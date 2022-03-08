@@ -31,11 +31,20 @@ let CastersService = class CastersService {
     findOne(id) {
         return this.repo.findOne(id);
     }
-    update(id, updateCasterDto) {
-        return `This action updates a #${id} caster`;
+    async update(id, updateCasterDto) {
+        const user = await this.findOne(id);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        Object.assign(user, updateCasterDto);
+        return this.repo.save(user);
     }
-    remove(id) {
-        return `This action removes a #${id} caster`;
+    async remove(id) {
+        const user = await this.findOne(id);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        return this.repo.remove(user);
     }
 };
 CastersService = __decorate([

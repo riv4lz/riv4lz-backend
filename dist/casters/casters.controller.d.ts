@@ -7,6 +7,6 @@ export declare class CastersController {
     create(createCasterDto: CreateCasterDto): Promise<import("./entities/caster.entity").Caster>;
     findAll(): Promise<import("./entities/caster.entity").Caster[]>;
     findOne(id: string): Promise<import("./entities/caster.entity").Caster>;
-    update(id: string, updateCasterDto: UpdateCasterDto): string;
-    remove(id: string): string;
+    update(id: string, updateCasterDto: UpdateCasterDto): Promise<import("./entities/caster.entity").Caster>;
+    remove(id: string): Promise<import("./entities/caster.entity").Caster>;
 }

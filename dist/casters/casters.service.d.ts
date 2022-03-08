@@ -8,6 +8,6 @@ export declare class CastersService {
     create(createCasterDto: CreateCasterDto): Promise<Caster>;
     findAll(): Promise<Caster[]>;
     findOne(id: number): Promise<Caster>;
-    update(id: number, updateCasterDto: UpdateCasterDto): string;
-    remove(id: number): string;
+    update(id: number, updateCasterDto: UpdateCasterDto): Promise<Caster>;
+    remove(id: number): Promise<Caster>;
 }

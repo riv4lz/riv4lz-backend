@@ -1,8 +1,8 @@
 import { CreateCasterDto } from './create-caster.dto';
 declare const UpdateCasterDto_base: import("@nestjs/mapped-types").MappedType<Partial<CreateCasterDto>>;
 export declare class UpdateCasterDto extends UpdateCasterDto_base {
-    newEmail: string;
-    newPassword: string;
-    newGamerTag: string;
+    email: string;
+    password: string;
+    gamerTag: string;
 }
 export {};

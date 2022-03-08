@@ -18,18 +18,21 @@ class UpdateCasterDto extends (0, mapped_types_1.PartialType)(create_caster_dto_
 }
 __decorate([
     (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
-], UpdateCasterDto.prototype, "newEmail", void 0);
+], UpdateCasterDto.prototype, "email", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateCasterDto.prototype, "newPassword", void 0);
+], UpdateCasterDto.prototype, "password", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateCasterDto.prototype, "newGamerTag", void 0);
+], UpdateCasterDto.prototype, "gamerTag", void 0);
 exports.UpdateCasterDto = UpdateCasterDto;
 //# sourceMappingURL=update-caster.dto.js.map

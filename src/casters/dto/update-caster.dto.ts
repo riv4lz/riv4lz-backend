@@ -1,18 +1,21 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateCasterDto } from './create-caster.dto';
 import {ApiProperty} from "@nestjs/swagger";
-import {IsEmail, IsString} from "class-validator";
+import {IsEmail, IsOptional, IsString} from "class-validator";
 
 export class UpdateCasterDto extends PartialType(CreateCasterDto) {
     @ApiProperty()
+    @IsOptional()
     @IsEmail()
-    newEmail: string;
+    email: string;
 
     @ApiProperty()
+    @IsOptional()
     @IsString()
-    newPassword: string;
+    password: string;
 
     @ApiProperty()
+    @IsOptional()
     @IsString()
-    newGamerTag: string;
+    gamerTag: string;
 }
