@@ -26,10 +26,10 @@ let CastersService = class CastersService {
         return this.repo.save(user);
     }
     findAll() {
-        return `This action returns all casters`;
+        return this.repo.find();
     }
     findOne(id) {
-        return `This action returns a #${id} caster`;
+        return this.repo.findOne(id);
     }
     update(id, updateCasterDto) {
         return `This action updates a #${id} caster`;

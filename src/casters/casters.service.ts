@@ -20,11 +20,11 @@ export class CastersService {
   }
 
   findAll() {
-    return `This action returns all casters`;
+    return this.repo.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} caster`;
+    return this.repo.findOne(id);
   }
 
   update(id: number, updateCasterDto: UpdateCasterDto) {

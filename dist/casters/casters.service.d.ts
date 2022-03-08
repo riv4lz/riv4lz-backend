@@ -6,8 +6,8 @@ export declare class CastersService {
     private repo;
     constructor(repo: Repository<Caster>);
     create(createCasterDto: CreateCasterDto): Promise<Caster>;
-    findAll(): string;
-    findOne(id: number): string;
+    findAll(): Promise<Caster[]>;
+    findOne(id: number): Promise<Caster>;
     update(id: number, updateCasterDto: UpdateCasterDto): string;
     remove(id: number): string;
 }

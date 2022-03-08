@@ -5,8 +5,8 @@ export declare class CastersController {
     private readonly castersService;
     constructor(castersService: CastersService);
     create(createCasterDto: CreateCasterDto): Promise<import("./entities/caster.entity").Caster>;
-    findAll(): string;
-    findOne(id: string): string;
+    findAll(): Promise<import("./entities/caster.entity").Caster[]>;
+    findOne(id: string): Promise<import("./entities/caster.entity").Caster>;
     update(id: string, updateCasterDto: UpdateCasterDto): string;
     remove(id: string): string;
 }
