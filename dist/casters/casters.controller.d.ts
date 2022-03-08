@@ -4,7 +4,7 @@ import { UpdateCasterDto } from './dto/update-caster.dto';
 export declare class CastersController {
     private readonly castersService;
     constructor(castersService: CastersService);
-    create(createCasterDto: CreateCasterDto): string;
+    create(createCasterDto: CreateCasterDto): Promise<import("./entities/caster.entity").Caster>;
     findAll(): string;
     findOne(id: string): string;
     update(id: string, updateCasterDto: UpdateCasterDto): string;

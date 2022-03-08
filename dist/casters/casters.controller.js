@@ -17,6 +17,8 @@ const common_1 = require("@nestjs/common");
 const casters_service_1 = require("./casters.service");
 const create_caster_dto_1 = require("./dto/create-caster.dto");
 const update_caster_dto_1 = require("./dto/update-caster.dto");
+const swagger_1 = require("@nestjs/swagger");
+const create_organisation_dto_1 = require("../organisations/dto/create-organisation.dto");
 let CastersController = class CastersController {
     constructor(castersService) {
         this.castersService = castersService;
@@ -38,7 +40,7 @@ let CastersController = class CastersController {
     }
 };
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)('/signup'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_caster_dto_1.CreateCasterDto]),
@@ -73,7 +75,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CastersController.prototype, "remove", null);
 CastersController = __decorate([
-    (0, common_1.Controller)('casters'),
+    (0, swagger_1.ApiExtraModels)(create_caster_dto_1.CreateCasterDto, create_organisation_dto_1.CreateOrganisationDto),
+    (0, common_1.Controller)('cauth'),
     __metadata("design:paramtypes", [casters_service_1.CastersService])
 ], CastersController);
 exports.CastersController = CastersController;

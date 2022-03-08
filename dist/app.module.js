@@ -13,6 +13,9 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const casters_module_1 = require("./casters/casters.module");
 const organisations_module_1 = require("./organisations/organisations.module");
+const caster_entity_1 = require("./casters/entities/caster.entity");
+const user_entity_1 = require("./Shared/Entities/user.entity");
+const organisation_entity_1 = require("./organisations/entities/organisation.entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -20,11 +23,11 @@ AppModule = __decorate([
         imports: [typeorm_1.TypeOrmModule.forRoot({
                 type: 'sqlite',
                 database: 'db.sqlite',
-                entities: [],
+                entities: [user_entity_1.User, caster_entity_1.Caster, organisation_entity_1.Organisation],
                 synchronize: true,
             }),
             casters_module_1.CastersModule,
-            organisations_module_1.OrganisationsModule],
+            organisations_module_1.OrganisationsModule,],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

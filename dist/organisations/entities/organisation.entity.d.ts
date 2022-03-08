@@ -1,2 +1,3 @@
-export declare class Organisation {
+import { User } from "../../Shared/Entities/user.entity";
+export declare class Organisation extends User {
 }

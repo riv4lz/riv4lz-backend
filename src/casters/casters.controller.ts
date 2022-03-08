@@ -2,12 +2,15 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CastersService } from './casters.service';
 import { CreateCasterDto } from './dto/create-caster.dto';
 import { UpdateCasterDto } from './dto/update-caster.dto';
+import {ApiExtraModels} from "@nestjs/swagger";
+import {CreateOrganisationDto} from "../organisations/dto/create-organisation.dto";
 
-@Controller('casters')
+@ApiExtraModels(CreateCasterDto, CreateOrganisationDto)
+@Controller('cauth')
 export class CastersController {
   constructor(private readonly castersService: CastersService) {}
 
-  @Post()
+  @Post('/signup')
   create(@Body() createCasterDto: CreateCasterDto) {
     return this.castersService.create(createCasterDto);
   }
