@@ -34,7 +34,7 @@ let CastersService = class CastersService {
     async update(id, updateCasterDto) {
         const user = await this.findOne(id);
         if (!user) {
-            throw new Error('User not found');
+            throw new common_1.NotFoundException('User not found');
         }
         Object.assign(user, updateCasterDto);
         return this.repo.save(user);
@@ -42,7 +42,7 @@ let CastersService = class CastersService {
     async remove(id) {
         const user = await this.findOne(id);
         if (!user) {
-            throw new Error('User not found');
+            throw new common_1.NotFoundException('User not found');
         }
         return this.repo.remove(user);
     }

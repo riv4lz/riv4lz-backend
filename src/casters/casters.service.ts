@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCasterDto } from './dto/create-caster.dto';
 import { UpdateCasterDto } from './dto/update-caster.dto';
 import { Repository } from "typeorm";
@@ -30,7 +30,7 @@ export class CastersService {
   async update(id: number, updateCasterDto: UpdateCasterDto) {
     const user = await this.findOne(id);
     if(!user){
-      throw new Error('User not found');
+      throw new NotFoundException('User not found');
     }
     Object.assign(user, updateCasterDto);
     return this.repo.save(user);
@@ -39,7 +39,7 @@ export class CastersService {
   async remove(id: number) {
     const user = await this.findOne(id);
     if(!user){
-      throw new Error('User not found')
+      throw new NotFoundException('User not found')
     }
     return this.repo.remove(user);
   }

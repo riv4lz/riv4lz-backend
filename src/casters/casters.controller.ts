@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseInterceptors, ClassSerializerInterceptor} from '@nestjs/common';
 import { CastersService } from './casters.service';
 import { CreateCasterDto } from './dto/create-caster.dto';
 import { UpdateCasterDto } from './dto/update-caster.dto';
 import {ApiExtraModels} from "@nestjs/swagger";
 import {CreateOrganisationDto} from "../organisations/dto/create-organisation.dto";
+import { SerializeInterceptor} from "../interceptors/serialize.interceptor";
 
 @ApiExtraModels(CreateCasterDto, CreateOrganisationDto)
 @Controller('cauth')
@@ -15,14 +16,20 @@ export class CastersController {
     return this.castersService.create(createCasterDto);
   }
 
+  @UseInterceptors(SerializeInterceptor)
   @Get()
   findAll() {
     return this.castersService.findAll();
   }
 
+  @UseInterceptors(SerializeInterceptor)
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.castersService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const user = await this.castersService.findOne(+id);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
   }
 
   @Patch(':id')
