@@ -20,6 +20,7 @@ const update_caster_dto_1 = require("./dto/update-caster.dto");
 const swagger_1 = require("@nestjs/swagger");
 const create_organisation_dto_1 = require("../organisations/dto/create-organisation.dto");
 const serialize_interceptor_1 = require("../interceptors/serialize.interceptor");
+const login_caster_dto_1 = require("./dto/login-caster.dto");
 let CastersController = class CastersController {
     constructor(castersService) {
         this.castersService = castersService;
@@ -52,14 +53,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CastersController.prototype, "create", null);
 __decorate([
-    (0, common_1.UseInterceptors)(serialize_interceptor_1.SerializeInterceptor),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], CastersController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.UseInterceptors)(serialize_interceptor_1.SerializeInterceptor),
+    (0, common_1.UseInterceptors)(new serialize_interceptor_1.SerializeInterceptor(login_caster_dto_1.LoginCasterDto)),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

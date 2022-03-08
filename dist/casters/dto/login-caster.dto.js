@@ -25,9 +25,5 @@ __decorate([
     (0, class_transformer_1.Expose)(),
     __metadata("design:type", String)
 ], LoginCasterDto.prototype, "gamerTag", void 0);
-__decorate([
-    (0, class_transformer_1.Exclude)(),
-    __metadata("design:type", String)
-], LoginCasterDto.prototype, "password", void 0);
 exports.LoginCasterDto = LoginCasterDto;
 //# sourceMappingURL=login-caster.dto.js.map

@@ -10,6 +10,4 @@ export class LoginCasterDto{
     @Expose()
     gamerTag: string;
 
-    @Exclude()
-    password: string;
 }
