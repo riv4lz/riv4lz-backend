@@ -6,17 +6,23 @@ import {ApiExtraModels} from "@nestjs/swagger";
 import {CreateOrganisationDto} from "../organisations/dto/create-organisation.dto";
 import { Serialize} from "../interceptors/serialize.interceptor";
 import { LoginCasterDto } from "./dto/login-caster.dto";
+import { AuthService } from "./auth.service";
 
 @Serialize(LoginCasterDto)
 @ApiExtraModels(CreateCasterDto, CreateOrganisationDto)
 @Controller('cauth')
 export class CastersController {
-  constructor(private readonly castersService: CastersService) {}
+  constructor(
+      private readonly castersService: CastersService,
+      private readonly authService: AuthService) {}
 
   @Post('/signup')
   create(@Body() createCasterDto: CreateCasterDto) {
-    return this.castersService.create(createCasterDto);
+    return this.authService.signup(createCasterDto);
   }
+
+
+
 
   @Get()
   findAll() {

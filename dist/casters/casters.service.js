@@ -31,6 +31,12 @@ let CastersService = class CastersService {
     findOne(id) {
         return this.repo.findOne(id);
     }
+    findByEmail(email) {
+        return this.repo.find({ email });
+    }
+    findByGamerTag(gamerTag) {
+        return this.repo.find({ gamerTag });
+    }
     async update(id, updateCasterDto) {
         const user = await this.findOne(id);
         if (!user) {

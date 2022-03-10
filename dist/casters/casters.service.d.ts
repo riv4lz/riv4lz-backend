@@ -8,6 +8,8 @@ export declare class CastersService {
     create(createCasterDto: CreateCasterDto): Promise<Caster>;
     findAll(): Promise<Caster[]>;
     findOne(id: number): Promise<Caster>;
+    findByEmail(email: string): Promise<Caster[]>;
+    findByGamerTag(gamerTag: string): Promise<Caster[]>;
     update(id: number, updateCasterDto: UpdateCasterDto): Promise<Caster>;
     remove(id: number): Promise<Caster>;
 }

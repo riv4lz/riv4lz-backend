@@ -12,13 +12,14 @@ const casters_service_1 = require("./casters.service");
 const casters_controller_1 = require("./casters.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const caster_entity_1 = require("./entities/caster.entity");
+const auth_service_1 = require("./auth.service");
 let CastersModule = class CastersModule {
 };
 CastersModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([caster_entity_1.Caster])],
         controllers: [casters_controller_1.CastersController],
-        providers: [casters_service_1.CastersService]
+        providers: [casters_service_1.CastersService, auth_service_1.AuthService]
     })
 ], CastersModule);
 exports.CastersModule = CastersModule;

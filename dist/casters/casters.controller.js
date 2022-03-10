@@ -21,12 +21,14 @@ const swagger_1 = require("@nestjs/swagger");
 const create_organisation_dto_1 = require("../organisations/dto/create-organisation.dto");
 const serialize_interceptor_1 = require("../interceptors/serialize.interceptor");
 const login_caster_dto_1 = require("./dto/login-caster.dto");
+const auth_service_1 = require("./auth.service");
 let CastersController = class CastersController {
-    constructor(castersService) {
+    constructor(castersService, authService) {
         this.castersService = castersService;
+        this.authService = authService;
     }
     create(createCasterDto) {
-        return this.castersService.create(createCasterDto);
+        return this.authService.signup(createCasterDto);
     }
     findAll() {
         return this.castersService.findAll();
@@ -59,7 +61,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CastersController.prototype, "findAll", null);
 __decorate([
-    (0, serialize_interceptor_1.Serialize)(login_caster_dto_1.LoginCasterDto),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -82,9 +83,11 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CastersController.prototype, "remove", null);
 CastersController = __decorate([
+    (0, serialize_interceptor_1.Serialize)(login_caster_dto_1.LoginCasterDto),
     (0, swagger_1.ApiExtraModels)(create_caster_dto_1.CreateCasterDto, create_organisation_dto_1.CreateOrganisationDto),
     (0, common_1.Controller)('cauth'),
-    __metadata("design:paramtypes", [casters_service_1.CastersService])
+    __metadata("design:paramtypes", [casters_service_1.CastersService,
+        auth_service_1.AuthService])
 ], CastersController);
 exports.CastersController = CastersController;
 //# sourceMappingURL=casters.controller.js.map
