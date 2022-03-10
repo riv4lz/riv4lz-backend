@@ -5,10 +5,11 @@ import { UpdateCasterDto } from './dto/update-caster.dto';
 import {ApiExtraModels} from "@nestjs/swagger";
 import {CreateOrganisationDto} from "../organisations/dto/create-organisation.dto";
 import { Serialize} from "../interceptors/serialize.interceptor";
-import { LoginCasterDto } from "./dto/login-caster.dto";
+import { CasterDto } from "./dto/caster.dto";
 import { AuthService } from "./auth.service";
+import {LoginCasterDto} from "./dto/login-caster.dto";
 
-@Serialize(LoginCasterDto)
+@Serialize(CasterDto)
 @ApiExtraModels(CreateCasterDto, CreateOrganisationDto)
 @Controller('cauth')
 export class CastersController {
@@ -21,7 +22,10 @@ export class CastersController {
     return this.authService.signup(createCasterDto);
   }
 
-
+  @Post('/signup')
+  signin(@Body() loginCasterDto: LoginCasterDto){
+    return this.authService.signin(loginCasterDto);
+  }
 
 
   @Get()

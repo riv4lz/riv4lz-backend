@@ -35,7 +35,17 @@ let AuthService = class AuthService {
         const caster = await this.castersService.create(createCasterDto);
         return caster;
     }
-    singin() {
+    async signin(loginCaster) {
+        const [caster] = await this.castersService.findByEmail(loginCaster.email);
+        if (!caster) {
+            throw new common_1.NotFoundException('User not found');
+        }
+        const [salt, storedHash] = caster.password.split('.');
+        const hash = (await scrypt(loginCaster.password, salt, 32));
+        if (storedHash !== hash.toString('hex')) {
+            throw new common_1.BadRequestException('Authentication failed');
+        }
+        return caster;
     }
 };
 AuthService = __decorate([

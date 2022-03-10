@@ -1,8 +1,10 @@
-import {BadRequestException, Injectable} from "@nestjs/common";
+import {BadRequestException, Injectable, NotFoundException} from "@nestjs/common";
 import { CastersService } from "./casters.service";
 import { randomBytes, scrypt as _scrypt } from "crypto";
 import { promisify } from "util";
 import { CreateCasterDto } from "./dto/create-caster.dto";
+import {CasterDto} from "./dto/caster.dto";
+import {LoginCasterDto} from "./dto/login-caster.dto";
 
 const scrypt = promisify(_scrypt);
 
@@ -31,7 +33,19 @@ export class AuthService{
         return caster;
     }
 
-    singin(){
+    async signin(loginCaster: LoginCasterDto){
+        const [caster] = await this.castersService.findByEmail(loginCaster.email);
+        if(!caster){
+            throw new NotFoundException('User not found');
+        }
 
+        const [salt, storedHash] = caster.password.split('.');
+        const hash = (await scrypt(loginCaster.password, salt, 32)) as Buffer;
+
+        if(storedHash !== hash.toString('hex')) {
+            throw new BadRequestException('Authentication failed');
+        }
+
+        return caster;
     }
 }

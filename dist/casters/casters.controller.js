@@ -20,8 +20,9 @@ const update_caster_dto_1 = require("./dto/update-caster.dto");
 const swagger_1 = require("@nestjs/swagger");
 const create_organisation_dto_1 = require("../organisations/dto/create-organisation.dto");
 const serialize_interceptor_1 = require("../interceptors/serialize.interceptor");
-const login_caster_dto_1 = require("./dto/login-caster.dto");
+const caster_dto_1 = require("./dto/caster.dto");
 const auth_service_1 = require("./auth.service");
+const login_caster_dto_1 = require("./dto/login-caster.dto");
 let CastersController = class CastersController {
     constructor(castersService, authService) {
         this.castersService = castersService;
@@ -29,6 +30,9 @@ let CastersController = class CastersController {
     }
     create(createCasterDto) {
         return this.authService.signup(createCasterDto);
+    }
+    signin(loginCasterDto) {
+        return this.authService.signin(loginCasterDto);
     }
     findAll() {
         return this.castersService.findAll();
@@ -54,6 +58,13 @@ __decorate([
     __metadata("design:paramtypes", [create_caster_dto_1.CreateCasterDto]),
     __metadata("design:returntype", void 0)
 ], CastersController.prototype, "create", null);
+__decorate([
+    (0, common_1.Post)('/signup'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [login_caster_dto_1.LoginCasterDto]),
+    __metadata("design:returntype", void 0)
+], CastersController.prototype, "signin", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
@@ -83,7 +94,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CastersController.prototype, "remove", null);
 CastersController = __decorate([
-    (0, serialize_interceptor_1.Serialize)(login_caster_dto_1.LoginCasterDto),
+    (0, serialize_interceptor_1.Serialize)(caster_dto_1.CasterDto),
     (0, swagger_1.ApiExtraModels)(create_caster_dto_1.CreateCasterDto, create_organisation_dto_1.CreateOrganisationDto),
     (0, common_1.Controller)('cauth'),
     __metadata("design:paramtypes", [casters_service_1.CastersService,

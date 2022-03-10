@@ -1,17 +1,12 @@
-import { Expose, Exclude } from "class-transformer";
+import {IsEmail, IsString } from "class-validator";
+import {ApiProperty} from "@nestjs/swagger";
 
-export class LoginCasterDto{
-    @Expose()
-    id: number;
-
-    @Expose()
+export class LoginCasterDto {
+    @ApiProperty()
+    @IsEmail()
     email: string;
 
-    @Expose()
-    gamerTag: string;
-
-    // TODO remove this
-    @Expose()
+    @ApiProperty()
+    @IsString()
     password: string;
-
 }
