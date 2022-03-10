@@ -59,7 +59,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CastersController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.UseInterceptors)(new serialize_interceptor_1.SerializeInterceptor(login_caster_dto_1.LoginCasterDto)),
+    (0, serialize_interceptor_1.Serialize)(login_caster_dto_1.LoginCasterDto),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

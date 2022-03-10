@@ -1,8 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SerializeInterceptor = void 0;
+exports.SerializeInterceptor = exports.Serialize = void 0;
+const common_1 = require("@nestjs/common");
 const operators_1 = require("rxjs/operators");
 const class_transformer_1 = require("class-transformer");
+function Serialize(dto) {
+    return (0, common_1.UseInterceptors)(new SerializeInterceptor((dto)));
+}
+exports.Serialize = Serialize;
 class SerializeInterceptor {
     constructor(dto) {
         this.dto = dto;

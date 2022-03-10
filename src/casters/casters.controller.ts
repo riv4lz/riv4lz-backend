@@ -4,9 +4,10 @@ import { CreateCasterDto } from './dto/create-caster.dto';
 import { UpdateCasterDto } from './dto/update-caster.dto';
 import {ApiExtraModels} from "@nestjs/swagger";
 import {CreateOrganisationDto} from "../organisations/dto/create-organisation.dto";
-import { SerializeInterceptor} from "../interceptors/serialize.interceptor";
+import { Serialize} from "../interceptors/serialize.interceptor";
 import { LoginCasterDto } from "./dto/login-caster.dto";
 
+@Serialize(LoginCasterDto)
 @ApiExtraModels(CreateCasterDto, CreateOrganisationDto)
 @Controller('cauth')
 export class CastersController {
@@ -16,13 +17,12 @@ export class CastersController {
   create(@Body() createCasterDto: CreateCasterDto) {
     return this.castersService.create(createCasterDto);
   }
-  
+
   @Get()
   findAll() {
     return this.castersService.findAll();
   }
 
-  @UseInterceptors(new SerializeInterceptor(LoginCasterDto))
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const user = await this.castersService.findOne(+id);
