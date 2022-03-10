@@ -24,6 +24,7 @@ const login_caster_dto_1 = require("./dto/login-caster.dto");
 const current_caster_decorator_1 = require("./current-caster.decorator");
 const current_caster_interceptor_1 = require("../interceptors/current-caster.interceptor");
 const caster_entity_1 = require("./entities/caster.entity");
+const auth_guard_1 = require("../guards/auth.guard");
 let CastersController = class CastersController {
     constructor(castersService, authService) {
         this.castersService = castersService;
@@ -65,6 +66,7 @@ let CastersController = class CastersController {
 };
 __decorate([
     (0, common_1.Get)('/currentcaster'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     __param(0, (0, current_caster_decorator_1.CurrentCaster)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [caster_entity_1.Caster]),

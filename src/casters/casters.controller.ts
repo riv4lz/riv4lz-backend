@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseInterceptors, ClassSerializerInterceptor, Session} from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseInterceptors, ClassSerializerInterceptor, Session, UseGuards} from '@nestjs/common';
 import { CastersService } from './casters.service';
 import { CreateCasterDto } from './dto/create-caster.dto';
 import { UpdateCasterDto } from './dto/update-caster.dto';
@@ -11,10 +11,9 @@ import { LoginCasterDto } from "./dto/login-caster.dto";
 import { CurrentCaster } from "./current-caster.decorator";
 import { CurrentCasterInterceptor } from "../interceptors/current-caster.interceptor";
 import {Caster} from "./entities/caster.entity";
-
+import {AuthGuard} from "../guards/auth.guard";
 
 @Serialize(CasterDto)
-//@ApiExtraModels(CreateCasterDto, CreateOrganisationDto)
 @Controller('cauth')
 @UseInterceptors(CurrentCasterInterceptor)
 export class CastersController {
@@ -23,6 +22,7 @@ export class CastersController {
       private readonly authService: AuthService) {}
 
   @Get('/currentcaster')
+  @UseGuards(AuthGuard)
   getCurrentUser(@CurrentCaster() caster: Caster){
 
     return caster;
