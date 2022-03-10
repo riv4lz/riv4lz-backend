@@ -6,6 +6,4 @@ export class Caster extends User {
 
     @Column()
     gamerTag: string;
-
-
 }

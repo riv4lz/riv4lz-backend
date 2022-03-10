@@ -29,7 +29,16 @@ let CastersService = class CastersService {
         return this.repo.find();
     }
     findOne(id) {
+        if (!id) {
+            throw new common_1.NotFoundException('No user signed in');
+        }
         return this.repo.findOne(id);
+    }
+    findByEmail(email) {
+        return this.repo.find({ email });
+    }
+    findByGamerTag(gamerTag) {
+        return this.repo.find({ gamerTag });
     }
     async update(id, updateCasterDto) {
         const user = await this.findOne(id);

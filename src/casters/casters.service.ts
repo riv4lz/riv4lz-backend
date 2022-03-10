@@ -24,7 +24,19 @@ export class CastersService {
   }
 
   findOne(id: number) {
+    if (!id){
+      throw new NotFoundException('No user signed in');
+    }
     return this.repo.findOne(id);
+  }
+
+  findByEmail(email: string){
+    return this.repo.find({email})
+  }
+
+  // TODO Refac this and findByEmail
+  findByGamerTag(gamerTag: string) {
+    return this.repo.find({gamerTag})
   }
 
   async update(id: number, updateCasterDto: UpdateCasterDto) {

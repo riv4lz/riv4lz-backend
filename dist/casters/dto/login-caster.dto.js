@@ -10,20 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoginCasterDto = void 0;
-const class_transformer_1 = require("class-transformer");
+const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class LoginCasterDto {
 }
 __decorate([
-    (0, class_transformer_1.Expose)(),
-    __metadata("design:type", Number)
-], LoginCasterDto.prototype, "id", void 0);
-__decorate([
-    (0, class_transformer_1.Expose)(),
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], LoginCasterDto.prototype, "email", void 0);
 __decorate([
-    (0, class_transformer_1.Expose)(),
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], LoginCasterDto.prototype, "gamerTag", void 0);
+], LoginCasterDto.prototype, "password", void 0);
 exports.LoginCasterDto = LoginCasterDto;
 //# sourceMappingURL=login-caster.dto.js.map
