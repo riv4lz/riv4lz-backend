@@ -17,22 +17,34 @@ const common_1 = require("@nestjs/common");
 const casters_service_1 = require("./casters.service");
 const create_caster_dto_1 = require("./dto/create-caster.dto");
 const update_caster_dto_1 = require("./dto/update-caster.dto");
-const swagger_1 = require("@nestjs/swagger");
-const create_organisation_dto_1 = require("../organisations/dto/create-organisation.dto");
 const serialize_interceptor_1 = require("../interceptors/serialize.interceptor");
 const caster_dto_1 = require("./dto/caster.dto");
 const auth_service_1 = require("./auth.service");
 const login_caster_dto_1 = require("./dto/login-caster.dto");
+const current_caster_decorator_1 = require("./current-caster.decorator");
+const current_caster_interceptor_1 = require("../interceptors/current-caster.interceptor");
+const caster_entity_1 = require("./entities/caster.entity");
 let CastersController = class CastersController {
     constructor(castersService, authService) {
         this.castersService = castersService;
         this.authService = authService;
     }
-    create(createCasterDto) {
-        return this.authService.signup(createCasterDto);
+    getCurrentUser(caster) {
+        return caster;
     }
-    signin(loginCasterDto) {
-        return this.authService.signin(loginCasterDto);
+    async create(createCasterDto, session) {
+        const caster = await this.authService.signup(createCasterDto);
+        session.casterId = caster.id;
+        return caster;
+    }
+    async signin(loginCasterDto, session) {
+        const caster = await this.authService.signin(loginCasterDto);
+        session.casterId = caster.id;
+        console.log('signin casterid: ' + session.casterId);
+        return caster;
+    }
+    signOut(session) {
+        session.casterId = null;
     }
     findAll() {
         return this.castersService.findAll();
@@ -52,19 +64,35 @@ let CastersController = class CastersController {
     }
 };
 __decorate([
-    (0, common_1.Post)('/signup'),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Get)('/currentcaster'),
+    __param(0, (0, current_caster_decorator_1.CurrentCaster)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_caster_dto_1.CreateCasterDto]),
+    __metadata("design:paramtypes", [caster_entity_1.Caster]),
     __metadata("design:returntype", void 0)
-], CastersController.prototype, "create", null);
+], CastersController.prototype, "getCurrentUser", null);
 __decorate([
     (0, common_1.Post)('/signup'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Session)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [login_caster_dto_1.LoginCasterDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [create_caster_dto_1.CreateCasterDto, Object]),
+    __metadata("design:returntype", Promise)
+], CastersController.prototype, "create", null);
+__decorate([
+    (0, common_1.Post)('/signin'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Session)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [login_caster_dto_1.LoginCasterDto, Object]),
+    __metadata("design:returntype", Promise)
 ], CastersController.prototype, "signin", null);
+__decorate([
+    (0, common_1.Post)('/signout'),
+    __param(0, (0, common_1.Session)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], CastersController.prototype, "signOut", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
@@ -95,8 +123,8 @@ __decorate([
 ], CastersController.prototype, "remove", null);
 CastersController = __decorate([
     (0, serialize_interceptor_1.Serialize)(caster_dto_1.CasterDto),
-    (0, swagger_1.ApiExtraModels)(create_caster_dto_1.CreateCasterDto, create_organisation_dto_1.CreateOrganisationDto),
     (0, common_1.Controller)('cauth'),
+    (0, common_1.UseInterceptors)(current_caster_interceptor_1.CurrentCasterInterceptor),
     __metadata("design:paramtypes", [casters_service_1.CastersService,
         auth_service_1.AuthService])
 ], CastersController);

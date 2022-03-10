@@ -24,6 +24,9 @@ export class CastersService {
   }
 
   findOne(id: number) {
+    if (!id){
+      throw new NotFoundException('No user signed in');
+    }
     return this.repo.findOne(id);
   }
 
