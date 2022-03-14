@@ -4,7 +4,7 @@ import {
     CallHandler,
     Injectable } from "@nestjs/common";
 import { CastersService } from "../casters/casters.service";
-import {type} from "os";
+
 
 @Injectable()
 export  class CurrentCasterInterceptor implements NestInterceptor{

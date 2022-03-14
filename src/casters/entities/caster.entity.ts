@@ -1,5 +1,5 @@
 import {User} from "../../Shared/Entities/user.entity";
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column } from "typeorm";
 
 @Entity()
 export class Caster extends User {

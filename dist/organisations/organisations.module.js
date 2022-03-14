@@ -10,12 +10,16 @@ exports.OrganisationsModule = void 0;
 const common_1 = require("@nestjs/common");
 const organisations_service_1 = require("./organisations.service");
 const organisations_controller_1 = require("./organisations.controller");
+const typeorm_1 = require("@nestjs/typeorm");
+const organisation_entity_1 = require("./entities/organisation.entity");
+const oauth_service_1 = require("./oauth.service");
 let OrganisationsModule = class OrganisationsModule {
 };
 OrganisationsModule = __decorate([
     (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([organisation_entity_1.Organisation])],
         controllers: [organisations_controller_1.OrganisationsController],
-        providers: [organisations_service_1.OrganisationsService]
+        providers: [organisations_service_1.OrganisationsService, oauth_service_1.OauthService]
     })
 ], OrganisationsModule);
 exports.OrganisationsModule = OrganisationsModule;

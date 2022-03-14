@@ -1,3 +1,10 @@
 import {User} from "../../Shared/Entities/user.entity";
+import { Entity, Column } from "typeorm";
 
-export class Organisation extends User {}
+@Entity()
+export class Organisation extends User {
+
+    @Column()
+    website: string;
+
+}

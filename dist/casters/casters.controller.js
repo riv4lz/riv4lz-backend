@@ -19,7 +19,7 @@ const create_caster_dto_1 = require("./dto/create-caster.dto");
 const update_caster_dto_1 = require("./dto/update-caster.dto");
 const serialize_interceptor_1 = require("../interceptors/serialize.interceptor");
 const caster_dto_1 = require("./dto/caster.dto");
-const auth_service_1 = require("./auth.service");
+const cauth_service_1 = require("./cauth.service");
 const login_caster_dto_1 = require("./dto/login-caster.dto");
 const current_caster_decorator_1 = require("./current-caster.decorator");
 const current_caster_interceptor_1 = require("../interceptors/current-caster.interceptor");
@@ -41,7 +41,6 @@ let CastersController = class CastersController {
     async signin(loginCasterDto, session) {
         const caster = await this.authService.signin(loginCasterDto);
         session.casterId = caster.id;
-        console.log('signin casterid: ' + session.casterId);
         return caster;
     }
     signOut(session) {
@@ -125,10 +124,10 @@ __decorate([
 ], CastersController.prototype, "remove", null);
 CastersController = __decorate([
     (0, serialize_interceptor_1.Serialize)(caster_dto_1.CasterDto),
-    (0, common_1.Controller)('cauth'),
+    (0, common_1.Controller)('casters'),
     (0, common_1.UseInterceptors)(current_caster_interceptor_1.CurrentCasterInterceptor),
     __metadata("design:paramtypes", [casters_service_1.CastersService,
-        auth_service_1.AuthService])
+        cauth_service_1.CauthService])
 ], CastersController);
 exports.CastersController = CastersController;
 //# sourceMappingURL=casters.controller.js.map

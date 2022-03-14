@@ -3,13 +3,12 @@ import { CastersService } from "./casters.service";
 import { randomBytes, scrypt as _scrypt } from "crypto";
 import { promisify } from "util";
 import { CreateCasterDto } from "./dto/create-caster.dto";
-import {CasterDto} from "./dto/caster.dto";
 import {LoginCasterDto} from "./dto/login-caster.dto";
 
 const scrypt = promisify(_scrypt);
 
 @Injectable()
-export class AuthService{
+export class CauthService {
     constructor(private castersService: CastersService) {
     }
 

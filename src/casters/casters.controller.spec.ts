@@ -1,20 +1,30 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { CastersController } from './casters.controller';
-import { CastersService } from './casters.service';
+import { CastersService } from "./casters.service";
+import {CastersController} from "./casters.controller";
+import {before} from "@nestjs/swagger/dist/plugin";
+import {Test} from "@nestjs/testing";
+import {Caster} from "./entities/caster.entity";
 
 describe('CastersController', () => {
-  let controller: CastersController;
+    let castersController: CastersController;
+    let castersService: CastersService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [CastersController],
-      providers: [CastersService],
-    }).compile();
+    beforeEach(async () => {
+        const moduleRef = await Test.createTestingModule({
+            controllers: [CastersController],
+            providers: [CastersService],
+        }).compile();
 
-    controller = module.get<CastersController>(CastersController);
-  });
+        castersService = moduleRef.get<CastersService>(CastersService);
+        castersController = moduleRef.get<CastersController>(CastersController);
+    });
+    
+    describe('findAll', () => {
+        it('should return an array of all casters', async () => {
+            const caster = new Caster()
+            const result = [caster];
+            jest.spyOn(castersService, 'findAll').mockImplementation(() => new Promise((resolve, reject) => resolve(result)));
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
-});
+            expect(await castersController.findAll()).toBe(result);
+        });
+    })
+})
