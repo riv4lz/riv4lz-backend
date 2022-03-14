@@ -9,17 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Organisation = void 0;
-const user_entity_1 = require("../../Shared/Entities/user.entity");
-const typeorm_1 = require("typeorm");
-let Organisation = class Organisation extends user_entity_1.User {
-};
+exports.LoginOrganisationDto = void 0;
+const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
+class LoginOrganisationDto {
+}
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
-], Organisation.prototype, "website", void 0);
-Organisation = __decorate([
-    (0, typeorm_1.Entity)()
-], Organisation);
-exports.Organisation = Organisation;
-//# sourceMappingURL=organisation.entity.js.map
+], LoginOrganisationDto.prototype, "email", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LoginOrganisationDto.prototype, "password", void 0);
+exports.LoginOrganisationDto = LoginOrganisationDto;
+//# sourceMappingURL=login-organisation.dto.js.map

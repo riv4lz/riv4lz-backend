@@ -17,18 +17,44 @@ const common_1 = require("@nestjs/common");
 const organisations_service_1 = require("./organisations.service");
 const create_organisation_dto_1 = require("./dto/create-organisation.dto");
 const update_organisation_dto_1 = require("./dto/update-organisation.dto");
+const oauth_service_1 = require("./oauth.service");
+const auth_guard_1 = require("../guards/auth.guard");
+const organisation_entity_1 = require("./entities/organisation.entity");
+const current_organisation_decorator_1 = require("./current-organisation.decorator");
+const serialize_interceptor_1 = require("../interceptors/serialize.interceptor");
+const organisation_dto_1 = require("./dto/organisation.dto");
+const current_organisation_interceptor_1 = require("./interceptors/current-organisation.interceptor");
+const login_organisation_dto_1 = require("./dto/login-organisation.dto");
 let OrganisationsController = class OrganisationsController {
-    constructor(organisationsService) {
+    constructor(organisationsService, authService) {
         this.organisationsService = organisationsService;
+        this.authService = authService;
     }
-    create(createOrganisationDto) {
-        return this.organisationsService.create(createOrganisationDto);
+    getCurrentOrganisation(organisation) {
+        return organisation;
+    }
+    async create(createOrganisationDto, session) {
+        const organisation = await this.authService.signup(createOrganisationDto);
+        session.organisationId = organisation.id;
+        return organisation;
+    }
+    async signin(loginOrganisationDto, session) {
+        const organisation = await this.authService.signin(loginOrganisationDto);
+        session.organisationId = organisation.id;
+        return organisation;
+    }
+    singout(session) {
+        session.organisationId = null;
     }
     findAll() {
         return this.organisationsService.findAll();
     }
-    findOne(id) {
-        return this.organisationsService.findOne(+id);
+    async findOne(id) {
+        const organisation = await this.organisationsService.findOne(+id);
+        if (!organisation) {
+            throw new common_1.NotFoundException('Organisation not found');
+        }
+        return organisation;
     }
     update(id, updateOrganisationDto) {
         return this.organisationsService.update(+id, updateOrganisationDto);
@@ -38,12 +64,36 @@ let OrganisationsController = class OrganisationsController {
     }
 };
 __decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Get)('/currentorganisation'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    __param(0, (0, current_organisation_decorator_1.CurrentOrganisation)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_organisation_dto_1.CreateOrganisationDto]),
+    __metadata("design:paramtypes", [organisation_entity_1.Organisation]),
     __metadata("design:returntype", void 0)
+], OrganisationsController.prototype, "getCurrentOrganisation", null);
+__decorate([
+    (0, common_1.Post)('/signup'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Session)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_organisation_dto_1.CreateOrganisationDto, Object]),
+    __metadata("design:returntype", Promise)
 ], OrganisationsController.prototype, "create", null);
+__decorate([
+    (0, common_1.Post)('/signin'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Session)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [login_organisation_dto_1.LoginOrganisationDto, Object]),
+    __metadata("design:returntype", Promise)
+], OrganisationsController.prototype, "signin", null);
+__decorate([
+    (0, common_1.Post)('/signout'),
+    __param(0, (0, common_1.Session)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], OrganisationsController.prototype, "singout", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
@@ -55,7 +105,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], OrganisationsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
@@ -73,8 +123,11 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], OrganisationsController.prototype, "remove", null);
 OrganisationsController = __decorate([
+    (0, serialize_interceptor_1.Serialize)(organisation_dto_1.OrganisationDto),
     (0, common_1.Controller)('organisations'),
-    __metadata("design:paramtypes", [organisations_service_1.OrganisationsService])
+    (0, common_1.UseInterceptors)(current_organisation_interceptor_1.CurrentOrganisationInterceptor),
+    __metadata("design:paramtypes", [organisations_service_1.OrganisationsService,
+        oauth_service_1.OauthService])
 ], OrganisationsController);
 exports.OrganisationsController = OrganisationsController;
 //# sourceMappingURL=organisations.controller.js.map

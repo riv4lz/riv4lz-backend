@@ -1,26 +1,53 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, NotFoundException} from '@nestjs/common';
 import { CreateOrganisationDto } from './dto/create-organisation.dto';
 import { UpdateOrganisationDto } from './dto/update-organisation.dto';
+import {InjectRepository} from "@nestjs/typeorm";
+import {Organisation} from "./entities/organisation.entity";
+import {Repository} from "typeorm";
 
 @Injectable()
 export class OrganisationsService {
+  constructor(
+      @InjectRepository(Organisation)
+      private repo: Repository<Organisation>) {
+  }
+
   create(createOrganisationDto: CreateOrganisationDto) {
-    return 'This action adds a new organisation';
+    const organisation = this.repo.create(createOrganisationDto);
+    return this.repo.save(organisation);
   }
 
   findAll() {
-    return `This action returns all organisations`;
+    return this.repo.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} organisation`;
+    if (!id){
+      throw new NotFoundException('No user signed in');
+    }
+    return this.repo.findOne(id);
   }
 
-  update(id: number, updateOrganisationDto: UpdateOrganisationDto) {
-    return `This action updates a #${id} organisation`;
+  findByEmail(email: string){
+    return this.repo.find({email})
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} organisation`;
+  async update(id: number, updateOrganisationDto: UpdateOrganisationDto) {
+    const user = await this.findOne(id);
+    if(!user){
+      throw new NotFoundException('User not found');
+    }
+    Object.assign(user, updateOrganisationDto);
+    return this.repo.save(user);
+  }
+
+
+
+  async remove(id: number) {
+    const user = await this.findOne(id);
+    if(!user){
+      throw new NotFoundException('User not found')
+    }
+    return this.repo.remove(user);
   }
 }

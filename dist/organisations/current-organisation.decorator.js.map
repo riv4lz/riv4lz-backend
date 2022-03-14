@@ -1,0 +1,1 @@
+{"version":3,"file":"current-organisation.decorator.js","sourceRoot":"","sources":["../../src/organisations/current-organisation.decorator.ts"],"names":[],"mappings":";;;AAAA,2CAGwB;AAEX,QAAA,mBAAmB,GAAG,IAAA,6BAAoB,EACnD,CAAC,IAAW,EAAE,OAAyB,EAAE,EAAE;IACvC,MAAM,OAAO,GAAG,OAAO,CAAC,YAAY,EAAE,CAAC,UAAU,EAAE,CAAC;IAEpD,OAAO,OAAO,CAAC,mBAAmB,CAAC;AACvC,CAAC,CACJ,CAAA"}

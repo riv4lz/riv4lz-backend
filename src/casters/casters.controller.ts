@@ -2,11 +2,9 @@ import {Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, Us
 import { CastersService } from './casters.service';
 import { CreateCasterDto } from './dto/create-caster.dto';
 import { UpdateCasterDto } from './dto/update-caster.dto';
-import {ApiExtraModels} from "@nestjs/swagger";
-import {CreateOrganisationDto} from "../organisations/dto/create-organisation.dto";
 import { Serialize} from "../interceptors/serialize.interceptor";
 import { CasterDto } from "./dto/caster.dto";
-import { AuthService } from "./auth.service";
+import { CauthService } from "./cauth.service";
 import { LoginCasterDto } from "./dto/login-caster.dto";
 import { CurrentCaster } from "./current-caster.decorator";
 import { CurrentCasterInterceptor } from "../interceptors/current-caster.interceptor";
@@ -14,12 +12,12 @@ import {Caster} from "./entities/caster.entity";
 import {AuthGuard} from "../guards/auth.guard";
 
 @Serialize(CasterDto)
-@Controller('cauth')
+@Controller('casters')
 @UseInterceptors(CurrentCasterInterceptor)
 export class CastersController {
   constructor(
       private readonly castersService: CastersService,
-      private readonly authService: AuthService) {}
+      private readonly authService: CauthService) {}
 
   @Get('/currentcaster')
   @UseGuards(AuthGuard)
@@ -39,7 +37,6 @@ export class CastersController {
   async signin(@Body() loginCasterDto: LoginCasterDto, @Session() session: any){
     const caster = await this.authService.signin(loginCasterDto);
     session.casterId = caster.id;
-    console.log('signin casterid: ' + session.casterId)
     return caster;
   }
 
