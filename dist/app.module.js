@@ -16,6 +16,7 @@ const organisations_module_1 = require("./organisations/organisations.module");
 const caster_entity_1 = require("./casters/entities/caster.entity");
 const user_entity_1 = require("./Shared/Entities/user.entity");
 const organisation_entity_1 = require("./organisations/entities/organisation.entity");
+const chats_module_1 = require("./chats/chats.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -27,7 +28,8 @@ AppModule = __decorate([
                 synchronize: true,
             }),
             casters_module_1.CastersModule,
-            organisations_module_1.OrganisationsModule,],
+            organisations_module_1.OrganisationsModule,
+            chats_module_1.ChatsModule,],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

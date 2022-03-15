@@ -7,8 +7,9 @@ import {CauthService} from "./cauth.service";
 import { CurrentCasterInterceptor } from "../interceptors/current-caster.interceptor";
 
 
+
 @Module({
-  imports: [TypeOrmModule.forFeature([Caster])],
+  imports: [TypeOrmModule.forFeature([Caster]),],
   controllers: [CastersController],
   providers: [CastersService, CauthService, CurrentCasterInterceptor]
 })
