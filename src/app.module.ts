@@ -7,8 +7,8 @@ import { OrganisationsModule } from './organisations/organisations.module';
 import {Caster} from "./casters/entities/caster.entity";
 import { User } from "./Shared/Entities/user.entity";
 import {Organisation} from "./organisations/entities/organisation.entity";
-import {ChatGateway} from "./chat/chat.gateway";
-import { EventsModule } from './events/events.module';
+import { ChatsModule } from './chats/chats.module';
+
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -19,8 +19,8 @@ import { EventsModule } from './events/events.module';
   }),
     CastersModule,
     OrganisationsModule,
-    EventsModule,],
+    ChatsModule,],
   controllers: [AppController],
-  providers: [AppService, ChatGateway],
+  providers: [AppService],
 })
 export class AppModule {}

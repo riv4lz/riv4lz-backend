@@ -1,5 +1,5 @@
 import {User} from "../../Shared/Entities/user.entity";
-import { Entity, Column } from "typeorm";
+import {Entity, Column, ManyToMany, JoinTable} from "typeorm";
 
 @Entity()
 export class Caster extends User {

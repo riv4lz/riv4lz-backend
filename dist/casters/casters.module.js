@@ -18,7 +18,7 @@ let CastersModule = class CastersModule {
 };
 CastersModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([caster_entity_1.Caster])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([caster_entity_1.Caster]),],
         controllers: [casters_controller_1.CastersController],
         providers: [casters_service_1.CastersService, cauth_service_1.CauthService, current_caster_interceptor_1.CurrentCasterInterceptor]
     })
