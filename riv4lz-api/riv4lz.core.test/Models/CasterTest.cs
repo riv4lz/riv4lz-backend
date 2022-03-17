@@ -51,4 +51,11 @@ public class CasterTest
         _caster.GamerTag = "test";
         Assert.IsType<string>(_caster.GamerTag);
     }
+
+    [Fact]
+    public void Caster_Is_BaseUser()
+    {
+        var caster = new Caster();
+        Assert.True(caster is BaseUser);
+    }
 }
