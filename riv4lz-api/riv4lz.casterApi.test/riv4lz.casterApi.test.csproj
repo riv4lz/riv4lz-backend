@@ -20,4 +20,8 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\riv4lz.casterApi\riv4lz.casterApi.csproj" />
+    </ItemGroup>
+
 </Project>
