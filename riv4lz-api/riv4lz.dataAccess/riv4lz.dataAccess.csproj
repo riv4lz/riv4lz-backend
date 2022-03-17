@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\riv4lz.core\riv4lz.core.csproj" />
+      <ProjectReference Include="..\riv4lz.domain\riv4lz.domain.csproj" />
     </ItemGroup>
 
 </Project>

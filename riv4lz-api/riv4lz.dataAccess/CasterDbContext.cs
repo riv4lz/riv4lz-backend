@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using riv4lz.core.Models;
+using riv4lz.dataAccess.Entities;
 
 namespace riv4lz.dataAccess;
 
@@ -10,5 +10,5 @@ public class CasterDbContext : DbContext
         
     }
 
-    public virtual DbSet<Caster> Casters { get; set; }
+    public virtual DbSet<CasterEntity> Casters { get; set; }
 }
