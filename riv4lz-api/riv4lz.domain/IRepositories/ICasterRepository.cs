@@ -1,6 +1,6 @@
 using riv4lz.core.Models;
 
-namespace riv4lz.domain.Repositories;
+namespace riv4lz.domain.IRepositories;
 
 public interface ICasterRepository
 {

@@ -4,7 +4,7 @@ using System.IO;
 using Moq;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
-using riv4lz.domain.Repositories;
+using riv4lz.domain.IRepositories;
 using riv4lz.domain.Services;
 using Xunit;
 
