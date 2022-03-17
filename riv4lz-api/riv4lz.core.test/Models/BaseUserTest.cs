@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.CompilerServices;
 using riv4lz.core.Models;
 using Xunit;
 
@@ -37,5 +39,26 @@ public class BaseUserTest
         _baseUser.Email = "t@t.tt";
 
         Assert.Equal("t@t.tt", _baseUser.Email);
+    }
+
+    [Fact]
+    public void BaseUserEmail_IsString()
+    {
+        _baseUser.Email = "test";
+        Assert.IsType<string>(_baseUser.Email);
+    }
+
+    [Fact]
+    public void BaseUser_SetPassword_UpdatesPassword()
+    {
+        _baseUser.Password = "password";
+        Assert.Equal("password", _baseUser.Password);
+    }
+
+    [Fact]
+    public void BaseUserPassword_IsString()
+    {
+        _baseUser.Password = "password";
+        Assert.IsType<string>(_baseUser.Password);
     }
 }
