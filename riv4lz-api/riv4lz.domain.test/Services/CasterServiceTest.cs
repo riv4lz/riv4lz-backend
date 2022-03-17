@@ -12,17 +12,24 @@ namespace riv4lz.domain.test.Services;
 
 public class CasterServiceTest
 {
-    private Mock<ICasterRepository> _mock;
+    private readonly Mock<ICasterRepository> _mock;
+    private readonly CasterService _service;
+    private readonly List<Caster> _expected;
 
     public CasterServiceTest()
     {
         _mock = new Mock<ICasterRepository>();
+        _service = new CasterService(_mock.Object);
+        _expected = new List<Caster>()
+        {
+            new Caster() {Id = 1, Email = "t@t.tt"},
+            new Caster() {Id = 2, Email = "d@d.dd"}
+        };
     }
     [Fact]
     public void CasterService_IsICasterService()
     {
-        var service = new CasterService(_mock.Object);
-        Assert.True(service is ICasterService);
+        Assert.True(_service is ICasterService);
     }
     
     [Fact]
@@ -42,8 +49,7 @@ public class CasterServiceTest
     [Fact]
     public void GetCasters_CallsCasterRepositoryFindAll_ExactlyOnce()
     {
-        var service = new CasterService(_mock.Object);
-        service.GetCasters();
+        _service.GetCasters();
         
         _mock.Verify(r => r.FindAll(),Times.Once);
     }
@@ -51,15 +57,9 @@ public class CasterServiceTest
     [Fact]
     public void GetCasters_NoFilter_ReturnsListOfAllCasters()
     {
-        var expected = new List<Caster>()
-        {
-            new Caster() {Id = 1, Email = "t@t.tt"},
-            new Caster() {Id = 2, Email = "d@d.dd"}
-        };
         _mock.Setup(r => r.FindAll())
-            .Returns(expected);
-
-        var service = new CasterService(_mock.Object);
-        Assert.Equal(expected, service.GetCasters());
+            .Returns(_expected);
+        
+        Assert.Equal(_expected, _service.GetCasters());
     }
 }
