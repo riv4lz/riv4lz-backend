@@ -13,15 +13,22 @@ namespace riv4lz.casterApi.Controllers
     [ApiController]
     public class CasterController : ControllerBase
     {
-        public CasterController()
+        private readonly ICasterService _casterService;
+
+        public CasterController(ICasterService casterService)
         {
-            
+            if (casterService == null)
+            {
+                throw new InvalidDataException("Constructor must have a CasterService");
+            }
+
+            _casterService = casterService;
         }
         
         [HttpGet]
         public ActionResult<List<Caster>> GetAll()
         {
-            return null;
+            return _casterService.GetCasters();
         }
     }
 }

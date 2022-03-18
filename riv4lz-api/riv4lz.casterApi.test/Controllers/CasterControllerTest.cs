@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using riv4lz.casterApi.Controllers;
 using riv4lz.casterApi.test.Helpers;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
+using riv4lz.dataAccess.Repositories;
 using riv4lz.domain.Services;
 using Xunit;
 
@@ -22,8 +24,8 @@ public class CasterControllerTest
     public CasterControllerTest()
     {
         _casterService = new Mock<ICasterService>();
-        _controllerInfoHelper = new ControllerInfoHelper<CasterController>();
-        _controller = new CasterController();
+        _controller = new CasterController(_casterService.Object);
+        _controllerInfoHelper = new ControllerInfoHelper<CasterController>(_controller);
         _typeInfo = typeof(CasterController).GetTypeInfo();
     }
 
@@ -31,6 +33,31 @@ public class CasterControllerTest
     public void CasterController_IsOfTypeControllerBase()
     {
         Assert.IsAssignableFrom<ControllerBase>(_controller);
+    }
+    
+    [Fact]
+    public void CasterController_HasCasterService_IsOfTypeControllerBase()
+    {
+        var service = new Mock<ICasterService>();
+        var controller = new CasterController(service.Object);
+
+        Assert.IsAssignableFrom<ControllerBase>(controller);
+    }
+
+    [Fact]
+    public void CasterController_WithNullProductService_ThrowsInvalidDataException()
+    {
+        Assert.Throws<InvalidDataException>(
+            () => new CasterController(null));
+    }
+    
+    [Fact]
+    public void CasterController_WithNullProductService_ThrowsInvalidDataExceptionWithMessage()
+    {
+        var exception = Assert.Throws<InvalidDataException>(
+            () => new CasterController(null));
+        
+        Assert.Equal("Constructor must have a CasterService", exception.Message);
     }
 
     [Fact]
@@ -57,6 +84,9 @@ public class CasterControllerTest
         Assert.Equal("api/[controller]", template);
     }
 
+    #region GetAll()
+
+    
     [Fact]
     public void CasterController_HasGetAllMethod()
     {
@@ -91,10 +121,16 @@ public class CasterControllerTest
     }
 
     [Fact]
-    public void CasterController_HasCasterService_IsOfTypeControllerBase()
+    public void CasterController_GetAllMethod_CallsServicesGetCasters_Once()
     {
-        var service = new Mock<ICasterService>();
-        var controller = new CasterController(service.Object);
+        _controller.GetAll();
+        
+        _casterService.Verify(s => s.GetCasters(), Times.Once);
     }
+
+    #endregion
+
+
+    
 
 }
