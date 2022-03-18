@@ -28,7 +28,15 @@ namespace riv4lz.casterApi.Controllers
         [HttpGet]
         public ActionResult<List<Caster>> GetAll()
         {
-            return _casterService.GetCasters();
+            var casters = _casterService.GetCasters();
+            
+            if (casters == null)
+            {
+                // TODO change exception type
+                throw new ArgumentException();
+            }
+
+            return casters;
         }
     }
 }

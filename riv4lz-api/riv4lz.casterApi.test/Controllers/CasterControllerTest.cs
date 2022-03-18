@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Internal;
 using Moq;
 using riv4lz.casterApi.Controllers;
 using riv4lz.casterApi.test.Helpers;
@@ -18,7 +20,7 @@ public class CasterControllerTest
 {
     private readonly CasterController _controller;
     private readonly TypeInfo _typeInfo;
-    private ControllerInfoHelper<CasterController> _controllerInfoHelper;
+    private readonly ControllerInfoHelper<CasterController> _controllerInfoHelper;
     private readonly Mock<ICasterService> _casterService;
 
     public CasterControllerTest()
@@ -96,7 +98,7 @@ public class CasterControllerTest
     }
 
     [Fact]
-    public void CasterController_HasGetAllMethod_IsPublic()
+    public void CasterController_GetAllMethod_IsPublic()
     {
         var method = _controllerInfoHelper.GetMethodByName("GetAll");
         
@@ -104,12 +106,22 @@ public class CasterControllerTest
     }
 
     [Fact]
-    public void CasterController_HasGetAllMethod_ReturnsLiftOfCastersInActionResult()
+    public void CasterController_GetAllMethod_ReturnsLiftOfCastersInActionResult()
     {
         var method = _controllerInfoHelper.GetMethodByName("GetAll");
         
         Assert.Equal(typeof(ActionResult<List<Caster>>).FullName, method.ReturnType.FullName);
     }
+
+    [Fact]
+    public void CasterController_GetAllMethod_IfListIsNull_ThrowsInternalServerErrorException()
+    {
+        _casterService.Setup(s => s.GetCasters()).Returns((List<Caster>) null);
+        
+        // TODO make custom exception system
+        Assert.Throws<ArgumentException>(() => _controller.GetAll());
+    }
+    
 
     [Fact]
     public void CasterController_GetAllMethod_HasGetHttpAttribute()
