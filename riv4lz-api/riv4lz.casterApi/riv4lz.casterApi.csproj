@@ -15,4 +15,8 @@
       <Folder Include="Controllers" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\riv4lz.core\riv4lz.core.csproj" />
+    </ItemGroup>
+
 </Project>
