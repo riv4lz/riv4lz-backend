@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using riv4lz.casterApi.Dtos;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
 
@@ -33,10 +34,21 @@ namespace riv4lz.casterApi.Controllers
             if (casters == null)
             {
                 // TODO change exception type
-                throw new ArgumentException();
+                throw new InvalidDataException();
             }
 
             return casters;
+        }
+
+        [HttpPost]
+        public ActionResult<CasterDto> Create([FromBody] CreateCasterDto createCasterDto)
+        {
+            var newCaster = _casterService.Create(new Caster());
+
+            return new CasterDto
+            {
+                
+            };
         }
     }
 }

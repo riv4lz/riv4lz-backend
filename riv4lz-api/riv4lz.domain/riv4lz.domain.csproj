@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\riv4lz.casterApi\riv4lz.casterApi.csproj" />
       <ProjectReference Include="..\riv4lz.core\riv4lz.core.csproj" />
     </ItemGroup>
 

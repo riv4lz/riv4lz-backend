@@ -23,4 +23,33 @@ public class CasterRepository : ICasterRepository
             GamerTag = ce.GamerTag
         }).ToList();
     }
+
+    public Caster Find(int id)
+    {
+        var casterEntity = _dbContext.Casters.FirstOrDefault(c => c.Id == id);
+
+        return new Caster()
+        {
+            Id = casterEntity.Id,
+            Email = casterEntity.Email,
+            GamerTag = casterEntity.GamerTag,
+            Password = casterEntity.Password
+        };
+    }
+
+
+    public Caster Create(Caster newCaster)
+    {
+        return new Caster();
+    }
+
+    public Caster Update(int id, Caster caster)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Caster Delete(int id)
+    {
+        throw new NotImplementedException();
+    }
 }

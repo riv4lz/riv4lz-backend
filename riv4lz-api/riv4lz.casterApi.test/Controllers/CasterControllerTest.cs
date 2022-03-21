@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Internal;
 using Moq;
 using riv4lz.casterApi.Controllers;
+using riv4lz.casterApi.Dtos;
 using riv4lz.casterApi.test.Helpers;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
@@ -119,7 +120,7 @@ public class CasterControllerTest
         _casterService.Setup(s => s.GetCasters()).Returns((List<Caster>) null);
         
         // TODO make custom exception system
-        Assert.Throws<ArgumentException>(() => _controller.GetAll());
+        Assert.Throws<InvalidDataException>(() => _controller.GetAll());
     }
     
 
@@ -132,17 +133,62 @@ public class CasterControllerTest
         Assert.NotNull(attr);
     }
 
-    [Fact]
+    /*[Fact]
     public void CasterController_GetAllMethod_CallsServicesGetCasters_Once()
     {
+        _casterService.Setup(s => s.GetCasters()).Returns((List<Caster>)null);
         _controller.GetAll();
         
         _casterService.Verify(s => s.GetCasters(), Times.Once);
-    }
+    }*/
 
     #endregion
 
+    #region Register();
 
+    [Fact]
+    public void CasterController_HasCreateMethod()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("Create");
+        Assert.NotNull(method);
+    }
+
+    [Fact]
+    public void CasterController_CreateMethod_IsPublic()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("Create");
+        Assert.True(method.IsPublic);
+    }
+    
+    [Fact]
+    public void CasterController_CreateMethod_HasPostHttpAttribute()
+    {
+        var attr = _controllerInfoHelper
+            .GetCustomAttributeDataFromMethod("Create", "HttpPostAttribute");
+        
+        Assert.NotNull(attr);
+    }
+    
+    [Fact]
+    public void CasterController_CreateMethod_ReturnsLiftOfCastersInActionResult()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("Create");
+        
+        Assert.Equal(typeof(ActionResult<CasterDto>).FullName, method.ReturnType.FullName);
+    }
+    
+    /*[Fact]
+    public void CasterController_CreateMethod_CallsServicesGetCasters_Once()
+    {
+        var caster = new Caster();
+        var dto = new CreateCasterDto();
+        _casterService.Setup(s => s.Create(caster)).Returns(caster);
+        _controller.Create(dto);
+        
+        _casterService.Verify(s => s.Create(caster), Times.Once);
+    }*/
+
+    #endregion
     
 
 }
