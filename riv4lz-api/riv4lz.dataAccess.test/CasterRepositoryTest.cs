@@ -16,6 +16,7 @@ public class CasterRepositoryTest
     private readonly CasterRepository _repo;
     private readonly CasterDbContext _dbContext;
     private readonly List<CasterEntity> _list;
+    private readonly CasterEntity _casterEntity;
     public CasterRepositoryTest()
     {
         _dbContext = Create.MockedDbContextFor<CasterDbContext>();
@@ -37,6 +38,14 @@ public class CasterRepositoryTest
                 Password = "12345",
                 GamerTag = "Gamer2"
             }
+        };
+
+        _casterEntity = new CasterEntity()
+        {
+            Id = 1,
+            Email = "t@t.dk",
+            Password = "12345",
+            GamerTag = "Gamer1"
         };
     }
 
@@ -82,9 +91,58 @@ public class CasterRepositoryTest
 
     #endregion
 
+    #region Find()
+
+    [Fact]
+    public void Find_GetCasterEntityInDbContext_AsCaster()
+    {
+        _dbContext.Set<CasterEntity>().Add(_casterEntity);
+        _dbContext.SaveChanges();
+        var expected = new Caster()
+        {
+            Id = _casterEntity.Id,
+            Email = _casterEntity.Email,
+            GamerTag = _casterEntity.GamerTag,
+            Password = _casterEntity.Password
+        };
+
+        var actual = _repo.Find(1);
+        
+        Assert.Equal(expected, actual, new Comparer());
+    }
+    
+    #endregion
+
     #region Create()
 
+    [Fact]
+    public void CreateMethod_SavingCasterAsEntity_AssignsId()
+    {
+        var entity = new CasterEntity()
+        {
+            Email = "j@j.jj",
+            GamerTag = "test",
+            Password = "Pa$$w0rd"
+        };
+        var createdEntity = _dbContext.Set<CasterEntity>().Add(entity).Entity;
+        _dbContext.SaveChanges();
+        
+        Assert.NotNull(createdEntity.Id);
+    }
     
+    // TODO returns caster
+
+    #endregion
+
+    #region Update()
+
+        // TODO
+
+    #endregion
+
+    #region Delete()
+
+        // TODO
 
     #endregion
     

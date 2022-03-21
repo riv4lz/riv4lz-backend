@@ -26,8 +26,17 @@ public class CasterRepository : ICasterRepository
 
     public Caster Find(int id)
     {
-        throw new NotImplementedException();
+        var casterEntity = _dbContext.Casters.FirstOrDefault(c => c.Id == id);
+
+        return new Caster()
+        {
+            Id = casterEntity.Id,
+            Email = casterEntity.Email,
+            GamerTag = casterEntity.GamerTag,
+            Password = casterEntity.Password
+        };
     }
+
 
     public Caster Create(Caster newCaster)
     {
