@@ -45,6 +45,8 @@ public class CasterServiceTest
         Assert.Equal("CasterRepository can't be null", exception.Message);
     }
 
+    #region GetCasters()
+    
     [Fact]
     public void GetCasters_CallsCasterRepositoryFindAll_ExactlyOnce()
     {
@@ -61,4 +63,18 @@ public class CasterServiceTest
         
         Assert.Equal(_expected, _service.GetCasters());
     }
+
+    #endregion
+
+    #region Create()
+
+    public void Create_CallsCasterRepositoryCreate_ExactlyOnce()
+    {
+        _service.Create();
+        
+        _mock.Verify(r => r.Create(),Times.Once);
+    }
+
+    #endregion
+
 }

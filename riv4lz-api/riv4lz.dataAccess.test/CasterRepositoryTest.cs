@@ -60,6 +60,8 @@ public class CasterRepositoryTest
         Assert.Equal("CasterRepository must have a CasterDbContext", exception.Message);
     }
 
+    #region FindAll()
+
     [Fact]
     public void FindAll_GetAllCasterEntitiesInDbContext_AsAListOfCasters()
     {
@@ -77,6 +79,14 @@ public class CasterRepositoryTest
         
         Assert.Equal(expectedList, actualList, new Comparer());
     }
+
+    #endregion
+
+    #region Create()
+
+    
+
+    #endregion
     
     public class Comparer: IEqualityComparer<Caster>
     {

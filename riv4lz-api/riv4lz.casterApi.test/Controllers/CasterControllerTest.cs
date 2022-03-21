@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Internal;
 using Moq;
 using riv4lz.casterApi.Controllers;
+using riv4lz.casterApi.Dtos;
 using riv4lz.casterApi.test.Helpers;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
@@ -142,7 +143,48 @@ public class CasterControllerTest
 
     #endregion
 
+    #region Register();
 
+    [Fact]
+    public void CasterController_HasCreateMethod()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("Create");
+        Assert.NotNull(method);
+    }
+
+    [Fact]
+    public void CasterController_CreateMethod_IsPublic()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("Create");
+        Assert.True(method.IsPublic);
+    }
+    
+    [Fact]
+    public void CasterController_CreateMethod_HasPostHttpAttribute()
+    {
+        var attr = _controllerInfoHelper
+            .GetCustomAttributeDataFromMethod("Create", "HttpPostAttribute");
+        
+        Assert.NotNull(attr);
+    }
+    
+    [Fact]
+    public void CasterController_CreateMethod_ReturnsLiftOfCastersInActionResult()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("Create");
+        
+        Assert.Equal(typeof(ActionResult<CasterDto>).FullName, method.ReturnType.FullName);
+    }
+    
+    [Fact]
+    public void CasterController_CreateMethod_CallsServicesGetCasters_Once()
+    {
+        _controller.Create();
+        
+        _casterService.Verify(s => s.Create(), Times.Once);
+    }
+
+    #endregion
     
 
 }

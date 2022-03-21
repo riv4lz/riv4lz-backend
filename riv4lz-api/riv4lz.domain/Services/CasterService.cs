@@ -18,4 +18,9 @@ public class CasterService : ICasterService
     {
         return _repo.FindAll();
     }
+
+    public Caster Create()
+    {
+        throw new NotImplementedException();
+    }
 }

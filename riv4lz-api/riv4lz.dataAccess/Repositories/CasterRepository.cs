@@ -23,4 +23,9 @@ public class CasterRepository : ICasterRepository
             GamerTag = ce.GamerTag
         }).ToList();
     }
+
+    public Caster Create()
+    {
+        throw new NotImplementedException();
+    }
 }
