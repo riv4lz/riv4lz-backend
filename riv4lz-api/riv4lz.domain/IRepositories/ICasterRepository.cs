@@ -9,6 +9,5 @@ public interface ICasterRepository
     Caster Create(Caster newCaster);
     Caster Update(int id, Caster caster);
     Caster Delete(int id);
-
-
+    Caster FindByEmail(string email);
 }

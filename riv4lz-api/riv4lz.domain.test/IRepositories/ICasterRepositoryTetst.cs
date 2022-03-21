@@ -70,6 +70,30 @@ public class ICasterRepositoryTest
 
     #endregion
 
+    #region GetCasterByEmail()
+
+    [Fact]
+    public void ICasterRepository_HasFindByEmailMethod()
+    {
+        var method = typeof(ICasterRepository).GetMethods()
+            .FirstOrDefault(m => "FindByEmail".Equals(m.Name));
+        
+        Assert.NotNull(method);
+    }
+    
+    [Fact]
+    public void FindByEmailMethod_ReturnsCaster()
+    {
+        var method = typeof(ICasterRepository).GetMethods()
+            .FirstOrDefault(m => "FindByEmail".Equals(m.Name));
+        
+        Assert.Equal(typeof(Caster).FullName, method.ReturnType.FullName);
+    }
+    
+    // TODO returns null if no caster
+
+    #endregion
+
     #region Create()
 
     [Fact]

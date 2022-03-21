@@ -68,4 +68,17 @@ public class CasterRepository : ICasterRepository
     {
         throw new NotImplementedException();
     }
+
+    public Caster FindByEmail(string email)
+    {
+        var casterEntity = _dbContext.Casters.FirstOrDefault(c => c.Email.Equals(email));
+
+        return new Caster()
+        {
+            Id = casterEntity.Id,
+            Email = casterEntity.Email,
+            GamerTag = casterEntity.GamerTag,
+            Password = casterEntity.Password
+        };
+    }
 }

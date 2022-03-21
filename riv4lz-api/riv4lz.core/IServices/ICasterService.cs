@@ -9,4 +9,5 @@ public interface ICasterService
     Caster Create(Caster newCaster);
     Caster Update(int id, Caster caster);
     Caster Delete(int id);
+    Caster GetCasterByEmail(string email);
 }

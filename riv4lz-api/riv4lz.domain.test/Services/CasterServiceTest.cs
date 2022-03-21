@@ -78,13 +78,35 @@ public class CasterServiceTest
     }
     
     [Fact]
-    public void GetCaster_NoFilter_ReturnsCaster()
+    public void GetCaster_ReturnsCaster()
     {
         var fakeCaster = new Caster();
         _mock.Setup(r => r.Find(1))
             .Returns(fakeCaster);
         
         Assert.Equal(fakeCaster, _service.GetCaster(1));
+    }
+
+    #endregion
+
+    #region GetCasterByEmail()
+
+    [Fact]
+    public void GetCasterByEmail_CallsCasterRepositoryFindByEmail_ExactlyOnce()
+    {
+        _service.GetCasterByEmail("test");
+        
+        _mock.Verify(r => r.FindByEmail("test"),Times.Once);
+    }
+    
+    [Fact]
+    public void GetCasterByEmail_ReturnsCaster()
+    {
+        var fakeCaster = new Caster();
+        _mock.Setup(r => r.FindByEmail("test"))
+            .Returns(fakeCaster);
+        
+        Assert.Equal(fakeCaster, _service.GetCasterByEmail("test"));
     }
 
     #endregion

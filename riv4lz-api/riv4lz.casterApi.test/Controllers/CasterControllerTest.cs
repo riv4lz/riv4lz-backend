@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using riv4lz.casterApi.Controllers;
 using riv4lz.casterApi.Dtos;
+using riv4lz.casterApi.test.Dtos;
 using riv4lz.casterApi.test.Helpers;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
@@ -142,48 +143,82 @@ public class CasterControllerTest
     #region Register();
 
     [Fact]
-    public void CasterController_HasCreateMethod()
+    public void CasterController_HasRegisterMethod()
     {
-        var method = _controllerInfoHelper.GetMethodByName("Create");
+        var method = _controllerInfoHelper.GetMethodByName("Register");
         Assert.NotNull(method);
     }
 
     [Fact]
-    public void CasterController_CreateMethod_IsPublic()
+    public void CasterController_RegisterMethod_IsPublic()
     {
-        var method = _controllerInfoHelper.GetMethodByName("Create");
+        var method = _controllerInfoHelper.GetMethodByName("Register");
         Assert.True(method.IsPublic);
     }
     
     [Fact]
-    public void CasterController_CreateMethod_HasPostHttpAttribute()
+    public void CasterController_RegisterMethod_HasPostHttpAttribute()
     {
         var attr = _controllerInfoHelper
-            .GetCustomAttributeDataFromMethod("Create", "HttpPostAttribute");
+            .GetCustomAttributeDataFromMethod("Register", "HttpPostAttribute");
         
         Assert.NotNull(attr);
     }
     
     [Fact]
-    public void CasterController_CreateMethod_ReturnsLiftOfCastersInActionResult()
+    public void CasterController_RegisterMethod_ReturnsLiftOfCastersInActionResult()
     {
-        var method = _controllerInfoHelper.GetMethodByName("Create");
+        var method = _controllerInfoHelper.GetMethodByName("Register");
         
         Assert.Equal(typeof(ActionResult<CasterDto>).FullName, method.ReturnType.FullName);
     }
     
     /*[Fact]
-    public void CasterController_CreateMethod_CallsServicesGetCasters_Once()
+    public void CasterController_RegisterMethod_CallsServicesGetCasters_Once()
     {
         var caster = new Caster();
         var dto = new CreateCasterDto();
-        _casterService.Setup(s => s.Create(caster)).Returns(caster);
-        _controller.Create(dto);
+        _casterService.Setup(s => s.Register(caster)).Returns(caster);
+        _controller.Register(dto);
         
-        _casterService.Verify(s => s.Create(caster), Times.Once);
+        _casterService.Verify(s => s.Register(caster), Times.Once);
     }*/
 
     #endregion
+
+    #region Login()
+
+    [Fact]
+    public void CasterController_HasLoginMethod()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("Login");
+        Assert.NotNull(method);
+    }
+
+    [Fact]
+    public void CasterController_LoginMethod_IsPublic()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("Login");
+        Assert.True(method.IsPublic);
+    }
     
+    [Fact]
+    public void CasterController_LoginMethod_HasPostHttpAttribute()
+    {
+        var attr = _controllerInfoHelper
+            .GetCustomAttributeDataFromMethod("Login", "HttpPostAttribute");
+        
+        Assert.NotNull(attr);
+    }
+
+    [Fact]
+    public void CasterController_LoginMethod_ReturnsLoginCasterDto()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("Login");
+        
+        Assert.Equal(typeof(ActionResult<CasterDto>).FullName, method.ReturnType.FullName);
+    }
+    
+    #endregion
 
 }

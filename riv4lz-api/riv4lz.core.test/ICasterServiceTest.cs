@@ -72,6 +72,28 @@ public class ICasterServiceTest
 
     #endregion
 
+    #region GetCasterByEmail()
+    
+    [Fact]
+    public void ICasterService_HasGetCasterByEmailMethod()
+    {
+        var method = typeof(ICasterService).GetMethods()
+            .FirstOrDefault(m => "GetCasterByEmail".Equals(m.Name));
+        
+        Assert.NotNull(method);
+    }
+    
+    [Fact]
+    public void GetCasterMethod_ReturnsGetCasterByEmail()
+    {
+        var method = typeof(ICasterService).GetMethods()
+            .FirstOrDefault(m => "GetCasterByEmail".Equals(m.Name));
+        
+        Assert.Equal(typeof(Caster).FullName, method.ReturnType.FullName);
+    }
+
+    #endregion
+
     #region Create()
 
     [Fact]
