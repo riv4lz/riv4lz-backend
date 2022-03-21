@@ -39,11 +39,20 @@ namespace riv4lz.casterApi.Controllers
         [HttpPost]
         public ActionResult<CasterDto> Create([FromBody] CreateCasterDto createCasterDto)
         {
-            var newCaster = _casterService.Create(new Caster());
+            var newCaster = new Caster()
+            {
+                Email = createCasterDto.Email,
+                GamerTag = createCasterDto.GamerTag,
+                Password = createCasterDto.Password
+            };
+            
+            var caster = _casterService.Create(newCaster);
 
             return new CasterDto
             {
-                
+                Id = caster.Id,
+                GamerTag = caster.GamerTag,
+                Email = caster.Email
             };
         }
     }

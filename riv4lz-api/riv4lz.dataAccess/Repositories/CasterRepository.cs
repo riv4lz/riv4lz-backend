@@ -1,4 +1,5 @@
 using riv4lz.core.Models;
+using riv4lz.dataAccess.Entities;
 using riv4lz.domain.IRepositories;
 
 namespace riv4lz.dataAccess.Repositories;
@@ -40,7 +41,22 @@ public class CasterRepository : ICasterRepository
 
     public Caster Create(Caster newCaster)
     {
-        return new Caster();
+        var caster = _dbContext.Casters.Add(new CasterEntity()
+        {
+            GamerTag = newCaster.GamerTag,
+            Email = newCaster.Email,
+            Password = newCaster.Password
+        }).Entity;
+        
+        _dbContext.SaveChanges();
+
+        return new Caster()
+        {
+            Id = caster.Id,
+            Email = caster.Email,
+            GamerTag = caster.GamerTag,
+            Password = caster.Password
+        };
     }
 
     public Caster Update(int id, Caster caster)
