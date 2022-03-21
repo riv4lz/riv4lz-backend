@@ -67,6 +67,12 @@ public class CasterServiceTest
 
     #endregion
 
+    #region GetCaster()
+
+    // TODO
+
+    #endregion
+
     #region Create()
 
     [Fact]
@@ -89,4 +95,16 @@ public class CasterServiceTest
 
     #endregion
 
+    #region Update()
+
+        // TODO
+
+    #endregion
+
+    #region Delete()
+
+        // TODO
+
+    #endregion
+    
 }

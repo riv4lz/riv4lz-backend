@@ -24,8 +24,23 @@ public class CasterRepository : ICasterRepository
         }).ToList();
     }
 
+    public Caster Find(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     public Caster Create(Caster newCaster)
     {
         return new Caster();
+    }
+
+    public Caster Update(int id, Caster caster)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Caster Delete(int id)
+    {
+        throw new NotImplementedException();
     }
 }
