@@ -112,6 +112,28 @@ public class CasterRepositoryTest
     
     #endregion
 
+    #region FindByEmail()
+
+    [Fact]
+    public void FindByEmail_GetCasterEntityInDbContext_AsCaster()
+    {
+        _dbContext.Set<CasterEntity>().Add(_casterEntity);
+        _dbContext.SaveChanges();
+        var expected = new Caster()
+        {
+            Id = _casterEntity.Id,
+            Email = _casterEntity.Email,
+            GamerTag = _casterEntity.GamerTag,
+            Password = _casterEntity.Password
+        };
+
+        var actual = _repo.FindByEmail("t@t.dk");
+        
+        Assert.Equal(expected, actual, new Comparer());
+    }
+
+    #endregion
+
     #region Create()
 
     [Fact]

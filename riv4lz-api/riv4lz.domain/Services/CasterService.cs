@@ -38,4 +38,9 @@ public class CasterService : ICasterService
     {
         return _repo.Delete(id);
     }
+
+    public Caster GetCasterByEmail(string email)
+    {
+        return _repo.FindByEmail(email);
+    }
 }

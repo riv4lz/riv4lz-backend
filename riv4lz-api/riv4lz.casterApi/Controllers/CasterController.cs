@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using riv4lz.casterApi.Dtos;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
+using riv4lz.dataAccess;
 
 
 namespace riv4lz.casterApi.Controllers
@@ -36,14 +37,41 @@ namespace riv4lz.casterApi.Controllers
             return casters;
         }
 
-        [HttpPost]
-        public ActionResult<CasterDto> Create([FromBody] CreateCasterDto createCasterDto)
+        [HttpPost(nameof(Register))]
+        public ActionResult<CasterDto> Register([FromBody] CreateCasterDto createCasterDto)
         {
-            var newCaster = _casterService.Create(new Caster());
+            var newCaster = new Caster()
+            {
+                Email = createCasterDto.Email,
+                GamerTag = createCasterDto.GamerTag,
+                Password = createCasterDto.Password
+            };
+            
+            var caster = _casterService.Create(newCaster);
 
             return new CasterDto
             {
-                
+                Id = caster.Id,
+                GamerTag = caster.GamerTag,
+                Email = caster.Email
+            };
+        }
+
+        [HttpPost(nameof(Login))]
+        public ActionResult<CasterDto> Login([FromBody] LoginCasterDto loginCasterDto)
+        {
+            var caster = _casterService.GetCasterByEmail(loginCasterDto.Email);
+
+            if (caster == null)
+            {
+                return BadRequest("User not found");
+            }
+
+            return new CasterDto()
+            {
+                Email = caster.Email,
+                GamerTag = caster.GamerTag,
+                Id = caster.Id
             };
         }
     }
