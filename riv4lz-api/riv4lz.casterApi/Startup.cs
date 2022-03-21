@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using riv4lz.casterApi.Extensions;
 using riv4lz.dataAccess;
 

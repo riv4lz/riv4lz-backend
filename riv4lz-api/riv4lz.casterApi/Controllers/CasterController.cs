@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using riv4lz.casterApi.Dtos;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
-using riv4lz.dataAccess;
 
 
 namespace riv4lz.casterApi.Controllers
