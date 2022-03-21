@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.casterApi.Dtos;
+using riv4lz.casterApi.test.Dtos;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
 
@@ -72,6 +73,18 @@ namespace riv4lz.casterApi.Controllers
                 GamerTag = caster.GamerTag,
                 Id = caster.Id
             };
+        }
+
+        [HttpPut(nameof(UpdateCaster))]
+        public ActionResult<CasterDto> UpdateCaster([FromBody] int id, UpdateCasterDto updateCasterDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpDelete(nameof(DeleteCaster))]
+        public ActionResult<CasterDto> DeleteCaster([FromBody] int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
