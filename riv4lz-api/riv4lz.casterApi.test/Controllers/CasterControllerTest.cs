@@ -220,4 +220,74 @@ public class CasterControllerTest
     
     #endregion
 
+    #region UpdateCaster()
+
+    [Fact]
+    public void CasterController_HasUpdateCasterMethod()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("UpdateCaster");
+        Assert.NotNull(method);
+    }
+
+    [Fact]
+    public void CasterController_UpdateCaster_IsPublic()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("UpdateCaster");
+        Assert.True(method.IsPublic);
+    }
+    
+    [Fact]
+    public void CasterController_UpdateCaster_HasPutHttpAttribute()
+    {
+        var attr = _controllerInfoHelper
+            .GetCustomAttributeDataFromMethod("UpdateCaster", "HttpPutAttribute");
+        
+        Assert.NotNull(attr);
+    }
+
+    [Fact]
+    public void CasterController_UpdateCaster_ReturnsCasterDto()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("UpdateCaster");
+        
+        Assert.Equal(typeof(ActionResult<CasterDto>).FullName, method.ReturnType.FullName);
+    }
+
+    #endregion
+
+    #region DeleteCaster()
+
+    [Fact]
+    public void CasterController_HasDeleteCasterMethod()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("DeleteCaster");
+        Assert.NotNull(method);
+    }
+
+    [Fact]
+    public void CasterController_DeleteCaster_IsPublic()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("DeleteCaster");
+        Assert.True(method.IsPublic);
+    }
+    
+    [Fact]
+    public void CasterController_DeleteCaster_HasPutHttpAttribute()
+    {
+        var attr = _controllerInfoHelper
+            .GetCustomAttributeDataFromMethod("DeleteCaster", "HttpDeleteAttribute");
+        
+        Assert.NotNull(attr);
+    }
+
+    [Fact]
+    public void CasterController_DeleteCaster_ReturnsCasterDto()
+    {
+        var method = _controllerInfoHelper.GetMethodByName("DeleteCaster");
+        
+        Assert.Equal(typeof(ActionResult<CasterDto>).FullName, method.ReturnType.FullName);
+    }
+
+    #endregion
+
 }
