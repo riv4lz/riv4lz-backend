@@ -1,5 +1,4 @@
 using riv4lz.core.IServices;
-using riv4lz.core.Models;
 using riv4lz.dataAccess.Entities;
 
 namespace riv4lz.dataAccess;
@@ -22,7 +21,7 @@ public class CasterDbSeeder
             var caster1 = new CasterEntity()
             {
                 Email = "t",
-                GamerTag = "test",
+                GamerTag = "t",
                 Password = "t"
             };
 
