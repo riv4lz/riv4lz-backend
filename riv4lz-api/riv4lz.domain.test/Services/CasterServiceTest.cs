@@ -69,7 +69,23 @@ public class CasterServiceTest
 
     #region GetCaster()
 
-    // TODO
+    [Fact]
+    public void GetCaster_CallsCasterRepositoryFindAll_ExactlyOnce()
+    {
+        _service.GetCaster(1);
+        
+        _mock.Verify(r => r.Find(1),Times.Once);
+    }
+    
+    [Fact]
+    public void GetCaster_NoFilter_ReturnsCaster()
+    {
+        var fakeCaster = new Caster();
+        _mock.Setup(r => r.Find(1))
+            .Returns(fakeCaster);
+        
+        Assert.Equal(fakeCaster, _service.GetCaster(1));
+    }
 
     #endregion
 
@@ -97,13 +113,46 @@ public class CasterServiceTest
 
     #region Update()
 
-        // TODO
+    [Fact]
+    public void UpdateMethod_CallsCasterRepositoryFindAll_ExactlyOnce()
+    {
+        var caster = new Caster();
+        _service.Update(1, caster);
+        
+        _mock.Verify(r => r.Update(1, caster),Times.Once);
+    }
+    
+    [Fact]
+    public void UpdateMethod_ReturnsCaster()
+    {
+        var fakeCaster = new Caster();
+        _mock.Setup(r => r.Update(1, fakeCaster))
+            .Returns(fakeCaster);
+        
+        Assert.Equal(fakeCaster, _service.Update(1, fakeCaster));
+    }
 
     #endregion
 
     #region Delete()
 
-        // TODO
+    [Fact]
+    public void DeleteMethod_CallsCasterRepositoryFindAll_ExactlyOnce()
+    {
+        _service.Delete(1);
+        
+        _mock.Verify(r => r.Delete(1),Times.Once);
+    }
+    
+    [Fact]
+    public void DeleteMethod_ReturnsCaster()
+    {
+        var fakeCaster = new Caster();
+        _mock.Setup(r => r.Find(1))
+            .Returns(fakeCaster);
+        
+        Assert.Equal(fakeCaster, _service.GetCaster(1));
+    }
 
     #endregion
     

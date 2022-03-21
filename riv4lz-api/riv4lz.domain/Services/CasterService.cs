@@ -22,7 +22,7 @@ public class CasterService : ICasterService
 
     public Caster GetCaster(int id)
     {
-        throw new NotImplementedException();
+        return _repo.Find(id);
     }
 
     public Caster Create(Caster newCaster)
@@ -32,11 +32,11 @@ public class CasterService : ICasterService
 
     public Caster Update(int id, Caster caster)
     {
-        throw new NotImplementedException();
+        return _repo.Update(id, caster);
     }
 
     public Caster Delete(int id)
     {
-        throw new NotImplementedException();
+        return _repo.Delete(id);
     }
 }
