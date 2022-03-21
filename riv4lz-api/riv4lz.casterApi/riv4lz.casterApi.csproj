@@ -7,6 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.3" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
@@ -17,6 +19,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\riv4lz.core\riv4lz.core.csproj" />
+      <ProjectReference Include="..\riv4lz.dataAccess\riv4lz.dataAccess.csproj" />
+      <ProjectReference Include="..\riv4lz.domain\riv4lz.domain.csproj" />
     </ItemGroup>
 
 </Project>

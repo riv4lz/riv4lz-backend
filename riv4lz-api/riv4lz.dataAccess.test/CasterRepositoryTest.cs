@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -129,8 +128,6 @@ public class CasterRepositoryTest
         
         Assert.NotNull(createdEntity.Id);
     }
-    
-    // TODO returns caster
 
     #endregion
 

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Moq;
 using riv4lz.core.Models;
 using riv4lz.domain.IRepositories;
