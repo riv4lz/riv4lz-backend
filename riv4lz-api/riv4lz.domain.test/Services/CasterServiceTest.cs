@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Moq;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
@@ -68,11 +69,22 @@ public class CasterServiceTest
 
     #region Create()
 
-    public void Create_CallsCasterRepositoryCreate_ExactlyOnce()
+    [Fact]
+    public void CreateMethod_CallsCasterRepositoryCreate_ExactlyOnce()
     {
-        _service.Create();
+        var caster = new Caster();
+        _service.Create(caster);
         
-        _mock.Verify(r => r.Create(),Times.Once);
+        _mock.Verify(r => r.Create(caster),Times.Once);
+    }
+
+    [Fact]
+    public void CreateMethod_ReturnsCaster()
+    {
+        var method = typeof(CasterService).GetMethods()
+            .FirstOrDefault(m => "Create".Equals(m.Name));
+        
+        Assert.Equal(typeof(Caster).FullName, method.ReturnType.FullName);
     }
 
     #endregion

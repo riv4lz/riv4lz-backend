@@ -36,7 +36,7 @@ public class ICasterServiceTest
     }
     
     [Fact]
-    public void GetCasters_NoParams_ReturnsListsOfAllUsers()
+    public void GetCastersMethod_NoParams_ReturnsListsOfAllUsers()
     {
         var mock = new Mock<ICasterService>();
         var fakeList = new List<Caster>();
@@ -48,6 +48,28 @@ public class ICasterServiceTest
         var casters = service.GetCasters();
         
         Assert.Equal(fakeList, casters);
+    }
+
+    #endregion
+
+    #region GetCaster()
+
+    [Fact]
+    public void ICasterService_HasGetCasterMethod()
+    {
+        var method = typeof(ICasterService).GetMethods()
+            .FirstOrDefault(m => "GetCaster".Equals(m.Name));
+        
+        Assert.NotNull(method);
+    }
+    
+    [Fact]
+    public void GetCasterMethod_ReturnsCaster()
+    {
+        var method = typeof(ICasterService).GetMethods()
+            .FirstOrDefault(m => "GetCaster".Equals(m.Name));
+        
+        Assert.Equal(typeof(Caster).FullName, method.ReturnType.FullName);
     }
 
     #endregion
@@ -64,7 +86,7 @@ public class ICasterServiceTest
     }
     
     [Fact]
-    public void Create_ReturnsCaster()
+    public void CreateMethod_ReturnsCaster()
     {
         var method = typeof(ICasterService).GetMethods()
             .FirstOrDefault(m => "Create".Equals(m.Name));
@@ -74,4 +96,47 @@ public class ICasterServiceTest
 
     #endregion
 
+    #region Update()
+
+    [Fact]
+    public void ICasterService_HasUpdateMethod()
+    {
+        var method = typeof(ICasterService).GetMethods()
+            .FirstOrDefault(m => "Update".Equals(m.Name));
+        
+        Assert.NotNull(method);
+    }
+    
+    [Fact]
+    public void UpdateMethod_ReturnsCaster()
+    {
+        var method = typeof(ICasterService).GetMethods()
+            .FirstOrDefault(m => "Update".Equals(m.Name));
+        
+        Assert.Equal(typeof(Caster).FullName, method.ReturnType.FullName);
+    }
+
+    #endregion
+
+    #region Delete()
+
+    [Fact]
+    public void ICasterService_HasDeleteMethod()
+    {
+        var method = typeof(ICasterService).GetMethods()
+            .FirstOrDefault(m => "Delete".Equals(m.Name));
+        
+        Assert.NotNull(method);
+    }
+    
+    [Fact]
+    public void DeleteMethod_ReturnsCaster()
+    {
+        var method = typeof(ICasterService).GetMethods()
+            .FirstOrDefault(m => "Delete".Equals(m.Name));
+        
+        Assert.Equal(typeof(Caster).FullName, method.ReturnType.FullName);
+    }
+
+    #endregion
 }

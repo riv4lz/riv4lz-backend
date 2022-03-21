@@ -1,3 +1,4 @@
+using riv4lz.casterApi.Dtos;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
 using riv4lz.domain.IRepositories;
@@ -19,7 +20,22 @@ public class CasterService : ICasterService
         return _repo.FindAll();
     }
 
-    public Caster Create()
+    public Caster GetCaster(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Caster Create(Caster newCaster)
+    {
+        return _repo.Create(newCaster);
+    }
+
+    public Caster Update(int id, Caster caster)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Caster Delete(int id)
     {
         throw new NotImplementedException();
     }

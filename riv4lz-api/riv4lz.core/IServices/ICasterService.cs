@@ -5,5 +5,8 @@ namespace riv4lz.core.IServices;
 public interface ICasterService
 {
     List<Caster> GetCasters();
-    Caster Create();
+    Caster GetCaster(int id);
+    Caster Create(Caster newCaster);
+    Caster Update(int id, Caster caster);
+    Caster Delete(int id);
 }

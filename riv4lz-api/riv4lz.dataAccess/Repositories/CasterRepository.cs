@@ -24,8 +24,8 @@ public class CasterRepository : ICasterRepository
         }).ToList();
     }
 
-    public Caster Create()
+    public Caster Create(Caster newCaster)
     {
-        throw new NotImplementedException();
+        return new Caster();
     }
 }

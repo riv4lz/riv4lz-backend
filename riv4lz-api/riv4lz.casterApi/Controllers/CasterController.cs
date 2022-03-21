@@ -34,16 +34,16 @@ namespace riv4lz.casterApi.Controllers
             if (casters == null)
             {
                 // TODO change exception type
-                throw new ArgumentException();
+                throw new InvalidDataException();
             }
 
             return casters;
         }
 
         [HttpPost]
-        public ActionResult<CasterDto> Create()
+        public ActionResult<CasterDto> Create([FromBody] CreateCasterDto createCasterDto)
         {
-            var newCaster = _casterService.Create();
+            var newCaster = _casterService.Create(new Caster());
 
             return new CasterDto
             {
