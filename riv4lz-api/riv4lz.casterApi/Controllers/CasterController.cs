@@ -23,7 +23,6 @@ namespace riv4lz.casterApi.Controllers
             _casterService = casterService;
         }
         
-        [Authorize]
         [HttpGet]
         public ActionResult<List<Caster>> GetAll()
         {
