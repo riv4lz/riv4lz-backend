@@ -1,6 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.casterApi.Extensions;
 using riv4lz.dataAccess;
+using riv4lz.security;
+using riv4lz.security.DataAccess;
 
 namespace riv4lz.casterApi
 {
@@ -19,13 +24,26 @@ namespace riv4lz.casterApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            });
             services.AddApplicationServices();
+            services.AddIdentityServices(_configuration);
+            
+            //TODO fix
+            
             services.AddSwaggerDocumentation();
 
             services.AddDbContext<CasterDbContext>(options =>
             {
                 options.UseSqlite(_configuration.GetConnectionString("CasterConnection"));
+            });
+
+            services.AddDbContext<AuthContext>(options =>
+            {
+                options.UseSqlite(_configuration.GetConnectionString("AuthConnection"));
             });
             
             services.AddCors(options =>
@@ -54,6 +72,7 @@ namespace riv4lz.casterApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

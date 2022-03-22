@@ -1,12 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.casterApi.Dtos;
-using riv4lz.casterApi.test.Dtos;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
 
 
 namespace riv4lz.casterApi.Controllers
 {
+    // TODO remove when auth v2 is ready
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class CasterController : ControllerBase
@@ -76,7 +78,7 @@ namespace riv4lz.casterApi.Controllers
         }
 
         [HttpPut(nameof(UpdateCaster))]
-        public ActionResult<CasterDto> UpdateCaster([FromBody] int id, UpdateCasterDto updateCasterDto)
+        public ActionResult<CasterDto> UpdateCaster([FromBody] UpdateCasterDto updateCasterDto)
         {
             throw new NotImplementedException();
         }
