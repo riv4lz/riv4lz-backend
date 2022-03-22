@@ -7,6 +7,8 @@ using riv4lz.core.Models;
 
 namespace riv4lz.casterApi.Controllers
 {
+    // TODO remove when auth v2 is ready
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class CasterController : ControllerBase
