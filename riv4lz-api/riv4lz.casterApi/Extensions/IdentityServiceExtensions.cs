@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using riv4lz.casterApi.Services;
 using riv4lz.security;
 using riv4lz.security.DataAccess;
 
@@ -23,6 +24,7 @@ namespace riv4lz.casterApi.Extensions
                 .AddSignInManager<SignInManager<IdentityUser<Guid>>>();
             
             services.AddAuthentication();
+            services.AddScoped<TokenService>();
 
             return services;
         }
