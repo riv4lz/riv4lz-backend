@@ -22,6 +22,7 @@ namespace riv4lz.casterApi
 
             services.AddControllers();
             services.AddApplicationServices();
+            services.AddIdentityServices(_configuration);
             services.AddSwaggerDocumentation();
 
             services.AddDbContext<CasterDbContext>(options =>

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.security;
 
@@ -16,8 +17,9 @@ namespace riv4lz.casterApi
             try
             {
                 var context = services.GetRequiredService<AuthContext>();
+                var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 await context.Database.MigrateAsync();
-                await AuthDbSeed.SeedData(context);
+                await AuthDbSeed.SeedData(context, userManager);
             }
             catch (Exception e)
             {
