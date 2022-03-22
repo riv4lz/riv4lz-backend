@@ -12,7 +12,8 @@ public class AuthControllerTest
 
     public AuthControllerTest()
     {
-        _controller = new AuthController();
+        // TODO add user and signinmanager
+        _controller = new AuthController(null, null);
         _infoHelper = new ControllerInfoHelper<AuthController>(_controller);
     }
     [Fact]

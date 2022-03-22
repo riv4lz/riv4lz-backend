@@ -5,7 +5,8 @@ namespace riv4lz.security.DataAccess;
 
 public class AuthDbSeed
 {
-    public static async Task SeedData(AuthContext context, UserManager<IdentityUser<Guid>> userManager)
+    public static async Task SeedData(AuthContext context, 
+        UserManager<IdentityUser<Guid>> userManager)
     {
         //await context.Database.EnsureDeletedAsync();
         if (!userManager.Users.Any())
@@ -21,6 +22,11 @@ public class AuthDbSeed
             {
                 await userManager.CreateAsync(user, "t");
             }
+        }
+
+        if (!context.Roles.Any())
+        {
+            //roleManager.CreateAsync("Caster");
         }
     }
 }
