@@ -1,6 +1,15 @@
-namespace riv4lz.casterApi.Controllers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-public class AuthController
+namespace riv4lz.casterApi.Controllers
 {
-    
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AuthController : ControllerBase
+    {
+    }
 }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using riv4lz.casterApi.Extensions;
 using riv4lz.dataAccess;
 using riv4lz.security;
+using riv4lz.security.DataAccess;
 
 namespace riv4lz.casterApi
 {

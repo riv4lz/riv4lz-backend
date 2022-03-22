@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
+using riv4lz.security.Models;
 
-namespace riv4lz.security;
+namespace riv4lz.security.DataAccess;
 
 public class AuthDbSeed
 {

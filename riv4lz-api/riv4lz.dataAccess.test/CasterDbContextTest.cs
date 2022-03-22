@@ -20,4 +20,11 @@ public class CasterDbContextTest
         var mockedDbContext = Create.MockedDbContextFor<CasterDbContext>();
         Assert.True(mockedDbContext.Casters is DbSet<CasterEntity>);
     }
+
+    [Fact]
+    public void CasterContext_IsAssignableFromDbContext()
+    {
+        var mockedDbContext = Create.MockedDbContextFor<CasterDbContext>();
+        Assert.IsAssignableFrom<DbContext>(mockedDbContext);
+    }
 }
