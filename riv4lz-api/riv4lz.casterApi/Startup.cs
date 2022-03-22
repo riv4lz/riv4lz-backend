@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.casterApi.Extensions;
 using riv4lz.dataAccess;
@@ -23,6 +24,9 @@ namespace riv4lz.casterApi
             services.AddControllers();
             services.AddApplicationServices();
             services.AddIdentityServices(_configuration);
+            
+            //TODO fix
+            
             services.AddSwaggerDocumentation();
 
             services.AddDbContext<CasterDbContext>(options =>

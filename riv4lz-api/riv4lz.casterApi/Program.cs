@@ -17,7 +17,7 @@ namespace riv4lz.casterApi
             try
             {
                 var context = services.GetRequiredService<AuthContext>();
-                var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                var userManager = services.GetRequiredService<UserManager<IdentityUser<Guid>>>();
                 await context.Database.MigrateAsync();
                 await AuthDbSeed.SeedData(context, userManager);
             }

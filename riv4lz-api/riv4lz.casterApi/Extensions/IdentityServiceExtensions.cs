@@ -7,7 +7,7 @@ namespace riv4lz.casterApi.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddIdentityCore<AppUser>(options =>
+            services.AddIdentityCore<IdentityUser<Guid>>(options =>
                 {
                     options.Password.RequiredLength = 1;
                     options.Password.RequireLowercase = false;
@@ -19,8 +19,8 @@ namespace riv4lz.casterApi.Extensions
 
                 })
                 .AddEntityFrameworkStores<AuthContext>()
-                .AddSignInManager<SignInManager<AppUser>>();
-
+                .AddSignInManager<SignInManager<IdentityUser<Guid>>>();
+            
             services.AddAuthentication();
 
             return services;

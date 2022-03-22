@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace riv4lz.security;
 
-public class AppUser : IdentityUser
+public class AppUser : IdentityUser<Guid>
 {
     //public string Email { get; set; }
     //public string UserName { get; set; }
