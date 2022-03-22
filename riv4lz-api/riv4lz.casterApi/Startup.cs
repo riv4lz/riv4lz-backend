@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using riv4lz.casterApi.Extensions;
 using riv4lz.dataAccess;
+using riv4lz.security;
 
 namespace riv4lz.casterApi
 {
@@ -26,6 +27,11 @@ namespace riv4lz.casterApi
             services.AddDbContext<CasterDbContext>(options =>
             {
                 options.UseSqlite(_configuration.GetConnectionString("CasterConnection"));
+            });
+
+            services.AddDbContext<AuthContext>(options =>
+            {
+                options.UseSqlite(_configuration.GetConnectionString("AuthConnection"));
             });
             
             services.AddCors(options =>

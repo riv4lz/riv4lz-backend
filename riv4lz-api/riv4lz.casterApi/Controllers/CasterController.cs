@@ -76,7 +76,7 @@ namespace riv4lz.casterApi.Controllers
         }
 
         [HttpPut(nameof(UpdateCaster))]
-        public ActionResult<CasterDto> UpdateCaster([FromBody] int id, UpdateCasterDto updateCasterDto)
+        public ActionResult<CasterDto> UpdateCaster([FromBody] UpdateCasterDto updateCasterDto)
         {
             throw new NotImplementedException();
         }
