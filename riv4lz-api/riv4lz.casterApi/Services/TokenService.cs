@@ -9,6 +9,12 @@ namespace riv4lz.casterApi.Services;
 
 public class TokenService
 {
+    private readonly IConfiguration _configuration;
+
+    public TokenService(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
     public string CreateToken(IdentityUser<Guid> user)
     {
         var claims = new List<Claim>()
@@ -19,7 +25,7 @@ public class TokenService
         };
         
         //TODO update key
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secretkeysupersecret"));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtConfig:Secret"]));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 
         var tokenDescriptor = new SecurityTokenDescriptor()

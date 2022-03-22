@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.casterApi.Dtos;
 using riv4lz.core.IServices;
@@ -22,6 +23,7 @@ namespace riv4lz.casterApi.Controllers
             _casterService = casterService;
         }
         
+        [Authorize]
         [HttpGet]
         public ActionResult<List<Caster>> GetAll()
         {

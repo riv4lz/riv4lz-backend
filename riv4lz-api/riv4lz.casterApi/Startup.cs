@@ -66,6 +66,7 @@ namespace riv4lz.casterApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
