@@ -6,9 +6,9 @@ namespace riv4lz.casterApi.test.Dtos;
 public class CreateCasterDtoTest
 {
     [Fact]
-    public void CreateCasterDto_CanBeInitialized()
+    public void RegisterCasterDto_CanBeInitialized()
     {
-        var dto = new CreateCasterDto();
+        var dto = new RegisterCasterDto();
         
         Assert.NotNull(dto);
     }
