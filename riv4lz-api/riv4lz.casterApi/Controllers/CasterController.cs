@@ -40,7 +40,7 @@ namespace riv4lz.casterApi.Controllers
         }
 
         [HttpPost(nameof(Register))]
-        public ActionResult<CasterDto> Register([FromBody] CreateCasterDto createCasterDto)
+        public ActionResult<CasterDto> Register([FromBody] RegisterCasterDto createCasterDto)
         {
             var newCaster = new Caster()
             {
