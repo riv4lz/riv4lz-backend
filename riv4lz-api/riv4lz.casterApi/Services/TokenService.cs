@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using riv4lz.security.Models;
 
 namespace riv4lz.casterApi.Services;
 

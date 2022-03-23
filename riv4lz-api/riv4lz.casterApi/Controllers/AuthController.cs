@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Security.Policy;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.casterApi.Dtos;
 using riv4lz.casterApi.Services;
-using riv4lz.security.DataAccess;
-using riv4lz.security.Models;
+using riv4lz.core.Models;
+using riv4lz.dataAccess.Entities;
 
 namespace riv4lz.casterApi.Controllers
 {
@@ -112,4 +106,6 @@ namespace riv4lz.casterApi.Controllers
         
        
     }
+
+    
 }

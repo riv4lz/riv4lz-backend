@@ -14,6 +14,12 @@
     <ItemGroup>
       <Folder Include="DataAccess\IRepositories" />
       <Folder Include="Migrations" />
+      <Folder Include="Models" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\riv4lz.core\riv4lz.core.csproj" />
+      <ProjectReference Include="..\riv4lz.dataAccess\riv4lz.dataAccess.csproj" />
     </ItemGroup>
 
 </Project>

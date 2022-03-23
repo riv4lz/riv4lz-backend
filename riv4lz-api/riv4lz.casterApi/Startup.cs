@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.casterApi.Extensions;
 using riv4lz.dataAccess;
-using riv4lz.security;
 using riv4lz.security.DataAccess;
 
 namespace riv4lz.casterApi
@@ -79,6 +77,7 @@ namespace riv4lz.casterApi
             {
                 endpoints.MapControllers();
             });
+            
         }
     }
 }
