@@ -94,7 +94,11 @@ namespace riv4lz.casterApi.Controllers
                 Token = _tokenService.CreateToken(user)
             };
         }
-
+        
+        [AllowAnonymous]
+        [HttpPost]
+        
+        
         private UserDto CreateUserObject(AppUser appUser)
         {
             return new UserDto()

@@ -44,11 +44,10 @@ public class AuthDbSeed
             foreach (var user in users)
             {
                 await userManager.CreateAsync(user, "t");
+                await userManager.AddToRoleAsync(user, "Caster");
             }
 
-            //await userManager.AddToRoleAsync(users[1], "Caster");
-            //await userManager.AddToRoleAsync(users[1], "Caster");
-            //await userManager.AddToRoleAsync(users[1], "Caster");
+            
         }
 
         
