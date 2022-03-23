@@ -32,6 +32,7 @@ namespace riv4lz.casterApi.Controllers
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            var roles = _userManager.GetRolesAsync(user);
             
             if (user == null)
             {
@@ -54,8 +55,8 @@ namespace riv4lz.casterApi.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost(nameof(RegisterCaster))]
-        public async Task<ActionResult<UserDto>> RegisterCaster([FromBody] RegisterCasterDto registerCasterDto)
+        [HttpPost(nameof(Register))]
+        public async Task<ActionResult<UserDto>> Register([FromBody] RegisterCasterDto registerCasterDto)
         {
             if (await _userManager.Users.AnyAsync(c => c.Email.Equals(registerCasterDto.Email)))
             {
@@ -83,6 +84,26 @@ namespace riv4lz.casterApi.Controllers
             return BadRequest("Problem registering caster");
         }
 
+        [Authorize(Roles = "Caster")]
+        [HttpPost(nameof(RegisterCaster))]
+        public async Task<ActionResult<CasterDto>> RegisterCaster([FromBody] RegisterCasterDto registerCasterDto)
+        {
+            if (await _userManager.Users.AnyAsync(c => c.Email.Equals(registerCasterDto.Email)))
+            {
+                return BadRequest("Email taken");
+            }
+            if (await _userManager.Users.AnyAsync(c => c.UserName.Equals(registerCasterDto.GamerTag)))
+            {
+                return BadRequest("GamerTag taken");
+            }
+
+            var user = new CasterDto()
+            {
+                Email = "test"
+            };
+            return user;
+        }
+
         [HttpGet(nameof(GetCurrentUser))]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
@@ -94,10 +115,18 @@ namespace riv4lz.casterApi.Controllers
                 Token = _tokenService.CreateToken(user)
             };
         }
+
+        [Authorize(Roles = "Caster")]
+        [HttpGet(nameof(GetString))]
+        public ActionResult<string> GetString()
+        {
+            var user = new Caster();
+            user.GamerTag = "hey";
+            return "hey";
+        }
         
-        [AllowAnonymous]
-        [HttpPost]
-        
+        // TODO IsEmailTaken: bool
+        // TODO IsUserNameTaken: bool (caster/ org)
         
         private UserDto CreateUserObject(AppUser appUser)
         {

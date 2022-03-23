@@ -25,4 +25,9 @@
       <ProjectReference Include="..\riv4lz.security\riv4lz.security.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Dtos\Caster" />
+      <Folder Include="Dtos\Organisation" />
+    </ItemGroup>
+
 </Project>

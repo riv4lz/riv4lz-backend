@@ -43,6 +43,11 @@ namespace riv4lz.casterApi.Extensions
                 });
             services.AddScoped<TokenService>();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Caster", cl);
+            });
+
             return services;
         }
     }

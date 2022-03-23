@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using riv4lz.core.Models;
 using riv4lz.dataAccess.Entities;
@@ -45,6 +46,7 @@ public class AuthDbSeed
             {
                 await userManager.CreateAsync(user, "t");
                 await userManager.AddToRoleAsync(user, "Caster");
+                await userManager.AddClaimAsync(user, new Claim(ClaimsIdentity.DefaultRoleClaimType, "Caster"));
             }
 
             

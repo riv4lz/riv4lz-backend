@@ -39,8 +39,8 @@ namespace riv4lz.casterApi.Controllers
             return casters;
         }
 
-        [HttpPost(nameof(Register))]
-        public ActionResult<CasterDto> Register([FromBody] RegisterCasterDto createCasterDto)
+        [HttpPost(nameof(Register2))]
+        public ActionResult<CasterDto> Register2([FromBody] RegisterCasterDto createCasterDto)
         {
             var newCaster = new Caster()
             {
@@ -53,14 +53,13 @@ namespace riv4lz.casterApi.Controllers
 
             return new CasterDto
             {
-                Id = caster.Id,
                 GamerTag = caster.GamerTag,
                 Email = caster.Email
             };
         }
 
         [HttpPost(nameof(Login))]
-        public ActionResult<CasterDto> Login([FromBody] LoginCasterDto loginCasterDto)
+        public ActionResult<CasterDto> Login([FromBody] RegisterCasterDto loginCasterDto)
         {
             var caster = _casterService.GetCasterByEmail(loginCasterDto.Email);
 
@@ -73,7 +72,7 @@ namespace riv4lz.casterApi.Controllers
             {
                 Email = caster.Email,
                 GamerTag = caster.GamerTag,
-                Id = caster.Id
+                
             };
         }
 

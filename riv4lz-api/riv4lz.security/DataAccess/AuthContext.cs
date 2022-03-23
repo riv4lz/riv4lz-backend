@@ -11,7 +11,10 @@ public class AuthContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Gu
     {
         
     }
-    
-    
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+    }
 }
 
