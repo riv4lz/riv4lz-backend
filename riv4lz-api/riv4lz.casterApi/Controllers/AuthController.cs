@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Policy;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -73,6 +74,7 @@ namespace riv4lz.casterApi.Controllers
 
             var caster = new AppUser()
             {
+                Id = new Guid(),
                 Email = registerCasterDto.Email,
                 UserName = registerCasterDto.GamerTag,
             };
@@ -81,14 +83,33 @@ namespace riv4lz.casterApi.Controllers
 
             if (result.Succeeded)
             {
-                return new UserDto()
-                {
-                    Email = caster.Email,
-                    Token = _tokenService.CreateToken(caster)
-                };
+                return CreateUserObject(caster);
             }
 
             return BadRequest("Problem registering caster");
         }
+
+        [HttpGet(nameof(GetCurrentUser))]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+
+            return new UserDto()
+            {
+                Email = user.Email,
+                Token = _tokenService.CreateToken(user)
+            };
+        }
+
+        private UserDto CreateUserObject(AppUser appUser)
+        {
+            return new UserDto()
+            {
+                Email = appUser.Email,
+                Token = _tokenService.CreateToken(appUser)
+            };
+        }
+        
+       
     }
 }
