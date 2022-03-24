@@ -11,7 +11,7 @@ using riv4lz.security.DataAccess;
 namespace riv4lz.security.Migrations
 {
     [DbContext(typeof(AuthContext))]
-    [Migration("20220323191759_IdentityAdded")]
+    [Migration("20220323214916_IdentityAdded")]
     partial class IdentityAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -12,7 +12,8 @@ public class AuthDbSeed
         
     }
     public static async Task SeedData(AuthContext context,
-        UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager)
+        UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager,
+        SignInManager<IdentityUser<Guid>> signInManager)
     {
 
         if (!context.Roles.Any())
@@ -44,9 +45,13 @@ public class AuthDbSeed
             
             foreach (var user in users)
             {
+                
+                var casterRole = await roleManager.FindByNameAsync("Caster");
                 await userManager.CreateAsync(user, "t");
                 await userManager.AddToRoleAsync(user, "Caster");
                 await userManager.AddClaimAsync(user, new Claim(ClaimsIdentity.DefaultRoleClaimType, "Caster"));
+                await roleManager.AddClaimAsync(casterRole, new Claim(ClaimTypes.Role, "Caster"));
+                await signInManager.ClaimsFactory.CreateAsync(user);
             }
 
             

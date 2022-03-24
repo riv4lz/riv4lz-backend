@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.casterApi.Dtos;
+using riv4lz.casterApi.PolicyHandlers;
 using riv4lz.casterApi.Services;
 using riv4lz.core.Models;
 using riv4lz.dataAccess.Entities;
@@ -32,8 +33,7 @@ namespace riv4lz.casterApi.Controllers
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
-            var roles = _userManager.GetRolesAsync(user);
-            
+            var claims = _userManager.GetClaimsAsync(user);
             if (user == null)
             {
                 return Unauthorized();
@@ -116,7 +116,7 @@ namespace riv4lz.casterApi.Controllers
             };
         }
 
-        [Authorize(Roles = "Caster")]
+        [Authorize(nameof(RoleRequirement))]
         [HttpGet(nameof(GetString))]
         public ActionResult<string> GetString()
         {
