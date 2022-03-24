@@ -1,5 +1,4 @@
 using System;
-using EntityFrameworkCore.Testing.Moq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

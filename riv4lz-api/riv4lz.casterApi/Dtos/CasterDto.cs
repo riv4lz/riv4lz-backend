@@ -1,8 +1,10 @@
+using riv4lz.core.Models;
+
 namespace riv4lz.casterApi.Dtos;
 
-public class CasterDto
+public class CasterDto : UserDto
 {
-    public int Id { get; set; }
     public string GamerTag { get; set; }
-    public string Email { get; set; }
+    public CasterProfile Profile { get; set; }
+    
 }

@@ -1,9 +1,11 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using riv4lz.casterApi.PolicyHandlers;
 using riv4lz.casterApi.Services;
-using riv4lz.security;
 using riv4lz.security.DataAccess;
 
 namespace riv4lz.casterApi.Extensions
@@ -19,12 +21,13 @@ namespace riv4lz.casterApi.Extensions
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                     options.Password.RequireDigit = false;
-
                     options.User.RequireUniqueEmail = true;
-
                 })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<AuthContext>()
                 .AddSignInManager<SignInManager<IdentityUser<Guid>>>();
+
+            
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -38,8 +41,16 @@ namespace riv4lz.casterApi.Extensions
                         ValidateAudience = false,
                     };
                 });
+            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(nameof(RoleRequirement), policy =>
+                {
+                    policy.Requirements.Add(new RoleRequirement());
+                });
+            });
+            services.AddTransient<IAuthorizationHandler, CasterRoleRequirementHandler>();
             services.AddScoped<TokenService>();
-
             return services;
         }
     }
