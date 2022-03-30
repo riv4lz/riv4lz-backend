@@ -3,9 +3,11 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
+COPY /riv4lz.casterApi/*.csproj ./
 RUN dotnet restore
 
 # Copy everything else and build
+COPY ../engine/examples ./
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
