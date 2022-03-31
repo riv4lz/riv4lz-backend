@@ -10,4 +10,4 @@ RUN dotnet build "riv4lz-api" -c Release -o /app/build
 RUN dotnet publish "riv4lz-api" -c Release -o /app/publish
 RUN dotnet tool install -g dotnet-ef 
 
-ENTRYPOINT ["dotnet", "riv4lz-api.dll"]
+ENTRYPOINT ["dotnet", "riv4lz-api/riv4lz-api.dll"]
