@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using riv4lz.core.Models;
 using riv4lz.dataAccess.Entities;
 
+
 namespace riv4lz.security.DataAccess;
 
 public class AuthDbSeed
@@ -12,7 +13,7 @@ public class AuthDbSeed
         
     }
     public static async Task SeedData(AuthContext context,
-        UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager,
+        UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager, 
         SignInManager<IdentityUser<Guid>> signInManager)
     {
 
