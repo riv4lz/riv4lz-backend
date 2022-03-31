@@ -16,7 +16,7 @@ pipeline {
         }
         stage("Production") {
             steps {
-              sh "docker run -d --rm -p 7219 :7219  --name riv4lz-backend frederikotto/riv4lz-backend:${BUILD_NUMBER}"
+              sh "docker run -d --rm -p 7219:7219  --name riv4lz-backend frederikotto/riv4lz-backend:${BUILD_NUMBER}"
             }
         }
     }
