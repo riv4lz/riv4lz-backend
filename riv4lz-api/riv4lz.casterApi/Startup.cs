@@ -53,6 +53,14 @@ namespace riv4lz.casterApi
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
+                
+                options.AddPolicy("Prod-cors", policy =>
+                {
+                    policy
+                        .WithOrigins("https://riv4lz:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
             });
         }
 
@@ -64,6 +72,11 @@ namespace riv4lz.casterApi
                 new CasterDbSeeder(casterDbContext).SeedDevelopment();
                 app.UseDeveloperExceptionPage();
                 app.UseSwaggerDocumentation();
+            }
+
+            if (env.IsProduction())
+            {
+                app.UseCors("Prod-cors");
             }
 
             app.UseHttpsRedirection();
