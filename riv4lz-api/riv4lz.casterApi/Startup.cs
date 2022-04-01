@@ -49,7 +49,7 @@ namespace riv4lz.casterApi
                 options.AddPolicy("Dev-cors", policy =>
                 {
                     policy
-                        .WithOrigins("http://localhost:4200")
+                        .WithOrigins("http://localhost:3000")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
@@ -69,6 +69,7 @@ namespace riv4lz.casterApi
         {
             if (env.IsDevelopment())
             {
+                app.UseCors("Dev-cors");
                 new CasterDbSeeder(casterDbContext).SeedDevelopment();
                 app.UseDeveloperExceptionPage();
                 app.UseSwaggerDocumentation();
@@ -85,6 +86,8 @@ namespace riv4lz.casterApi
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            
 
             app.UseEndpoints(endpoints =>
             {

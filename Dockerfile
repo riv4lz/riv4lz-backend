@@ -1,17 +1,12 @@
 # syntax=docker/dockerfile:1
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
+COPY . .
+RUN dotnet restore "riv4lz-api"
 
-# Copy csproj and restore as distinct layers
-COPY /riv4lz.casterApi/*.csproj ./
-RUN dotnet restore
+RUN dotnet publish "riv4lz-api" -c Release -o out
 
-# Copy everything else and build
-COPY ../engine/examples ./
-RUN dotnet publish -c Release -o out
-
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+FROM mcr.microsoft.com/dotnet/sdk:6.0 
 WORKDIR /app
 COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+ENTRYPOINT ["dotnet", "riv4lz.casterApi.dll"]
