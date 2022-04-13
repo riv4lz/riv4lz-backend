@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.casterApi.Dtos;
-using riv4lz.casterApi.PolicyHandlers;
 using riv4lz.casterApi.Services;
 using riv4lz.core.Models;
 using riv4lz.dataAccess.Entities;
@@ -33,11 +32,11 @@ namespace riv4lz.casterApi.Controllers
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
-            var claims = _userManager.GetClaimsAsync(user);
             if (user == null)
             {
                 return Unauthorized();
             }
+            
 
             var result = await _signInManager
                 .CheckPasswordSignInAsync(user, loginDto.Password, false);
@@ -116,7 +115,7 @@ namespace riv4lz.casterApi.Controllers
             };
         }
 
-        [Authorize(nameof(RoleRequirement))]
+        [Authorize(Policy = "IsCaster")]
         [HttpGet(nameof(GetString))]
         public ActionResult<string> GetString()
         {
@@ -124,9 +123,6 @@ namespace riv4lz.casterApi.Controllers
             user.GamerTag = "hey";
             return "hey";
         }
-        
-        // TODO IsEmailTaken: bool
-        // TODO IsUserNameTaken: bool (caster/ org)
         
         private UserDto CreateUserObject(AppUser appUser)
         {
