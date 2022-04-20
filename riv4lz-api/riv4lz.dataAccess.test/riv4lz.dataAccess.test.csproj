@@ -27,4 +27,10 @@
       <ProjectReference Include="..\riv4lz.domain\riv4lz.domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="AutoMapper, Version=11.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005">
+        <HintPath>..\..\..\..\.nuget\packages\automapper\11.0.0\lib\netstandard2.1\AutoMapper.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
-namespace riv4lz.core.Models;
+namespace riv4lz.Mediator.Dtos;
 
-public class CasterProfile
+public class CreateCasterProfileDto
 {
     public Guid CasterId { get; set; }
     public string GamerTag { get; set; }

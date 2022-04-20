@@ -1,8 +1,10 @@
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.casterApi.Extensions;
 using riv4lz.dataAccess;
+using riv4lz.Mediator;
 using riv4lz.security.DataAccess;
 
 namespace riv4lz.casterApi
@@ -30,7 +32,6 @@ namespace riv4lz.casterApi
             services.AddApplicationServices();
             services.AddIdentityServices(_configuration);
             
-            //TODO fix
             
             services.AddSwaggerDocumentation();
 
@@ -62,6 +63,9 @@ namespace riv4lz.casterApi
                         .AllowAnyMethod();
                 });
             });
+
+            services.AddMediatR(typeof(List.Handler).Assembly);
+            services.AddAutoMapper(typeof(MappingProfiles.MappingProfiles).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

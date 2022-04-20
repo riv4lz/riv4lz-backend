@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using riv4lz.dataAccess;
 using riv4lz.security.DataAccess;
 
 namespace riv4lz.casterApi
@@ -17,10 +18,13 @@ namespace riv4lz.casterApi
             try
             {
                 var context = services.GetRequiredService<AuthContext>();
+                var casterContext = services.GetRequiredService<CasterDbContext>();
                 var userManager = services.GetRequiredService<UserManager<IdentityUser<Guid>>>();
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
                 var signinManager = services.GetRequiredService<SignInManager<IdentityUser<Guid>>>();
                 await context.Database.MigrateAsync();
+                await casterContext.Database.EnsureCreatedAsync();
+                await casterContext.Database.MigrateAsync();
                 await AuthDbSeed.SeedData(context, userManager, roleManager, signinManager);
             }
             catch (Exception e)

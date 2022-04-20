@@ -1,3 +1,5 @@
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using riv4lz.core.Models;
 using riv4lz.dataAccess.Entities;
 using riv4lz.domain.IRepositories;
@@ -7,78 +9,47 @@ namespace riv4lz.dataAccess.Repositories;
 public class CasterRepository : ICasterRepository
 {
     private readonly CasterDbContext _dbContext;
+    private readonly IMapper _mapper;
 
-    public CasterRepository(CasterDbContext dbContext)
+    public CasterRepository(CasterDbContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext ?? throw new InvalidDataException(
             "CasterRepository must have a CasterDbContext");
-    }
-
-    public List<Caster> FindAll()
-    {
-        return _dbContext.Casters.Select(ce => new Caster()
-        {
-            Id = ce.Id,
-            Email = ce.Email,
-            Password = ce.Password,
-            GamerTag = ce.GamerTag
-        }).ToList();
-    }
-
-    public Caster Find(int id)
-    {
-        var casterEntity = _dbContext.Casters.FirstOrDefault(c => c.Id == id);
-
-        return new Caster()
-        {
-            Id = casterEntity.Id,
-            Email = casterEntity.Email,
-            GamerTag = casterEntity.GamerTag,
-            Password = casterEntity.Password
-        };
+        _mapper = mapper;
     }
 
 
-    public Caster Create(Caster newCaster)
+    public List<CasterProfile> FindAll()
     {
-        var caster = _dbContext.Casters.Add(new CasterEntity()
-        {
-            GamerTag = newCaster.GamerTag,
-            Email = newCaster.Email,
-            Password = newCaster.Password
-        }).Entity;
+        throw new NotImplementedException();
+    }
+
+    public CasterProfile Find(int id)
+    {
+        return null;
+    }
+
+    public CasterProfile Create(CasterProfile newCasterProfile)
+    {
         
+        var entity = _dbContext.CasterProfiles.Add(
+            _mapper.Map(newCasterProfile, new CasterProfileEntity())).Entity;
         _dbContext.SaveChanges();
-
-        return new Caster()
-        {
-            Id = caster.Id,
-            Email = caster.Email,
-            GamerTag = caster.GamerTag,
-            Password = caster.Password
-        };
+        
+        return _mapper.Map(entity, new CasterProfile());
     }
 
-    public Caster Update(int id, Caster caster)
+    public CasterProfile Update(int id, CasterProfile casterProfile)
     {
         throw new NotImplementedException();
     }
 
-    public Caster Delete(int id)
+    public CasterProfile Delete(int id)
     {
         throw new NotImplementedException();
     }
-
-    public Caster FindByEmail(string email)
-    {
-        var casterEntity = _dbContext.Casters.FirstOrDefault(c => c.Email.Equals(email));
-
-        return new Caster()
-        {
-            Id = casterEntity.Id,
-            Email = casterEntity.Email,
-            GamerTag = casterEntity.GamerTag,
-            Password = casterEntity.Password
-        };
-    }
+    
+    
+    
+    
 }

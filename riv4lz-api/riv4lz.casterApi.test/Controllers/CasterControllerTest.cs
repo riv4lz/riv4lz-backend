@@ -22,41 +22,10 @@ public class CasterControllerTest
     public CasterControllerTest()
     {
         _casterService = new Mock<ICasterService>();
-        _controller = new CasterController(_casterService.Object);
         _controllerInfoHelper = new ControllerInfoHelper<CasterController>(_controller);
         _typeInfo = typeof(CasterController).GetTypeInfo();
     }
 
-    [Fact]
-    public void CasterController_IsOfTypeControllerBase()
-    {
-        Assert.IsAssignableFrom<ControllerBase>(_controller);
-    }
-    
-    [Fact]
-    public void CasterController_HasCasterService_IsOfTypeControllerBase()
-    {
-        var service = new Mock<ICasterService>();
-        var controller = new CasterController(service.Object);
-
-        Assert.IsAssignableFrom<ControllerBase>(controller);
-    }
-
-    [Fact]
-    public void CasterController_WithNullProductService_ThrowsInvalidDataException()
-    {
-        Assert.Throws<InvalidDataException>(
-            () => new CasterController(null));
-    }
-    
-    [Fact]
-    public void CasterController_WithNullProductService_ThrowsInvalidDataExceptionWithMessage()
-    {
-        var exception = Assert.Throws<InvalidDataException>(
-            () => new CasterController(null));
-        
-        Assert.Equal("Constructor must have a CasterService", exception.Message);
-    }
 
     [Fact]
     public void CasterController_UsesApiControllerAttribute()
@@ -82,62 +51,7 @@ public class CasterControllerTest
         Assert.Equal("api/[controller]", template);
     }
 
-    #region GetAll()
-
     
-    [Fact]
-    public void CasterController_HasGetAllMethod()
-    {
-        var method = _controllerInfoHelper.GetMethodByName("GetAll");
-        
-        Assert.NotNull(method);
-    }
-
-    [Fact]
-    public void CasterController_GetAllMethod_IsPublic()
-    {
-        var method = _controllerInfoHelper.GetMethodByName("GetAll");
-        
-        Assert.True(method.IsPublic);
-    }
-
-    [Fact]
-    public void CasterController_GetAllMethod_ReturnsLiftOfCastersInActionResult()
-    {
-        var method = _controllerInfoHelper.GetMethodByName("GetAll");
-        
-        Assert.Equal(typeof(ActionResult<List<Caster>>).FullName, method.ReturnType.FullName);
-    }
-
-    [Fact]
-    public void CasterController_GetAllMethod_IfListIsNull_ThrowsInternalServerErrorException()
-    {
-        _casterService.Setup(s => s.GetCasters()).Returns((List<Caster>) null);
-        
-        // TODO make custom exception system
-        Assert.Throws<InvalidDataException>(() => _controller.GetAll());
-    }
-    
-
-    [Fact]
-    public void CasterController_GetAllMethod_HasGetHttpAttribute()
-    {
-        var attr = _controllerInfoHelper
-            .GetCustomAttributeDataFromMethod("GetAll", "HttpGetAttribute");
-        
-        Assert.NotNull(attr);
-    }
-
-    /*[Fact]
-    public void CasterController_GetAllMethod_CallsServicesGetCasters_Once()
-    {
-        _casterService.Setup(s => s.GetCasters()).Returns((List<Caster>)null);
-        _controller.GetAll();
-        
-        _casterService.Verify(s => s.GetCasters(), Times.Once);
-    }*/
-
-    #endregion
 
     #region Register();
 
@@ -175,7 +89,7 @@ public class CasterControllerTest
     /*[Fact]
     public void CasterController_RegisterMethod_CallsServicesGetCasters_Once()
     {
-        var caster = new Caster();
+        var caster = new CasterProfile();
         var dto = new CreateCasterDto();
         _casterService.Setup(s => s.Register(caster)).Returns(caster);
         _controller.Register(dto);

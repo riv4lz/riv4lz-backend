@@ -15,7 +15,7 @@ public class AuthHelper
 
 
 /*
-    public static Task<bool> ValidateCreateCasterDto(RegisterCasterDto registerCasterDto)
+    public static Task<bool> ValidateCreateCasterDto(RegisterUserDto registerCasterDto)
     {
         if (await _userManager.Users.AnyAsync(c => c.Email.Equals(registerCasterDto.Email)))
         {

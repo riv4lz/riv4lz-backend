@@ -1,7 +1,10 @@
-namespace riv4lz.core.Models;
+using System.ComponentModel.DataAnnotations;
 
-public class CasterProfile
+namespace riv4lz.dataAccess.Entities;
+
+public class CasterProfileEntity
 {
+    [Key]
     public Guid CasterId { get; set; }
     public string GamerTag { get; set; }
     public string FirstName { get; set; }

@@ -1,8 +1,12 @@
+using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.casterApi.Dtos;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
+using riv4lz.Mediator;
+using riv4lz.Mediator.Dtos;
 
 
 namespace riv4lz.casterApi.Controllers
@@ -14,8 +18,10 @@ namespace riv4lz.casterApi.Controllers
     public class CasterController : ControllerBase
     {
         private readonly ICasterService _casterService;
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public CasterController(ICasterService casterService)
+        public CasterController(ICasterService casterService, IMediator mediator, IMapper mapper)
         {
             if (casterService == null)
             {
@@ -23,61 +29,53 @@ namespace riv4lz.casterApi.Controllers
             }
 
             _casterService = casterService;
+            _mediator = mediator;
+            _mapper = mapper;
         }
         
         [HttpGet]
-        public ActionResult<List<Caster>> GetAll()
+        public ActionResult<List<CasterProfile>> GetAll()
         {
-            var casters = _casterService.GetCasters();
-            
-            if (casters == null)
-            {
-                // TODO change exception type
-                throw new InvalidDataException();
-            }
+            //var casters = _casterService.GetCasters();
 
-            return casters;
+            var dto = new CreateCasterProfileDto()
+            {
+                CasterId = Guid.NewGuid(),
+                FirstName = "asd",
+                LastName = "asd",
+                Description = "asd",
+                GamerTag = "asd",
+                BannerImage = "asd",
+                ProfileImage = "asd",
+                FacebookURL = "asd",
+                DiscordURL = "asd",
+                TwitchURL = "asd",
+                TwitterURL = "asd"
+            };
+
+            var profile = new CasterProfile();
+            _mapper.Map(dto, profile);
+
+            var users = new List<CasterProfile>();
+            users.Add(profile);
+
+            return users;
         }
 
-        [HttpPost(nameof(Register2))]
-        public ActionResult<CasterDto> Register2([FromBody] RegisterCasterDto createCasterDto)
+        
+        [HttpPost(nameof(RegisterCasterProfile))]
+        public async Task<IActionResult> RegisterCasterProfile(CreateCasterProfileDto casterProfileDto)
         {
-            var newCaster = new Caster()
+            return Ok(await _mediator.Send(new CreateCasterProfile.Command
             {
-                Email = createCasterDto.Email,
-                GamerTag = createCasterDto.GamerTag,
-                Password = createCasterDto.Password
-            };
-            
-            var caster = _casterService.Create(newCaster);
-
-            return new CasterDto
-            {
-                GamerTag = caster.GamerTag,
-                Email = caster.Email
-            };
+                CasterProfile = _mapper.Map(casterProfileDto, new CasterProfile())
+            }));
         }
 
-        [HttpPost(nameof(Login))]
-        public ActionResult<CasterDto> Login([FromBody] RegisterCasterDto loginCasterDto)
-        {
-            var caster = _casterService.GetCasterByEmail(loginCasterDto.Email);
 
-            if (caster == null)
-            {
-                return BadRequest("User not found");
-            }
-
-            return new CasterDto()
-            {
-                Email = caster.Email,
-                GamerTag = caster.GamerTag,
-                
-            };
-        }
 
         [HttpPut(nameof(UpdateCaster))]
-        public ActionResult<CasterDto> UpdateCaster([FromBody] UpdateCasterDto updateCasterDto)
+        public ActionResult<CasterDto> UpdateCaster([FromBody] UpdateCasterProfileDto updateCasterProfileDto)
         {
             throw new NotImplementedException();
         }
