@@ -27,10 +27,10 @@ public class FindUserByEmail
         public async Task<UserDto> Handle(Query request, CancellationToken cancellationToken)
         {
             var user = _userManager.FindByEmailAsync(request.Email).Result;
-
             
             var userDto = new UserDto()
             {
+                Id = user.Id,
                 Email = user.Email,
                 Token = _tokenService.CreateToken(user)
             };

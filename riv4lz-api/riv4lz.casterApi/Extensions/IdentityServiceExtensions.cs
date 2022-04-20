@@ -25,7 +25,6 @@ namespace riv4lz.casterApi.Extensions
                 .AddEntityFrameworkStores<AuthContext>()
                 .AddSignInManager<SignInManager<IdentityUser<Guid>>>();
 
-            
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

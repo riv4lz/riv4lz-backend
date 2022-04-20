@@ -28,7 +28,8 @@ public class CreateUser
             var user = new AppUser()
             {
                 Id = request.RegisterUserDto.Id,
-                Email = request.RegisterUserDto.Email
+                Email = request.RegisterUserDto.Email,
+                UserName = request.RegisterUserDto.Email
             };
 
             var registerUserResult = await _userManager.CreateAsync(user, request.RegisterUserDto.Password);

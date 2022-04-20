@@ -64,7 +64,6 @@ namespace riv4lz.casterApi.Controllers
         [HttpPost(nameof(RegisterCaster))]
         public async Task<ActionResult<UserDto>> RegisterCaster([FromBody] RegisterUserDto registerUserDto)
         {
-            
             if (IsEmailTaken(registerUserDto.Email).Result)
             {
                 return BadRequest("Email taken");
@@ -80,9 +79,9 @@ namespace riv4lz.casterApi.Controllers
                 return BadRequest("Problem registering caster");
             }
 
-            var user = _mediator.Send(new FindUserByEmail.Query {Email = registerUserDto.Email}).Result;
+            var userDto = _mediator.Send(new FindUserByEmail.Query {Email = registerUserDto.Email}).Result;
 
-            return user != null ? user : null;
+            return userDto != null ? userDto : BadRequest("Problem registering caster");
         }
 
         [Authorize(Roles = "CasterProfile")]
