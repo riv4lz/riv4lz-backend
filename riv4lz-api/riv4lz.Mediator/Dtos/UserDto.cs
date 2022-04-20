@@ -1,4 +1,4 @@
-namespace riv4lz.casterApi.Dtos;
+namespace riv4lz.Mediator.Dtos;
 
 public class UserDto
 {

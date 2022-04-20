@@ -8,10 +8,12 @@ using riv4lz.casterApi.Dtos;
 using riv4lz.casterApi.Services;
 using riv4lz.core.Models;
 using riv4lz.dataAccess.Entities;
+using riv4lz.Mediator;
 using riv4lz.Mediator.Dtos;
 
 namespace riv4lz.casterApi.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -59,28 +61,28 @@ namespace riv4lz.casterApi.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost(nameof(Register))]
-        public async Task<ActionResult<UserDto>> Register([FromBody] RegisterUserDto registerUserDto)
+        [HttpPost(nameof(RegisterCaster))]
+        public async Task<ActionResult<UserDto>> RegisterCaster([FromBody] RegisterUserDto registerUserDto)
         {
-            if (await _userManager.Users.AnyAsync(c => c.Email.Equals(registerUserDto.Email)))
+            
+            if (IsEmailTaken(registerUserDto.Email).Result)
             {
                 return BadRequest("Email taken");
             }
-            
-            var caster = new AppUser()
-            {
-                Id = new Guid(),
-                Email = registerUserDto.Email
-            };
 
-            var result = await _userManager.CreateAsync(caster, registerUserDto.Password);
-
-            if (result.Succeeded)
+            var result = _mediator.Send(new CreateUser.Command
             {
-                return CreateUserObject(caster);
+                RegisterUserDto = registerUserDto, UserType = UserType.caster
+            }).Result;
+
+            if (!result)
+            {
+                return BadRequest("Problem registering caster");
             }
 
-            return BadRequest("Problem registering caster");
+            var user = _mediator.Send(new FindUserByEmail.Query {Email = registerUserDto.Email}).Result;
+
+            return user != null ? user : null;
         }
 
         [Authorize(Roles = "CasterProfile")]
@@ -100,6 +102,12 @@ namespace riv4lz.casterApi.Controllers
                 Email = user.Email,
                 Token = _tokenService.CreateToken(user)
             };
+        }
+
+        [HttpGet(nameof(IsEmailTaken))]
+        public async Task<bool> IsEmailTaken(string email)
+        {
+            return await _mediator.Send(new IsEmailTaken.Query { Email = email});
         }
 
         

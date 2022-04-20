@@ -6,7 +6,7 @@ public interface ICasterRepository
 {
     List<CasterProfile> FindAll();
     CasterProfile Find(int id);
-    CasterProfile Create(CasterProfile newCasterProfile);
+    bool Create(CasterProfile newCasterProfile);
     CasterProfile Update(int id, CasterProfile casterProfile);
     CasterProfile Delete(int id);
     

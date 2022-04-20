@@ -64,12 +64,12 @@ namespace riv4lz.casterApi.Controllers
 
         
         [HttpPost(nameof(RegisterCasterProfile))]
-        public async Task<IActionResult> RegisterCasterProfile(CreateCasterProfileDto casterProfileDto)
+        public async Task<bool> RegisterCasterProfile(CreateCasterProfileDto casterProfileDto)
         {
-            return Ok(await _mediator.Send(new CreateCasterProfile.Command
+            return await _mediator.Send(new CreateCasterProfile.Command
             {
                 CasterProfile = _mapper.Map(casterProfileDto, new CasterProfile())
-            }));
+            });
         }
 
 

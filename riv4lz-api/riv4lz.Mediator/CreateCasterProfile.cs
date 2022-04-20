@@ -7,12 +7,12 @@ namespace riv4lz.Mediator;
 
 public class CreateCasterProfile
 {
-    public class Command : IRequest
+    public class Command : IRequest<bool>
     {
         public CasterProfile CasterProfile { get; set; }
     }
     
-    public class Handler: IRequestHandler<Command>
+    public class Handler: IRequestHandler<Command, bool>
     {
         private readonly ICasterService _casterService;
 
@@ -21,11 +21,9 @@ public class CreateCasterProfile
             _casterService = casterService;
         }
 
-        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            var result = _casterService.Create(request.CasterProfile);
-
-            return Unit.Value;
+            return _casterService.Create(request.CasterProfile);
         }
     }
     

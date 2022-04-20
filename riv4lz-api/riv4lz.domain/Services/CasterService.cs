@@ -24,7 +24,7 @@ public class CasterService : ICasterService
         return _repo.Find(id);
     }
 
-    public CasterProfile Create(CasterProfile newCasterProfile)
+    public bool Create(CasterProfile newCasterProfile)
     {
         return _repo.Create(newCasterProfile);
     }

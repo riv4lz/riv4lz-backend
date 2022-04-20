@@ -29,14 +29,13 @@ public class CasterRepository : ICasterRepository
         return null;
     }
 
-    public CasterProfile Create(CasterProfile newCasterProfile)
+    public bool Create(CasterProfile newCasterProfile)
     {
-        
-        var entity = _dbContext.CasterProfiles.Add(
-            _mapper.Map(newCasterProfile, new CasterProfileEntity())).Entity;
-        _dbContext.SaveChanges();
-        
-        return _mapper.Map(entity, new CasterProfile());
+        _dbContext.CasterProfiles.Add(
+            _mapper.Map(newCasterProfile, new CasterProfileEntity()));
+        var result = _dbContext.SaveChanges();
+
+        return result > 0;
     }
 
     public CasterProfile Update(int id, CasterProfile casterProfile)

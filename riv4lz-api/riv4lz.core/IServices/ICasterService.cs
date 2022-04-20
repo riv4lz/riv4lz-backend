@@ -6,7 +6,7 @@ public interface ICasterService
 {
     List<CasterProfile> GetCasters();
     CasterProfile GetCaster(int id);
-    CasterProfile Create(CasterProfile newCasterProfile);
+    bool Create(CasterProfile newCasterProfile);
     CasterProfile Update(int id, CasterProfile casterProfile);
     CasterProfile Delete(int id);
 }
