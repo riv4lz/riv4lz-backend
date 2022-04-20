@@ -4,10 +4,10 @@ namespace riv4lz.domain.IRepositories;
 
 public interface ICasterRepository
 {
-    List<Caster> FindAll();
-    Caster Find(int id);
-    Caster Create(Caster newCaster);
-    Caster Update(int id, Caster caster);
-    Caster Delete(int id);
-    Caster FindByEmail(string email);
+    List<CasterProfile> FindAll();
+    CasterProfile Find(int id);
+    bool Create(CasterProfile newCasterProfile);
+    CasterProfile Update(int id, CasterProfile casterProfile);
+    CasterProfile Delete(int id);
+    
 }

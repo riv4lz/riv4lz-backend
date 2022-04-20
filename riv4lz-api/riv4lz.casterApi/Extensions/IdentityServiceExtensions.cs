@@ -2,9 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using riv4lz.casterApi.PolicyHandlers;
 using riv4lz.casterApi.Services;
 using riv4lz.security.DataAccess;
 
@@ -27,7 +25,6 @@ namespace riv4lz.casterApi.Extensions
                 .AddEntityFrameworkStores<AuthContext>()
                 .AddSignInManager<SignInManager<IdentityUser<Guid>>>();
 
-            
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -44,12 +41,20 @@ namespace riv4lz.casterApi.Extensions
             
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(nameof(RoleRequirement), policy =>
+                options.AddPolicy("IsCaster", policy =>
                 {
-                    policy.Requirements.Add(new RoleRequirement());
+                    policy.RequireRole("caster");
                 });
             });
-            services.AddTransient<IAuthorizationHandler, CasterRoleRequirementHandler>();
+            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsAdmin", policy =>
+                {
+                    policy.RequireRole("admin");
+                });
+            });
+            
             services.AddScoped<TokenService>();
             return services;
         }

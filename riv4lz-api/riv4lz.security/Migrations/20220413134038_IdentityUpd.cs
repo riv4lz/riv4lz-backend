@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace riv4lz.security.Migrations
 {
-    public partial class IdentityAdded : Migration
+    public partial class IdentityUpd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

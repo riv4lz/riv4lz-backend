@@ -1,6 +1,5 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-using riv4lz.core.Models;
 using riv4lz.dataAccess.Entities;
 
 
@@ -16,50 +15,31 @@ public class AuthDbSeed
         UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager, 
         SignInManager<IdentityUser<Guid>> signInManager)
     {
+        var casterRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "caster"};
+        var organisationRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "organisation"};
+
+        var user1 = new AppUser() {Id = new Guid(), Email = "j@r.co", UserName = "Jonas"};
+        var user2 = new AppUser() {Id = new Guid(), Email = "m@r.co", UserName = "Mike"};
+        var user3 = new AppUser() {Id = new Guid(), Email = "f@r.co", UserName = "Frederik"};
+
 
         if (!context.Roles.Any())
         {
-            
-            var roles = new List<IdentityRole<Guid>>()
-            {
-                new IdentityRole<Guid>() {Id = new Guid(), Name = "Caster"},
-                new IdentityRole<Guid>() {Id = new Guid(), Name = "Organisation"},
-            };
-
-            foreach (var role in roles)
-            {
-                await roleManager.CreateAsync(role);
-            }
-            
-            
+            await roleManager.CreateAsync(casterRole);
+            await roleManager.CreateAsync(organisationRole);
         }
         
         //await context.Database.EnsureDeletedAsync();
         if (!userManager.Users.Any())
         {
-            var users = new List<AppUser>()
-            {
-                new AppUser() {Id = new Guid(), Email = "jonas@riv4lz.com", UserName = "Jonas"},
-                new AppUser() {Id = new Guid(), Email = "mike@riv4lz.com", UserName = "Mike"},
-                new AppUser() {Id = new Guid(), Email = "frederik@riv4lz.com", UserName = "Frederik"},
-            };
-            
-            foreach (var user in users)
-            {
-                
-                var casterRole = await roleManager.FindByNameAsync("Caster");
-                await userManager.CreateAsync(user, "t");
-                await userManager.AddToRoleAsync(user, "Caster");
-                await userManager.AddClaimAsync(user, new Claim(ClaimsIdentity.DefaultRoleClaimType, "Caster"));
-                await roleManager.AddClaimAsync(casterRole, new Claim(ClaimTypes.Role, "Caster"));
-                await signInManager.ClaimsFactory.CreateAsync(user);
-            }
+            await userManager.CreateAsync(user1, "pw");
+            await userManager.AddToRoleAsync(user1, casterRole.Name);
 
+            await userManager.CreateAsync(user2, "pw");
+            await userManager.AddToRoleAsync(user2, casterRole.Name);
             
+            await userManager.CreateAsync(user3, "pw");
+            await userManager.AddToRoleAsync(user3, casterRole.Name);
         }
-
-        
-        
-        
     }
 }

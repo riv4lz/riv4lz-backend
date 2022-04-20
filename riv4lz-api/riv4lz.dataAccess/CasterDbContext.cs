@@ -11,5 +11,6 @@ public class CasterDbContext : DbContext
         
     }
 
-    public virtual DbSet<CasterEntity> Casters { get; set; }
+    public virtual DbSet<CasterProfileEntity> CasterProfiles { get; set; }
+    
 }

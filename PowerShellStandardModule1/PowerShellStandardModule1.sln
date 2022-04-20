@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerShellStandardModule1", "PowerShellStandardModule1\PowerShellStandardModule1.csproj", "{31815608-180A-40A0-867D-F1C0F03F1098}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmd", "Cmd\Cmd.csproj", "{40DE5F66-0D7E-447A-BE2B-E7717C410EE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31815608-180A-40A0-867D-F1C0F03F1098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31815608-180A-40A0-867D-F1C0F03F1098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31815608-180A-40A0-867D-F1C0F03F1098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31815608-180A-40A0-867D-F1C0F03F1098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40DE5F66-0D7E-447A-BE2B-E7717C410EE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40DE5F66-0D7E-447A-BE2B-E7717C410EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40DE5F66-0D7E-447A-BE2B-E7717C410EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40DE5F66-0D7E-447A-BE2B-E7717C410EE4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

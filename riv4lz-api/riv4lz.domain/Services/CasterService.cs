@@ -14,33 +14,28 @@ public class CasterService : ICasterService
             "CasterRepository can't be null");
     }
 
-    public List<Caster> GetCasters()
+    public List<CasterProfile> GetCasters()
     {
         return _repo.FindAll();
     }
 
-    public Caster GetCaster(int id)
+    public CasterProfile GetCaster(int id)
     {
         return _repo.Find(id);
     }
 
-    public Caster Create(Caster newCaster)
+    public bool Create(CasterProfile newCasterProfile)
     {
-        return _repo.Create(newCaster);
+        return _repo.Create(newCasterProfile);
     }
 
-    public Caster Update(int id, Caster caster)
+    public CasterProfile Update(int id, CasterProfile casterProfile)
     {
-        return _repo.Update(id, caster);
+        return _repo.Update(id, casterProfile);
     }
 
-    public Caster Delete(int id)
+    public CasterProfile Delete(int id)
     {
         return _repo.Delete(id);
-    }
-
-    public Caster GetCasterByEmail(string email)
-    {
-        return _repo.FindByEmail(email);
     }
 }

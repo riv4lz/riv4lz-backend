@@ -15,18 +15,7 @@ public class CasterDbSeeder
 
     public void SeedDevelopment()
     {
-        _ctx.Database.EnsureDeleted();
-        if (_ctx.Database.EnsureCreated())
-        {
-            var caster1 = new CasterEntity()
-            {
-                Email = "t",
-                GamerTag = "t",
-                Password = "t"
-            };
+        _ctx.Database.EnsureCreated();
 
-            _ctx.Casters.Add(caster1);
-            _ctx.SaveChanges();
-        }
     }
 }
