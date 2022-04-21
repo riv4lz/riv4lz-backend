@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 
 namespace riv4lz.core.test.Models;

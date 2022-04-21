@@ -1,5 +1,4 @@
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using riv4lz.core.Models;
 using riv4lz.dataAccess.Entities;
 using riv4lz.domain.IRepositories;

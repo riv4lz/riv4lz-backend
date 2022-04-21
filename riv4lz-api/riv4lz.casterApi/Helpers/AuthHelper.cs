@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using riv4lz.casterApi.Dtos;
 
 namespace riv4lz.casterApi.Helpers;
 

@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
 using Moq;
 using riv4lz.core.IServices;
-using riv4lz.core.Models;
 using Xunit;
 
 namespace riv4lz.core.test;

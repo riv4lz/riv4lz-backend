@@ -1,5 +1,4 @@
 using riv4lz.core.IServices;
-using riv4lz.dataAccess.Entities;
 
 namespace riv4lz.dataAccess;
 

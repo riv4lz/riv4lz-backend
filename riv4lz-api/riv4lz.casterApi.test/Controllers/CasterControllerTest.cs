@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -7,7 +5,6 @@ using riv4lz.casterApi.Controllers;
 using riv4lz.casterApi.Dtos;
 using riv4lz.casterApi.test.Helpers;
 using riv4lz.core.IServices;
-using riv4lz.core.Models;
 using Xunit;
 
 namespace riv4lz.casterApi.test.Controllers;

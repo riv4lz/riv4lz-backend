@@ -1,4 +1,3 @@
-using riv4lz.casterApi.Dtos;
 using riv4lz.Mediator.Dtos;
 using Xunit;
 

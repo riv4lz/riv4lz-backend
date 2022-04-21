@@ -3,10 +3,10 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.casterApi.Dtos;
-using riv4lz.core.IServices;
 using riv4lz.core.Models;
 using riv4lz.Mediator;
 using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Queries;
 
 
 namespace riv4lz.casterApi.Controllers
@@ -32,16 +32,30 @@ namespace riv4lz.casterApi.Controllers
             throw new NotImplementedException();
         }
 
-        
+        [HttpGet(nameof(GetCasterProfile))]
+        public async Task<ActionResult<CasterProfileDto>> GetCasterProfile(Guid id)
+        {
+            return await _mediator.Send(new GetCasterProfile.Query {CasterId = id});
+        }
+
+
         [HttpPost(nameof(RegisterCasterProfile))]
         public async Task<ActionResult<CasterProfileDto>> RegisterCasterProfile(RegisterCasterProfileDto registerCasterProfileDto)
         {
-            var profile = await _mediator.Send(new CreateCasterProfile.Command
+            var createResult = await _mediator.Send(new CreateCasterProfile.Command
             {
                 RegisterCasterProfileDto = registerCasterProfileDto
             });
 
-            return profile != null ? profile : BadRequest("Error saving profile");
+            if (!createResult)
+            {
+                return BadRequest("Error storing profile information");
+            }
+
+            var profile = await _mediator.Send(
+                new GetCasterProfile.Query {CasterId = registerCasterProfileDto.CasterId});
+
+            return profile != null ? profile : BadRequest("Problem loading profile");
         }
 
 
