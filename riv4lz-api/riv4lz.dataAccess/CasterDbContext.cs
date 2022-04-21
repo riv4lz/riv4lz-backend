@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess.Entities;
+using riv4lz.domain;
 
 
 namespace riv4lz.dataAccess;
@@ -12,5 +13,6 @@ public class CasterDbContext : DbContext
     }
 
     public virtual DbSet<CasterProfileEntity> CasterProfiles { get; set; }
+    public DbSet<Comment> Comments { get; set; }
     
 }
