@@ -1,12 +1,10 @@
 using AutoMapper;
+using MediatR;
 using riv4lz.dataAccess;
 using riv4lz.dataAccess.Entities;
 using riv4lz.Mediator.Dtos;
 
-namespace riv4lz.Mediator.Queries;
-
-using MediatR;
-
+namespace riv4lz.Mediator.Queries.CasterQueries;
 
 public class GetCasterProfile
 {

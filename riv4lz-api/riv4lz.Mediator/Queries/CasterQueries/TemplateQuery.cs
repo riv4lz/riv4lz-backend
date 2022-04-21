@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace riv4lz.Mediator.Queries;
+namespace riv4lz.Mediator.Queries.CasterQueries;
 
 public class TemplateQuery
 {

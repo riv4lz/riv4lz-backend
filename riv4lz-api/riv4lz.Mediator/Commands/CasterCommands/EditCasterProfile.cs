@@ -1,7 +1,7 @@
 using MediatR;
 using riv4lz.Mediator.Dtos;
 
-namespace riv4lz.Mediator;
+namespace riv4lz.Mediator.Commands.CasterCommands;
 
 public class EditCasterProfile
 {

@@ -4,7 +4,7 @@ using riv4lz.dataAccess;
 using riv4lz.dataAccess.Entities;
 using riv4lz.Mediator.Dtos;
 
-namespace riv4lz.Mediator;
+namespace riv4lz.Mediator.Commands.CasterCommands;
 
 public class CreateCasterProfile
 {

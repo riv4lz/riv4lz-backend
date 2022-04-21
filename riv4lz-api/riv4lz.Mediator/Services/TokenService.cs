@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace riv4lz.casterApi.Services;
+namespace riv4lz.Mediator.Services;
 
 public class TokenService
 {

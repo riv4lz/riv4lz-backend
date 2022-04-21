@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using riv4lz.casterApi.Services;
 using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Services;
 
-namespace riv4lz.Mediator;
+namespace riv4lz.Mediator.Queries.CasterQueries;
 
 public class AuthenticateUser
 {

@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using riv4lz.casterApi.Dtos;
 using riv4lz.core.Models;
 using riv4lz.Mediator;
+using riv4lz.Mediator.Commands.CasterCommands;
 using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Queries;
+using riv4lz.Mediator.Queries.CasterQueries;
 
 
 namespace riv4lz.casterApi.Controllers

@@ -13,7 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DataAccess\IRepositories" />
       <Folder Include="Models" />
     </ItemGroup>
 
