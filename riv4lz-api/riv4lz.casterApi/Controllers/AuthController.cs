@@ -64,22 +64,23 @@ namespace riv4lz.casterApi.Controllers
         [HttpPost(nameof(RegisterCaster))]
         public async Task<ActionResult<UserDto>> RegisterCaster([FromBody] RegisterUserDto registerUserDto)
         {
-            if (IsEmailTaken(registerUserDto.Email).Result)
+            if (await IsEmailTaken(registerUserDto.Email))
             {
                 return BadRequest("Email taken");
             }
 
-            var result = _mediator.Send(new CreateUser.Command
+            var result = await _mediator.Send(new CreateUser.Command
             {
-                RegisterUserDto = registerUserDto, UserType = UserType.caster
-            }).Result;
+                RegisterUserDto = registerUserDto, 
+                UserType = UserType.caster
+            });
 
             if (!result)
             {
                 return BadRequest("Problem registering caster");
             }
 
-            var userDto = _mediator.Send(new FindUserByEmail.Query {Email = registerUserDto.Email}).Result;
+            var userDto = await _mediator.Send(new FindUserByEmail.Query {Email = registerUserDto.Email});
 
             return userDto != null ? userDto : BadRequest("Problem registering caster");
         }
@@ -94,13 +95,7 @@ namespace riv4lz.casterApi.Controllers
         [HttpGet(nameof(GetCurrentUser))]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
-
-            return new UserDto()
-            {
-                Email = user.Email,
-                Token = _tokenService.CreateToken(user)
-            };
+            return await _mediator.Send(new FindUserByEmail.Query {Email = User.FindFirstValue(ClaimTypes.Email)});
         }
 
         [HttpGet(nameof(IsEmailTaken))]
@@ -108,19 +103,6 @@ namespace riv4lz.casterApi.Controllers
         {
             return await _mediator.Send(new IsEmailTaken.Query { Email = email});
         }
-
-        
-        
-        private UserDto CreateUserObject(AppUser appUser)
-        {
-            return new UserDto()
-            {
-                Email = appUser.Email,
-                Token = _tokenService.CreateToken(appUser)
-            };
-        }
-        
-       
     }
 
     

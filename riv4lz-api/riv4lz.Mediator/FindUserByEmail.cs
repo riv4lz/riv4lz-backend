@@ -26,7 +26,7 @@ public class FindUserByEmail
 
         public async Task<UserDto> Handle(Query request, CancellationToken cancellationToken)
         {
-            var user = _userManager.FindByEmailAsync(request.Email).Result;
+            var user = await _userManager.FindByEmailAsync(request.Email);
             
             var userDto = new UserDto()
             {
