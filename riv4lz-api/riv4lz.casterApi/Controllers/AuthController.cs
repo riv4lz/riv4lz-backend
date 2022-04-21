@@ -37,27 +37,13 @@ namespace riv4lz.casterApi.Controllers
         [HttpPost(nameof(Login))]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            var user = await _mediator.Send(new AuthenticateUser.Query {LoginDto = loginDto});
             if (user == null)
             {
                 return Unauthorized();
             }
-            
 
-            var result = await _signInManager
-                .CheckPasswordSignInAsync(user, loginDto.Password, false);
-
-            if (result.Succeeded)
-            {
-                return new UserDto()
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    Token = _tokenService.CreateToken(user),
-                };
-            }
-
-            return Unauthorized();
+            return user;
         }
 
         [AllowAnonymous]

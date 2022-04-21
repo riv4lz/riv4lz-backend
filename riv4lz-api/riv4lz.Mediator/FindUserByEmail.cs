@@ -10,7 +10,6 @@ public class FindUserByEmail
     public class Query : IRequest<UserDto>
     {
         public string Email { get; set; }
-        public string Password { get; set; }
     }
     
     public class Handler : IRequestHandler<Query, UserDto>
