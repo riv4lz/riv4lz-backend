@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using AutoMapper;
 using EntityFrameworkCore.Testing.Moq;
 using riv4lz.core.Models;

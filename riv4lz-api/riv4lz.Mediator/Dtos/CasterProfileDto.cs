@@ -1,10 +1,7 @@
-using System.ComponentModel.DataAnnotations;
+namespace riv4lz.Mediator.Dtos;
 
-namespace riv4lz.dataAccess.Entities;
-
-public class CasterProfileEntity
+public class CasterProfileDto
 {
-    [Key]
     public Guid CasterId { get; set; }
     public string? GamerTag { get; set; }
     public string? FirstName { get; set; }

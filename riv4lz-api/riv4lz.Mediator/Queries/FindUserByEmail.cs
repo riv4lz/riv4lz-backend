@@ -10,7 +10,6 @@ public class FindUserByEmail
     public class Query : IRequest<UserDto>
     {
         public string Email { get; set; }
-        public string Password { get; set; }
     }
     
     public class Handler : IRequestHandler<Query, UserDto>
@@ -26,7 +25,7 @@ public class FindUserByEmail
 
         public async Task<UserDto> Handle(Query request, CancellationToken cancellationToken)
         {
-            var user = _userManager.FindByEmailAsync(request.Email).Result;
+            var user = await _userManager.FindByEmailAsync(request.Email);
             
             var userDto = new UserDto()
             {

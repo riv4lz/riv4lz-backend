@@ -1,6 +1,5 @@
 using System;
 using Microsoft.AspNetCore.Identity;
-using riv4lz.core.Models;
 using riv4lz.dataAccess.Entities;
 using Xunit;
 

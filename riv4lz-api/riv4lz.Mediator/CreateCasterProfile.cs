@@ -1,7 +1,8 @@
+using AutoMapper;
 using MediatR;
-using riv4lz.core.IServices;
-using riv4lz.core.Models;
-using riv4lz.domain.IRepositories;
+using riv4lz.dataAccess;
+using riv4lz.dataAccess.Entities;
+using riv4lz.Mediator.Dtos;
 
 namespace riv4lz.Mediator;
 
@@ -9,21 +10,28 @@ public class CreateCasterProfile
 {
     public class Command : IRequest<bool>
     {
-        public CasterProfile CasterProfile { get; set; }
+        public RegisterCasterProfileDto RegisterCasterProfileDto { get; set; }
     }
     
     public class Handler: IRequestHandler<Command, bool>
     {
-        private readonly ICasterService _casterService;
+        private readonly IMapper _mapper;
+        private readonly CasterDbContext _ctx;
 
-        public Handler(ICasterService casterService)
+        public Handler(IMapper mapper, CasterDbContext ctx)
         {
-            _casterService = casterService;
+            _mapper = mapper;
+            _ctx = ctx;
         }
 
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            return _casterService.Create(request.CasterProfile);
+            await _ctx.CasterProfiles.AddAsync(
+                _mapper.Map<RegisterCasterProfileDto, CasterProfileEntity>(request.RegisterCasterProfileDto), cancellationToken);
+
+            var result = await _ctx.SaveChangesAsync(cancellationToken);
+
+            return result > 0;
         }
     }
     
