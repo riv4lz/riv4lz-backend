@@ -12,7 +12,7 @@ namespace riv4lz.casterApi.Extensions
         {
             services.AddScoped<ICasterService, CasterService>();
             services.AddScoped<ICasterRepository, CasterRepository>();
-            
+            services.AddSignalR();
             
             return services;
         }

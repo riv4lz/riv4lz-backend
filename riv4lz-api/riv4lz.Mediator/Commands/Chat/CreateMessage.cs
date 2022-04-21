@@ -7,7 +7,7 @@ namespace riv4lz.Mediator.Commands.Chat;
 
 public class CreateMessage
 {
-    public class Command: IRequest<bool>
+    public class Command: IRequest<Comment>
     {
         public string Body { get; set; }
         public string UserName { get; set; }
@@ -21,7 +21,7 @@ public class CreateMessage
         }
     }
     
-    public class Handler: IRequestHandler<Command, bool>
+    public class Handler: IRequestHandler<Command, Comment>
     {
         private readonly CasterDbContext _ctx;
 
@@ -30,7 +30,7 @@ public class CreateMessage
             _ctx = ctx;
         }
 
-        public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Comment> Handle(Command request, CancellationToken cancellationToken)
         {
             var comment = new Comment()
             {
@@ -38,10 +38,11 @@ public class CreateMessage
                 UserName = request.UserName
             };
 
+            // todo validate comment 
             await _ctx.Comments.AddAsync(comment, cancellationToken);
             var result = await _ctx.SaveChangesAsync(cancellationToken) > 0;
 
-            return result;
+            return comment;
         }
     }
 }

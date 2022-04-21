@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.casterApi.Extensions;
+using riv4lz.casterApi.SignalR;
 using riv4lz.dataAccess;
 using riv4lz.Mediator;
 using riv4lz.Mediator.Commands.CasterCommands;
@@ -97,6 +98,7 @@ namespace riv4lz.casterApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
             });
             
         }
