@@ -17,18 +17,11 @@ namespace riv4lz.casterApi.Controllers
     [ApiController]
     public class CasterController : ControllerBase
     {
-        private readonly ICasterService _casterService;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public CasterController(ICasterService casterService, IMediator mediator, IMapper mapper)
+        public CasterController(IMediator mediator, IMapper mapper)
         {
-            if (casterService == null)
-            {
-                throw new InvalidDataException("Constructor must have a CasterService");
-            }
-
-            _casterService = casterService;
             _mediator = mediator;
             _mapper = mapper;
         }
@@ -36,40 +29,19 @@ namespace riv4lz.casterApi.Controllers
         [HttpGet]
         public ActionResult<List<CasterProfile>> GetAll()
         {
-            //var casters = _casterService.GetCasters();
-
-            var dto = new CreateCasterProfileDto()
-            {
-                CasterId = Guid.NewGuid(),
-                FirstName = "asd",
-                LastName = "asd",
-                Description = "asd",
-                GamerTag = "asd",
-                BannerImage = "asd",
-                ProfileImage = "asd",
-                FacebookURL = "asd",
-                DiscordURL = "asd",
-                TwitchURL = "asd",
-                TwitterURL = "asd"
-            };
-
-            var profile = new CasterProfile();
-            _mapper.Map(dto, profile);
-
-            var users = new List<CasterProfile>();
-            users.Add(profile);
-
-            return users;
+            throw new NotImplementedException();
         }
 
         
         [HttpPost(nameof(RegisterCasterProfile))]
-        public async Task<bool> RegisterCasterProfile(CreateCasterProfileDto casterProfileDto)
+        public async Task<ActionResult<CasterProfileDto>> RegisterCasterProfile(RegisterCasterProfileDto registerCasterProfileDto)
         {
-            return await _mediator.Send(new CreateCasterProfile.Command
+            var profile = await _mediator.Send(new CreateCasterProfile.Command
             {
-                CasterProfile = _mapper.Map(casterProfileDto, new CasterProfile())
+                RegisterCasterProfileDto = registerCasterProfileDto
             });
+
+            return profile != null ? profile : BadRequest("Error saving profile");
         }
 
 

@@ -9,8 +9,7 @@ public class MappingProfiles: Profile
 {
     public MappingProfiles()
     {
-        CreateMap<CasterProfileEntity, CasterProfile>();
-        CreateMap<CasterProfile, CasterProfileEntity>();
-        CreateMap<CreateCasterProfileDto, CasterProfile>();
+        CreateMap<CasterProfileEntity, CasterProfileDto>();
+        CreateMap<RegisterCasterProfileDto, CasterProfileEntity>();
     }
 }

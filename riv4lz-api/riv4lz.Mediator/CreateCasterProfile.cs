@@ -1,29 +1,38 @@
+using AutoMapper;
 using MediatR;
 using riv4lz.core.IServices;
 using riv4lz.core.Models;
+using riv4lz.dataAccess;
+using riv4lz.dataAccess.Entities;
 using riv4lz.domain.IRepositories;
+using riv4lz.Mediator.Dtos;
 
 namespace riv4lz.Mediator;
 
 public class CreateCasterProfile
 {
-    public class Command : IRequest<bool>
+    public class Command : IRequest<CasterProfileDto>
     {
-        public CasterProfile CasterProfile { get; set; }
+        public RegisterCasterProfileDto RegisterCasterProfileDto { get; set; }
     }
     
-    public class Handler: IRequestHandler<Command, bool>
+    public class Handler: IRequestHandler<Command, CasterProfileDto>
     {
-        private readonly ICasterService _casterService;
+        private readonly IMapper _mapper;
+        private readonly CasterDbContext _ctx;
 
-        public Handler(ICasterService casterService)
+        public Handler(IMapper mapper, CasterDbContext ctx)
         {
-            _casterService = casterService;
+            _mapper = mapper;
+            _ctx = ctx;
         }
 
-        public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<CasterProfileDto> Handle(Command request, CancellationToken cancellationToken)
         {
-            return _casterService.Create(request.CasterProfile);
+            var entity = _ctx.CasterProfiles.Add(
+                _mapper.Map<RegisterCasterProfileDto, CasterProfileEntity>(request.RegisterCasterProfileDto)).Entity;
+
+            return entity != null ? _mapper.Map<CasterProfileEntity, CasterProfileDto>(entity) : null;
         }
     }
     

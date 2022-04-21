@@ -26,7 +26,7 @@ public class IsEmailTaken
         public async Task<bool> Handle(Query request, CancellationToken cancellationToken)
         {
             var user = _authContext.Users.FirstOrDefault(u => request.Email.Equals(u.Email));
-
+            
             return user != null;
         }
     }
