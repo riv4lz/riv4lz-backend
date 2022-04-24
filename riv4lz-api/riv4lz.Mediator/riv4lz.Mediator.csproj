@@ -24,4 +24,8 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Queries\EventQueries" />
+    </ItemGroup>
+
 </Project>
