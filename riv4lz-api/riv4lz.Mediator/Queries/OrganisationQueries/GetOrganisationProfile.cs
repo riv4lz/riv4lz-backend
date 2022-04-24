@@ -27,12 +27,11 @@ public class GetOrganisationProfile
 
         public async Task<OrganisationProfileDto> Handle(Query request, CancellationToken cancellationToken)
         {
-           /* var entity = _ctx.OrganisationProfiles.FirstOrDefault(
+           var entity = _ctx.OrganisationProfiles.FirstOrDefault(
                 u => u.OrganisationId == request.OrganisationId);
-
-            return entity != null ? _mapper.Map<OrganisationProfileEntity, OrganisationProfileDto>(entity) : null;
-            */
-           return null;
+           
+           return entity != null ? _mapper.Map<OrganisationProfileEntity, OrganisationProfileDto>(entity) : null;
+           
         }
     }
 }
