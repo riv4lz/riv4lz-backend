@@ -23,9 +23,9 @@ public class ChatHub: Hub
 
     public override async Task OnConnectedAsync()
     {
-        var httpContext = Context.GetHttpContext();
-
         var result = await _mediator.Send(new GetChatMessages.Query());
-        await Clients.Caller.SendAsync("ReceiveMessages", result);
+        await Clients.Caller.SendAsync("LoadMessages", result);
     }
+    
+   
 }

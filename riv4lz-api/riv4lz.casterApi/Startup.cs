@@ -54,7 +54,8 @@ namespace riv4lz.casterApi
                     policy
                         .WithOrigins("http://localhost:3000")
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
+                        .AllowAnyMethod()
+                        .AllowCredentials();
                 });
                 
                 options.AddPolicy("Prod-cors", policy =>
