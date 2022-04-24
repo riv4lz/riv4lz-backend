@@ -34,6 +34,4 @@ public class CreateCasterProfile
             return result > 0;
         }
     }
-    
-
 }
