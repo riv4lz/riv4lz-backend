@@ -11,6 +11,9 @@ public class MappingProfiles: Profile
     {
         CreateMap<CasterProfileEntity, CasterProfileDto>();
         CreateMap<RegisterCasterProfileDto, CasterProfileEntity>();
+        CreateMap<OrganisationProfileEntity, OrganisationProfileDto>();
+        CreateMap<RegisterOrganisationProfileDto, OrganisationProfileEntity>();
         CreateMap<Comment, CommentDto>();
+        
     }
 }
