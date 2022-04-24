@@ -9,7 +9,7 @@ public class CreateOrganisationProfile
 {
     public class Command : IRequest<bool>
     {
-        public RegisterOrganisationProfileDto Type { get; set; }
+        public RegisterOrganisationProfileDto RegisterOrganisationProfileDto { get; set; }
     }
 
     public class Handler : IRequestHandler<Command, bool>

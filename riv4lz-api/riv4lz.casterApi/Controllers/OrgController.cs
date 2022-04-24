@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.Mediator.Commands.OrgCommands;
 using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Queries.OrganisationQueries;
 
 namespace riv4lz.casterApi.Controllers
 {
@@ -27,9 +28,22 @@ namespace riv4lz.casterApi.Controllers
         [HttpPost(nameof(RegisterOrganisationProfile))]
         public async Task<ActionResult<OrganisationProfileDto>> RegisterOrganisationProfile(RegisterOrganisationProfileDto registerOrganisationProfileDto)
         {
-            var createResult = await _mediator.Send(new CreateOrganisationProfile.Command { });
+            var createResult = await _mediator.Send(new CreateOrganisationProfile.Command
+            {
+                RegisterOrganisationProfileDto = registerOrganisationProfileDto
+            });
 
-            return null;
+            if (!createResult)
+            {
+                return BadRequest("Error storing profile information");
+            }
+
+            var profile = await _mediator.Send(new GetOrganisationProfile.Query
+            {
+                OrganisationId = registerOrganisationProfileDto.OrganisationId
+            });
+
+            return profile != null ? profile : BadRequest("Problem loading profile");
         }
         
     }
