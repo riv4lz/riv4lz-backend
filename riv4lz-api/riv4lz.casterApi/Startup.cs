@@ -8,6 +8,7 @@ using riv4lz.dataAccess;
 using riv4lz.Mediator;
 using riv4lz.Mediator.Commands.CasterCommands;
 using riv4lz.security.DataAccess;
+using StackExchange.Redis;
 
 namespace riv4lz.casterApi
 {
@@ -33,7 +34,11 @@ namespace riv4lz.casterApi
             });
             services.AddApplicationServices();
             services.AddIdentityServices(_configuration);
-            
+            services.AddSingleton<ConnectionMultiplexer>(config =>
+            {
+                var configuration = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"));
+                return ConnectionMultiplexer.Connect(configuration);
+            });
             
             services.AddSwaggerDocumentation();
 
