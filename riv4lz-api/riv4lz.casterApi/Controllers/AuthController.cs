@@ -46,6 +46,15 @@ namespace riv4lz.casterApi.Controllers
             return result ? Ok("Password updated") : BadRequest("Error updating password");
         }
 
+        [HttpPost(nameof(UpdateEmail))]
+        public async Task<ActionResult> UpdateEmail(UpdateEmailDto updateEmailDto)
+        {
+            var result = await _mediator
+                .Send(new UpdateEmail.Command {UpdateEmailDto = updateEmailDto});
+            
+            return result ? Ok("Email updated") : BadRequest("Error updating email");
+        }
+        
         [AllowAnonymous]
         [HttpPost(nameof(RegisterCaster))]
         public async Task<ActionResult<UserDto>> RegisterCaster(RegisterUserDto registerUserDto)

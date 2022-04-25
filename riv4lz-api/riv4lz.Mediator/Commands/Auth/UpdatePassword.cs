@@ -14,12 +14,10 @@ public class UpdatePassword
     public class Handler : IRequestHandler<Command, bool>
     {
         private readonly UserManager<IdentityUser<Guid>> _userManager;
-        private readonly SignInManager<IdentityUser<Guid>> _signInManager;
 
-        public Handler(UserManager<IdentityUser<Guid>> userManager, SignInManager<IdentityUser<Guid>> signInManager)
+        public Handler(UserManager<IdentityUser<Guid>> userManager)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
         }
 
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
