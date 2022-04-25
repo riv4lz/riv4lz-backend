@@ -1,4 +1,3 @@
-using System.Linq;
 using AutoMapper;
 using MediatR;
 using riv4lz.dataAccess;

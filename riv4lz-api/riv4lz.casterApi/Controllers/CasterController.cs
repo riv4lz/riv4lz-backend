@@ -1,13 +1,8 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using riv4lz.casterApi.Dtos;
-using riv4lz.core.Models;
-using riv4lz.Mediator;
 using riv4lz.Mediator.Commands.CasterCommands;
 using riv4lz.Mediator.Dtos;
-using riv4lz.Mediator.Queries;
 using riv4lz.Mediator.Queries.CasterQueries;
 
 
@@ -20,18 +15,16 @@ namespace riv4lz.casterApi.Controllers
     public class CasterController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
 
-        public CasterController(IMediator mediator, IMapper mapper)
+        public CasterController(IMediator mediator)
         {
             _mediator = mediator;
-            _mapper = mapper;
         }
         
-        [HttpGet]
-        public ActionResult<List<CasterProfile>> GetAll()
+        [HttpGet(nameof(GetAll))]
+        public async  Task<ActionResult<List<CasterProfileDto>>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _mediator.Send(new GetCasterProfiles.Query());
         }
 
         [HttpGet(nameof(GetCasterProfile))]
@@ -74,7 +67,7 @@ namespace riv4lz.casterApi.Controllers
         }
 
         [HttpDelete(nameof(DeleteCaster))]
-        public ActionResult<CasterDto> DeleteCaster([FromBody] int id)
+        public ActionResult<CasterProfileDto> DeleteCaster([FromBody] int id)
         {
             throw new NotImplementedException();
         }

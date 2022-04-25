@@ -25,4 +25,8 @@
       <ProjectReference Include="..\riv4lz.security\riv4lz.security.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Models" />
+    </ItemGroup>
+
 </Project>
