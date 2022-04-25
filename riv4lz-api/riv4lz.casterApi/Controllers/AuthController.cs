@@ -49,12 +49,36 @@ namespace riv4lz.casterApi.Controllers
         [HttpPost(nameof(UpdateEmail))]
         public async Task<ActionResult> UpdateEmail(UpdateEmailDto updateEmailDto)
         {
+            var emailTaken = await _mediator.Send(new IsEmailTaken.Query {Email = updateEmailDto.Email});
+            
+            if (emailTaken)
+            {
+                return BadRequest("Email is already taken");
+            }
+            
             var result = await _mediator
                 .Send(new UpdateEmail.Command {UpdateEmailDto = updateEmailDto});
             
             return result ? Ok("Email updated") : BadRequest("Error updating email");
         }
         
+        [HttpPost(nameof(UpdateUsername))]
+        public async Task<ActionResult> UpdateUsername(UpdateUsernameDto updateEmailDto)
+        {
+            var usernameTaken = await _mediator.Send(
+                new IsUsernameTaken.Query {Username = updateEmailDto.Username});
+
+            if (usernameTaken)
+            {
+                return BadRequest("Username is already taken");
+            }
+            
+            var result = await _mediator
+                .Send(new UpdateUsername.Command {UpdateUsernameDto = updateEmailDto});
+            
+            return result ? Ok("Username updated") : BadRequest("Error updating username");
+        }
+
         [AllowAnonymous]
         [HttpPost(nameof(RegisterCaster))]
         public async Task<ActionResult<UserDto>> RegisterCaster(RegisterUserDto registerUserDto)
