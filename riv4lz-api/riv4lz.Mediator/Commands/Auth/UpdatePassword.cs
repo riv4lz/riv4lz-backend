@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using riv4lz.Mediator.Dtos;
 
 namespace riv4lz.Mediator.Commands.Auth;
 
@@ -7,9 +8,7 @@ public class UpdatePassword
 {
     public class Command : IRequest<bool>
     {
-        public Guid UserId { get; set; }
-        public string OldPassword { get; set; }
-        public string NewPassword { get; set; }
+        public UpdatePasswordDto UpdatePasswordDto { get; set; }
     }
 
     public class Handler : IRequestHandler<Command, bool>
@@ -25,13 +24,14 @@ public class UpdatePassword
 
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+            var user = await _userManager.FindByIdAsync(request.UpdatePasswordDto.UserId.ToString());
             if (user == null)
             {
                 return false;
             }
             
-            var result = await _userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
+            var result = await _userManager.ChangePasswordAsync(
+                user, request.UpdatePasswordDto.OldPassword, request.UpdatePasswordDto.NewPassword);
             
             return result.Succeeded;
         }

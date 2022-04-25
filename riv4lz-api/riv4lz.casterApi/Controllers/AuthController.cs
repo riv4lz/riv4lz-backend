@@ -38,9 +38,12 @@ namespace riv4lz.casterApi.Controllers
         }
 
         [HttpPost(nameof(UpdatePassword))]
-        public async Task<ActionResult> UpdatePassword()
+        public async Task<ActionResult> UpdatePassword(UpdatePasswordDto updatePasswordDto)
         {
+            var result = await _mediator
+                .Send(new UpdatePassword.Command {UpdatePasswordDto = updatePasswordDto});
             
+            return result ? Ok("Password updated") : BadRequest("Error updating password");
         }
 
         [AllowAnonymous]
