@@ -29,7 +29,7 @@ public class GetEvent
         public async Task<EventDto> Handle(Query request, CancellationToken cancellationToken)
         {
             var entity = _ctx.Events.FirstOrDefault(
-                u => u.EventId == request.EventId);
+                u => u.Id == request.EventId);
            
             return entity != null ? _mapper.Map<EventEntity, EventDto>(entity) : null;
            
