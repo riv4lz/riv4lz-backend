@@ -11,7 +11,6 @@ public class GetOrganisationProfiles
 {
     public class Query : IRequest<List<OrganisationProfileDto>>
     {
-        public Guid CasterId { get; set; }
     }
     
     public class Handler : IRequestHandler<Query, List<OrganisationProfileDto>>
