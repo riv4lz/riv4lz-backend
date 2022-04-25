@@ -27,7 +27,7 @@ public class UpdateCasterProfile
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             var profile = await _ctx.CasterProfiles.FindAsync(
-                request.UpdateCasterProfileDto.CasterId, cancellationToken);
+                request.UpdateCasterProfileDto.CasterId);
             
             if (profile == null)
             {

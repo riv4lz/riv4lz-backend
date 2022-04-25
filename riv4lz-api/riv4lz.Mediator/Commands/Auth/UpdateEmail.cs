@@ -28,9 +28,8 @@ public class UpdateEmail
                 return false;
             }
 
-            var token = await _userManager.GenerateChangeEmailTokenAsync(user, request.UpdateEmailDto.Email);
-            
-            var result = await _userManager.ChangeEmailAsync(user, request.UpdateEmailDto.Email, token);
+            user.Email = request.UpdateEmailDto.Email;
+            var result = await _userManager.UpdateAsync(user);
 
             return result.Succeeded;
         }
