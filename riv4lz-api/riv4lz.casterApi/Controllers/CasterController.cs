@@ -21,10 +21,10 @@ namespace riv4lz.casterApi.Controllers
             _mediator = mediator;
         }
         
-        [HttpGet]
-        public ActionResult<List<CasterProfileDto>> GetAll()
+        [HttpGet(nameof(GetAll))]
+        public async  Task<ActionResult<List<CasterProfileDto>>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _mediator.Send(new GetCasterProfiles.Query());
         }
 
         [HttpGet(nameof(GetCasterProfile))]

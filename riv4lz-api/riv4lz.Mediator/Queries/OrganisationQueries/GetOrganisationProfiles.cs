@@ -1,0 +1,39 @@
+using AutoMapper;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using riv4lz.dataAccess;
+using riv4lz.dataAccess.Entities;
+using riv4lz.Mediator.Dtos;
+
+namespace riv4lz.Mediator.Queries.OrganisationQueries;
+
+public class GetOrganisationProfiles
+{
+    public class Query : IRequest<List<OrganisationProfileDto>>
+    {
+        public Guid CasterId { get; set; }
+    }
+    
+    public class Handler : IRequestHandler<Query, List<OrganisationProfileDto>>
+    {
+        private readonly CasterDbContext _ctx;
+        private readonly IMapper _mapper;
+
+
+        public Handler(CasterDbContext ctx, IMapper mapper)
+        {
+            _ctx = ctx;
+            _mapper = mapper;
+        }
+
+        public async Task<List<OrganisationProfileDto>> Handle(Query request, CancellationToken cancellationToken)
+        {
+           var profileDtos = await _ctx.OrganisationProfiles.Select(
+                u => _mapper.Map<OrganisationProfileEntity, OrganisationProfileDto>(u))
+               .ToListAsync(cancellationToken);
+
+           return profileDtos != null ? profileDtos : null;
+        }
+    }
+    
+}
