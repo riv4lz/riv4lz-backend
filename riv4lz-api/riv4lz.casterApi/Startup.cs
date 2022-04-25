@@ -6,6 +6,7 @@ using riv4lz.casterApi.Extensions;
 using riv4lz.casterApi.SignalR;
 using riv4lz.dataAccess;
 using riv4lz.Mediator;
+using riv4lz.Mediator.Commands.Auth;
 using riv4lz.Mediator.Commands.CasterCommands;
 using riv4lz.security.DataAccess;
 using StackExchange.Redis;

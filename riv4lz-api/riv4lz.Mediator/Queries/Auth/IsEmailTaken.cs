@@ -1,7 +1,7 @@
 using MediatR;
 using riv4lz.security.DataAccess;
 
-namespace riv4lz.Mediator.Queries.CasterQueries;
+namespace riv4lz.Mediator.Queries.Auth;
 
 public class IsEmailTaken
 {

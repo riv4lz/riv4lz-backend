@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Services;
 
-namespace riv4lz.Mediator.Queries.CasterQueries;
+namespace riv4lz.Mediator.Queries.Auth;
 
 public class FindUserByEmail
 {

@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.core.Models;
 using riv4lz.Mediator;
+using riv4lz.Mediator.Commands.Auth;
 using riv4lz.Mediator.Commands.CasterCommands;
 using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Queries.Auth;
 using riv4lz.Mediator.Queries.CasterQueries;
 
 namespace riv4lz.casterApi.Controllers
@@ -35,6 +37,12 @@ namespace riv4lz.casterApi.Controllers
             return user;
         }
 
+        [HttpPost(nameof(UpdatePassword))]
+        public async Task<ActionResult> UpdatePassword()
+        {
+            
+        }
+
         [AllowAnonymous]
         [HttpPost(nameof(RegisterCaster))]
         public async Task<ActionResult<UserDto>> RegisterCaster(RegisterUserDto registerUserDto)
@@ -62,6 +70,7 @@ namespace riv4lz.casterApi.Controllers
             return await _mediator.Send(new IsEmailTaken.Query { Email = email});
         }
         
+        // TODO slet?
         private async Task<ActionResult<UserDto>> RegisterUser(RegisterUserDto registerUserDto, UserType userType)
         {
             if (await IsEmailTaken(registerUserDto.Email))
