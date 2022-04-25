@@ -1,7 +1,4 @@
 using MediatR;
-using riv4lz.Mediator.Dtos;
-using System;
-using AutoMapper;
 using FluentValidation;
 using riv4lz.dataAccess;
 using riv4lz.domain;

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Identity;
-using riv4lz.dataAccess.Entities;
 
 
 namespace riv4lz.security.DataAccess;
@@ -17,9 +16,9 @@ public class AuthDbSeed
         var casterRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "caster"};
         var organisationRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "organisation"};
 
-        var user1 = new AppUser() {Id = new Guid(), Email = "j@r.co", UserName = "Jonas"};
-        var user2 = new AppUser() {Id = new Guid(), Email = "m@r.co", UserName = "Mike"};
-        var user3 = new AppUser() {Id = new Guid(), Email = "f@r.co", UserName = "Frederik"};
+        var user1 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "j@r.co", UserName = "Jonas"};
+        var user2 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "m@r.co", UserName = "Mike"};
+        var user3 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "f@r.co", UserName = "Frederik"};
 
 
         if (!context.Roles.Any())

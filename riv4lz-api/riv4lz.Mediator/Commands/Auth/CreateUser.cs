@@ -1,7 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using riv4lz.core.Models;
-using riv4lz.dataAccess.Entities;
 using riv4lz.Mediator.Dtos;
 
 namespace riv4lz.Mediator.Commands.Auth;
@@ -25,7 +24,7 @@ public class CreateUser
 
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            var user = new AppUser()
+            var user = new IdentityUser<Guid>()
             {
                 Id = request.RegisterUserDto.Id,
                 Email = request.RegisterUserDto.Email,
@@ -37,7 +36,7 @@ public class CreateUser
             return registerUserResult.Succeeded && AddRole(user, request.UserType);
         }
 
-        private bool AddRole(AppUser user, UserType requestUserType)
+        private bool AddRole(IdentityUser<Guid> user, UserType requestUserType)
         {
             return requestUserType == UserType.caster ? 
                 _userManager.AddToRoleAsync(user, UserType.caster.ToString()).Result.Succeeded : 

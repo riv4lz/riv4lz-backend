@@ -1,4 +1,3 @@
-using System.Linq;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.security.DataAccess;
