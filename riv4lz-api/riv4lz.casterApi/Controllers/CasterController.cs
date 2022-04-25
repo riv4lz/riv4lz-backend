@@ -62,10 +62,15 @@ namespace riv4lz.casterApi.Controllers
 
 
 
-        [HttpPut(nameof(UpdateCaster))]
-        public ActionResult<CasterDto> UpdateCaster([FromBody] UpdateCasterProfileDto updateCasterProfileDto)
+        [HttpPut(nameof(UpdateCasterProfile))]
+        public async  Task<ActionResult> UpdateCasterProfile([FromBody] UpdateCasterProfileDto updateCasterProfileDto)
         {
-            throw new NotImplementedException();
+            var result = await _mediator.Send(new UpdateCasterProfile.Command
+            {
+                UpdateCasterProfileDto = updateCasterProfileDto
+            });
+
+            return result ? Ok("Caster profile updated") : BadRequest("Error updating profile");
         }
 
         [HttpDelete(nameof(DeleteCaster))]

@@ -13,6 +13,8 @@ public class CasterDbContext : DbContext
     }
 
     public virtual DbSet<CasterProfileEntity> CasterProfiles { get; set; }
+    public DbSet<OrganisationProfileEntity> OrganisationProfiles { get; set; }
+    public DbSet<EventEntity> Events { get; set; }
     public DbSet<Comment> Comments { get; set; }
     
 }
