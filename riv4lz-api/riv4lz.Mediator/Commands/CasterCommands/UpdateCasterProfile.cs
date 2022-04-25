@@ -3,7 +3,7 @@ using riv4lz.Mediator.Dtos;
 
 namespace riv4lz.Mediator.Commands.CasterCommands;
 
-public class EditCasterProfile
+public class UpdateCasterProfile
 {
     public class Command : IRequest
     {

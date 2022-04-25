@@ -26,6 +26,8 @@ namespace riv4lz.casterApi.Controllers
             _mediator = mediator;
             _mapper = mapper;
         }
+        
+        // TODO GetOrganisations
 
         [HttpGet(nameof(GetOrganisationProfile))]
         public async Task<ActionResult<OrganisationProfileDto>> GetOrganisationProfile(Guid id)
@@ -56,6 +58,17 @@ namespace riv4lz.casterApi.Controllers
             });
 
             return profile != null ? profile : BadRequest("Problem loading profile");
+        }
+
+        [HttpPut(nameof(UpdateOrganisationProfile))]
+        public async Task<ActionResult> UpdateOrganisationProfile(UpdateOrganisationProfileDto updateOrganisationProfileDto)
+        {
+            var result = await _mediator.Send(new UpdateOrganisationProfile.Command
+            {
+                UpdateOrganisationProfileDto = updateOrganisationProfileDto
+            });
+
+            return result ? Ok("Profile updated") : BadRequest("Error updating profile");
         }
 
     }
