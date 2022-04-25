@@ -3,7 +3,7 @@ namespace riv4lz.Mediator.Dtos;
 public class UpdateOrganisationProfileDto
 {
     public Guid OrganisationId { get; set; }
-    public string GamerTag { get; set; }
+    public string OrganisationName { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Description { get; set; }
