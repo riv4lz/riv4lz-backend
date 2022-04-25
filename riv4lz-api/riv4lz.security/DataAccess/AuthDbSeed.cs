@@ -10,8 +10,7 @@ public class AuthDbSeed
         
     }
     public static async Task SeedData(AuthContext context,
-        UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager, 
-        SignInManager<IdentityUser<Guid>> signInManager)
+        UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager)
     {
         var casterRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "caster"};
         var organisationRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "organisation"};
