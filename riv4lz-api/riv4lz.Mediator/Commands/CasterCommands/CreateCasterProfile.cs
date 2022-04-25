@@ -16,9 +16,9 @@ public class CreateCasterProfile
     public class Handler: IRequestHandler<Command, bool>
     {
         private readonly IMapper _mapper;
-        private readonly CasterDbContext _ctx;
+        private readonly DataContext _ctx;
 
-        public Handler(IMapper mapper, CasterDbContext ctx)
+        public Handler(IMapper mapper, DataContext ctx)
         {
             _mapper = mapper;
             _ctx = ctx;
@@ -27,7 +27,7 @@ public class CreateCasterProfile
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             await _ctx.CasterProfiles.AddAsync(
-                _mapper.Map<RegisterCasterProfileDto, CasterProfileEntity>(request.RegisterCasterProfileDto), cancellationToken);
+                _mapper.Map<RegisterCasterProfileDto, CasterProfile>(request.RegisterCasterProfileDto), cancellationToken);
 
             var result = await _ctx.SaveChangesAsync(cancellationToken);
 

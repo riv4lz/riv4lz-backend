@@ -5,9 +5,9 @@ namespace riv4lz.dataAccess;
 
 public class CasterDbSeeder
 {
-    private readonly CasterDbContext _ctx;
+    private readonly DataContext _ctx;
 
-    public CasterDbSeeder(CasterDbContext ctx)
+    public CasterDbSeeder(DataContext ctx)
     {
         _ctx = ctx;
     }
@@ -18,7 +18,7 @@ public class CasterDbSeeder
 
         if (!_ctx.CasterProfiles.Any())
         {
-            var caster1 = new CasterProfileEntity()
+            var caster1 = new CasterProfile()
             {
                 CasterId = Guid.NewGuid(),
                 BannerImage = "",
@@ -33,7 +33,7 @@ public class CasterDbSeeder
                 TwitterURL = "twitter.com/url",
             };
             
-            var caster2 = new CasterProfileEntity()
+            var caster2 = new CasterProfile()
             {
                 CasterId = Guid.NewGuid(),
                 BannerImage = "",
@@ -55,7 +55,7 @@ public class CasterDbSeeder
 
         if (!_ctx.OrganisationProfiles.Any())
         {
-            var org1 = new OrganisationProfileEntity()
+            var org1 = new OrganisationProfile()
             {
                 OrganisationId = Guid.NewGuid(),
                 BannerImage = "",
@@ -69,7 +69,7 @@ public class CasterDbSeeder
                 TwitchURL = "twitch.tv/url",
                 TwitterURL = "twitter.com/url",
             };
-            var org2 = new OrganisationProfileEntity()
+            var org2 = new OrganisationProfile()
             {
                 OrganisationId = Guid.NewGuid(),
                 BannerImage = "",

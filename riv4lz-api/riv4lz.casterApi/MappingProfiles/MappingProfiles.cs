@@ -9,16 +9,16 @@ public class MappingProfiles: Profile
 {
     public MappingProfiles()
     {
-        CreateMap<CasterProfileEntity, CasterProfileDto>();
-        CreateMap<RegisterCasterProfileDto, CasterProfileEntity>();
-        CreateMap<UpdateCasterProfileDto, CasterProfileEntity>();
+        CreateMap<CasterProfile, CasterProfileDto>();
+        CreateMap<RegisterCasterProfileDto, CasterProfile>();
+        CreateMap<UpdateCasterProfileDto, CasterProfile>();
         
-        CreateMap<OrganisationProfileEntity, OrganisationProfileDto>();
-        CreateMap<RegisterOrganisationProfileDto, OrganisationProfileEntity>();
-        CreateMap<UpdateOrganisationProfileDto, OrganisationProfileEntity>();
+        CreateMap<OrganisationProfile, OrganisationProfileDto>();
+        CreateMap<RegisterOrganisationProfileDto, OrganisationProfile>();
+        CreateMap<UpdateOrganisationProfileDto, OrganisationProfile>();
 
-        CreateMap<EventEntity, EventDto>();
-        CreateMap<CreateEventDto, EventEntity>();
+        CreateMap<Event, EventDto>();
+        CreateMap<CreateEventDto, Event>();
         
         CreateMap<Comment, CommentDto>();
         

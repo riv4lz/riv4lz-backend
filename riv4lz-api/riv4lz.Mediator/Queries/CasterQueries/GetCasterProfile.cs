@@ -15,11 +15,11 @@ public class GetCasterProfile
     
     public class Handler : IRequestHandler<Query, CasterProfileDto>
     {
-        private readonly CasterDbContext _ctx;
+        private readonly DataContext _ctx;
         private readonly IMapper _mapper;
 
 
-        public Handler(CasterDbContext ctx, IMapper mapper)
+        public Handler(DataContext ctx, IMapper mapper)
         {
             _ctx = ctx;
             _mapper = mapper;
@@ -30,7 +30,7 @@ public class GetCasterProfile
            var entity = _ctx.CasterProfiles.FirstOrDefault(
                 u => u.CasterId == request.CasterId);
 
-           return entity != null ? _mapper.Map<CasterProfileEntity, CasterProfileDto>(entity) : null;
+           return entity != null ? _mapper.Map<CasterProfile, CasterProfileDto>(entity) : null;
         }
     }
     

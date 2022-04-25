@@ -23,9 +23,9 @@ public class CreateMessage
     
     public class Handler: IRequestHandler<Command, Comment>
     {
-        private readonly CasterDbContext _ctx;
+        private readonly DataContext _ctx;
 
-        public Handler(CasterDbContext ctx)
+        public Handler(DataContext ctx)
         {
             _ctx = ctx;
         }

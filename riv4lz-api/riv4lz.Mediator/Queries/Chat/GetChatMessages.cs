@@ -17,11 +17,11 @@ public class GetChatMessages
     
     public class Handler : IRequestHandler<Query, List<CommentDto>>
     {
-        private readonly CasterDbContext _ctx;
+        private readonly DataContext _ctx;
         private readonly IMapper _mapper;
 
 
-        public Handler(CasterDbContext ctx, IMapper mapper)
+        public Handler(DataContext ctx, IMapper mapper)
         {
             _ctx = ctx;
             _mapper = mapper;
