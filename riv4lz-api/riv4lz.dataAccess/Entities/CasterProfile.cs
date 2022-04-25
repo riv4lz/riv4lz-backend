@@ -17,5 +17,5 @@ public class CasterProfile
     public string? DiscordURL { get; set; }
     public string? TwitchURL { get; set; }
 
-    public ICollection<Offer> Offers { get; set; }
+    public ICollection<Offer>? Offers { get; set; }
 }

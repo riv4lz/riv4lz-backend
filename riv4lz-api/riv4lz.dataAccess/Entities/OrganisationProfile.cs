@@ -17,5 +17,5 @@ public class OrganisationProfile
     public string? DiscordURL { get; set; }
     public string? TwitchURL { get; set; }
 
-    public ICollection<Event> Events { get; set; }
+    public ICollection<Event>? Events { get; set; }
 }

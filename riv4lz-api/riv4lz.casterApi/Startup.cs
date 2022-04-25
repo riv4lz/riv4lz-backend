@@ -80,7 +80,7 @@ namespace riv4lz.casterApi
             if (env.IsDevelopment())
             {
                 app.UseCors("Dev-cors");
-                new CasterDbSeeder(dataContext).SeedDevelopment();
+                new DbSeeder(dataContext).SeedDevelopment();
                 app.UseDeveloperExceptionPage();
                 app.UseSwaggerDocumentation();
             }
