@@ -41,7 +41,7 @@ namespace riv4lz.casterApi
             
             services.AddSwaggerDocumentation();
 
-            services.AddDbContext<CasterDbContext>(options =>
+            services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlite(_configuration.GetConnectionString("CasterConnection"));
             });
@@ -75,12 +75,12 @@ namespace riv4lz.casterApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, CasterDbContext casterDbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dataContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseCors("Dev-cors");
-                new CasterDbSeeder(casterDbContext).SeedDevelopment();
+                new DbSeeder(dataContext).SeedDevelopment();
                 app.UseDeveloperExceptionPage();
                 app.UseSwaggerDocumentation();
             }

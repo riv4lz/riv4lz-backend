@@ -15,10 +15,10 @@ public class CreateOrganisationProfile
 
     public class Handler : IRequestHandler<Command, bool>
     {
-        private readonly CasterDbContext _ctx;
+        private readonly DataContext _ctx;
         private readonly IMapper _mapper;
 
-        public Handler(CasterDbContext ctx, IMapper mapper)
+        public Handler(DataContext ctx, IMapper mapper)
         {
             _ctx = ctx;
             _mapper = mapper;
@@ -27,7 +27,7 @@ public class CreateOrganisationProfile
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             await _ctx.OrganisationProfiles.AddAsync(
-                _mapper.Map<RegisterOrganisationProfileDto, OrganisationProfileEntity>(
+                _mapper.Map<RegisterOrganisationProfileDto, OrganisationProfile>(
                     request.RegisterOrganisationProfileDto), cancellationToken);
 
             var result = await _ctx.SaveChangesAsync(cancellationToken);

@@ -33,6 +33,13 @@ namespace riv4lz.casterApi.Controllers
                 OrganisationId = id
             });
         }
+        
+        [HttpGet(nameof(GetOrganisationProfiles))]
+        public async Task<ActionResult<List<OrganisationProfileDto>>> GetOrganisationProfiles()
+        {
+            // TODO validate id
+            return await _mediator.Send(new GetOrganisationProfiles.Query());
+        }
 
         [HttpPost(nameof(RegisterOrganisationProfile))]
         public async Task<ActionResult<OrganisationProfileDto>> RegisterOrganisationProfile(RegisterOrganisationProfileDto registerOrganisationProfileDto)

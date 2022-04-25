@@ -18,7 +18,7 @@ namespace riv4lz.casterApi
             try
             {
                 var context = services.GetRequiredService<AuthContext>();
-                var casterContext = services.GetRequiredService<CasterDbContext>();
+                var casterContext = services.GetRequiredService<DataContext>();
                 var userManager = services.GetRequiredService<UserManager<IdentityUser<Guid>>>();
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
                 var signinManager = services.GetRequiredService<SignInManager<IdentityUser<Guid>>>();

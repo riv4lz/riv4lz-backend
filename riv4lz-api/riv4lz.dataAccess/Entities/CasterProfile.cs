@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace riv4lz.dataAccess.Entities;
 
-public class CasterProfileEntity
+public class CasterProfile
 {
     [Key]
     public Guid CasterId { get; set; }
@@ -16,4 +16,6 @@ public class CasterProfileEntity
     public string? TwitterURL { get; set; }
     public string? DiscordURL { get; set; }
     public string? TwitchURL { get; set; }
+
+    public ICollection<Offer>? Offers { get; set; }
 }

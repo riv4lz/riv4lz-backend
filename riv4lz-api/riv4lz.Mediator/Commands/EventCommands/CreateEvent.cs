@@ -15,10 +15,10 @@ public class CreateEvent
 
     public class Handler : IRequestHandler<Command, bool>
     {
-        private readonly CasterDbContext _ctx;
+        private readonly DataContext _ctx;
         private readonly IMapper _mapper;
 
-        public Handler(CasterDbContext ctx, IMapper mapper)
+        public Handler(DataContext ctx, IMapper mapper)
         {
             _ctx = ctx;
             _mapper = mapper;
@@ -27,7 +27,7 @@ public class CreateEvent
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             await _ctx.Events.AddAsync(
-                _mapper.Map<CreateEventDto, EventEntity>(
+                _mapper.Map<CreateEventDto, Event>(
                     request.CreateEventDto), cancellationToken);
 
             var result = await _ctx.SaveChangesAsync(cancellationToken);

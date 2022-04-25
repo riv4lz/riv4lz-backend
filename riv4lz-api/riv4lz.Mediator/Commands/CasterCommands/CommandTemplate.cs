@@ -23,9 +23,9 @@ public class CommandTemplate
     
     public class Handler: IRequestHandler<Command, bool>
     {
-        private readonly CasterDbContext _ctx;
+        private readonly DataContext _ctx;
 
-        public Handler(CasterDbContext ctx)
+        public Handler(DataContext ctx)
         {
             _ctx = ctx;
         }

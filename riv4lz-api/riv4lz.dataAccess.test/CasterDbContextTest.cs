@@ -10,21 +10,21 @@ public class CasterDbContextTest
     [Fact]
     public void DbContext_WithDbContextOptions_IsAvailable()
     {
-        var mockedDbContext = Create.MockedDbContextFor<CasterDbContext>();
+        var mockedDbContext = Create.MockedDbContextFor<DataContext>();
         Assert.NotNull(mockedDbContext);
     }
 
     [Fact]
     public void DbContext_DbSets_MustHaveDbSetWithTypeCasterEntity()
     {
-        var mockedDbContext = Create.MockedDbContextFor<CasterDbContext>();
-        Assert.True(mockedDbContext.CasterProfiles is DbSet<CasterProfileEntity>);
+        var mockedDbContext = Create.MockedDbContextFor<DataContext>();
+        Assert.True(mockedDbContext.CasterProfiles is DbSet<CasterProfile>);
     }
 
     [Fact]
     public void CasterContext_IsAssignableFromDbContext()
     {
-        var mockedDbContext = Create.MockedDbContextFor<CasterDbContext>();
+        var mockedDbContext = Create.MockedDbContextFor<DataContext>();
         Assert.IsAssignableFrom<DbContext>(mockedDbContext);
     }
 }

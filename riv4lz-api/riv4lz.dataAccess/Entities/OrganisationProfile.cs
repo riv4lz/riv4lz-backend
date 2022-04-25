@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace riv4lz.dataAccess.Entities;
 
-public class OrganisationProfileEntity
+public class OrganisationProfile
 {
     [Key]
     public Guid OrganisationId { get; set; }
@@ -16,4 +16,6 @@ public class OrganisationProfileEntity
     public string? TwitterURL { get; set; }
     public string? DiscordURL { get; set; }
     public string? TwitchURL { get; set; }
+
+    public ICollection<Event>? Events { get; set; }
 }

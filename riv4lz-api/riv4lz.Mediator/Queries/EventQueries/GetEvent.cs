@@ -15,11 +15,11 @@ public class GetEvent
     
     public class Handler : IRequestHandler<Query, EventDto>
     {
-        private readonly CasterDbContext _ctx;
+        private readonly DataContext _ctx;
         private readonly IMapper _mapper;
 
 
-        public Handler(CasterDbContext ctx, IMapper mapper)
+        public Handler(DataContext ctx, IMapper mapper)
         {
             _ctx = ctx;
             _mapper = mapper;
@@ -30,7 +30,7 @@ public class GetEvent
             var entity = _ctx.Events.FirstOrDefault(
                 u => u.Id == request.EventId);
            
-            return entity != null ? _mapper.Map<EventEntity, EventDto>(entity) : null;
+            return entity != null ? _mapper.Map<Event, EventDto>(entity) : null;
            
         }
     }
