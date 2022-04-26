@@ -3,6 +3,7 @@ using MediatR;
 using riv4lz.dataAccess;
 using riv4lz.dataAccess.Entities;
 using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Dtos.Casters;
 
 namespace riv4lz.Mediator.Queries.CasterQueries;
 

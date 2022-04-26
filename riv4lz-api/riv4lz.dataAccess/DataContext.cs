@@ -26,12 +26,12 @@ public class DataContext : DbContext
             .WithMany(o => o.Events)
             .HasForeignKey(o => o.OrganisationId);
 
-        /*
+        
         modelBuilder.Entity<Offer>()
             .HasOne<CasterProfile>(o => o.Caster)
             .WithMany(c => c.Offers)
             .HasForeignKey(o => o.CasterId); 
-        
+        /*
         modelBuilder.Entity<Offer>()
             .HasOne<Event>(o => o.Event)
             .WithMany(e => e.Offers)

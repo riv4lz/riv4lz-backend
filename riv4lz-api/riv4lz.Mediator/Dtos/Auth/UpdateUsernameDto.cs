@@ -1,4 +1,4 @@
-namespace riv4lz.Mediator.Dtos;
+namespace riv4lz.Mediator.Dtos.Auth;
 
 public class UpdateUsernameDto
 {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.Mediator.Commands.OrgCommands;
 using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Dtos.Organisations;
 using riv4lz.Mediator.Queries.OrganisationQueries;
 
 namespace riv4lz.casterApi.Controllers

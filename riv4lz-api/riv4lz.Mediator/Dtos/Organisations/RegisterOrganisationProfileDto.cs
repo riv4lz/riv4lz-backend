@@ -1,9 +1,9 @@
-namespace riv4lz.Mediator.Dtos;
+namespace riv4lz.Mediator.Dtos.Organisations;
 
-public class UpdateCasterProfileDto
+public class RegisterOrganisationProfileDto
 {
-    public Guid CasterId { get; set; }
-    public string GamerTag { get; set; }
+    public Guid OrganisationId { get; set; }
+    public string OrganisationName { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Description { get; set; }

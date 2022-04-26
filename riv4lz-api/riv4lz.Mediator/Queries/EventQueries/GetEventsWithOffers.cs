@@ -8,7 +8,7 @@ using riv4lz.Mediator.Dtos.Events;
 
 namespace riv4lz.Mediator.Queries.EventQueries;
 
-public class GetEvents
+public class GetEventsWithOffers
 {
     public class Query : IRequest<List<EventDto>>
     {
@@ -30,10 +30,12 @@ public class GetEvents
         public async Task<List<EventDto>> Handle(Query request, CancellationToken cancellationToken)
         {
             var events = await _ctx.Events
-                .Select(e => _mapper.Map<Event, EventDto>(e)).ToListAsync(cancellationToken);
+                .Include(x => x.Offers)
+                .ThenInclude(o => o.Caster)
+                .Select(e => _mapper.Map<Event, EventDto>(e))
+                .ToListAsync(cancellationToken);
 
             return events;
-
         }
     }
 }

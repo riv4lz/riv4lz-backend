@@ -1,4 +1,5 @@
 using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Dtos.Auth;
 using Xunit;
 
 namespace riv4lz.casterApi.test.Dtos;
