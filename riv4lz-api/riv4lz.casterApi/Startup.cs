@@ -69,6 +69,7 @@ namespace riv4lz.casterApi
 
             services.AddMediatR(typeof(CreateUser.Handler).Assembly);
             services.AddAutoMapper(typeof(Startup));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
