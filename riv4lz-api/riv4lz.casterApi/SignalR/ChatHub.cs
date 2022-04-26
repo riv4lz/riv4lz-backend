@@ -9,23 +9,23 @@ public class ChatHub: Hub
 {
     private readonly IMediator _mediator;
 
-    
+
     public ChatHub(IMediator mediator)
     {
         _mediator = mediator;
     }
     
-    public async Task SendMessage(CreateMessage.Command command)
+    public async Task SendMessage(string message)
     {
-        var message = await _mediator.Send(command);
         await Clients.All.SendAsync("ReceiveMessage", message);
     }
 
-    public override async Task OnConnectedAsync()
+    public async Task SendConnectionId(string connectionId)
     {
-        var httpContext = Context.GetHttpContext();
-
-        var result = await _mediator.Send(new GetChatMessages.Query());
-        await Clients.Caller.SendAsync("ReceiveMessages", result);
+        await Clients.All.SendAsync("setClientMessage", "A connection with ID '" + connectionId + "' has just connected");
     }
+
+
+    
+   
 }
