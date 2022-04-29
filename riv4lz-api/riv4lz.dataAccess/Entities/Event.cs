@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using riv4lz.core.Models;
 
@@ -15,6 +16,7 @@ public class Event
     public EventStatus EventStatus { get; set; } = EventStatus.PENDING;
     
     public Guid OrganisationId { get; set; }
+    [Required]
     public OrganisationProfile OrganisationProfile { get; set; }
 
     public ICollection<Offer>? Offers { get; set; }
