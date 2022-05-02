@@ -25,59 +25,10 @@ namespace riv4lz.casterApi
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-
-            services.AddControllers(options =>
-            {
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            })
-                .AddJsonOptions(x =>
-                    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);;
-            
-            services.AddApplicationServices();
+        { 
+            services.AddApplicationServices(_configuration);
             services.AddIdentityServices(_configuration);
-            services.AddSingleton<ConnectionMultiplexer>(config =>
-            {
-                var configuration = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"));
-                return ConnectionMultiplexer.Connect(configuration);
-            });
-            
             services.AddSwaggerDocumentation();
-
-            services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlite(_configuration.GetConnectionString("CasterConnection"));
-            });
-
-            services.AddDbContext<AuthContext>(options =>
-            {
-                options.UseSqlite(_configuration.GetConnectionString("AuthConnection"));
-            });
-            
-            services.AddCors(options =>
-            {
-                options.AddPolicy("Dev-cors", policy =>
-                {
-                    policy
-                        .WithOrigins("http://localhost:3000")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowCredentials();
-                });
-                
-                options.AddPolicy("Prod-cors", policy =>
-                {
-                    policy
-                        .WithOrigins("https://riv4lz:3000")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
-                });
-            });
-
-            services.AddMediatR(typeof(CreateUser.Handler).Assembly);
-            services.AddAutoMapper(typeof(Startup));
-            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
