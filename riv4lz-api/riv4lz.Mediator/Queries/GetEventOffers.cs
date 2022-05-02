@@ -2,6 +2,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using riv4lz.core.Models;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos;
 

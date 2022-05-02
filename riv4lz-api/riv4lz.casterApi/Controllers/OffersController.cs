@@ -6,8 +6,10 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using riv4lz.Mediator.Commands;
 using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Queries;
+using riv4lz.Mediator.Queries.OrganisationQueries;
 
 namespace riv4lz.casterApi.Controllers
 {
@@ -40,19 +42,25 @@ namespace riv4lz.casterApi.Controllers
         [HttpPost(nameof(CreateOffer))]
         public async Task<ActionResult<OfferDto>> CreateOffer(CreateOfferDto createOfferDto)
         {
-            return null;
+            var result = await _mediator.Send(new CreateEventOffer.Command {CreateOfferDto = createOfferDto});
+            if (result)
+            {
+                var offer = await _mediator.Send(new GetEventOffer.Query {OfferId = createOfferDto.Id});
+                return Ok(offer);
+            }
+            return BadRequest("Error creating offer");
         }
         
         [HttpPut(nameof(UpdateOffer))]
-        public async Task<ActionResult<OfferDto>> UpdateOffer(UpdateOfferDto updateOfferDto)
+        public async Task<ActionResult<bool>> UpdateOffer(UpdateOfferDto updateOfferDto)
         {
-            return null;
+            return await _mediator.Send(new UpdateOfferStatus.Command {UpdateOfferDto = updateOfferDto});
         }
         
         [HttpDelete(nameof(DeleteOffer))]
-        public async Task<ActionResult<OfferDto>> DeleteOffer(Guid offerId)
+        public async Task<ActionResult<bool>> DeleteOffer(Guid offerId)
         {
-            return null;
+            return await _mediator.Send(new DeleteEventOffer.Command {OfferId = offerId});
         }
         
         
