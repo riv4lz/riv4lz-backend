@@ -5,6 +5,7 @@ namespace riv4lz.casterApi.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddSignalR();
+            services.AddHttpContextAccessor();
 
             return services;
         }

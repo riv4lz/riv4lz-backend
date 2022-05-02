@@ -26,8 +26,6 @@ public class GetRooms
 
         public async Task<List<ChatRoomDto>> Handle(Query request, CancellationToken cancellationToken)
         {
-            
-
             return null;
         }
     }

@@ -6,6 +6,7 @@ namespace riv4lz.dataAccess.Entities;
 public class Offer
 {
         public Guid Id { get; set; }
+        public OfferStatus OfferStatus { get; set; }
 
         public Guid EventId { get; set; }
         [Required]
