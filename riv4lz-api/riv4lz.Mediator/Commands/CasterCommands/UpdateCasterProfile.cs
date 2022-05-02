@@ -12,17 +12,8 @@ public class UpdateCasterProfile
         public UpdateCasterProfileDto UpdateCasterProfileDto { get; set; }
     }
     
-    public class Handler : IRequestHandler<Command, bool>
+    public class Handler : BaseHandler, IRequestHandler<Command, bool>
     {
-        private readonly DataContext _ctx;
-        private readonly IMapper _mapper;
-
-        public Handler(DataContext ctx, IMapper mapper)
-        {
-            _ctx = ctx;
-            _mapper = mapper;
-        }
-
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             var profile = await _ctx.CasterProfiles.FindAsync(

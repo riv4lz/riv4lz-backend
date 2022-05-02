@@ -12,18 +12,8 @@ public class GetRooms
         public string RoomName { get; set; }
     }
     
-    public class Handler : IRequestHandler<Query, List<ChatRoomDto>>
+    public class Handler : BaseHandler, IRequestHandler<Query, List<ChatRoomDto>>
     {
-        private readonly DataContext _ctx;
-        private readonly IMapper _mapper;
-
-
-        public Handler(DataContext ctx, IMapper mapper)
-        {
-            _ctx = ctx;
-            _mapper = mapper;
-        }
-
         public async Task<List<ChatRoomDto>> Handle(Query request, CancellationToken cancellationToken)
         {
             return null;
