@@ -60,7 +60,14 @@ namespace riv4lz.casterApi.Controllers
         [HttpPut(nameof(AcceptOffer))]
         public async Task<ActionResult<bool>> AcceptOffer(UpdateOfferDto updateOfferDto)
         {
-            return await _mediator.Send(new AcceptOffer.Command {UpdateOfferDto = updateOfferDto});
+            var result = await _mediator.Send(new AcceptOffer.Command {UpdateOfferDto = updateOfferDto});
+
+            if (result)
+            {
+                
+            }
+
+            return false;
         }
         
         [HttpPut(nameof(RejectOffer))]
