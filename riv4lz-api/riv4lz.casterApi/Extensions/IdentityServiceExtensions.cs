@@ -36,6 +36,7 @@ namespace riv4lz.casterApi.Extensions
                         ValidateIssuer = false,
                         ValidateAudience = false,
                     };
+                    /*
                     options.Events = new JwtBearerEvents()
                     {
                         OnMessageReceived = context =>
@@ -52,6 +53,7 @@ namespace riv4lz.casterApi.Extensions
                             return Task.CompletedTask;
                         }
                     };
+                    */
                 });
             
             services.AddAuthorization(options =>

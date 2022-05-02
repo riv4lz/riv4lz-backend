@@ -8,12 +8,13 @@ public class ChatHub: Hub
 {
     private readonly IMediator _mediator;
 
-    
+
     public ChatHub(IMediator mediator)
     {
         _mediator = mediator;
     }
     
+
     public async Task SendMessage(string message, string room)
     {
         // TODO store message in db
@@ -47,4 +48,5 @@ public class ChatHub: Hub
     {
         await JoinRoom("main", "none");
     }
+    
 }
