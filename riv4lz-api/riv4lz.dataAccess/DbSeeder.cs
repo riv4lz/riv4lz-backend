@@ -162,6 +162,135 @@ public class DbSeeder
             await _ctx.SaveChangesAsync();
         }
 
+        if (!_ctx.ChatRooms.Any())
+        {
+            var r1 = new ChatRoom()
+            {
+                Id = Guid.NewGuid(),
+                Name = "general",
+            };
+            var r2 = new ChatRoom()
+            {
+                Id = Guid.NewGuid(),
+                Name = "counter strike",
+            };
+            var r3 = new ChatRoom()
+            {
+                Id = Guid.NewGuid(),
+                Name = "lol",
+            };
+            var r4 = new ChatRoom()
+            {
+                Id = Guid.NewGuid(),
+                Name = "wow",
+            };
+
+            var message = new Message()
+            {
+                ChatRoomId = r1.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "Hello World!",
+            };
+            var message2 = new Message()
+            {
+                ChatRoomId = r1.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Admin",
+                Text = "Hello Chatman!",
+            };
+            var message3 = new Message()
+            {
+                ChatRoomId = r1.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "You don't know me!",
+            };
+            
+            var message11 = new Message()
+            {
+                ChatRoomId = r2.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "Hello World!",
+            };
+            var message12 = new Message()
+            {
+                ChatRoomId = r2.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Admin",
+                Text = "Hello Chatman!",
+            };
+            var message13 = new Message()
+            {
+                ChatRoomId = r2.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "You don't know me!",
+            };
+            
+            var message20 = new Message()
+            {
+                ChatRoomId = r3.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "Hello World!",
+            };
+            var message21 = new Message()
+            {
+                ChatRoomId = r3.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Admin",
+                Text = "Hello Chatman!",
+            };
+            var message22 = new Message()
+            {
+                ChatRoomId = r3.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "You don't know me!",
+            };
+            
+            var message30 = new Message()
+            {
+                ChatRoomId = r4.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "Hello World!",
+            };
+            var message31 = new Message()
+            {
+                ChatRoomId = r4.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Admin",
+                Text = "Hello Chatman!",
+            };
+            var message32 = new Message()
+            {
+                ChatRoomId = r4.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "You don't know me!",
+            };
+            
+            await _ctx.ChatRooms.AddAsync(r1);
+            await _ctx.ChatRooms.AddAsync(r2);
+            await _ctx.ChatRooms.AddAsync(r3);
+            await _ctx.ChatRooms.AddAsync(r4);
+            await _ctx.Messages.AddAsync(message);
+            await _ctx.Messages.AddAsync(message2);
+            await _ctx.Messages.AddAsync(message3);
+            await _ctx.Messages.AddAsync(message11);
+            await _ctx.Messages.AddAsync(message12);
+            await _ctx.Messages.AddAsync(message13);
+            await _ctx.Messages.AddAsync(message20);
+            await _ctx.Messages.AddAsync(message21);
+            await _ctx.Messages.AddAsync(message22);
+            await _ctx.Messages.AddAsync(message30);
+            await _ctx.Messages.AddAsync(message31);
+            await _ctx.Messages.AddAsync(message32);
+            await _ctx.SaveChangesAsync();
+        }
         
         
     }
