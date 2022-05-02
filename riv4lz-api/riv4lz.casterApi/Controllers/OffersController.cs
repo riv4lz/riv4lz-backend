@@ -26,15 +26,15 @@ namespace riv4lz.casterApi.Controllers
         [HttpGet(nameof(GetOffer))]
         public async Task<ActionResult<OfferDto>> GetOffer(Guid offerId)
         {
-            var offer = await _mediator.Send(new GetEventOffer.Query(offerId));
+            var offer = await _mediator.Send(new GetEventOffer.Query {OfferId = offerId});
             return Ok(offer);
         }
         
         [HttpGet(nameof(GetOffers))]
-        public async Task<ActionResult<OfferDto>> GetOffers(Guid eventId)
+        public async Task<ActionResult<List<OfferDto>>> GetOffers(Guid eventId)
         {
-            var offer = await _mediator.Send(new GetEventOffers.Query(eventId));
-            return Ok(offer);
+            var offers = await _mediator.Send(new GetEventOffers.Query {EventId = eventId});
+            return Ok(offers);
         }
         
         [HttpPost(nameof(CreateOffer))]

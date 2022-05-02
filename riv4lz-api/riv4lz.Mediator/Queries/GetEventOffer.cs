@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos;
 
@@ -26,7 +27,7 @@ public class GetEventOffer
 
         public async Task<OfferDto?> Handle(Query request, CancellationToken cancellationToken)
         {
-            var entity = await _ctx.Offers.FindAsync(request.OfferId, cancellationToken);
+            var entity = await _ctx.Offers.FirstOrDefaultAsync(e => e.Id == request.OfferId, cancellationToken);
             
             return entity == null ? null : _mapper.Map<OfferDto>(entity);
         }
