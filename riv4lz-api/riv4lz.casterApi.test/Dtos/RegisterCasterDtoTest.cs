@@ -1,4 +1,3 @@
-using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Auth;
 using Xunit;
 

@@ -1,27 +1,26 @@
 using FluentValidation;
 using MediatR;
 using riv4lz.dataAccess;
-using riv4lz.domain;
+using riv4lz.Mediator.Dtos;
 
 namespace riv4lz.Mediator.Commands.Chat;
 
 public class CreateMessage
 {
-    public class Command: IRequest<Comment>
+    public class Command: IRequest<bool>
     {
-        public string Body { get; set; }
-        public string UserName { get; set; }
+        public CreateMessageDto CreateMessageDto { get; set; }
     }
 
     public class CommandValidator : AbstractValidator<Command>
     {
         public CommandValidator()
         {
-            RuleFor(x => x.Body).NotEmpty();
+            RuleFor(x => x.CreateMessageDto.Text).NotEmpty();
         }
     }
     
-    public class Handler: IRequestHandler<Command, Comment>
+    public class Handler: IRequestHandler<Command, bool>
     {
         private readonly DataContext _ctx;
 
@@ -30,19 +29,9 @@ public class CreateMessage
             _ctx = ctx;
         }
 
-        public async Task<Comment> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            var comment = new Comment()
-            {
-                Body = request.Body,
-                UserName = request.UserName
-            };
-
-            // todo validate comment 
-            await _ctx.Comments.AddAsync(comment, cancellationToken);
-            var result = await _ctx.SaveChangesAsync(cancellationToken) > 0;
-
-            return comment;
+            return false;
         }
     }
 }

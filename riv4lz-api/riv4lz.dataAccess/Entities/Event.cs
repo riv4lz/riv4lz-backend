@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using riv4lz.core.Models;
 
 namespace riv4lz.dataAccess.Entities;

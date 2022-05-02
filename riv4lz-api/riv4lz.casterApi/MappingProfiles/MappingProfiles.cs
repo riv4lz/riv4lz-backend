@@ -1,6 +1,5 @@
 using AutoMapper;
 using riv4lz.dataAccess.Entities;
-using riv4lz.domain;
 using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Casters;
 using riv4lz.Mediator.Dtos.Events;
@@ -27,7 +26,7 @@ public class MappingProfiles: Profile
         CreateMap<Offer, OfferDto>();
         CreateMap<CreateOfferDto, Offer>();
         
-        CreateMap<Comment, CommentDto>();
+        CreateMap<Message, MessageDto>();
         
     }
 }

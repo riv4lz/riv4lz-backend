@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.Mediator.Commands;
 using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Queries;
-using riv4lz.Mediator.Queries.OrganisationQueries;
 
 namespace riv4lz.casterApi.Controllers
 {

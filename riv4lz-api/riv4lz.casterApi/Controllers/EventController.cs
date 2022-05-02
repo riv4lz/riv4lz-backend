@@ -1,8 +1,6 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Events;
 using riv4lz.Mediator.Queries.EventQueries;
 

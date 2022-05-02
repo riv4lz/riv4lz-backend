@@ -2,7 +2,6 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess;
-using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Organisations;
 
 namespace riv4lz.Mediator.Commands.OrgCommands;

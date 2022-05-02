@@ -1,5 +1,4 @@
 using riv4lz.core.Models;
-using riv4lz.Mediator.Dtos.Casters;
 
 namespace riv4lz.Mediator.Dtos;
 

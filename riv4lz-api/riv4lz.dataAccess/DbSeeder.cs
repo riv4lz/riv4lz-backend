@@ -1,7 +1,5 @@
-
 using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess.Entities;
-using riv4lz.domain;
 
 namespace riv4lz.dataAccess;
 
@@ -164,38 +162,7 @@ public class DbSeeder
             await _ctx.SaveChangesAsync();
         }
 
-        if(!_ctx.Comments.Any())
-        {
-            var c1 = new Comment()
-            {
-                Body = "Hey her er en besked!",
-                CreatedAt = DateTime.Now.AddDays(-1),
-                UserName = "Borat"
-            };
-            var c2 = new Comment()
-            {
-                Body = "Will you be there?",
-                CreatedAt = DateTime.Now.AddDays(-2),
-                UserName = "User"
-            };
-            var c3 = new Comment()
-            {
-                Body = "I will be there!",
-                CreatedAt = DateTime.Now.AddDays(-3),
-                UserName = "Bob"
-            };
-            var c4 = new Comment()
-            {
-                Body = "I am Nigerian prince, i give you money all the time!",
-                CreatedAt = DateTime.Now.AddDays(-4),
-                UserName = "Mufufu"
-            };
-            
-            await _ctx.Comments.AddAsync(c1);
-            await _ctx.Comments.AddAsync(c2);
-            await _ctx.Comments.AddAsync(c3);
-            await _ctx.Comments.AddAsync(c4);
-            await _ctx.SaveChangesAsync();
-        }
+        
+        
     }
 }
