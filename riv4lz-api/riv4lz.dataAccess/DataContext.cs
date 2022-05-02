@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess.Entities;
-using riv4lz.domain;
 
 
 namespace riv4lz.dataAccess;
@@ -26,12 +25,18 @@ public class DataContext : DbContext
             .WithMany(o => o.Events)
             .HasForeignKey(o => o.OrganisationId);
 
-        /*
+        
         modelBuilder.Entity<Offer>()
             .HasOne<CasterProfile>(o => o.Caster)
             .WithMany(c => c.Offers)
             .HasForeignKey(o => o.CasterId); 
         
+        modelBuilder.Entity<Message>()
+            .HasOne<ChatRoom>(m => m.ChatRoom)
+            .WithMany(c => c.Messages)
+            .HasForeignKey(m => m.ChatRoomId);
+        
+        /*
         modelBuilder.Entity<Offer>()
             .HasOne<Event>(o => o.Event)
             .WithMany(e => e.Offers)
@@ -49,6 +54,6 @@ public class DataContext : DbContext
     public DbSet<OrganisationProfile> OrganisationProfiles { get; set; }
     public DbSet<Event> Events { get; set; }
     public DbSet<Offer> Offers { get; set; }
-    public DbSet<Comment> Comments { get; set; }
-    
+    public DbSet<ChatRoom> ChatRooms { get; set; }
+    public DbSet<Message> Messages { get; set; }
 }

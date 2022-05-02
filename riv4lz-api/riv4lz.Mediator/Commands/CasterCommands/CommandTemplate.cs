@@ -1,7 +1,6 @@
 using MediatR;
 using FluentValidation;
 using riv4lz.dataAccess;
-using riv4lz.domain;
 
 namespace riv4lz.Mediator.Commands.CasterCommands;
 
@@ -32,16 +31,9 @@ public class CommandTemplate
 
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            var comment = new Comment()
-            {
-                Body = request.Body,
-                UserName = request.UserName
-            };
+            
 
-            await _ctx.Comments.AddAsync(comment, cancellationToken);
-            var result = await _ctx.SaveChangesAsync(cancellationToken) > 0;
-
-            return result;
+            return false;
         }
     }
 }

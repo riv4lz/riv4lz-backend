@@ -1,8 +1,8 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Dtos.Events;
+using riv4lz.Mediator.Queries.EventQueries;
 
 namespace riv4lz.casterApi.Controllers
 {
@@ -12,18 +12,16 @@ namespace riv4lz.casterApi.Controllers
     public class EventController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
 
-        public EventController(IMediator mediator, IMapper mapper)
+        public EventController(IMediator mediator)
         {
             _mediator = mediator;
-            _mapper = mapper;
         }
 
         [HttpGet(nameof(GetEvents))]
         public async Task<ActionResult<List<EventDto>>> GetEvents()
         {
-            return null;
+            return await _mediator.Send(new GetEvents.Query());
         }
         
         [HttpGet(nameof(GetEvent))]

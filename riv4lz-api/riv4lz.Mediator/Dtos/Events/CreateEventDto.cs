@@ -1,4 +1,4 @@
-namespace riv4lz.Mediator.Dtos;
+namespace riv4lz.Mediator.Dtos.Events;
 
 public class CreateEventDto
 {

@@ -21,7 +21,6 @@ namespace riv4lz.casterApi
                 var casterContext = services.GetRequiredService<DataContext>();
                 var userManager = services.GetRequiredService<UserManager<IdentityUser<Guid>>>();
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-                var signinManager = services.GetRequiredService<SignInManager<IdentityUser<Guid>>>();
                 await context.Database.MigrateAsync();
                 await casterContext.Database.EnsureCreatedAsync();
                 await casterContext.Database.MigrateAsync();

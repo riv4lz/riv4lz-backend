@@ -1,7 +1,9 @@
 using AutoMapper;
 using riv4lz.dataAccess.Entities;
-using riv4lz.domain;
 using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Dtos.Casters;
+using riv4lz.Mediator.Dtos.Events;
+using riv4lz.Mediator.Dtos.Organisations;
 
 namespace riv4lz.casterApi.MappingProfiles;
 
@@ -18,9 +20,16 @@ public class MappingProfiles: Profile
         CreateMap<UpdateOrganisationProfileDto, OrganisationProfile>();
 
         CreateMap<Event, EventDto>();
+        CreateMap<Event, EventWithOffersDto>();
         CreateMap<CreateEventDto, Event>();
         
-        CreateMap<Comment, CommentDto>();
+        CreateMap<Offer, OfferDto>();
+        CreateMap<CreateOfferDto, Offer>();
         
+        CreateMap<Message, MessageDto>();
+        CreateMap<MessageDto, Message>();
+        
+        CreateMap<ChatRoom, ChatRoomWithMessagesDto>();
+        CreateMap<ChatRoom, ChatRoomDto>();
     }
 }

@@ -1,16 +1,14 @@
 using AutoMapper;
 using MediatR;
 using riv4lz.dataAccess;
-using riv4lz.dataAccess.Entities;
-using riv4lz.Mediator.Dtos.Events;
 
-namespace riv4lz.Mediator.Commands.EventCommands;
+namespace riv4lz.Mediator.Commands;
 
-public class CreateEvent
+public class DeleteEventOffer
 {
     public class Command : IRequest<bool>
     {
-        public CreateEventDto CreateEventDto { get; set; }
+        public Guid OfferId { get; set; }
     }
 
     public class Handler : IRequestHandler<Command, bool>
@@ -26,13 +24,14 @@ public class CreateEvent
 
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            await _ctx.Events.AddAsync(
-                _mapper.Map<CreateEventDto, Event>(
-                    request.CreateEventDto), cancellationToken);
+            var offer = await _ctx.Offers.FindAsync(request.OfferId, cancellationToken);
 
-            var result = await _ctx.SaveChangesAsync(cancellationToken);
+            if (offer != null)
+            {
+                _ctx.Offers.Remove(offer);
+            }
             
-            return result > 0;
+            return await _ctx.SaveChangesAsync(cancellationToken) > 0;
         }
     }
 }

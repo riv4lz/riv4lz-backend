@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -30,7 +31,10 @@ namespace riv4lz.casterApi
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
-            });
+            })
+                .AddJsonOptions(x =>
+                    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);;
+            
             services.AddApplicationServices();
             services.AddIdentityServices(_configuration);
             services.AddSingleton<ConnectionMultiplexer>(config =>
@@ -98,8 +102,6 @@ namespace riv4lz.casterApi
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            
 
             app.UseEndpoints(endpoints =>
             {

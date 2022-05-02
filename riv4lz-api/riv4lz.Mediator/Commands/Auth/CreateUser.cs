@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using riv4lz.core.Models;
-using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Dtos.Auth;
 
 namespace riv4lz.Mediator.Commands.Auth;
 

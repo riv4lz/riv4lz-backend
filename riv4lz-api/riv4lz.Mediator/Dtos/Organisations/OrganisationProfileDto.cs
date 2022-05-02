@@ -1,6 +1,6 @@
-namespace riv4lz.Mediator.Dtos;
+namespace riv4lz.Mediator.Dtos.Organisations;
 
-public class UpdateOrganisationProfileDto
+public class OrganisationProfileDto
 {
     public Guid OrganisationId { get; set; }
     public string OrganisationName { get; set; }

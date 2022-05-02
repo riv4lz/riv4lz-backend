@@ -1,7 +1,5 @@
-
 using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess.Entities;
-using riv4lz.domain;
 
 namespace riv4lz.dataAccess;
 
@@ -164,38 +162,136 @@ public class DbSeeder
             await _ctx.SaveChangesAsync();
         }
 
-        if(!_ctx.Comments.Any())
+        if (!_ctx.ChatRooms.Any())
         {
-            var c1 = new Comment()
+            var r1 = new ChatRoom()
             {
-                Body = "Hey her er en besked!",
-                CreatedAt = DateTime.Now.AddDays(-1),
-                UserName = "Borat"
+                Id = Guid.NewGuid(),
+                Name = "general",
             };
-            var c2 = new Comment()
+            var r2 = new ChatRoom()
             {
-                Body = "Will you be there?",
-                CreatedAt = DateTime.Now.AddDays(-2),
-                UserName = "User"
+                Id = Guid.NewGuid(),
+                Name = "counter strike",
             };
-            var c3 = new Comment()
+            var r3 = new ChatRoom()
             {
-                Body = "I will be there!",
-                CreatedAt = DateTime.Now.AddDays(-3),
-                UserName = "Bob"
+                Id = Guid.NewGuid(),
+                Name = "lol",
             };
-            var c4 = new Comment()
+            var r4 = new ChatRoom()
             {
-                Body = "I am Nigerian prince, i give you money all the time!",
-                CreatedAt = DateTime.Now.AddDays(-4),
-                UserName = "Mufufu"
+                Id = Guid.NewGuid(),
+                Name = "wow",
+            };
+
+            var message = new Message()
+            {
+                ChatRoomId = r1.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "Hello World!",
+            };
+            var message2 = new Message()
+            {
+                ChatRoomId = r1.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Admin",
+                Text = "Hello Chatman!",
+            };
+            var message3 = new Message()
+            {
+                ChatRoomId = r1.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "You don't know me!",
             };
             
-            await _ctx.Comments.AddAsync(c1);
-            await _ctx.Comments.AddAsync(c2);
-            await _ctx.Comments.AddAsync(c3);
-            await _ctx.Comments.AddAsync(c4);
+            var message11 = new Message()
+            {
+                ChatRoomId = r2.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "Hello World!",
+            };
+            var message12 = new Message()
+            {
+                ChatRoomId = r2.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Admin",
+                Text = "Hello Chatman!",
+            };
+            var message13 = new Message()
+            {
+                ChatRoomId = r2.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "You don't know me!",
+            };
+            
+            var message20 = new Message()
+            {
+                ChatRoomId = r3.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "Hello World!",
+            };
+            var message21 = new Message()
+            {
+                ChatRoomId = r3.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Admin",
+                Text = "Hello Chatman!",
+            };
+            var message22 = new Message()
+            {
+                ChatRoomId = r3.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "You don't know me!",
+            };
+            
+            var message30 = new Message()
+            {
+                ChatRoomId = r4.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "Hello World!",
+            };
+            var message31 = new Message()
+            {
+                ChatRoomId = r4.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Admin",
+                Text = "Hello Chatman!",
+            };
+            var message32 = new Message()
+            {
+                ChatRoomId = r4.Id,
+                Id = Guid.NewGuid(),
+                UserName = "Chatman",
+                Text = "You don't know me!",
+            };
+            
+            await _ctx.ChatRooms.AddAsync(r1);
+            await _ctx.ChatRooms.AddAsync(r2);
+            await _ctx.ChatRooms.AddAsync(r3);
+            await _ctx.ChatRooms.AddAsync(r4);
+            await _ctx.Messages.AddAsync(message);
+            await _ctx.Messages.AddAsync(message2);
+            await _ctx.Messages.AddAsync(message3);
+            await _ctx.Messages.AddAsync(message11);
+            await _ctx.Messages.AddAsync(message12);
+            await _ctx.Messages.AddAsync(message13);
+            await _ctx.Messages.AddAsync(message20);
+            await _ctx.Messages.AddAsync(message21);
+            await _ctx.Messages.AddAsync(message22);
+            await _ctx.Messages.AddAsync(message30);
+            await _ctx.Messages.AddAsync(message31);
+            await _ctx.Messages.AddAsync(message32);
             await _ctx.SaveChangesAsync();
         }
+        
+        
     }
 }
