@@ -14,17 +14,36 @@ public class ChatHub: Hub
         _mediator = mediator;
     }
     
+    public async Task SendMessage(string message, string room)
     {
-        var message = await _mediator.Send(command);
-        await Clients.All.SendAsync("ReceiveMessage", message);
+        // TODO store message in db
+        await Clients.Group(room).SendAsync("ReceiveMessage", message);
+    }
+
+    public async Task SendConnectionId(string connectionId)
+    {
+        await Clients.All.SendAsync("setClientMessage", "A connection with ID '" + connectionId + "' has just connected");
+    }
+
+    public async Task JoinRoom(string roomName, string previousRoomName)
+    {
+        await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
+        if (!previousRoomName.Equals("none"))
+        {
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, previousRoomName);
+        }
+        var messages = await _mediator.Send(new GetRoomMessages.Query {RoomName = roomName});
+
+        await Clients.Caller.SendAsync("LoadMessages", messages).ConfigureAwait(true);
+    }
+    
+
+    public async Task LeaveRoom(string previousRoomName)
+    {
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, previousRoomName);
     }
 
     public override async Task OnConnectedAsync()
-    {
-        var httpContext = Context.GetHttpContext();
-
-        var result = await _mediator.Send(new GetChatMessages.Query());
-        await Clients.Caller.SendAsync("ReceiveMessages", result);
     {
         await JoinRoom("main", "none");
     }
