@@ -14,18 +14,8 @@ public class GetEvent
         public Guid EventId { get; set; }
     }
     
-    public class Handler : IRequestHandler<Query, EventDto?>
+    public class Handler : BaseHandler, IRequestHandler<Query, EventDto?>
     {
-        private readonly DataContext _ctx;
-        private readonly IMapper _mapper;
-
-
-        public Handler(DataContext ctx, IMapper mapper)
-        {
-            _ctx = ctx;
-            _mapper = mapper;
-        }
-
         public async Task<EventDto?> Handle(Query request, CancellationToken cancellationToken)
         {
             var entity = await _ctx.Events.FirstOrDefaultAsync(

@@ -5,9 +5,18 @@ using riv4lz.dataAccess;
 
 namespace riv4lz.Mediator;
 
-public class BaseRequest
+public class BaseHandler
 {
-    protected IMapper _mapper;
-    protected DataContext _ctx;
-    
+    public IMapper _mapper;
+    public DataContext _ctx;
+
+    public BaseHandler(IMapper mapper, DataContext ctx)
+    {
+        _mapper = mapper;
+        _ctx = ctx;
+    }
+
+    public BaseHandler()
+    {
+    }
 }

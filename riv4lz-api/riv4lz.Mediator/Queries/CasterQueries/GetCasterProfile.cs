@@ -13,18 +13,8 @@ public class GetCasterProfile
         public Guid CasterId { get; set; }
     }
     
-    public class Handler : IRequestHandler<Query, CasterProfileDto>
+    public class Handler : BaseHandler, IRequestHandler<Query, CasterProfileDto>
     {
-        private readonly DataContext _ctx;
-        private readonly IMapper _mapper;
-
-
-        public Handler(DataContext ctx, IMapper mapper)
-        {
-            _ctx = ctx;
-            _mapper = mapper;
-        }
-
         public async Task<CasterProfileDto> Handle(Query request, CancellationToken cancellationToken)
         {
            var entity = _ctx.CasterProfiles.FirstOrDefault(

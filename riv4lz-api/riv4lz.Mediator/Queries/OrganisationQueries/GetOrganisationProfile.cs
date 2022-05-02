@@ -13,18 +13,8 @@ public class GetOrganisationProfile
         public Guid OrganisationId { get; set; }
     }
     
-    public class Handler : IRequestHandler<Query, OrganisationProfileDto>
+    public class Handler : BaseHandler, IRequestHandler<Query, OrganisationProfileDto>
     {
-        private readonly DataContext _ctx;
-        private readonly IMapper _mapper;
-
-
-        public Handler(DataContext ctx, IMapper mapper)
-        {
-            _ctx = ctx;
-            _mapper = mapper;
-        }
-
         public async Task<OrganisationProfileDto> Handle(Query request, CancellationToken cancellationToken)
         {
            var entity = _ctx.OrganisationProfiles.FirstOrDefault(
