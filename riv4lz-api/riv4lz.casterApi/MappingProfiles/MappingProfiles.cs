@@ -25,6 +25,7 @@ public class MappingProfiles: Profile
         CreateMap<CreateEventDto, Event>();
         
         CreateMap<Offer, OfferDto>();
+        CreateMap<CreateOfferDto, Offer>();
         
         CreateMap<Comment, CommentDto>();
         

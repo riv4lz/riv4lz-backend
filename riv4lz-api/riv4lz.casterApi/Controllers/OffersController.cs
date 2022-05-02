@@ -57,12 +57,22 @@ namespace riv4lz.casterApi.Controllers
             return await _mediator.Send(new UpdateOfferStatus.Command {UpdateOfferDto = updateOfferDto});
         }
         
+        [HttpPut(nameof(AcceptOffer))]
+        public async Task<ActionResult<bool>> AcceptOffer(UpdateOfferDto updateOfferDto)
+        {
+            return await _mediator.Send(new AcceptOffer.Command {UpdateOfferDto = updateOfferDto});
+        }
+        
+        [HttpPut(nameof(RejectOffer))]
+        public async Task<ActionResult<bool>> RejectOffer(UpdateOfferDto updateOfferDto)
+        {
+            return await _mediator.Send(new RejectOffer.Command {UpdateOfferDto = updateOfferDto});
+        }
+        
         [HttpDelete(nameof(DeleteOffer))]
         public async Task<ActionResult<bool>> DeleteOffer(Guid offerId)
         {
             return await _mediator.Send(new DeleteEventOffer.Command {OfferId = offerId});
         }
-        
-        
     }
 }

@@ -1,11 +1,12 @@
 using AutoMapper;
 using MediatR;
+using riv4lz.core.Models;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos;
 
 namespace riv4lz.Mediator.Commands;
 
-public class UpdateOfferStatus
+public class RejectOffer
 {
     public class Command : IRequest<bool>
     {
@@ -29,12 +30,10 @@ public class UpdateOfferStatus
 
             if (offer != null)
             {
-                offer.OfferStatus = request.UpdateOfferDto.OfferStatus;
+                offer.OfferStatus = OfferStatus.REJECTED;
             }
 
-            var result = await _ctx.SaveChangesAsync(cancellationToken);
-            
-            return result > 0;
+            return await _ctx.SaveChangesAsync(cancellationToken) > 0;
         }
     }
 }
