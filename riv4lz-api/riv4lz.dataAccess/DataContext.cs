@@ -56,5 +56,4 @@ public class DataContext : DbContext
     public DbSet<Offer> Offers { get; set; }
     public DbSet<ChatRoom> ChatRooms { get; set; }
     public DbSet<Message> Messages { get; set; }
-    
 }

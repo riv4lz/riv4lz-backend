@@ -32,7 +32,7 @@ public class ChatHub: Hub
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, previousRoomName);
         }
-        var messages = await _mediator.Send(new GetRoomMessages.Query {RoomName = roomName});
+        var messages = await _mediator.Send(new GetRoom.Query {RoomName = roomName});
 
         await Clients.Caller.SendAsync("LoadMessages", messages).ConfigureAwait(true);
     }

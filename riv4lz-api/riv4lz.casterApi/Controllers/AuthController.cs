@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.core.Models;
 using riv4lz.Mediator.Commands.Auth;
+using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Auth;
 using riv4lz.Mediator.Queries.Auth;
+using riv4lz.Mediator.Queries.Chat;
 
 namespace riv4lz.casterApi.Controllers
 {
@@ -126,6 +128,13 @@ namespace riv4lz.casterApi.Controllers
 
             return userDto != null ? userDto : BadRequest("Problem registering user");
         }
+        
+        [HttpGet(nameof(GetRoom))]
+        public async Task<ActionResult<ChatRoomWithMessagesDto>> GetRoom(string roomName)
+        {
+            return await _mediator.Send(new GetRoom.Query {RoomName = roomName});
+        }
+        
     }
 
     
