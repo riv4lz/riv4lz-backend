@@ -12,8 +12,7 @@ public class Event
     public string TeamOne { get; set; }
     public string TeamTwo { get; set; }
     public double Price { get; set; }
-    public EventStatus EventStatus { get; set; } = EventStatus.PENDING;
-    
+
     public Guid OrganisationId { get; set; }
     public OrganisationProfile OrganisationProfile { get; set; }
 
