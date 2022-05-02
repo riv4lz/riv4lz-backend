@@ -23,7 +23,7 @@ namespace riv4lz.casterApi.Controllers
         [HttpGet(nameof(GetEvents))]
         public async Task<ActionResult<List<EventDto>>> GetEvents()
         {
-            return await _mediator.Send(new GetEventsWithOffers.Query());
+            return await _mediator.Send(new GetEvents.Query());
         }
         
         [HttpGet(nameof(GetEvent))]

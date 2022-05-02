@@ -8,6 +8,6 @@ namespace riv4lz.Mediator.Dtos;
 public class OfferDto
 {
     public Guid Id { get; set; }
-    public OfferStatus OfferStatus { get; set; } = OfferStatus.PENDING;
+    public OfferStatus OfferStatus { get; set; }
     public CasterProfileDto Caster { get; set; }
 }
