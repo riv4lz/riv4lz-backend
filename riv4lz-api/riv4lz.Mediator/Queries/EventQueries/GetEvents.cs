@@ -14,8 +14,16 @@ public class GetEvents
         
     }
     
-    public class Handler : BaseHandler, IRequestHandler<Query, List<EventDto>>
+    public class Handler : IRequestHandler<Query, List<EventDto>>
     {
+        private readonly IMapper _mapper;
+        private readonly DataContext _ctx;
+
+        public Handler(IMapper mapper, DataContext ctx)
+        {
+            _mapper = mapper;
+            _ctx = ctx;
+        }
         public async Task<List<EventDto>> Handle(Query request, CancellationToken cancellationToken)
         {
             var events = await _ctx.Events

@@ -121,9 +121,9 @@ namespace riv4lz.casterApi.Controllers
         }
         
         [HttpGet(nameof(GetRoom))]
-        public async Task<ActionResult<ChatRoomWithMessagesDto>> GetRoom(string roomName)
+        public async Task<ActionResult<ChatRoomWithMessagesDto>> GetRoom(string roomId)
         {
-            return await Mediator.Send(new GetRoom.Query {RoomName = roomName});
+            return await Mediator.Send(new GetRoom.Query {RoomName = roomId});
         }
         
     }

@@ -14,10 +14,19 @@ public class AcceptOffer
         public UpdateOfferDto UpdateOfferDto { get; set; }
     }
 
-    public class Handler : BaseHandler, IRequestHandler<Command, bool>
+    public class Handler : IRequestHandler<Command, bool>
     {
+        private readonly IMapper _mapper;
+        private readonly DataContext _ctx;
+
+        public Handler(IMapper mapper, DataContext ctx)
+        {
+            _mapper = mapper;
+            _ctx = ctx;
+        }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
+            
             await using (var dbTransaction = await _ctx.Database.BeginTransactionAsync(cancellationToken))
             {
                 try

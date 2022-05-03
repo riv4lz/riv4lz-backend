@@ -14,8 +14,16 @@ public class GetEventOffers
         public Guid EventId { get; set; }
     }
     
-    public class Handler : BaseHandler, IRequestHandler<Query, List<OfferDto>?>
+    public class Handler : IRequestHandler<Query, List<OfferDto>?>
     {
+        private readonly IMapper _mapper;
+        private readonly DataContext _ctx;
+
+        public Handler(IMapper mapper, DataContext ctx)
+        {
+            _mapper = mapper;
+            _ctx = ctx;
+        }
         public async Task<List<OfferDto>?> Handle(Query request, CancellationToken cancellationToken)
         {
             var eventOffers = await _ctx.Offers.Where(x => x.EventId == request.EventId)
