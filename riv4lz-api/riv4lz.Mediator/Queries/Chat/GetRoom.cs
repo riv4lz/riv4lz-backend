@@ -28,7 +28,7 @@ public class GetRoom
         {
             var chatRoom = await _ctx.ChatRooms
                 .Include(r => r.Messages)
-                .FirstOrDefaultAsync(r => r.Name.Equals(request.RoomName), cancellationToken);
+                .FirstOrDefaultAsync(r => r.Id.Equals(new Guid(request.RoomName)), cancellationToken);
             
             return _mapper.Map<ChatRoomWithMessagesDto>(chatRoom);
         }
