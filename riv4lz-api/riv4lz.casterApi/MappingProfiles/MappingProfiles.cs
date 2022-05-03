@@ -28,6 +28,7 @@ public class MappingProfiles: Profile
         
         CreateMap<Message, MessageDto>();
         CreateMap<MessageDto, Message>();
+        CreateMap<CreateMessageDto, MessageDto>();
         
         CreateMap<ChatRoom, ChatRoomWithMessagesDto>();
         CreateMap<ChatRoom, ChatRoomDto>();

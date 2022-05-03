@@ -13,8 +13,16 @@ public class GetCasterProfiles
     {
     }
     
-    public class Handler : BaseHandler, IRequestHandler<Query, List<CasterProfileDto>>
+    public class Handler : IRequestHandler<Query, List<CasterProfileDto>>
     {
+        private readonly IMapper _mapper;
+        private readonly DataContext _ctx;
+
+        public Handler(IMapper mapper, DataContext ctx)
+        {
+            _mapper = mapper;
+            _ctx = ctx;
+        }
         public async Task<List<CasterProfileDto>> Handle(Query request, CancellationToken cancellationToken)
         {
            var profileDtos = await _ctx.CasterProfiles.Select(

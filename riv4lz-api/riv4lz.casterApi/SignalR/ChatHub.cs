@@ -46,7 +46,7 @@ public class ChatHub: Hub
 
     public override async Task OnConnectedAsync()
     {
-        await JoinRoom("main", "none");
+        await JoinRoom("general", "none");
     }
     
 }

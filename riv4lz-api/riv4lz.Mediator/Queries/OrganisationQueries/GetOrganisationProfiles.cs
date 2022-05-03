@@ -13,8 +13,16 @@ public class GetOrganisationProfiles
     {
     }
     
-    public class Handler : BaseHandler, IRequestHandler<Query, List<OrganisationProfileDto>>
+    public class Handler : IRequestHandler<Query, List<OrganisationProfileDto>>
     {
+        private readonly IMapper _mapper;
+        private readonly DataContext _ctx;
+
+        public Handler(IMapper mapper, DataContext ctx)
+        {
+            _mapper = mapper;
+            _ctx = ctx;
+        }
         public async Task<List<OrganisationProfileDto>> Handle(Query request, CancellationToken cancellationToken)
         {
            var profileDtos = await _ctx.OrganisationProfiles.Select(

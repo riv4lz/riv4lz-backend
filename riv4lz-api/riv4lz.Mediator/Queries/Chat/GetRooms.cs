@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos;
 
@@ -9,14 +10,22 @@ public class GetRooms
 {
     public class Query : IRequest<List<ChatRoomDto>>
     {
-        public string RoomName { get; set; }
     }
     
-    public class Handler : BaseHandler, IRequestHandler<Query, List<ChatRoomDto>>
+    public class Handler : IRequestHandler<Query, List<ChatRoomDto>>
     {
+        private readonly IMapper _mapper;
+        private readonly DataContext _ctx;
+
+        public Handler(IMapper mapper, DataContext ctx)
+        {
+            _mapper = mapper;
+            _ctx = ctx;
+        }
         public async Task<List<ChatRoomDto>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return null;
+            return await _ctx.ChatRooms.Select(x => _mapper.Map<ChatRoomDto>(x))
+                .ToListAsync(cancellationToken);
         }
     }
 }

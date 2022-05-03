@@ -13,8 +13,17 @@ public class GetRoom
         public string RoomName { get; set; }
     }
     
-    public class Handler : BaseHandler, IRequestHandler<Query, ChatRoomWithMessagesDto>
+    public class Handler : IRequestHandler<Query, ChatRoomWithMessagesDto>
     {
+        private readonly IMapper _mapper;
+        private readonly DataContext _ctx;
+
+        public Handler(IMapper mapper, DataContext ctx)
+        {
+            _mapper = mapper;
+            _ctx = ctx;
+        }
+
         public async Task<ChatRoomWithMessagesDto> Handle(Query request, CancellationToken cancellationToken)
         {
             var chatRoom = await _ctx.ChatRooms

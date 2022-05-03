@@ -13,8 +13,16 @@ public class GetEventOffer
         public Guid OfferId { get; set; }
     }
     
-    public class Handler : BaseHandler, IRequestHandler<Query, OfferDto?>
+    public class Handler : IRequestHandler<Query, OfferDto?>
     {
+        private readonly IMapper _mapper;
+        private readonly DataContext _ctx;
+
+        public Handler(IMapper mapper, DataContext ctx)
+        {
+            _mapper = mapper;
+            _ctx = ctx;
+        }
         public async Task<OfferDto?> Handle(Query request, CancellationToken cancellationToken)
         {
             var entity = await _ctx.Offers

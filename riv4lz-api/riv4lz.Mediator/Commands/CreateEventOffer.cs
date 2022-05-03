@@ -13,8 +13,16 @@ public class CreateEventOffer
         public CreateOfferDto CreateOfferDto { get; set; }
     }
 
-    public class Handler : BaseHandler, IRequestHandler<Command, bool>
+    public class Handler : IRequestHandler<Command, bool>
     {
+        private readonly IMapper _mapper;
+        private readonly DataContext _ctx;
+
+        public Handler(IMapper mapper, DataContext ctx)
+        {
+            _mapper = mapper;
+            _ctx = ctx;
+        }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             await _ctx.Offers.AddAsync(_mapper.Map<Offer>(request.CreateOfferDto), cancellationToken);
