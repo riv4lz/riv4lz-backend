@@ -10,7 +10,7 @@ public class GetRoom
 { 
     public class Query : IRequest<ChatRoomWithMessagesDto>
     {
-        public string RoomName { get; set; }
+        public string RoomId { get; set; }
     }
     
     public class Handler : IRequestHandler<Query, ChatRoomWithMessagesDto>
@@ -26,9 +26,10 @@ public class GetRoom
 
         public async Task<ChatRoomWithMessagesDto> Handle(Query request, CancellationToken cancellationToken)
         {
+            var roomId = new Guid(request.RoomId);
             var chatRoom = await _ctx.ChatRooms
                 .Include(r => r.Messages)
-                .FirstOrDefaultAsync(r => r.Id.Equals(new Guid(request.RoomName)), cancellationToken);
+                .FirstOrDefaultAsync(r => r.Id.Equals(roomId), cancellationToken);
             
             return _mapper.Map<ChatRoomWithMessagesDto>(chatRoom);
         }
