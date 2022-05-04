@@ -1,6 +1,6 @@
 using EntityFrameworkCore.Testing.Moq;
 using Microsoft.EntityFrameworkCore;
-using riv4lz.dataAccess.Entities;
+using riv4lz.core.Entities;
 using Xunit;
 
 namespace riv4lz.dataAccess.test;

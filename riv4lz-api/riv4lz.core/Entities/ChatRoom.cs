@@ -1,4 +1,4 @@
-namespace riv4lz.dataAccess.Entities;
+namespace riv4lz.core.Entities;
 
 public class ChatRoom
 {

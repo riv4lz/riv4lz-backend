@@ -1,5 +1,5 @@
 using AutoMapper;
-using riv4lz.dataAccess.Entities;
+using riv4lz.core.Entities;
 using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Casters;
 using riv4lz.Mediator.Dtos.Events;

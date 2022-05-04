@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-using riv4lz.core.Models;
 
-namespace riv4lz.dataAccess.Entities;
+namespace riv4lz.core.Entities;
 
 public class Event
 {
+    [Key]
     public Guid Id { get; set; }
     public string Organiser { get; set; }
     public DateTime Time { get; set; }
@@ -16,6 +16,8 @@ public class Event
     public Guid OrganisationId { get; set; }
     [Required]
     public OrganisationProfile OrganisationProfile { get; set; }
+    
+    public Order Order { get; set; }
 
     public ICollection<Offer>? Offers { get; set; }
 }

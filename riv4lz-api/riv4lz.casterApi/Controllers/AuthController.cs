@@ -8,6 +8,7 @@ using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Auth;
 using riv4lz.Mediator.Queries.Auth;
 using riv4lz.Mediator.Queries.Chat;
+using riv4lz.Mediator.Queries.EventQueries;
 
 namespace riv4lz.casterApi.Controllers
 {
@@ -125,8 +126,5 @@ namespace riv4lz.casterApi.Controllers
         {
             return await Mediator.Send(new GetRoom.Query {RoomId = roomId});
         }
-        
     }
-
-    
 }

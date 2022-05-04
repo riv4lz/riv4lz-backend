@@ -21,7 +21,7 @@ public class CreateUser
         {
             _userManager = userManager;
         }
-
+        
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             var user = new IdentityUser<Guid>()

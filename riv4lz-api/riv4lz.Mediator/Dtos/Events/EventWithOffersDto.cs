@@ -1,9 +1,9 @@
+using riv4lz.core.Entities;
 using riv4lz.core.Models;
-using riv4lz.dataAccess.Entities;
 
 namespace riv4lz.Mediator.Dtos.Events;
 
-public class EventWithOffersDto : EventDto
+public class EventWithOffersDto
 {
     public Guid Id { get; set; }
     public string Organiser { get; set; }

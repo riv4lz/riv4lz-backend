@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using riv4lz.core.Models;
 
-namespace riv4lz.dataAccess.Entities;
+namespace riv4lz.core.Entities;
 
 public class Offer
 {
@@ -11,6 +11,7 @@ public class Offer
         public Guid EventId { get; set; }
         [Required]
         public Event Event { get; set; }
+
         public Guid CasterId { get; set; } 
         [Required]
         public CasterProfile Caster { get; set; }
