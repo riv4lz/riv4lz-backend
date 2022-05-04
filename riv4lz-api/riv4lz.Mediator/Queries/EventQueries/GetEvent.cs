@@ -1,8 +1,8 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using riv4lz.core.Entities;
 using riv4lz.dataAccess;
-using riv4lz.dataAccess.Entities;
 using riv4lz.Mediator.Dtos.Events;
 
 namespace riv4lz.Mediator.Queries.EventQueries;

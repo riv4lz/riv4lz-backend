@@ -29,7 +29,7 @@ public class AuthenticateUser
         public async Task<UserDto> Handle(Query request, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByEmailAsync(request.LoginDto.Email);
-
+            
             if (user == null)
             {
                 return null;

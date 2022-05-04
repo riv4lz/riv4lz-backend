@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace riv4lz.dataAccess.Entities;
+namespace riv4lz.core.Entities;
 
 public class OrganisationProfile
 {
@@ -18,4 +18,5 @@ public class OrganisationProfile
     public string? TwitchURL { get; set; }
 
     public ICollection<Event>? Events { get; set; }
+    public ICollection<Order>? Orders { get; set; }
 }

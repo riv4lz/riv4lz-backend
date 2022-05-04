@@ -1,5 +1,5 @@
+using riv4lz.core.Entities;
 using riv4lz.core.Models;
-using riv4lz.dataAccess.Entities;
 
 namespace riv4lz.Mediator.Dtos.Events;
 
