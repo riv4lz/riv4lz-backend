@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Commands.Auth;
 using riv4lz.security.DataAccess;
-using StackExchange.Redis;
 
 namespace riv4lz.casterApi.Extensions
 {
@@ -22,11 +21,11 @@ namespace riv4lz.casterApi.Extensions
                 })
                 .AddJsonOptions(x =>
                     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-            
-            services.AddSingleton<ConnectionMultiplexer>(config =>
+
+            services.AddStackExchangeRedisCache(options =>
             {
-                var configuration = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"));
-                return ConnectionMultiplexer.Connect(configuration);
+                options.Configuration = _configuration.GetConnectionString("Redis");
+                options.InstanceName = "riv4lz_";
             });
 
             services.AddDbContext<DataContext>(options =>
@@ -37,6 +36,11 @@ namespace riv4lz.casterApi.Extensions
             services.AddDbContext<AuthContext>(options =>
             {
                 options.UseSqlite(_configuration.GetConnectionString("AuthConnection"));
+            });
+
+            services.AddDbContext<ChatContext>(options =>
+            {
+                options.UseSqlite(_configuration.GetConnectionString("ChatConnection"));
             });
             
             services.AddCors(options =>
@@ -58,7 +62,7 @@ namespace riv4lz.casterApi.Extensions
                         .AllowAnyMethod();
                 });
             });
-
+            
             services.AddMediatR(typeof(CreateUser.Handler).Assembly);
             services.AddAutoMapper(typeof(Startup));
             services.AddSignalR();

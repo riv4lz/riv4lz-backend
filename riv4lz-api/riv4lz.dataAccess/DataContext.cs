@@ -33,10 +33,7 @@ public class DataContext : DbContext
             .WithMany(c => c.Offers)
             .HasForeignKey(o => o.CasterId); 
         
-        modelBuilder.Entity<Message>()
-            .HasOne<ChatRoom>(m => m.ChatRoom)
-            .WithMany(c => c.Messages)
-            .HasForeignKey(m => m.ChatRoomId);
+        
 
 
         modelBuilder.Entity<Order>()
@@ -80,8 +77,7 @@ public class DataContext : DbContext
     public virtual DbSet<OrganisationProfile> OrganisationProfiles { get; set; }
     public virtual DbSet<Event> Events { get; set; }
     public virtual DbSet<Offer> Offers { get; set; }
-    public virtual DbSet<ChatRoom> ChatRooms { get; set; }
-    public virtual DbSet<Message> Messages { get; set; }
+    
     public virtual DbSet<Order> Orders { get; set; }
     public virtual DbSet<Team> Teams { get; set; }
 }

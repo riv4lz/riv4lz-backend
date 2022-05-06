@@ -5,6 +5,7 @@ public class Message
     public Guid Id { get; set; }
     public string UserName { get; set; }
     public string Text { get; set; }
+    //public string ProfileImgUrl { get; set; }
 
     public Guid ChatRoomId { get; set; }
     public ChatRoom ChatRoom { get; set; }

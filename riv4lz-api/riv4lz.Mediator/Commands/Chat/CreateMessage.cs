@@ -24,10 +24,10 @@ public class CreateMessage
     
     public class Handler: IRequestHandler<Command, bool>
     {
-        private readonly DataContext _ctx;
+        private readonly ChatContext _ctx;
         private readonly IMapper _mapper;
 
-        public Handler(DataContext ctx, IMapper mapper)
+        public Handler(ChatContext ctx, IMapper mapper)
         {
             _ctx = ctx;
             _mapper = mapper;

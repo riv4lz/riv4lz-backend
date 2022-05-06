@@ -1,7 +1,10 @@
 using System.Security.Claims;
+using System.Text.Json;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+
 using riv4lz.core.Models;
 using riv4lz.Mediator.Commands.Auth;
 using riv4lz.Mediator.Dtos;
@@ -15,6 +18,12 @@ namespace riv4lz.casterApi.Controllers
     [AllowAnonymous]
     public class AuthController : BaseController
     {
+        private readonly IDistributedCache _cache;
+
+        public AuthController(IDistributedCache cache)
+        {
+            _cache = cache;
+        }
         [AllowAnonymous]
         [HttpPost(nameof(Login))]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
@@ -24,7 +33,7 @@ namespace riv4lz.casterApi.Controllers
             {
                 return Unauthorized();
             }
-
+            
             return user;
         }
 
@@ -125,6 +134,12 @@ namespace riv4lz.casterApi.Controllers
         public async Task<ActionResult<ChatRoomWithMessagesDto>> GetRoom(string roomId)
         {
             return await Mediator.Send(new GetRoom.Query {RoomId = roomId});
+        }
+        
+        [HttpGet(nameof(GetRooms))]
+        public async Task<ActionResult<List<ChatRoomDto>>> GetRooms()
+        {
+            return await Mediator.Send(new GetRooms.Query());
         }
     }
 }

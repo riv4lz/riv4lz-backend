@@ -6,10 +6,12 @@ namespace riv4lz.dataAccess;
 public class DbSeeder
 {
     private readonly DataContext _ctx;
+    private readonly ChatContext _chatCtx;
 
-    public DbSeeder(DataContext ctx)
+    public DbSeeder(DataContext ctx, ChatContext chatCtx)
     {
         _ctx = ctx;
+        _chatCtx = chatCtx;
     }
 
     public async void SeedDevelopment()
@@ -200,7 +202,9 @@ public class DbSeeder
             await _ctx.SaveChangesAsync();
         }
 
-        if (!_ctx.ChatRooms.Any())
+        await _chatCtx.Database.EnsureCreatedAsync();
+
+        if (!_chatCtx.ChatRooms.Any())
         {
             var r1 = new ChatRoom()
             {
@@ -311,23 +315,23 @@ public class DbSeeder
                 Text = "You don't know me!",
             };
             
-            await _ctx.ChatRooms.AddAsync(r1);
-            await _ctx.ChatRooms.AddAsync(r2);
-            await _ctx.ChatRooms.AddAsync(r3);
-            await _ctx.ChatRooms.AddAsync(r4);
-            await _ctx.Messages.AddAsync(message);
-            await _ctx.Messages.AddAsync(message2);
-            await _ctx.Messages.AddAsync(message3);
-            await _ctx.Messages.AddAsync(message11);
-            await _ctx.Messages.AddAsync(message12);
-            await _ctx.Messages.AddAsync(message13);
-            await _ctx.Messages.AddAsync(message20);
-            await _ctx.Messages.AddAsync(message21);
-            await _ctx.Messages.AddAsync(message22);
-            await _ctx.Messages.AddAsync(message30);
-            await _ctx.Messages.AddAsync(message31);
-            await _ctx.Messages.AddAsync(message32);
-            await _ctx.SaveChangesAsync();
+            await _chatCtx.ChatRooms.AddAsync(r1);
+            await _chatCtx.ChatRooms.AddAsync(r2);
+            await _chatCtx.ChatRooms.AddAsync(r3);
+            await _chatCtx.ChatRooms.AddAsync(r4);
+            await _chatCtx.Messages.AddAsync(message);
+            await _chatCtx.Messages.AddAsync(message2);
+            await _chatCtx.Messages.AddAsync(message3);
+            await _chatCtx.Messages.AddAsync(message11);
+            await _chatCtx.Messages.AddAsync(message12);
+            await _chatCtx.Messages.AddAsync(message13);
+            await _chatCtx.Messages.AddAsync(message20);
+            await _chatCtx.Messages.AddAsync(message21);
+            await _chatCtx.Messages.AddAsync(message22);
+            await _chatCtx.Messages.AddAsync(message30);
+            await _chatCtx.Messages.AddAsync(message31);
+            await _chatCtx.Messages.AddAsync(message32);
+            await _chatCtx.SaveChangesAsync();
         }
         
         
