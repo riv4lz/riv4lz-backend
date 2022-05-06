@@ -37,9 +37,8 @@ public class ChatHub: Hub
 
     public async Task JoinRoom(string roomId, string previousRoomId)
     {
-        await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
         await LeaveRoom(previousRoomId);
-        
+        await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
         var messages = await _mediator.Send(new GetRoom.Query {RoomId = roomId});
 
         await Clients.Caller.SendAsync("LoadMessages", messages).ConfigureAwait(true);

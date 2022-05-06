@@ -41,6 +41,7 @@ public class AcceptOffer
 
                     await _ctx.SaveChangesAsync(cancellationToken);
                     
+                    
                     // Set all other offers' status to REJECTED.
                     var offers = await _ctx.Offers
                         .Where(o => o.Id != request.UpdateOfferDto.Id)
