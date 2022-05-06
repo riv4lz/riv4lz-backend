@@ -27,7 +27,7 @@ namespace riv4lz.casterApi.Controllers
         [HttpGet(nameof(GetEvent))]
         public async Task<ActionResult<EventDto>> GetEvent(Guid eventId)
         {
-            return null;
+            return await _mediator.Send(new GetEvent.Query {EventId = eventId});
         }
         
         [HttpPost(nameof(CreateEvent))]
