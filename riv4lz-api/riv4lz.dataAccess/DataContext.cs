@@ -24,6 +24,8 @@ public class DataContext : DbContext
             .HasOne<OrganisationProfile>(e => e.OrganisationProfile)
             .WithMany(o => o.Events)
             .HasForeignKey(o => o.OrganisationId);
+        
+        
 
         
         modelBuilder.Entity<Offer>()
@@ -51,9 +53,15 @@ public class DataContext : DbContext
             .HasOne(o => o.OrganisationProfile)
             .WithMany(c => c.Orders)
             .HasForeignKey(cp => cp.OrganisationId);
-            
-
-
+        
+        modelBuilder.Entity<Team>()
+            .HasIndex(t => t.Name).IsUnique();
+        
+        modelBuilder.Entity<CasterProfile>()
+            .HasIndex(t => t.GamerTag).IsUnique();
+        
+        modelBuilder.Entity<OrganisationProfile>()
+            .HasIndex(t => t.OrganisationName).IsUnique();
         /*
         modelBuilder.Entity<Offer>()
             .HasOne<Event>(o => o.Event)
@@ -75,4 +83,5 @@ public class DataContext : DbContext
     public virtual DbSet<ChatRoom> ChatRooms { get; set; }
     public virtual DbSet<Message> Messages { get; set; }
     public virtual DbSet<Order> Orders { get; set; }
+    public virtual DbSet<Team> Teams { get; set; }
 }

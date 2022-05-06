@@ -26,10 +26,12 @@ public class GetEvent
         }
         public async Task<EventDto?> Handle(Query request, CancellationToken cancellationToken)
         {
-            var entity = await _ctx.Events.FirstOrDefaultAsync(
-                u => u.Id == request.EventId, cancellationToken);
+            var entity = await _ctx.Events
+                .Include(t => t.Teams)
+                .Include(o => o.OrganisationProfile)
+                .FirstAsync(e => e.Id == request.EventId);
            
-            return entity != null ? _mapper.Map<Event, EventDto>(entity) : null;
+            return entity != null ? _mapper.Map<EventDto>(entity) : null;
            
         }
     }

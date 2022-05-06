@@ -62,7 +62,7 @@ namespace riv4lz.casterApi.Extensions
             services.AddMediatR(typeof(CreateUser.Handler).Assembly);
             services.AddAutoMapper(typeof(Startup));
             services.AddSignalR();
-            services.AddMemoryCache();
+            
 
             return services;
         }

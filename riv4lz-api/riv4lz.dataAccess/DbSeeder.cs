@@ -16,6 +16,43 @@ public class DbSeeder
     {
         await _ctx.Database.EnsureCreatedAsync();
 
+        if (!_ctx.Teams.Any())
+        {
+            var t1 = new Team()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Strikers",
+            };
+            var t2 = new Team()
+            {
+                Id = Guid.NewGuid(),
+                Name = "EDG",
+            };
+            var t3 = new Team()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Cloud9",
+            };
+            var t4 = new Team()
+            {
+                Id = Guid.NewGuid(),
+                Name = "SK Gaming",
+            };
+            var t5 = new Team()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Spirit of Amiga",
+            };
+            var t6 = new Team()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Virtus.pro",
+            };
+            
+            await _ctx.Teams.AddRangeAsync(t1, t2, t3, t4, t5, t6);
+            await _ctx.SaveChangesAsync();
+        }
+
         if (!_ctx.CasterProfiles.Any())
         {
             var caster1 = new CasterProfile()
@@ -92,6 +129,7 @@ public class DbSeeder
         if (!_ctx.Events.Any())
         {
             var orgs = await _ctx.OrganisationProfiles.ToListAsync();
+            var teams = await _ctx.Teams.ToListAsync();
             
             var e1 = new Event()
             {
@@ -100,9 +138,9 @@ public class DbSeeder
                 OrganisationId = orgs[0].OrganisationId,
                 Organiser = "DCSA",
                 Price = 9999.99,
-                TeamOne = "Team One",
-                TeamTwo = "Team Two",
-                Time = DateTime.Today.AddMonths(6)
+                Teams = new List<Team>(){teams[0], teams[1]},
+                Time = DateTime.Today.AddMonths(6),
+                Game = "Counter Strike: Global Offensive",
             };
             
             var e2 = new Event()
@@ -112,9 +150,9 @@ public class DbSeeder
                 OrganisationId = orgs[1].OrganisationId,
                 Organiser = "LoLand",
                 Price = 99.99,
-                TeamOne = "Team Three",
-                TeamTwo = "Team Four",
-                Time = DateTime.Today.AddMonths(5)
+                Teams = new List<Team>(){teams[2], teams[3]},
+                Time = DateTime.Today.AddMonths(5),
+                Game = "LOL"
             };
             
             await _ctx.Events.AddAsync(e1);
