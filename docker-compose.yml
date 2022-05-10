@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+    redis:
+      image: redis:latest
+      ports:
+        - 6379:6379
+      command: ["redis-server", "--appendonly", "yes"]
+      volumes:
+        - redis-data:/data
+    
+    redis-commander:
+      image: rediscommander/redis-commander:latest
+      environment:
+        - REDIS_HOSTS=local:redis:6379
+        - HTTP_USER=root
+        - HTTP_PASSWORD=secret
+      ports:
+        - 8081:8081
+      depends_on:
+        - redis
+
+    postgresql_database:
+      image: postgres:latest
+      environment:
+        - POSTGRES_USER=admin
+        - POSTGRES_PASSWORD=riv4lz5683
+        - POSTGRES_DB=riv4lzMainDb
+      ports: 
+        - 5432:5432
+      restart: always
+
+    pgadmin:
+      image: dpage/pgadmin4
+      environment: 
+        - PGADMIN_DEFAULT_EMAIL=jbuus9@gmail.com
+        - PGADMIN_DEFAULT_PASSWORD=riv4lz5683
+      ports:
+        - 5050:80
+      restart: always
+
+    rabbitmq:
+      image: rabbitmq:3-management
+      hostname: my-rabbit
+      volumes:
+        - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
+        - ./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+        - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
+        - ./rabbitmq/logs:/var/log/rabbitmq/log
+      ports:
+        - 5672:5672
+        - 15672:15672
+        
+volumes:
+  redis-data:
+    

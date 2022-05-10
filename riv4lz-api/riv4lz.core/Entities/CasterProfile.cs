@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using riv4lz.core.Models;
 
 namespace riv4lz.core.Entities;
 
@@ -19,4 +20,5 @@ public class CasterProfile
 
     public ICollection<Offer>? Offers { get; set; }
     public ICollection<Order>? Orders { get; set; }
+    public ICollection<Image> Images { get; set; }
 }

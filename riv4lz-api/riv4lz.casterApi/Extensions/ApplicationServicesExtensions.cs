@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess;
+using riv4lz.dataAccess.Photos;
 using riv4lz.Mediator.Commands.Auth;
 using riv4lz.security.DataAccess;
 
@@ -62,11 +63,12 @@ namespace riv4lz.casterApi.Extensions
                         .AllowAnyMethod();
                 });
             });
-            
+
+            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             services.AddMediatR(typeof(CreateUser.Handler).Assembly);
             services.AddAutoMapper(typeof(Startup));
             services.AddSignalR();
-            
+            services.Configure<CloudinarySettings>(_configuration.GetSection("Cloudinary"));
 
             return services;
         }

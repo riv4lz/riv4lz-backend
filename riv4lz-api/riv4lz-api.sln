@@ -38,6 +38,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "riv4lz.security.test", "riv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "riv4lz.Mediator", "riv4lz.Mediator\riv4lz.Mediator.csproj", "{99C63E27-A314-496F-B2C2-5248050502FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheWorker", "CacheWorker\CacheWorker.csproj", "{66E19B92-FF86-4578-9CD6-FA957325D373}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatService", "ChatService\ChatService.csproj", "{44948077-6356-4094-A34B-E94B4A68EAE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +92,14 @@ Global
 		{99C63E27-A314-496F-B2C2-5248050502FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99C63E27-A314-496F-B2C2-5248050502FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99C63E27-A314-496F-B2C2-5248050502FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66E19B92-FF86-4578-9CD6-FA957325D373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66E19B92-FF86-4578-9CD6-FA957325D373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66E19B92-FF86-4578-9CD6-FA957325D373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66E19B92-FF86-4578-9CD6-FA957325D373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44948077-6356-4094-A34B-E94B4A68EAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44948077-6356-4094-A34B-E94B4A68EAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44948077-6356-4094-A34B-E94B4A68EAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44948077-6356-4094-A34B-E94B4A68EAE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1273376E-D6D9-4354-BD53-39D47C78317C} = {3447847D-0391-47CB-9F71-46AC2E5C84A2}

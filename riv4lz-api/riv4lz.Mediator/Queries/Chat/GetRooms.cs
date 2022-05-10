@@ -38,11 +38,10 @@ public class GetRooms
                 return cachedChatRooms;
             }
             
-            Thread.Sleep(5000);
             var chatRooms = await _ctx.ChatRooms.Select(x => _mapper.Map<ChatRoomDto>(x))
                 .ToListAsync(cancellationToken);
 
-            //await _redis.SetCachedChatRooms(chatRooms);
+            await _cache.SetStringAsync("chatrooms", JsonSerializer.Serialize(chatRooms));
             Console.WriteLine("DB ROOMS");
 
             return chatRooms;

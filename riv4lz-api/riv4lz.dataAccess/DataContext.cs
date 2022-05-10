@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using riv4lz.core.Entities;
+using riv4lz.core.Models;
 
 
 namespace riv4lz.dataAccess;
@@ -80,4 +81,5 @@ public class DataContext : DbContext
     
     public virtual DbSet<Order> Orders { get; set; }
     public virtual DbSet<Team> Teams { get; set; }
+    public virtual DbSet<Image> Images { get; set; }
 }
