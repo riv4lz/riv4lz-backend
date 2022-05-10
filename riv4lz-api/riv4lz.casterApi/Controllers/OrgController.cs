@@ -3,12 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.core.Models;
-using riv4lz.Mediator.Commands.OrgCommands;
 using riv4lz.Mediator.Commands.ProfileCommands;
 using riv4lz.Mediator.Dtos.Casters;
-using riv4lz.Mediator.Dtos.Organisations;
 using riv4lz.Mediator.Queries.CasterQueries;
-using riv4lz.Mediator.Queries.OrganisationQueries;
 
 namespace riv4lz.casterApi.Controllers
 {

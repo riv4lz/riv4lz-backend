@@ -17,7 +17,7 @@ public class Profile
     public string? TwitchURL { get; set; }
     public string? WebsiteURL { get; set; }
 
-    public ICollection<Offer>? Offers { get; set; }
-    public ICollection<Image>? Images { get; set; }
-    public ICollection<Event>? Events { get; set; }
+    public ICollection<Offer> Offers { get; set; }
+    public ICollection<Image> Images { get; set; }
+    public ICollection<Event> Events { get; set; }
 }

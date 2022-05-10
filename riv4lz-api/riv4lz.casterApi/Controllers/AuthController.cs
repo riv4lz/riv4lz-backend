@@ -1,6 +1,4 @@
 using System.Security.Claims;
-using System.Text.Json;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -11,7 +9,6 @@ using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Auth;
 using riv4lz.Mediator.Queries.Auth;
 using riv4lz.Mediator.Queries.Chat;
-using riv4lz.Mediator.Queries.EventQueries;
 
 namespace riv4lz.casterApi.Controllers
 {

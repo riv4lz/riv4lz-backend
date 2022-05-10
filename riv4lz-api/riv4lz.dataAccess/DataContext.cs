@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using riv4lz.core.Entities;
-using riv4lz.core.Models;
 
 
 namespace riv4lz.dataAccess;

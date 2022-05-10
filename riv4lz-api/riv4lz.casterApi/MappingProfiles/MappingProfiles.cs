@@ -1,4 +1,3 @@
-using AutoMapper;
 using riv4lz.core.Entities;
 using riv4lz.core.Models;
 using riv4lz.Mediator.Dtos;
@@ -15,9 +14,11 @@ public class MappingProfiles: AutoMapper.Profile
     {
         CreateMap<Profile, ProfileDto>()
             .ForMember(d => d.ProfileImage,
-                opt => opt.MapFrom(s => s.Images.FirstOrDefault(i => i.Type == ImgType.Profile)))
+                opt => opt
+                    .MapFrom(s => s.Images.FirstOrDefault(i => i.ImageType == ImgType.Profile)))
             .ForMember(d => d.BannerImage,
-                opt => opt.MapFrom(s => s.Images.FirstOrDefault(i => i.Type == ImgType.Banner)));
+                opt => opt
+                    .MapFrom(s => s.Images.FirstOrDefault(i => i.ImageType == ImgType.Banner)));
         
         CreateMap<RegisterProfileDto, Profile>();
         CreateMap<UpdateProfileDto, Profile>();
