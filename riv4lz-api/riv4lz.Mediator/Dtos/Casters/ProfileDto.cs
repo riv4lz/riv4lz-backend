@@ -1,5 +1,4 @@
-using System.Net.Mime;
-using riv4lz.core.Models;
+using riv4lz.core.Entities;
 
 namespace riv4lz.Mediator.Dtos.Casters;
 

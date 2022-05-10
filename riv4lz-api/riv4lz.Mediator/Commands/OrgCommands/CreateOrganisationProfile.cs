@@ -1,6 +1,5 @@
 using AutoMapper;
 using MediatR;
-using riv4lz.core.Entities;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Organisations;
 

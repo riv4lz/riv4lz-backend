@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace riv4lz.core.Entities;
 
 public class Team

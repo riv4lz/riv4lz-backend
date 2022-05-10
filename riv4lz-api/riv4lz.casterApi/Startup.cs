@@ -1,14 +1,6 @@
-using System.Text.Json.Serialization;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.EntityFrameworkCore;
 using riv4lz.casterApi.Extensions;
 using riv4lz.casterApi.SignalR;
 using riv4lz.dataAccess;
-using riv4lz.Mediator.Commands.Auth;
-using riv4lz.security.DataAccess;
-using StackExchange.Redis;
 
 namespace riv4lz.casterApi
 {

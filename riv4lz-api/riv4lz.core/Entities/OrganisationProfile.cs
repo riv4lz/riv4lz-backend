@@ -18,5 +18,4 @@ public class OrganisationProfile
     public string? TwitchURL { get; set; }
 
     public ICollection<Event>? Events { get; set; }
-    public ICollection<Order>? Orders { get; set; }
 }
