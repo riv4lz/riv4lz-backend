@@ -3,13 +3,13 @@ using MediatR;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Casters;
 
-namespace riv4lz.Mediator.Commands.CasterCommands;
+namespace riv4lz.Mediator.Commands.ProfileCommands;
 
-public class UpdateCasterProfile
+public class UpdateProfile
 {
     public class Command : IRequest<bool>
     {
-        public UpdateCasterProfileDto UpdateCasterProfileDto { get; set; }
+        public UpdateProfileDto UpdateProfileDto { get; set; }
     }
     
     public class Handler : IRequestHandler<Command, bool>
@@ -24,15 +24,15 @@ public class UpdateCasterProfile
         }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            var profile = await _ctx.CasterProfiles.FindAsync(
-                request.UpdateCasterProfileDto.CasterId);
+            var profile = await _ctx.Profiles.FindAsync(
+                request.UpdateProfileDto.Id);
             
             if (profile == null)
             {
                 return false;
             }
             
-            _mapper.Map(request.UpdateCasterProfileDto, profile);
+            _mapper.Map(request.UpdateProfileDto, profile);
             
             var result = await _ctx.SaveChangesAsync(cancellationToken);
             

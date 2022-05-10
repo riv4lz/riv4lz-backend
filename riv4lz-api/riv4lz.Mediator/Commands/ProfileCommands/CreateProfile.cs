@@ -1,16 +1,16 @@
 using AutoMapper;
 using MediatR;
-using riv4lz.core.Entities;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Casters;
+using Profile = riv4lz.core.Entities.Profile;
 
-namespace riv4lz.Mediator.Commands.CasterCommands;
+namespace riv4lz.Mediator.Commands.ProfileCommands;
 
-public class CreateCasterProfile
+public class CreateProfile
 {
     public class Command : IRequest<bool>
     {
-        public RegisterCasterProfileDto RegisterCasterProfileDto { get; set; }
+        public RegisterProfileDto RegisterProfileDto { get; set; }
     }
     
     public class Handler: IRequestHandler<Command, bool>
@@ -25,8 +25,8 @@ public class CreateCasterProfile
         }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            await _ctx.CasterProfiles.AddAsync(
-                _mapper.Map<RegisterCasterProfileDto, CasterProfile>(request.RegisterCasterProfileDto), cancellationToken);
+            await _ctx.Profiles.AddAsync(
+                _mapper.Map<RegisterProfileDto, Profile>(request.RegisterProfileDto), cancellationToken);
 
             var result = await _ctx.SaveChangesAsync(cancellationToken);
 

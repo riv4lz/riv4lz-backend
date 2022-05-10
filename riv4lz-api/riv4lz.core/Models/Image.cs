@@ -9,5 +9,5 @@ public class Image
     public ImgType Type { get; set; }
     public bool IsMain { get; set; }
 
-    public ICollection<CasterProfile> CasterProfiles { get; set; }
+    public ICollection<Profile> CasterProfiles { get; set; }
 }

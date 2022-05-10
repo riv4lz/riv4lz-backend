@@ -22,28 +22,22 @@ public class DataContext : DbContext
             .HasForeignKey(o => o.EventId);
         
         modelBuilder.Entity<Event>()
-            .HasOne<OrganisationProfile>(e => e.OrganisationProfile)
+            .HasOne<Profile>(e => e.OrganisationProfile)
             .WithMany(o => o.Events)
             .HasForeignKey(o => o.OrganisationId);
         
-        
-
-        
         modelBuilder.Entity<Offer>()
-            .HasOne<CasterProfile>(o => o.Caster)
+            .HasOne<Profile>(o => o.Caster)
             .WithMany(c => c.Offers)
             .HasForeignKey(o => o.CasterId); 
         
-        
-
-
         modelBuilder.Entity<Order>()
             .HasOne(o => o.Event)
             .WithOne(e => e.Order)
             .HasForeignKey<Order>(e => e.EventId);
 
         modelBuilder.Entity<Order>()
-            .HasOne(o => o.CasterProfile)
+            .HasOne(o => o.Profile)
             .WithMany(c => c.Orders)
             .HasForeignKey(cp => cp.CasterId);
 
@@ -55,27 +49,16 @@ public class DataContext : DbContext
         modelBuilder.Entity<Team>()
             .HasIndex(t => t.Name).IsUnique();
         
-        modelBuilder.Entity<CasterProfile>()
-            .HasIndex(t => t.GamerTag).IsUnique();
+        modelBuilder.Entity<Profile>()
+            .HasIndex(t => t.Name).IsUnique();
         
         modelBuilder.Entity<OrganisationProfile>()
             .HasIndex(t => t.OrganisationName).IsUnique();
-        /*
-        modelBuilder.Entity<Offer>()
-            .HasOne<Event>(o => o.Event)
-            .WithMany(e => e.Offers)
-            .HasForeignKey(o => o.EventId);
-            
         
-        modelBuilder.Entity<CasterProfile>()
-            .HasMany<Offer>(c => c.Offers)
-            .WithOne(o => o.Caster)
-            .HasForeignKey(o => o.CasterId);
-        */
+        
     }
 
-    public virtual DbSet<CasterProfile> CasterProfiles { get; set; }
-    public virtual DbSet<OrganisationProfile> OrganisationProfiles { get; set; }
+    public virtual DbSet<Profile> Profiles { get; set; }
     public virtual DbSet<Event> Events { get; set; }
     public virtual DbSet<Offer> Offers { get; set; }
     

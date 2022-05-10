@@ -1,7 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using riv4lz.Mediator.Commands.CasterCommands;
+using riv4lz.core.Models;
+using riv4lz.Mediator.Commands.ProfileCommands;
 using riv4lz.Mediator.Dtos.Casters;
 using riv4lz.Mediator.Queries.CasterQueries;
 
@@ -21,25 +22,25 @@ namespace riv4lz.casterApi.Controllers
             _mediator = mediator;
         }
         
-        [HttpGet(nameof(GetAll))]
-        public async  Task<ActionResult<List<CasterProfileDto>>> GetAll()
+        [HttpGet(nameof(GetCasterProfiles))]
+        public async  Task<ActionResult<List<ProfileDto>>> GetCasterProfiles()
         {
-            return await _mediator.Send(new GetCasterProfiles.Query());
+            return await _mediator.Send(new GetProfiles.Query(){UserType = UserType.Caster});
         }
 
         [HttpGet(nameof(GetCasterProfile))]
-        public async Task<ActionResult<CasterProfileDto>> GetCasterProfile(Guid id)
+        public async Task<ActionResult<ProfileDto>> GetCasterProfile(Guid id)
         {
-            return await _mediator.Send(new GetCasterProfile.Query {CasterId = id});
+            return await _mediator.Send(new GetProfile.Query {Id = id});
         }
 
 
         [HttpPost(nameof(RegisterCasterProfile))]
-        public async Task<ActionResult<CasterProfileDto>> RegisterCasterProfile(RegisterCasterProfileDto registerCasterProfileDto)
+        public async Task<ActionResult<ProfileDto>> RegisterCasterProfile(RegisterProfileDto registerProfileDto)
         {
-            var createResult = await _mediator.Send(new CreateCasterProfile.Command
+            var createResult = await _mediator.Send(new CreateProfile.Command
             {
-                RegisterCasterProfileDto = registerCasterProfileDto
+                RegisterProfileDto = registerProfileDto
             });
 
             if (!createResult)
@@ -48,7 +49,7 @@ namespace riv4lz.casterApi.Controllers
             }
 
             var profile = await _mediator.Send(
-                new GetCasterProfile.Query {CasterId = registerCasterProfileDto.CasterId});
+                new GetProfile.Query {Id = registerProfileDto.Id});
 
             return profile != null ? profile : BadRequest("Problem loading profile");
         }
@@ -56,18 +57,18 @@ namespace riv4lz.casterApi.Controllers
 
 
         [HttpPut(nameof(UpdateCasterProfile))]
-        public async  Task<ActionResult> UpdateCasterProfile([FromBody] UpdateCasterProfileDto updateCasterProfileDto)
+        public async  Task<ActionResult> UpdateCasterProfile([FromBody] UpdateProfileDto updateProfileDto)
         {
-            var result = await _mediator.Send(new UpdateCasterProfile.Command
+            var result = await _mediator.Send(new UpdateProfile.Command
             {
-                UpdateCasterProfileDto = updateCasterProfileDto
+                UpdateProfileDto = updateProfileDto
             });
 
             return result ? Ok("Caster profile updated") : BadRequest("Error updating profile");
         }
 
         [HttpDelete(nameof(DeleteCaster))]
-        public ActionResult<CasterProfileDto> DeleteCaster([FromBody] int id)
+        public ActionResult<ProfileDto> DeleteCaster([FromBody] int id)
         {
             throw new NotImplementedException();
         }

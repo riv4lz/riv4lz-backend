@@ -29,7 +29,7 @@ public class GetEvent
             var entity = await _ctx.Events
                 .Include(t => t.Teams)
                 .Include(o => o.OrganisationProfile)
-                .FirstAsync(e => e.Id == request.EventId);
+                .FirstAsync(e => e.Id == request.EventId, cancellationToken);
            
             return entity != null ? _mapper.Map<EventDto>(entity) : null;
            

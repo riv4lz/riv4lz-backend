@@ -1,19 +1,26 @@
 using AutoMapper;
 using riv4lz.core.Entities;
+using riv4lz.core.Models;
 using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Casters;
 using riv4lz.Mediator.Dtos.Events;
 using riv4lz.Mediator.Dtos.Organisations;
+using Profile = riv4lz.core.Entities.Profile;
 
 namespace riv4lz.casterApi.MappingProfiles;
 
-public class MappingProfiles: Profile
+public class MappingProfiles: AutoMapper.Profile
 {
     public MappingProfiles()
     {
-        CreateMap<CasterProfile, CasterProfileDto>();
-        CreateMap<RegisterCasterProfileDto, CasterProfile>();
-        CreateMap<UpdateCasterProfileDto, CasterProfile>();
+        CreateMap<Profile, ProfileDto>()
+            .ForMember(d => d.ProfileImage,
+                opt => opt.MapFrom(s => s.Images.FirstOrDefault(i => i.Type == ImgType.Profile)))
+            .ForMember(d => d.BannerImage,
+                opt => opt.MapFrom(s => s.Images.FirstOrDefault(i => i.Type == ImgType.Banner)));
+        
+        CreateMap<RegisterProfileDto, Profile>();
+        CreateMap<UpdateProfileDto, Profile>();
         
         CreateMap<OrganisationProfile, OrganisationProfileDto>();
         CreateMap<RegisterOrganisationProfileDto, OrganisationProfile>();

@@ -1,11 +1,12 @@
+using riv4lz.core.Models;
+
 namespace riv4lz.Mediator.Dtos.Casters;
 
-public class UpdateCasterProfileDto
+public class RegisterProfileDto
 {
-    public Guid CasterId { get; set; }
-    public string GamerTag { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public UserType UserType { get; set; }
     public string Description { get; set; }
     public string ProfileImage { get; set; }
     public string BannerImage { get; set; }
@@ -13,4 +14,5 @@ public class UpdateCasterProfileDto
     public string TwitterURL { get; set; }
     public string DiscordURL { get; set; }
     public string TwitchURL { get; set; }
+    public string WebsiteURL { get; set; }
 }

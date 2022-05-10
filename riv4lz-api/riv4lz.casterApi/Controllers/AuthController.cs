@@ -83,14 +83,14 @@ namespace riv4lz.casterApi.Controllers
         [HttpPost(nameof(RegisterCaster))]
         public async Task<ActionResult<UserDto>> RegisterCaster(RegisterUserDto registerUserDto)
         {
-            return await RegisterUser(registerUserDto, UserType.caster);
+            return await RegisterUser(registerUserDto, UserType.Caster);
         }
 
         [AllowAnonymous]
         [HttpPost(nameof(RegisterOrganisation))]
         public async Task<ActionResult<UserDto>> RegisterOrganisation(RegisterUserDto registerUserDto)
         {
-            return await RegisterUser(registerUserDto, UserType.organisation);
+            return await RegisterUser(registerUserDto, UserType.Organisation);
         }
 
         [HttpGet(nameof(GetCurrentUser))]

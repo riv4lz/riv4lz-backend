@@ -25,11 +25,13 @@ public class GetOrganisationProfiles
         }
         public async Task<List<OrganisationProfileDto>> Handle(Query request, CancellationToken cancellationToken)
         {
+            /*
            var profileDtos = await _ctx.OrganisationProfiles.Select(
                 u => _mapper.Map<OrganisationProfile, OrganisationProfileDto>(u))
                .ToListAsync(cancellationToken);
 
-           return profileDtos != null ? profileDtos : null;
+           return profileDtos != null ? profileDtos : null; */
+            return null;
         }
     }
     

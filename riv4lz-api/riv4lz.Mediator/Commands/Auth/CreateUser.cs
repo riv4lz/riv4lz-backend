@@ -38,9 +38,9 @@ public class CreateUser
 
         private bool AddRole(IdentityUser<Guid> user, UserType requestUserType)
         {
-            return requestUserType == UserType.caster ? 
-                _userManager.AddToRoleAsync(user, UserType.caster.ToString()).Result.Succeeded : 
-                _userManager.AddToRoleAsync(user, UserType.organisation.ToString()).Result.Succeeded;
+            return requestUserType == UserType.Caster ? 
+                _userManager.AddToRoleAsync(user, UserType.Caster.ToString()).Result.Succeeded : 
+                _userManager.AddToRoleAsync(user, UserType.Organisation.ToString()).Result.Succeeded;
         }
     }
 }

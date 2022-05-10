@@ -12,7 +12,7 @@ public class Order
 
 
     public Guid CasterId { get; set; }
-    public CasterProfile CasterProfile { get; set; }
+    public Profile Profile { get; set; }
 
     public Guid OrganisationId { get; set; }
     public OrganisationProfile OrganisationProfile { get; set; }
