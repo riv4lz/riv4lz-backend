@@ -6,7 +6,7 @@ namespace riv4lz.security.DataAccess;
 
 public class AuthContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
 {
-    public AuthContext(DbContextOptions options) : base(options)
+    public AuthContext(DbContextOptions<AuthContext> options) : base(options)
     {
         
     }

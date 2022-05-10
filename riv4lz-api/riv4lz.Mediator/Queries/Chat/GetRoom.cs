@@ -16,9 +16,9 @@ public class GetRoom
     public class Handler : IRequestHandler<Query, ChatRoomWithMessagesDto>
     {
         private readonly IMapper _mapper;
-        private readonly DataContext _ctx;
+        private readonly ChatContext _ctx;
 
-        public Handler(IMapper mapper, DataContext ctx)
+        public Handler(IMapper mapper, ChatContext ctx)
         {
             _mapper = mapper;
             _ctx = ctx;

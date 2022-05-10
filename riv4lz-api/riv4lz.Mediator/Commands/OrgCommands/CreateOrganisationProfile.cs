@@ -25,13 +25,16 @@ public class CreateOrganisationProfile
         }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            await _ctx.OrganisationProfiles.AddAsync(
+            /*
+            await _ctx.Profiles.AddAsync(
                 _mapper.Map<RegisterOrganisationProfileDto, OrganisationProfile>(
                     request.RegisterOrganisationProfileDto), cancellationToken);
 
             var result = await _ctx.SaveChangesAsync(cancellationToken);
             
             return result > 0;
+            */
+            return false;
         }
     }
 }

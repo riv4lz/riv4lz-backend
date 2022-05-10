@@ -14,5 +14,5 @@ public class Offer
 
         public Guid CasterId { get; set; } 
         [Required]
-        public CasterProfile Caster { get; set; }
+        public Profile Caster { get; set; }
 }

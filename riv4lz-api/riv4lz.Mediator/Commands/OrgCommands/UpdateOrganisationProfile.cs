@@ -25,6 +25,7 @@ public class UpdateOrganisationProfile
         }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
+            /*
             var organisation = await _ctx.OrganisationProfiles.FirstOrDefaultAsync(
                 x => x.OrganisationId == request.UpdateOrganisationProfileDto.OrganisationId, cancellationToken);
             
@@ -37,7 +38,8 @@ public class UpdateOrganisationProfile
             
             var result = await _ctx.SaveChangesAsync(cancellationToken);
             
-            return result > 0;
+            return result > 0; */
+            return true;
         }
     }
 }

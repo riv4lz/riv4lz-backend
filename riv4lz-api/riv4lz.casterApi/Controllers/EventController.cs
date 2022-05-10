@@ -1,6 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using riv4lz.Mediator.Commands.EventCommands;
+using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Events;
 using riv4lz.Mediator.Queries.EventQueries;
 
@@ -31,9 +33,9 @@ namespace riv4lz.casterApi.Controllers
         }
         
         [HttpPost(nameof(CreateEvent))]
-        public async Task<ActionResult<EventDto>> CreateEvent(CreateEventDto createEventDto)
+        public async Task<ActionResult<bool>> CreateEvent(CreateEventDto createEventDto)
         {
-            return null;
+            return await _mediator.Send(new CreateEvent.Command {CreateEventDto = createEventDto});
         }
         
         [HttpPut(nameof(UpdateEvent))]
@@ -41,6 +43,13 @@ namespace riv4lz.casterApi.Controllers
         {
             return null;
         }
+        
+        [HttpGet(nameof(GetTeams))]
+        public async Task<ActionResult<List<TeamDto>>> GetTeams()
+        {
+            return await _mediator.Send(new GetTeams.Query());
+        }
+        
         
     }
 }

@@ -12,13 +12,15 @@ public class AuthDbSeed
     public static async Task SeedData(AuthContext context,
         UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager)
     {
-        var casterRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "caster"};
-        var organisationRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "organisation"};
+        var casterRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "Caster"};
+        var organisationRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "OrganisationProfile"};
 
         var user1 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "j@r.co", UserName = "Jonas"};
         var user2 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "m@r.co", UserName = "Mike"};
         var user3 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "f@r.co", UserName = "Frederik"};
 
+        await context.Database.EnsureDeletedAsync();
+        await context.Database.EnsureCreatedAsync();
 
         if (!context.Roles.Any())
         {
@@ -26,7 +28,6 @@ public class AuthDbSeed
             await roleManager.CreateAsync(organisationRole);
         }
         
-        //await context.Database.EnsureDeletedAsync();
         if (!userManager.Users.Any())
         {
             await userManager.CreateAsync(user1, "pw");

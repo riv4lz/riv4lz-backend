@@ -18,7 +18,7 @@ public class CasterDbContextTest
     public void DbContext_DbSets_MustHaveDbSetWithTypeCasterEntity()
     {
         var mockedDbContext = Create.MockedDbContextFor<DataContext>();
-        Assert.True(mockedDbContext.CasterProfiles is DbSet<CasterProfile>);
+        Assert.True(mockedDbContext.Profiles is DbSet<Profile>);
     }
 
     [Fact]

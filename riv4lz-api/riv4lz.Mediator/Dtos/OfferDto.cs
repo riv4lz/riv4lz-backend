@@ -7,5 +7,5 @@ public class OfferDto
 {
     public Guid Id { get; set; }
     public OfferStatus OfferStatus { get; set; }
-    public CasterProfileDto Caster { get; set; }
+    public ProfileDto Caster { get; set; }
 }

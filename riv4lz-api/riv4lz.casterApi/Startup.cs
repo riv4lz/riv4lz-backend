@@ -32,12 +32,12 @@ namespace riv4lz.casterApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dataContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dataContext, ChatContext chatContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseCors("Dev-cors");
-                new DbSeeder(dataContext).SeedDevelopment();
+                new DbSeeder(dataContext, chatContext).SeedDevelopment();
                 app.UseDeveloperExceptionPage();
                 app.UseSwaggerDocumentation();
             }

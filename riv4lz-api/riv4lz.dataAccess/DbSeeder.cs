@@ -1,19 +1,23 @@
 using Microsoft.EntityFrameworkCore;
 using riv4lz.core.Entities;
+using riv4lz.core.Models;
 
 namespace riv4lz.dataAccess;
 
 public class DbSeeder
 {
     private readonly DataContext _ctx;
+    private readonly ChatContext _chatCtx;
 
-    public DbSeeder(DataContext ctx)
+    public DbSeeder(DataContext ctx, ChatContext chatCtx)
     {
         _ctx = ctx;
+        _chatCtx = chatCtx;
     }
 
     public async void SeedDevelopment()
     {
+        await _ctx.Database.EnsureDeletedAsync();
         await _ctx.Database.EnsureCreatedAsync();
 
         if (!_ctx.Teams.Any())
@@ -53,90 +57,74 @@ public class DbSeeder
             await _ctx.SaveChangesAsync();
         }
 
-        if (!_ctx.CasterProfiles.Any())
+        if (!_ctx.Profiles.Any())
         {
-            var caster1 = new CasterProfile()
+            var caster1 = new Profile()
             {
-                CasterId = Guid.NewGuid(),
-                BannerImage = "",
+                Id = Guid.NewGuid(),
                 Description = "Will cast for money!",
                 DiscordURL = "discord.gg/url",
                 FacebookURL = "facebook.com/url",
-                FirstName = "Borat",
-                LastName = "Boratsen",
-                GamerTag = "BoraTheCaster",
-                ProfileImage = "url",
+                Name = "BoraTheCaster",
                 TwitchURL = "twitch.tv/url",
                 TwitterURL = "twitter.com/url",
+                UserType = UserType.Caster,
             };
             
-            var caster2 = new CasterProfile()
+            var caster2 = new Profile()
             {
-                CasterId = Guid.NewGuid(),
-                BannerImage = "",
+                Id = Guid.NewGuid(),
                 Description = "Will cast for MORE money!",
                 DiscordURL = "discord.gg/url",
                 FacebookURL = "facebook.com/url",
-                FirstName = "Mike",
-                LastName = "Hovedskov",
-                GamerTag = "Frann0",
-                ProfileImage = "url",
+                Name = "Frann0",
                 TwitchURL = "twitch.tv/url",
                 TwitterURL = "twitter.com/url",
+                UserType = UserType.Caster,
             };
             
-            await _ctx.CasterProfiles.AddAsync(caster1);
-            await _ctx.CasterProfiles.AddAsync(caster2);
-            await _ctx.SaveChangesAsync();
-        }
-
-        if (!_ctx.OrganisationProfiles.Any())
-        {
-            var org1 = new OrganisationProfile()
+            var org1 = new Profile()
             {
-                OrganisationId = Guid.NewGuid(),
-                BannerImage = "",
+                Id = Guid.NewGuid(),
                 Description = "We host the greatest matches in the world!",
                 DiscordURL = "discord.gg/url",
                 FacebookURL = "facebook.com/url",
-                FirstName = "Jonas",
-                LastName = "Nielsen",
-                OrganisationName = "DCSA",
-                ProfileImage = "url",
+                Name = "DCSA",
                 TwitchURL = "twitch.tv/url",
                 TwitterURL = "twitter.com/url",
+                UserType = UserType.Organisation,
             };
-            var org2 = new OrganisationProfile()
+            var org2 = new Profile()
             {
-                OrganisationId = Guid.NewGuid(),
-                BannerImage = "",
+                Id = Guid.NewGuid(),
                 Description = "All LOL games in the world!",
                 DiscordURL = "discord.gg/url",
                 FacebookURL = "facebook.com/url",
-                FirstName = "Frederik",
-                LastName = "Otto",
-                OrganisationName = "LoLand",
-                ProfileImage = "url",
+                Name = "LoLand",
                 TwitchURL = "twitch.tv/url",
                 TwitterURL = "twitter.com/url",
+                UserType = UserType.Organisation,
             };
             
-            await _ctx.OrganisationProfiles.AddAsync(org1);
-            await _ctx.OrganisationProfiles.AddAsync(org2);
+            await _ctx.Profiles.AddAsync(org1);
+            await _ctx.Profiles.AddAsync(org2);
+            await _ctx.Profiles.AddAsync(caster1);
+            await _ctx.Profiles.AddAsync(caster2);
             await _ctx.SaveChangesAsync();
         }
 
+        
+
         if (!_ctx.Events.Any())
         {
-            var orgs = await _ctx.OrganisationProfiles.ToListAsync();
+            var orgs = await _ctx.Profiles.Where(p => p.UserType == UserType.Organisation).ToListAsync();
             var teams = await _ctx.Teams.ToListAsync();
             
             var e1 = new Event()
             {
                 Description = "We are going to play a game!",
                 Id = Guid.NewGuid(),
-                OrganisationId = orgs[0].OrganisationId,
-                Organiser = "DCSA",
+                OrganisationId = orgs[0].Id,
                 Price = 9999.99,
                 Teams = new List<Team>(){teams[0], teams[1]},
                 Time = DateTime.Today.AddMonths(6),
@@ -147,8 +135,7 @@ public class DbSeeder
             {
                 Description = "We are going to play another game!",
                 Id = Guid.NewGuid(),
-                OrganisationId = orgs[1].OrganisationId,
-                Organiser = "LoLand",
+                OrganisationId = orgs[1].Id,
                 Price = 99.99,
                 Teams = new List<Team>(){teams[2], teams[3]},
                 Time = DateTime.Today.AddMonths(5),
@@ -162,35 +149,35 @@ public class DbSeeder
 
         if (!_ctx.Offers.Any())
         {
-            var casters = await _ctx.CasterProfiles.ToListAsync();
+            var casters = await _ctx.Profiles.Where(p => p.UserType == UserType.Caster).ToListAsync();
             var events = await _ctx.Events.ToListAsync();
             
             var o1 = new Offer()
             {
                 Id = Guid.NewGuid(),
                 EventId = events[0].Id,
-                CasterId = casters[0].CasterId,
+                CasterId = casters[0].Id,
             };
             
             var o2 = new Offer()
             {
                 Id = Guid.NewGuid(),
                 EventId = events[0].Id,
-                CasterId = casters[1].CasterId,
+                CasterId = casters[1].Id,
             };
 
             var o4 = new Offer()
             {
                 Id = Guid.NewGuid(),
                 EventId = events[1].Id,
-                CasterId = casters[0].CasterId,
+                CasterId = casters[0].Id,
             };
             
             var o5 = new Offer()
             {
                 Id = Guid.NewGuid(),
                 EventId = events[1].Id,
-                CasterId = casters[1].CasterId,
+                CasterId = casters[1].Id,
             };
             
             await _ctx.Offers.AddAsync(o1);
@@ -200,7 +187,9 @@ public class DbSeeder
             await _ctx.SaveChangesAsync();
         }
 
-        if (!_ctx.ChatRooms.Any())
+        await _chatCtx.Database.EnsureCreatedAsync();
+
+        if (!_chatCtx.ChatRooms.Any())
         {
             var r1 = new ChatRoom()
             {
@@ -311,23 +300,23 @@ public class DbSeeder
                 Text = "You don't know me!",
             };
             
-            await _ctx.ChatRooms.AddAsync(r1);
-            await _ctx.ChatRooms.AddAsync(r2);
-            await _ctx.ChatRooms.AddAsync(r3);
-            await _ctx.ChatRooms.AddAsync(r4);
-            await _ctx.Messages.AddAsync(message);
-            await _ctx.Messages.AddAsync(message2);
-            await _ctx.Messages.AddAsync(message3);
-            await _ctx.Messages.AddAsync(message11);
-            await _ctx.Messages.AddAsync(message12);
-            await _ctx.Messages.AddAsync(message13);
-            await _ctx.Messages.AddAsync(message20);
-            await _ctx.Messages.AddAsync(message21);
-            await _ctx.Messages.AddAsync(message22);
-            await _ctx.Messages.AddAsync(message30);
-            await _ctx.Messages.AddAsync(message31);
-            await _ctx.Messages.AddAsync(message32);
-            await _ctx.SaveChangesAsync();
+            await _chatCtx.ChatRooms.AddAsync(r1);
+            await _chatCtx.ChatRooms.AddAsync(r2);
+            await _chatCtx.ChatRooms.AddAsync(r3);
+            await _chatCtx.ChatRooms.AddAsync(r4);
+            await _chatCtx.Messages.AddAsync(message);
+            await _chatCtx.Messages.AddAsync(message2);
+            await _chatCtx.Messages.AddAsync(message3);
+            await _chatCtx.Messages.AddAsync(message11);
+            await _chatCtx.Messages.AddAsync(message12);
+            await _chatCtx.Messages.AddAsync(message13);
+            await _chatCtx.Messages.AddAsync(message20);
+            await _chatCtx.Messages.AddAsync(message21);
+            await _chatCtx.Messages.AddAsync(message22);
+            await _chatCtx.Messages.AddAsync(message30);
+            await _chatCtx.Messages.AddAsync(message31);
+            await _chatCtx.Messages.AddAsync(message32);
+            await _chatCtx.SaveChangesAsync();
         }
         
         
