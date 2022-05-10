@@ -18,7 +18,6 @@ public class Profile
     public string? WebsiteURL { get; set; }
 
     public ICollection<Offer>? Offers { get; set; }
-    public ICollection<Order>? Orders { get; set; }
     public ICollection<Image>? Images { get; set; }
     public ICollection<Event>? Events { get; set; }
 }
