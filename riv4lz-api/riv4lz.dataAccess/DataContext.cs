@@ -51,11 +51,6 @@ public class DataContext : DbContext
         
         modelBuilder.Entity<Profile>()
             .HasIndex(t => t.Name).IsUnique();
-        
-        modelBuilder.Entity<OrganisationProfile>()
-            .HasIndex(t => t.OrganisationName).IsUnique();
-        
-        
     }
 
     public virtual DbSet<Profile> Profiles { get; set; }

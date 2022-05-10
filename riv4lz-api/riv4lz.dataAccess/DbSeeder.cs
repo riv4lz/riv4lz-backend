@@ -61,7 +61,7 @@ public class DbSeeder
         {
             var caster1 = new Profile()
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.Parse("B3B711C3-F088-4CDB-8AE2-3ACD90D16F52"),
                 Description = "Will cast for money!",
                 DiscordURL = "discord.gg/url",
                 FacebookURL = "facebook.com/url",
@@ -73,7 +73,7 @@ public class DbSeeder
             
             var caster2 = new Profile()
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.Parse("16360FB6-35F1-47A3-BBB6-E604BB342A07"),
                 Description = "Will cast for MORE money!",
                 DiscordURL = "discord.gg/url",
                 FacebookURL = "facebook.com/url",
