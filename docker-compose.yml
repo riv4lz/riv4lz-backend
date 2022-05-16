@@ -9,7 +9,6 @@ services:
       depends_on:
         - redis
         - postgresql_database
-        - rabbitmq 
     redis:
       image: redis:latest
       container_name: "redis-container"
@@ -44,7 +43,7 @@ services:
       restart: always
       volumes:
         - postgres-data:/postgres/data
-
+        
     pgadmin:
       image: dpage/pgadmin4
       environment: 
@@ -52,26 +51,9 @@ services:
         - PGADMIN_DEFAULT_PASSWORD=riv4lz5683
       ports:
         - 5050:80
-      restart: always
-
-    rabbitmq:
-      image: rabbitmq:3-management
-      hostname: my-rabbit
-      volumes:
-        - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
-        - ./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-        - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
-        - ./rabbitmq/logs:/var/log/rabbitmq/log
-      ports:
-        - 5672:5672
-        - 15672:15672
-        
+      restart: always    
 volumes:
   redis-data:
   postgres-data:
-  ./rabbitmq/etc/definitions.json:
-  ./rabbitmq/etc/rabbitmq.conf:
-  ./rabbitmq/data:
-  ./rabbitmq/logs:
     
     
