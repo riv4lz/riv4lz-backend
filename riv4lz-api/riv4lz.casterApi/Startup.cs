@@ -31,13 +31,15 @@ namespace riv4lz.casterApi
                 app.UseCors("Dev-cors");
                 new DbSeeder(dataContext, chatContext).SeedDevelopment();
                 app.UseDeveloperExceptionPage();
-                app.UseSwaggerDocumentation();
+                
             }
 
             if (env.IsProduction())
             {
                 app.UseCors("Prod-cors");
+                new DbSeeder(dataContext, chatContext).SeedDevelopment();
             }
+            app.UseSwaggerDocumentation();
 
             app.UseHttpsRedirection();
 

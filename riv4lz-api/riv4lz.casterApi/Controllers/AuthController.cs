@@ -134,6 +134,7 @@ namespace riv4lz.casterApi.Controllers
             return await Mediator.Send(new GetRoom.Query {RoomId = roomId});
         }
         
+        [AllowAnonymous]
         [HttpGet(nameof(GetRooms))]
         public async Task<ActionResult<List<ChatRoomDto>>> GetRooms()
         {
