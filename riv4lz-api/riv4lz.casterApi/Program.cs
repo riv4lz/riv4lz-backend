@@ -25,7 +25,7 @@ namespace riv4lz.casterApi
                 await context.Database.MigrateAsync();
                 await casterContext.Database.EnsureCreatedAsync();
                 await casterContext.Database.MigrateAsync();
-                await AuthDbSeed.SeedData(context, userManager, roleManager);
+                //await AuthDbSeed.SeedData(context, userManager, roleManager);
             }
             catch (Exception e)
             {
