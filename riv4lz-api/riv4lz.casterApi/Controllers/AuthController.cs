@@ -12,7 +12,7 @@ using riv4lz.Mediator.Queries.Chat;
 
 namespace riv4lz.casterApi.Controllers
 {
-    [AllowAnonymous]
+    
     public class AuthController : BaseController
     {
         private readonly IDistributedCache _cache;
