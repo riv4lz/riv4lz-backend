@@ -7,10 +7,10 @@ pipeline {
         stage("Startup"){
             steps {
                 buildDescription env.COMMITMSG
-                try {
+                script{
+                  try {
                     sh "rm -rf TestResults"
-                } catch (exception) {
-                    echo "No test results to delete"
+                  } finally {}
                 }
             }
         }
@@ -63,10 +63,8 @@ pipeline {
             }
         }
         stage("Deploy") {
-            stage("API"){
-                steps {
-                    sh "docker-compose up -d" 
-                }
+            steps {
+                sh "docker-compose up -d" 
             }
         }         
     }
