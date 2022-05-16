@@ -7,11 +7,12 @@ pipeline {
         stage("Startup"){
             steps {
                 buildDescription env.COMMITMSG
-                dir("riv4lz-api/riv4lz.casterApi")
-                script{
-                  try {
-                    sh "rm -rf TestResults"
-                  } finally {}
+                dir("riv4lz-api/riv4lz.casterApi"){
+                    script{
+                        try {
+                            sh "rm -rf TestResults"
+                        } finally {}
+                    }
                 }
             }
         }
