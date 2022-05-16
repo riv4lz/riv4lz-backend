@@ -58,10 +58,10 @@ services:
       image: rabbitmq:3-management
       hostname: my-rabbit
       volumes:
-        - rabbitmq:./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
-        - rabbitmq:./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-        - rabbitmq:./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
-        - rabbitmq:./rabbitmq/logs:/var/log/rabbitmq/log
+        - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
+        - ./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+        - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
+        - ./rabbitmq/logs:/var/log/rabbitmq/log
       ports:
         - 5672:5672
         - 15672:15672
@@ -69,5 +69,4 @@ services:
 volumes:
   redis-data:
   postgres-data:
-  rabbitmq:
     

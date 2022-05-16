@@ -16,7 +16,8 @@ namespace riv4lz.casterApi.Controllers
     public class AuthController : BaseController
     {
         private readonly IDistributedCache _cache;
-
+        
+        // test comment
         public AuthController(IDistributedCache cache)
         {
             _cache = cache;
