@@ -58,7 +58,7 @@ namespace riv4lz.casterApi.Extensions
                 options.AddPolicy("Prod-cors", policy =>
                 {
                     policy
-                        .WithOrigins("https://localhost:3000")
+                        .WithOrigins("http://localhost:3000")
                         .WithOrigins("http://10.0.2.2:8081")
                         .WithOrigins("https://10.0.2.2:8081")
                         .WithOrigins("http://localhost:8081")
