@@ -64,7 +64,8 @@ namespace riv4lz.casterApi.Extensions
                         .WithOrigins("http://localhost:8081")
                         .WithOrigins("https://localhost:8081")
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
+                        .AllowAnyMethod()
+                        .AllowCredentials();
                 });
             });
 
