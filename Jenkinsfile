@@ -42,8 +42,10 @@ pipeline {
                 }
             }
             steps{
-                sh "dotnet add package coverlet.collector"
-                sh "dotnet test --collect:'XPlat Code Coverage'"
+                dir("riv4lz-api/riv4lz.casterApi") {
+                    sh "dotnet add package coverlet.collector"
+                    sh "dotnet test --collect:'XPlat Code Coverage'"  
+                } 
             }
             post{
                 success{
