@@ -28,7 +28,7 @@ services:
         - HTTP_USER=root
         - HTTP_PASSWORD=secret
       ports:
-        - 8081:8081
+        - 8888:8081
       depends_on:
         - redis
 
