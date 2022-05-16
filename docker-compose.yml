@@ -69,4 +69,9 @@ services:
 volumes:
   redis-data:
   postgres-data:
+  ./rabbitmq/etc/definitions.json:
+  ./rabbitmq/etc/rabbitmq.conf:
+  ./rabbitmq/data:
+  ./rabbitmq/logs:
+    
     
