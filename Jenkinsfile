@@ -13,7 +13,6 @@ pipeline {
                     echo "No test results to delete"
                 }
             }
-          }
         }
         stage("Build") {
             when {
@@ -49,7 +48,7 @@ pipeline {
             post{
                 success{
                     archiveArtifacts "TestResults/*/coverage.cobertura.xml"
-                              publishCoverage adapters: [cobertura(path: 'TestResults/*/coverage.cobertura.xml', thresholds: [[thresholdTarget: 'Conditional', unhealthyThreshold: 80.0, unstableThreshold: 50.0]])], sourceFileResolver: sourceFiles('NEVER_STORE')
+                    publishCoverage adapters: [cobertura(path: 'TestResults/*/coverage.cobertura.xml', thresholds: [[thresholdTarget: 'Conditional', unhealthyThreshold: 80.0, unstableThreshold: 50.0]])], sourceFileResolver: sourceFiles('NEVER_STORE')
                 }
             }
         }
