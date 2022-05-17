@@ -25,6 +25,7 @@ pipeline {
             steps {
               dir("riv4lz-api/riv4lz.casterApi") {
                 sh "dotnet build --configuration Release"
+                sh "docker-compose --env-file config/Dev.env build api"
               }
             }
             post{
@@ -61,7 +62,7 @@ pipeline {
             steps{
                 script{
                     try{
-                        sh "docker-compose down"
+                        sh "docker-compose --env-file config/Dev.env down"
                     }
                     finally{}
                 }
@@ -69,7 +70,7 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                sh "docker-compose up -d" 
+                sh "docker-compose --env-file config/Dev.env up -d" 
             }
         }         
     }
