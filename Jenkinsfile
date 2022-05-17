@@ -75,7 +75,7 @@ pipeline {
         }
         stage("Push images to registry"){
           steps{
-            sh "az acre login --name riv4lzprod"
+            sh "az acr login --name riv4lzprod"
             sh "docker-compose --env-file Dev.env push"
           }
         }         
