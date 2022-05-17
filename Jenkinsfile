@@ -74,7 +74,9 @@ pipeline {
             }
         }
         stage("Push images to registry"){
-          Docker-compose --env-file riv4lz-api/riv4lz.casterApi/config/Dev.env push"
+          steps{
+            sh "docker-compose --env-file riv4lz-api/riv4lz.casterApi/config/Dev.env push"
+          }
         }         
     }
 }
