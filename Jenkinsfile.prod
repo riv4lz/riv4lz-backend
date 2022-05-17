@@ -2,7 +2,7 @@ pipeline{
   agent any
   stages{
     stage("Deploy to production){
-      sh "docker-compose --env-file riv4lz-api/riv4lz.casterApi/config/Prod.env ud -d
+      sh "docker-compose --env-file ./Prod.env up -d
     }
   }
 }
