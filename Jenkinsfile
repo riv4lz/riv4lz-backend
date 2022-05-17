@@ -26,7 +26,7 @@ pipeline {
               dir("riv4lz-api/riv4lz.casterApi") {
                 sh "dotnet build --configuration Release"
               }
-              sh "docker-compose --env-file riv4lz-api/riv4lz.casterApi/config/Dev.env build api"
+              sh "docker-compose --env-file ./Dev.env build api"
             }
             post{
                 success{
@@ -62,7 +62,7 @@ pipeline {
             steps{
                 script{
                     try{
-                        sh "docker-compose --env-file riv4lz-api/riv4lz.casterApi/config/Dev.env down"
+                        sh "docker-compose --env-file ./Dev.env down"
                     }
                     finally{}
                 }
@@ -70,12 +70,12 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                sh "docker-compose --env-file riv4lz-api/riv4lz.casterApi/config/Dev.env up -d" 
+                sh "docker-compose --env-file ./Dev.env up -d" 
             }
         }
         stage("Push images to registry"){
           steps{
-            sh "docker-compose --env-file riv4lz-api/riv4lz.casterApi/config/Dev.env push"
+            sh "docker-compose --env-file ./Dev.env push"
           }
         }         
     }
