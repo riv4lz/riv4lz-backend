@@ -31,7 +31,7 @@ namespace riv4lz.casterApi.Extensions
 
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlite(_configuration.GetConnectionString("CasterConnection"));
+                options.UseNpgsql(_configuration.GetConnectionString("Postgres"));
             });
 
             services.AddDbContext<AuthContext>(options =>
