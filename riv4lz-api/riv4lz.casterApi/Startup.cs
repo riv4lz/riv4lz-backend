@@ -41,7 +41,7 @@ namespace riv4lz.casterApi
             }
             app.UseSwaggerDocumentation();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
