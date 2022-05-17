@@ -47,7 +47,7 @@ services:
         
     pgadmin:
       image: dpage/pgadmin4
-container_name: "${DB_ADMIN_CONT_NAME}"
+      container_name: "${DB_ADMIN_CONT_NAME}"
       environment: 
         - PGADMIN_DEFAULT_EMAIL=jbuus9@gmail.com
         - PGADMIN_DEFAULT_PASSWORD=riv4lz5683
