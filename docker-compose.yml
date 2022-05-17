@@ -3,7 +3,7 @@ version: '3.9'
 services:
     api:
       build: .
-      image: localhost:7003/riv4lz-backend
+      image: localhost:7002/riv4lz-backend
       container_name: "${API_CONT_NAME}"
       ports:
         - "${API_PORT}:80" 
