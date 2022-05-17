@@ -43,7 +43,7 @@ services:
         - ${DB_PORT}:5432
       restart: always
       volumes:
-        - postgres-data:/postgres/data
+        - postgres-data:var/lib/postgresql/data
         
     pgadmin:
       image: dpage/pgadmin4
