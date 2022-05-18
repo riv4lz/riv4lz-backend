@@ -45,19 +45,31 @@ pipeline {
                     changeset "riv4lz-api/**"
                 }
             }
-            steps{
-                dir("riv4lz-api/riv4lz.casterApi.test") {
+            parallel{
+              stage("Test-Api"){
+                steps{
+                  dir("riv4lz-api/riv4lz.casterApi.test") {
                     sh "dotnet add package coverlet.collector"
                     sh "dotnet test --collect:'XPlat Code Coverage'"  
+                  }
                 }
-                dir("riv4lz-api/riv4lz.security.test") {
+              }
+              stage("Test-Security"){
+                steps{
+                  dir("riv4lz-api/riv4lz.security.test") {
                     sh "dotnet add package coverlet.collector"
                     sh "dotnet test --collect:'XPlat Code Coverage'"  
-                }  
-                dir("riv4lz-api/riv4lz.core.test") {
+                  }
+                }
+              }
+              stage("Test-Core"){
+                steps{
+                  dir("riv4lz-api/riv4lz.core.test") {
                     sh "dotnet add package coverlet.collector"
                     sh "dotnet test --collect:'XPlat Code Coverage'"  
-                } 
+                  }
+                }
+              }
             }
             post{
                 success{
@@ -90,8 +102,8 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
               sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
               sh "docker-compose --env-file Dev.env build"
-              sh "docker tag redis:latest jonasbf/riv4lz:redis-${BUILD_NUMBER}"
-              sh "docker push jonasbf/riv4lz:redis:latest"
+              sh "docker tag redis:latest redis"
+              sh "docker push jonasbf/riv4lz:redis"
               sh "docker-compose --env-file Dev.env push"
             }
           } 
