@@ -10,7 +10,7 @@ services:
         - redis
         - postgresql_database
     redis:
-      image: jonasbf/riv4lz/redis:latest
+      image: redis:latest
       container_name: "${REDIS_CONT_NAME}"
       ports:
         - ${REDIS_PORT}:6379
