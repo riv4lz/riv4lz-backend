@@ -24,7 +24,7 @@ public class AuthDbSeed
         var user3 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "f@r.co", UserName = "Frederik"};
         var user4 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "a@r.co", UserName = "Ashwini"};
 
-        await context.Database.EnsureDeletedAsync();
+        
         await context.Database.EnsureCreatedAsync();
 
         if (!context.Roles.Any())
