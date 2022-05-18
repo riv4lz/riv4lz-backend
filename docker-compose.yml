@@ -3,7 +3,6 @@ version: '3.9'
 services:
     api:
       build: .
-      image: riv4lzprod.azurecr.io/api:${IMAGE_TAG}
       container_name: "${API_CONT_NAME}"
       ports:
         - "${API_PORT}:80" 
