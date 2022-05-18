@@ -45,10 +45,6 @@ pipeline {
                     changeset "riv4lz-api/**"
                 }
             }
-            steps{
-             echo "test"
-            }
-            /*
             parallel{
               stage("Test-Api"){
                 steps{
@@ -84,7 +80,7 @@ pipeline {
                     
                     echo "Test succeded"
                 }
-            } */
+            }
         }
         stage("Clean Containers"){
             steps{
