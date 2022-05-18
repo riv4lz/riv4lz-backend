@@ -88,10 +88,7 @@ pipeline {
           steps{
             withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
               sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
-              sh "docker-compose --env-file Dev.env push api"
-              sh "docker-compose --env-file Dev.env push redis"
-              sh "docker-compose --env-file Dev.env push postgresql_database"
-              sh "docker-compose --env-file Dev.env push pgadmin"
+              sh "docker-compose --env-file Dev.env push"
             }
           } 
         }         
