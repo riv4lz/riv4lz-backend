@@ -6,14 +6,6 @@ namespace riv4lz.security.DataAccess;
 
 public class AuthContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
 {
-    public AuthContext(DbContextOptions<AuthContext> options) : base(options)
-    {
-        
-    }
-
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
-    }
+    public AuthContext(DbContextOptions<AuthContext> options) : base(options) {}
 }
 

@@ -1,7 +1,7 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using riv4lz.core.Models;
+using riv4lz.core.Enums;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Casters;
 using Profile = riv4lz.core.Entities.Profile;

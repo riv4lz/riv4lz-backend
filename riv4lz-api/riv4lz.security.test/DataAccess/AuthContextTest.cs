@@ -9,14 +9,13 @@ namespace riv4lz.security.test.DataAccess;
 
 public class AuthContextTest
 {
-    private readonly DbContextOptionsBuilder<AuthContext> _optionsBuilder;
     private readonly AuthContext _context;
     
     public AuthContextTest()
     {
-        _optionsBuilder = new DbContextOptionsBuilder<AuthContext>();
-        _optionsBuilder.UseInMemoryDatabase("AuthContextTest");
-        _context = new AuthContext(_optionsBuilder.Options);
+        var optionsBuilder = new DbContextOptionsBuilder<AuthContext>();
+        optionsBuilder.UseInMemoryDatabase("AuthContextTest");
+        _context = new AuthContext(optionsBuilder.Options);
     }
     [Fact]
     public void AuthContext_WithDbContextOptions_IsAvailable()

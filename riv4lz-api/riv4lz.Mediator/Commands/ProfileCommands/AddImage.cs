@@ -1,11 +1,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.core.Entities;
-using riv4lz.core.Models;
+using riv4lz.core.Enums;
 using riv4lz.dataAccess;
-using riv4lz.dataAccess.Photos;
+using riv4lz.dataAccess.Cloudinary;
 
 namespace riv4lz.Mediator.Commands.ProfileCommands;
 

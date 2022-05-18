@@ -1,11 +1,15 @@
-using riv4lz.core.Models;
+using System.ComponentModel.DataAnnotations;
+using riv4lz.core.Enums;
 
 namespace riv4lz.Mediator.Dtos.Casters;
 
 public class RegisterProfileDto
 {
+    [Required]
     public Guid Id { get; set; }
+    [Required]
     public string Name { get; set; }
+    [Required]
     public UserType UserType { get; set; }
     public string Description { get; set; }
     public string ProfileImage { get; set; }
