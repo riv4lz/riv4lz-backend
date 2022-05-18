@@ -88,7 +88,10 @@ pipeline {
           steps{
             withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
               sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
-              sh "docker-compose push jonasbf/riv4lz:${BUILD_NUMBER}"
+              sh "docker-compose push api"
+              sh "docker-compose push redis"
+              sh "docker-compose push postgresql_database"
+              sh "docker-compose push pgadmin"
             }
           } 
         }         
