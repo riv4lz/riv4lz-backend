@@ -69,11 +69,6 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'ACR', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
               sh 'docker login -u ${USERNAME} -p ${PASSWORD} riv4lzprod.azurecr.io'
               sh "docker-compose --env-file Dev.env build"
-              //sh "docker tag redis:latest riv4lzprod.azurecr.io:redis-${BUILD_NUMBER}"
-              //sh "docker tag postgres:latest riv4lzprod.azurecr.io:postgres-${BUILD_NUMBER}"
-              //sh "docker push riv4lzprod.azurecr.io:redis-${BUILD_NUMBER}"
-              //sh "docker push riv4lzprod.azurecr.io:postgres-${BUILD_NUMBER}"
-              //sh "docker-compose --env-file Dev.env push"
               sh "docker push riv4lzprod.azurecr.io/api:${BUILD_NUMBER}
             }
           } 
