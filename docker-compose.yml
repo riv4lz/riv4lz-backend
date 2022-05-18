@@ -3,7 +3,6 @@ version: '3.9'
 services:
     api:
       build: .
-      image: jonasbf/riv4lz:api-
       container_name: "${API_CONT_NAME}"
       ports:
         - "${API_PORT}:80" 
@@ -11,7 +10,7 @@ services:
         - redis
         - postgresql_database
     redis:
-      image: jonasbf/riv4lz:redis-
+      image: redis:latest
       container_name: "${REDIS_CONT_NAME}"
       ports:
         - ${REDIS_PORT}:6379
@@ -22,7 +21,7 @@ services:
         - postgresql_database
     
     redis-commander:
-      image: jonasbf/riv4lz:redis-commander-
+      image: rediscommander/redis-commander:latest
       container_name: "${REDIS_CMD_CONT_NAME}"
       environment:
         - REDIS_HOSTS=local:redis:6379
@@ -34,7 +33,7 @@ services:
         - redis
 
     postgresql_database:
-      image: jonasbf/riv4lz:db
+      image: postgres:latest
       container_name: "${DB_CONT_NAME}"
       environment:
         - POSTGRES_USER=admin
@@ -47,7 +46,7 @@ services:
         - postgres-data:/var/lib/postgresql/data
         
     pgadmin:
-      image: jonasbf/riv4lz:db-admin-
+      image: dpage/pgadmin4
       container_name: "${DB_ADMIN_CONT_NAME}"
       environment: 
         - PGADMIN_DEFAULT_EMAIL=jbuus9@gmail.com
