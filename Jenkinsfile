@@ -27,7 +27,7 @@ pipeline {
                 sh "dotnet build --configuration Release"
               }
               sh "docker-compose --env-file Dev.env build api"
-              sh "docker-compose --env-file Dev.env build redis"
+              sh "docker-compose --env-file Dev.env build -t jonasbf/riv4lz:redis-${BUILD_NUMBER} redis"
             }
             post{
                 success{
