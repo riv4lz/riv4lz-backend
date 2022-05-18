@@ -11,7 +11,7 @@ public class AuthDbSeed
 {
     public AuthDbSeed()
     {
-        // Commentwerdfgsdfsdfgsdafadsfsdfsdfsdfsdfsad
+        // Commentwerdfgsdfsdfgsdafadsfsdfsdfsdfsdfsadsdaf
     }
     public static async Task SeedData(AuthContext context,
         UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager, DataContext ctx, ChatContext chatCtx)

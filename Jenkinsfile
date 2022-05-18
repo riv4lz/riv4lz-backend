@@ -99,13 +99,13 @@ pipeline {
         }
         stage("Push images to registry"){
           steps{
-            withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-              sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+            withCredentials([usernamePassword(credentialsId: 'ACR', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+              sh 'docker login -u ${USERNAME} -p ${PASSWORD} riv4lzprod.azurecr.io'
               sh "docker-compose --env-file Dev.env build"
-              sh "docker tag redis:latest jonasbf/riv4lz:redis-${BUILD_NUMBER}"
-              sh "docker tag postgres:latest jonasbf/riv4lz:postgres-${BUILD_NUMBER}"
-              sh "docker push jonasbf/riv4lz:redis-${BUILD_NUMBER}"
-              sh "docker push jonasbf/riv4lz:postgres-${BUILD_NUMBER}"
+              sh "docker tag redis:latest riv4lzprod.azurecr.io:redis-${BUILD_NUMBER}"
+              sh "docker tag postgres:latest riv4lzprod.azurecr.io:postgres-${BUILD_NUMBER}"
+              sh "docker push riv4lzprod.azurecr.io:redis-${BUILD_NUMBER}"
+              sh "docker push riv4lzprod.azurecr.io:postgres-${BUILD_NUMBER}"
               sh "docker-compose --env-file Dev.env push"
             }
           } 
