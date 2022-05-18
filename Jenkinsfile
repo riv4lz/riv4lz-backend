@@ -52,8 +52,8 @@ pipeline {
             }
             post{
                 success{
-                    //archiveArtifacts "riv4lz-api/riv4lz.casterApi/TestResults/*/coverage.cobertura.xml"
-                    //publishCoverage adapters: [cobertura(path: 'riv4lz-api/riv4lz.casterApi/TestResults/*/coverage.cobertura.xml', thresholds: [[thresholdTarget: 'Conditional', unhealthyThreshold: 80.0, unstableThreshold: 50.0]])], sourceFileResolver: sourceFiles('NEVER_STORE') 
+                    archiveArtifacts "riv4lz-api/riv4lz.casterApi/TestResults/*/coverage.cobertura.xml"
+                    publishCoverage adapters: [cobertura(path: 'riv4lz-api/riv4lz.casterApi/TestResults/*/coverage.cobertura.xml', thresholds: [[thresholdTarget: 'Conditional', unhealthyThreshold: 80.0, unstableThreshold: 50.0]])], sourceFileResolver: sourceFiles('NEVER_STORE') 
                     echo "Test succeded"
                 }
             }
