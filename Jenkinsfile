@@ -86,11 +86,11 @@ pipeline {
         }
         stage("Push images to registry"){
           steps{
-            withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'PWD', usernameVariable: 'USERNAME')]) {
-              sh 'docker login -u ${USERNAME} -p ${PWD}'
+            withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+              sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
               sh "docker push jonasbf/riv4lz:backend-${BUILD_NUMBER}"
             }
-          }
+          } 
         }         
     }
 }
