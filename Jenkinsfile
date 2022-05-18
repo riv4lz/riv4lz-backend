@@ -88,7 +88,10 @@ pipeline {
           steps{
             withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
               sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
-              sh "docker push jonasbf/riv4lz:backend-${BUILD_NUMBER}"
+              sh "docker push jonasbf/riv4lz:redis-${BUILD_NUMBER}"
+              sh "docker push jonasbf/riv4lz:redis-commander-${BUILD_NUMBER}"
+              sh "docker push jonasbf/riv4lz:db-${BUILD_NUMBER}"
+              sh "docker push jonasbf/riv4lz:db-admin-${BUILD_NUMBER}"
             }
           } 
         }         
