@@ -24,6 +24,7 @@ namespace riv4lz.casterApi
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
                 var ctx = services.GetRequiredService<DataContext>();
                 var chatCtx = services.GetRequiredService<ChatContext>();
+                await context.Database.EnsureCreatedAsync();
                 await context.Database.MigrateAsync();
                 await casterContext.Database.EnsureCreatedAsync();
                 await casterContext.Database.MigrateAsync();

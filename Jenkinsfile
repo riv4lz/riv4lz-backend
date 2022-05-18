@@ -27,7 +27,6 @@ pipeline {
                 sh "dotnet build --configuration Release"
               }
               sh "docker-compose --env-file Dev.env build api"
-              sh "docker-compose --env-file Dev.env build redis"
             }
             post{
                 success{
@@ -69,7 +68,7 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'ACR', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
               sh 'docker login -u ${USERNAME} -p ${PASSWORD} riv4lzprod.azurecr.io'
               sh "docker-compose --env-file Dev.env build"
-              sh "docker push riv4lzprod.azurecr.io/api:${BUILD_NUMBER}"
+              sh "docker push riv4lzprod.azurecr.io/api:${BUILD_NUMBER}
             }
           } 
         }         

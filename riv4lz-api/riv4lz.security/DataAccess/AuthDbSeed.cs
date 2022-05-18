@@ -13,7 +13,7 @@ public class AuthDbSeed
     {
         // Commentwerdfgsdfsdfgsdafadsfsdfsdfsdfsdfsadsdafasdasdsdf
     }
-    public static async Task SeedData(AuthContext context,
+    public static async Task SeedData(AuthContext authCtx,
         UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager, DataContext ctx, ChatContext chatCtx)
     {
         var casterRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "Caster"};
@@ -25,9 +25,9 @@ public class AuthDbSeed
         var user4 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "a@r.co", UserName = "Ashwini"};
 
         
-        await context.Database.EnsureCreatedAsync();
+        await authCtx.Database.EnsureCreatedAsync();
 
-        if (!context.Roles.Any())
+        if (!authCtx.Roles.Any())
         {
             await roleManager.CreateAsync(casterRole);
             await roleManager.CreateAsync(organisationRole);
