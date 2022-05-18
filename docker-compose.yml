@@ -53,9 +53,13 @@ services:
         - PGADMIN_DEFAULT_PASSWORD=riv4lz5683
       ports:
         - ${DB_ADM_PORT}:80
-      restart: always    
+      restart: always
+      volumes:
+        - pgadmin-data:/var/lib/pgadmin
+
 volumes:
   redis-data:
   postgres-data:
+  pgadmin-data:
     
     
