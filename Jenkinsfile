@@ -24,7 +24,8 @@ pipeline {
             }
             steps {
               dir("riv4lz-api/riv4lz.casterApi") {
-                sh "dotnet clean"
+                sh "dotnet restore"
+                
                 sh "dotnet build --configuration Release"
               }
               sh "docker-compose --env-file Dev.env build api"
