@@ -3,7 +3,7 @@ version: '3.9'
 services:
     api:
       build: .
-      image: jonasbf/riv4lz:${IMAGE_TAG}
+      image: jonasbf/riv4lz:api-${IMAGE_TAG}
       container_name: "${API_CONT_NAME}"
       ports:
         - "${API_PORT}:80" 

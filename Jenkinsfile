@@ -90,6 +90,7 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
               sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
               sh "docker-compose --env-file Dev.env build"
+              sh "docker tag redis:latest jonasbf/riv4lz:redis-${BUILD_NUMBER}"
               sh "docker-compose --env-file Dev.env push"
             }
           } 
