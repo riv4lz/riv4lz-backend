@@ -26,6 +26,7 @@ pipeline {
               dir("riv4lz-api/riv4lz.casterApi") {
                 sh "dotnet build --configuration Release"
               }
+              sh "docker-compose --env-file Dev.env build api"
             }
             post{
                 success{
@@ -44,24 +45,14 @@ pipeline {
                 }
             }
             steps{
-                dir("riv4lz-api/riv4lz.casterApi") {
-                    sh "dotnet add package coverlet.collector"
-                    sh "dotnet test --collect:'XPlat Code Coverage'"  
-                } 
-            }
-            post{
-                success{
-                    //archiveArtifacts "riv4lz-api/riv4lz.casterApi/TestResults/*/coverage.cobertura.xml"
-                    //publishCoverage adapters: [cobertura(path: 'riv4lz-api/riv4lz.casterApi/TestResults/*/coverage.cobertura.xml', thresholds: [[thresholdTarget: 'Conditional', unhealthyThreshold: 80.0, unstableThreshold: 50.0]])], sourceFileResolver: sourceFiles('NEVER_STORE') 
-                    echo "Test succeded"
-                }
+              echo "Testing"
             }
         }
         stage("Clean Containers"){
             steps{
                 script{
                     try{
-                        sh "docker-compose down"
+                        sh "docker-compose --env-file Dev.env down"
                     }
                     finally{}
                 }
@@ -69,8 +60,17 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                sh "docker-compose up -d" 
+                sh "docker-compose --env-file Dev.env up -d" 
             }
+        }
+        stage("Push images to registry"){
+          steps{
+            withCredentials([usernamePassword(credentialsId: 'ACR', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+              sh 'docker login -u ${USERNAME} -p ${PASSWORD} riv4lzprod.azurecr.io'
+              sh "docker-compose --env-file Dev.env build"
+              sh "docker push riv4lzprod.azurecr.io/api:${BUILD_NUMBER}"
+            }
+          } 
         }         
     }
 }

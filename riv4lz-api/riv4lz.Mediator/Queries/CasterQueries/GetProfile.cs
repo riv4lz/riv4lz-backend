@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Casters;
 using Profile = riv4lz.core.Entities.Profile;
@@ -25,10 +26,10 @@ public class GetProfile
         }
         public async Task<ProfileDto> Handle(Query request, CancellationToken cancellationToken)
         {
-           var entity = _ctx.Profiles.FirstOrDefault(
-                u => u.Id == request.Id);
+           var entity = await _ctx.Profiles.FirstOrDefaultAsync(
+                u => u.Id == request.Id, cancellationToken);
 
-           return entity != null ? _mapper.Map<Profile, ProfileDto>(entity) : null;
+           return entity is null ? _mapper.Map<Profile, ProfileDto>(entity) : null;
         }
     }
     

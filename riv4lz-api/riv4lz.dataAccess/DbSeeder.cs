@@ -117,7 +117,7 @@ public class DbSeeder
         {
             var orgs = await _ctx.Profiles.Where(p => p.UserType == UserType.Organisation).ToListAsync();
             var teams = await _ctx.Teams.ToListAsync();
-            
+            // commsdfsdfasdsdfsdfasdsdfasd
             var e1 = new Event()
             {
                 Description = "We are going to play a game!",

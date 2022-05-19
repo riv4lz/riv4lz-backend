@@ -29,7 +29,6 @@ namespace riv4lz.casterApi
             if (env.IsDevelopment())
             {
                 app.UseCors("Dev-cors");
-                new DbSeeder(dataContext, chatContext).SeedDevelopment();
                 app.UseDeveloperExceptionPage();
                 
             }
@@ -37,11 +36,10 @@ namespace riv4lz.casterApi
             if (env.IsProduction())
             {
                 app.UseCors("Prod-cors");
-                new DbSeeder(dataContext, chatContext).SeedDevelopment();
             }
             app.UseSwaggerDocumentation();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

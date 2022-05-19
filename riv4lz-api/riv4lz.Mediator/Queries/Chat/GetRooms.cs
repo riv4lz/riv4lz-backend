@@ -29,6 +29,7 @@ public class GetRooms
         }
         public async Task<List<ChatRoomDto>> Handle(Query request, CancellationToken cancellationToken)
         {
+            /*
             var jsonData = await _cache.GetStringAsync("chatrooms");
 
             if (!jsonData.IsNullOrEmpty())
@@ -37,11 +38,12 @@ public class GetRooms
                 Console.WriteLine("CACHED ROOMS");
                 return cachedChatRooms;
             }
+            */
             
             var chatRooms = await _ctx.ChatRooms.Select(x => _mapper.Map<ChatRoomDto>(x))
                 .ToListAsync(cancellationToken);
 
-            await _cache.SetStringAsync("chatrooms", JsonSerializer.Serialize(chatRooms));
+            // await _cache.SetStringAsync("chatrooms", JsonSerializer.Serialize(chatRooms));
             Console.WriteLine("DB ROOMS");
 
             return chatRooms;
