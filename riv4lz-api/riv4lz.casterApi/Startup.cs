@@ -38,7 +38,7 @@ namespace riv4lz.casterApi
                 app.UseCors("Prod-cors");
             }
             app.UseSwaggerDocumentation();
-
+            
             //app.UseHttpsRedirection();
 
             app.UseRouting();

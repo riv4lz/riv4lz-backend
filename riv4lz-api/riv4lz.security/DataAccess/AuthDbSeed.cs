@@ -24,7 +24,7 @@ public class AuthDbSeed
         var user3 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "f@r.co", UserName = "Frederik"};
         var user4 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "a@r.co", UserName = "Ashwini"};
 
-        
+        //await authCtx.Database.EnsureDeletedAsync();
         await authCtx.Database.EnsureCreatedAsync();
 
         if (!authCtx.Roles.Any())
@@ -48,7 +48,7 @@ public class AuthDbSeed
             await userManager.AddToRoleAsync(user4, organisationRole.Name);
         }
         
-        await ctx.Database.EnsureDeletedAsync();
+        //await ctx.Database.EnsureDeletedAsync();
         await ctx.Database.EnsureCreatedAsync();
         
         if (!ctx.Teams.Any())
@@ -217,7 +217,7 @@ public class AuthDbSeed
             await ctx.Offers.AddAsync(o5);
             await ctx.SaveChangesAsync();
         }
-
+        //await chatCtx.Database.EnsureDeletedAsync();
         await chatCtx.Database.EnsureCreatedAsync();
 
         if (!chatCtx.ChatRooms.Any())

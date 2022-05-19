@@ -15,10 +15,8 @@ public class DbSeeder
         _chatCtx = chatCtx;
     }
 
-    public async void SeedDevelopment()
+    public async Task SeedDevelopment()
     {
-        await _ctx.Database.EnsureDeletedAsync();
-        await _ctx.Database.EnsureCreatedAsync();
 
         if (!_ctx.Teams.Any())
         {
@@ -187,7 +185,7 @@ public class DbSeeder
             await _ctx.SaveChangesAsync();
         }
 
-        await _chatCtx.Database.EnsureCreatedAsync();
+       
 
         if (!_chatCtx.ChatRooms.Any())
         {
