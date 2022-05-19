@@ -7,24 +7,52 @@ namespace riv4lz.dataAccess.test;
 
 public class DataContextTest
 {
-    [Fact]
-    public void DbContext_WithDbContextOptions_IsAvailable()
+    private DataContext _dataContext;
+
+    public DataContextTest()
     {
-        var mockedDbContext = Create.MockedDbContextFor<DataContext>();
-        Assert.NotNull(mockedDbContext);
+        _dataContext = Create.MockedDbContextFor<DataContext>();
     }
 
     [Fact]
-    public void DbContext_DbSets_MustHaveDbSetWithTypeCasterEntity()
+    public void DbContext_WithDbContextOptions_IsAvailable()
     {
-        var mockedDbContext = Create.MockedDbContextFor<DataContext>();
-        Assert.True(mockedDbContext.Profiles is DbSet<Profile>);
+        Assert.NotNull(_dataContext);
+    }
+
+    [Fact]
+    public void DbContext_DbSets_MustHaveDbSetWithTypeProfile()
+    {
+        Assert.True(_dataContext.Profiles is DbSet<Profile>);
+    }
+    
+    [Fact]
+    public void DbContext_DbSets_MustHaveDbSetWithTypeImages()
+    {
+        Assert.True(_dataContext.Images is DbSet<Image>);
+    }
+    
+    [Fact]
+    public void DbContext_DbSets_MustHaveDbSetWithTypeTeam()
+    {
+        Assert.True(_dataContext.Teams is DbSet<Team>);
+    }
+    
+    [Fact]
+    public void DbContext_DbSets_MustHaveDbSetWithTypeOffer()
+    {
+        Assert.True(_dataContext.Offers is DbSet<Offer>);
+    }
+    
+    [Fact]
+    public void DbContext_DbSets_MustHaveDbSetWithTypeEvent()
+    {
+        Assert.True(_dataContext.Events is DbSet<Event>);
     }
 
     [Fact]
     public void CasterContext_IsAssignableFromDbContext()
     {
-        var mockedDbContext = Create.MockedDbContextFor<DataContext>();
-        Assert.IsAssignableFrom<DbContext>(mockedDbContext);
+        Assert.IsAssignableFrom<DbContext>(_dataContext);
     }
 }

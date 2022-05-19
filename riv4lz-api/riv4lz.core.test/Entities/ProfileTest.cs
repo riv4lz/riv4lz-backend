@@ -284,20 +284,20 @@ public class ProfileTest
     }
     
     [Fact]
-    public void Images_CanBeListOfImages()
+    public void Profile_Images_CanBeListOfImages()
     {
         _profile.Images = new List<Image>();
         Assert.IsType<List<Image>>(_profile.Images);
     }
     
     [Fact]
-    public void Images_IsNullByDefault()
+    public void Profile_Images_IsNullByDefault()
     {
         Assert.Null(_profile.Images);
     }
     
     [Fact]
-    public void Images_CanBeSet()
+    public void Profile_Images_CanBeSet()
     {
         var images = new List<Image>();
         _profile.Images = images;
@@ -305,7 +305,7 @@ public class ProfileTest
     }
     
     [Fact]
-    public void Images_CanBeAdded()
+    public void Profile_Images_CanBeAdded()
     {
         _profile.Images = new List<Image>();
         var image = new Image();
@@ -314,7 +314,7 @@ public class ProfileTest
     }
     
     [Fact]
-    public void Images_CanBeRemoved()
+    public void Profile_Images_CanBeRemoved()
     {
         _profile.Images = new List<Image>();
         var image = new Image();
@@ -324,7 +324,7 @@ public class ProfileTest
     }
     
     [Fact]
-    public void Images_CanBeCleared()
+    public void Profile_Images_CanBeCleared()
     {
         _profile.Images = new List<Image>();
         var image = new Image();
@@ -334,12 +334,70 @@ public class ProfileTest
     }
     
     [Fact]
-    public void Images_CanBeSetToNull()
+    public void Profile_Images_CanBeSetToNull()
     {
         _profile.Images = new List<Image>();
         _profile.Images = null;
         Assert.Null(_profile.Images);
     }
+
+    [Fact]
+    public void Profile_Events_CanBeListOfEvent()
+    {
+        _profile.Events = new List<Event>();
+        Assert.IsType<List<Event>>(_profile.Events);
+    }
+
+    [Fact]
+    public void Profile_Events_IsNullByDefault()
+    {
+        Assert.Null(_profile.Events);
+    }
+
+    [Fact]
+    public void Profile_Events_CanBeSet()
+    {
+        var e = new Event();
+        _profile.Events = new List<Event>();
+        _profile.Events.Add(e);
+
+        Assert.Contains(e, _profile.Events);
+    }
     
+    [Fact]
+    public void Profile_Events_CanBeAdded()
+    {
+        _profile.Events = new List<Event>();
+        var e = new Event();
+        _profile.Events.Add(e);
+        Assert.Contains(e, _profile.Events);
+    }
     
+    [Fact]
+    public void Profile_Events_CanBeRemoved()
+    {
+        _profile.Events = new List<Event>();
+        var e = new Event();
+        _profile.Events.Add(e);
+        _profile.Events.Remove(e);
+        Assert.DoesNotContain(e, _profile.Events);
+    }
+    
+    [Fact]
+    public void Profile_Events_CanBeCleared()
+    {
+        _profile.Events = new List<Event>();
+        var e = new Event();
+        _profile.Events.Add(e);
+        _profile.Events.Clear();
+        Assert.Empty(_profile.Events);
+    }
+    
+    [Fact]
+    public void Profile_Events_CanBeSetToNull()
+    {
+        _profile.Events = new List<Event>();
+        _profile.Events = null;
+        Assert.Null(_profile.Events);
+    }
 }

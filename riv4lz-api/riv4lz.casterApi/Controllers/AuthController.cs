@@ -25,7 +25,7 @@ namespace riv4lz.casterApi.Controllers
             return user;
         }
 
-        [HttpPost(nameof(UpdatePassword))]
+        [HttpPut(nameof(UpdatePassword))]
         public async Task<ActionResult> UpdatePassword(UpdatePasswordDto updatePasswordDto)
         {
             var result = await Mediator
@@ -34,7 +34,7 @@ namespace riv4lz.casterApi.Controllers
             return result ? Ok("Password updated") : BadRequest("Error updating password");
         }
 
-        [HttpPost(nameof(UpdateEmail))]
+        [HttpPut(nameof(UpdateEmail))]
         public async Task<ActionResult> UpdateEmail(UpdateEmailDto updateEmailDto)
         {
             var emailTaken = await Mediator.Send(new IsEmailTaken.Query {Email = updateEmailDto.Email});
@@ -50,7 +50,7 @@ namespace riv4lz.casterApi.Controllers
             return result ? Ok("Email updated") : BadRequest("Error updating email");
         }
         
-        [HttpPost(nameof(UpdateUsername))]
+        [HttpPut(nameof(UpdateUsername))]
         public async Task<ActionResult> UpdateUsername(UpdateUsernameDto updateEmailDto)
         {
             var usernameTaken = await Mediator.Send(
@@ -80,6 +80,8 @@ namespace riv4lz.casterApi.Controllers
             return await Mediator.Send(new IsEmailTaken.Query { Email = email});
         }
         
+        [AllowAnonymous]
+        [HttpPost(nameof(RegisterUser))]
         public async Task<ActionResult<UserDto>> RegisterUser(RegisterUserDto registerUserDto, UserType userType)
         {
             if (await IsEmailTaken(registerUserDto.Email))
