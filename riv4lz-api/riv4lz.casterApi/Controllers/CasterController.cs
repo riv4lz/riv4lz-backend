@@ -10,40 +10,53 @@ namespace riv4lz.casterApi.Controllers
 {
     public class CasterController : BaseController, ICasterController
     {
+        private ICasterController _casterControllerImplementation;
+
         [HttpGet(nameof(GetCasterProfiles))]
         public async  Task<ActionResult<List<ProfileDto>>> GetCasterProfiles()
         {
-            return await Mediator.Send(new GetProfiles.Query(){UserType = UserType.Caster});
+            var profiles = await Mediator
+                .Send(new GetProfiles.Query(){UserType = UserType.Caster});
+
+            if (profiles is null)
+                return BadRequest("Fail to load profiles from database");
+
+            return Ok(profiles);
         }
 
         [HttpGet(nameof(GetCasterProfile))]
         public async Task<ActionResult<ProfileDto>> GetCasterProfile(Guid id)
         {
-            return await Mediator.Send(new GetProfile.Query {Id = id});
+            var profile = await Mediator.Send(new GetProfile.Query {Id = id});
+
+            if (profile is null)
+                return BadRequest("Failed to load profile from database");
+            
+            return Ok(profile);
         }
 
 
         [HttpPost(nameof(RegisterCasterProfile))]
         public async Task<ActionResult<ProfileDto>> RegisterCasterProfile(RegisterProfileDto registerProfileDto)
         {
-            var createResult = await Mediator.Send(new CreateProfile.Command
+            var result = await Mediator.Send(new CreateProfile.Command
             {
                 RegisterProfileDto = registerProfileDto
             });
 
-            if (!createResult)
-            {
+            if (!result)
                 return BadRequest("Error storing profile information");
-            }
+            
 
             var profile = await Mediator.Send(
                 new GetProfile.Query {Id = registerProfileDto.Id});
 
-            return profile is not null ? profile : BadRequest("Problem loading profile");
+            if (profile is null)
+                return BadRequest("Failed to load profile from database");
+
+            return Ok(profile);
         }
-
-
-
+        
         [HttpPut(nameof(UpdateCasterProfile))]
         public async  Task<ActionResult> UpdateCasterProfile([FromBody] UpdateProfileDto updateProfileDto)
         {
@@ -51,12 +64,15 @@ namespace riv4lz.casterApi.Controllers
             {
                 UpdateProfileDto = updateProfileDto
             });
+            
+            if (!result)
+                return BadRequest("Failed to update profile");
 
-            return result ? Ok("Caster profile updated") : BadRequest("Error updating profile");
+            return Ok(true);
         }
 
         [HttpDelete(nameof(DeleteCaster))]
-        public ActionResult<ProfileDto> DeleteCaster([FromBody] int id)
+        public ActionResult<ProfileDto> DeleteCaster(Guid id)
         {
             throw new NotImplementedException();
         }
