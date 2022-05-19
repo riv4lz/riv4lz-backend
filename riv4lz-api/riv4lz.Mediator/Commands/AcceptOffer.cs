@@ -1,9 +1,9 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using riv4lz.core.Enums;
+using riv4lz.core.Models;
 using riv4lz.dataAccess;
-using riv4lz.Mediator.Dtos.Events;
+using riv4lz.Mediator.Dtos;
 
 namespace riv4lz.Mediator.Commands;
 
@@ -31,26 +31,31 @@ public class AcceptOffer
             {
                 try
                 {
-                    // Set accepted offer status to Closed.
-                    var offer = await _ctx.Offers.FindAsync(request.UpdateOfferDto.Id);
+                    // Set accepted offer status to CLOSED.
+                    var offer = await _ctx.Offers.Include(o => o.Event).FirstOrDefaultAsync(o => o.Id == request.UpdateOfferDto.Id);
 
                     if (offer != null)
                     {
-                        offer.OfferStatus = OfferStatus.Closed;
+                        offer.OfferStatus = OfferStatus.CLOSED;
                     }
 
                     await _ctx.SaveChangesAsync(cancellationToken);
                     
                     
-                    // Set all other offers' status to Rejected.
+                    // Set all other offers' status to REJECTED.
                     var offers = await _ctx.Offers
                         .Where(o => o.Id != request.UpdateOfferDto.Id)
                         .ToListAsync(cancellationToken);
                 
                     foreach (var o in offers)
                     {
-                        o.OfferStatus = OfferStatus.Rejected;
+                        o.OfferStatus = OfferStatus.REJECTED;
                     }
+                    
+                    // TODO REMOVE in refactoring
+                    // Set event status to CLOSED.
+                    offer.Event.EventStatus = EventStatus.CLOSED;
+                    
                     await _ctx.SaveChangesAsync(cancellationToken);
 
                     await dbTransaction.CommitAsync(cancellationToken);

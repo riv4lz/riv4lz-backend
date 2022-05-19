@@ -9,6 +9,8 @@ services:
       depends_on:
         - redis
         - postgresql_database
+        - auth_db
+        - chat_db
     redis:
       image: redis:latest
       container_name: "${REDIS_CONT_NAME}"
@@ -44,6 +46,30 @@ services:
       restart: always
       volumes:
         - postgres-data:/var/lib/postgresql/data
+
+    auth_db:
+      image: postgres:latest
+      environment:
+        - POSTGRES_USER=admin
+        - POSTGRES_PASSWORD=riv4lz5683
+        - POSTGRES_DB=authDb
+      ports: 
+        - 5433:5432
+      restart: always
+      volumes:
+        - auth-data:/var/lib/auth/postgres/data
+
+    chat_db:
+      image: postgres:latest
+      environment:
+        - POSTGRES_USER=admin
+        - POSTGRES_PASSWORD=riv4lz5683
+        - POSTGRES_DB=chatDb
+      ports: 
+        - 5434:5432
+      restart: always
+      volumes:
+        - chat-data:/var/lib/chat/postgres/data
         
     pgadmin:
       image: dpage/pgadmin4
@@ -56,10 +82,20 @@ services:
       restart: always
       volumes:
         - pgadmin-data:/var/lib/pgadmin
+    
+    flyway:
+      image: flyway/flyway
+      command: -url=jdbc:postgresql://auth_db:5432/authDb -schemas=authSchema -user=jbuus9@gmail.com -password=riv4lz5683 migrate -connectRetries=60 migrate
+      volumes:
+        - ./sql:/flyway/sql
+      depends_on:
+        - auth_db
 
 volumes:
   redis-data:
   postgres-data:
   pgadmin-data:
+  auth-data:
+  chat-data:
     
     
