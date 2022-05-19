@@ -29,7 +29,7 @@ public class GetProfile
            var entity = await _ctx.Profiles.FirstOrDefaultAsync(
                 u => u.Id == request.Id, cancellationToken);
 
-           return entity is null ? _mapper.Map<Profile, ProfileDto>(entity) : null;
+           return entity != null ? _mapper.Map<Profile, ProfileDto>(entity) : null;
         }
     }
     
