@@ -32,10 +32,6 @@
       <ProjectReference Include="..\riv4lz.security\riv4lz.security.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Helpers" />
-    </ItemGroup>
-
 <ItemGroup>
    <None Include="appsettings.json" CopyToPublishDirectory="Always" />
 </ItemGroup>
