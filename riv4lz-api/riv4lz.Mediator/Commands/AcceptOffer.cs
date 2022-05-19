@@ -32,7 +32,7 @@ public class AcceptOffer
                 try
                 {
                     // Set accepted offer status to CLOSED.
-                    var offer = await _ctx.Offers.FindAsync(request.UpdateOfferDto.Id);
+                    var offer = await _ctx.Offers.Include(o => o.Event).FirstOrDefaultAsync(o => o.Id == request.UpdateOfferDto.Id);
 
                     if (offer != null)
                     {
@@ -51,6 +51,11 @@ public class AcceptOffer
                     {
                         o.OfferStatus = OfferStatus.REJECTED;
                     }
+                    
+                    // TODO REMOVE in refactoring
+                    // Set event status to CLOSED.
+                    offer.Event.EventStatus = EventStatus.CLOSED;
+                    
                     await _ctx.SaveChangesAsync(cancellationToken);
 
                     await dbTransaction.CommitAsync(cancellationToken);

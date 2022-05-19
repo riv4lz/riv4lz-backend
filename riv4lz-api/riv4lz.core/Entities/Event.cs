@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using riv4lz.core.Models;
 
 namespace riv4lz.core.Entities;
 
@@ -7,6 +8,7 @@ public class Event
     [Key]
     public Guid Id { get; set; }
     public DateTime Time { get; set; }
+    public EventStatus EventStatus { get; set; }
     public string Description { get; set; }
     public double Price { get; set; }
     public string Game { get; set; }
