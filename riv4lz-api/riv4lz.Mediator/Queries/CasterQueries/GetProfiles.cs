@@ -1,6 +1,7 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using riv4lz.core.Enums;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Casters;
@@ -14,7 +15,7 @@ public class GetProfiles
     {
         public UserType UserType { get; set; }
     }
-    
+
     public class Handler : IRequestHandler<Query, List<ProfileDto>>
     {
         private readonly IMapper _mapper;
@@ -25,14 +26,15 @@ public class GetProfiles
             _mapper = mapper;
             _ctx = ctx;
         }
+
         public async Task<List<ProfileDto>> Handle(Query request, CancellationToken cancellationToken)
         {
-           var profileDtos = await _ctx.Profiles.Where(p => p.UserType == request.UserType)
-               .Select(
-                u => _mapper.Map<Profile, ProfileDto>(u)).ToListAsync(cancellationToken);
+            var profiles = await _ctx.Profiles
+                .Where(p => p.UserType == request.UserType)
+                .Select(u => _mapper.Map<ProfileDto>(u))
+                .ToListAsync(cancellationToken);
 
-           return profileDtos != null ? profileDtos : null;
+            return profiles.IsNullOrEmpty() ? null : profiles;
         }
     }
-    
 }

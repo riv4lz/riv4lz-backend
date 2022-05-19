@@ -17,12 +17,11 @@ namespace riv4lz.casterApi.Controllers
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await Mediator.Send(new AuthenticateUser.Query {LoginDto = loginDto});
-            if (user is null)
-            {
-                return Unauthorized();
-            }
             
-            return user;
+            if (user is null)
+                return Unauthorized();
+            
+            return Ok(user);
         }
 
         [HttpPut(nameof(UpdatePassword))]
@@ -30,8 +29,11 @@ namespace riv4lz.casterApi.Controllers
         {
             var result = await Mediator
                 .Send(new UpdatePassword.Command {UpdatePasswordDto = updatePasswordDto});
-            
-            return result ? Ok("Password updated") : BadRequest("Error updating password");
+
+            if (!result)
+                return BadRequest("Failed to update password");
+
+            return Ok("Password updated");
         }
 
         [HttpPut(nameof(UpdateEmail))]
@@ -39,15 +41,16 @@ namespace riv4lz.casterApi.Controllers
         {
             var emailTaken = await Mediator.Send(new IsEmailTaken.Query {Email = updateEmailDto.Email});
             
-            if (emailTaken)
-            {
+            if (emailTaken) 
                 return BadRequest("Email is already taken");
-            }
             
             var result = await Mediator
                 .Send(new UpdateEmail.Command {UpdateEmailDto = updateEmailDto});
+
+            if (!result) 
+                return BadRequest("Failed to update email");
             
-            return result ? Ok("Email updated") : BadRequest("Error updating email");
+            return Ok("Email updated");
         }
         
         [HttpPut(nameof(UpdateUsername))]
@@ -57,27 +60,37 @@ namespace riv4lz.casterApi.Controllers
                 new IsUsernameTaken.Query {Username = updateEmailDto.Username});
 
             if (usernameTaken)
-            {
                 return BadRequest("Username is already taken");
-            }
+            
             
             var result = await Mediator
                 .Send(new UpdateUsername.Command {UpdateUsernameDto = updateEmailDto});
-            
-            return result ? Ok("Username updated") : BadRequest("Error updating username");
+
+            if (!result)
+                return BadRequest("Failed to update username");
+
+            return Ok("Username updated");
         }
 
         [HttpGet(nameof(GetCurrentUser))]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            return await Mediator.Send(new FindUserByEmail.Query {Email = User.FindFirstValue(ClaimTypes.Email)});
+            var user = await Mediator
+                .Send(new FindUserByEmail.Query {Email = User.FindFirstValue(ClaimTypes.Email)});
+
+            if (user is null)
+                return Unauthorized();
+            
+            return Ok(user);
         }
 
         [AllowAnonymous]
         [HttpGet(nameof(IsEmailTaken))]
         public async Task<bool> IsEmailTaken(string email)
         {
-            return await Mediator.Send(new IsEmailTaken.Query { Email = email});
+            var result = await Mediator.Send(new IsEmailTaken.Query { Email = email});
+            
+            return result;
         }
         
         [AllowAnonymous]
@@ -85,9 +98,8 @@ namespace riv4lz.casterApi.Controllers
         public async Task<ActionResult<UserDto>> RegisterUser(RegisterUserDto registerUserDto, UserType userType)
         {
             if (await IsEmailTaken(registerUserDto.Email))
-            {
                 return BadRequest("Email taken");
-            }
+            
 
             var result = await Mediator.Send(new CreateUser.Command
             {
@@ -96,13 +108,15 @@ namespace riv4lz.casterApi.Controllers
             });
 
             if (!result)
-            {
                 return BadRequest("Problem registering user");
-            }
+            
 
             var userDto = await Mediator.Send(new FindUserByEmail.Query {Email = registerUserDto.Email});
 
-            return userDto != null ? userDto : BadRequest("Problem registering user");
+            if (userDto is null)
+                return BadRequest("Problem registering user");
+
+            return Ok(userDto);
         }
     }
 }

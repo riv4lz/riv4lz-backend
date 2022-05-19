@@ -28,8 +28,11 @@ public class GetEventOffer
             var entity = await _ctx.Offers
                 .Include(o => o.Caster)
                 .FirstOrDefaultAsync(e => e.Id == request.OfferId, cancellationToken);
+
+            if (entity is null)
+                return null;
             
-            return entity == null ? null : _mapper.Map<OfferDto>(entity);
+            return _mapper.Map<OfferDto>(entity);
         }
     }
 }

@@ -23,15 +23,17 @@ public class GetEvent
             _mapper = mapper;
             _ctx = ctx;
         }
-        public async Task<EventDto?> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<EventDto> Handle(Query request, CancellationToken cancellationToken)
         {
             var entity = await _ctx.Events
                 .Include(t => t.Teams)
                 .Include(o => o.OrganisationProfile)
                 .FirstAsync(e => e.Id == request.EventId, cancellationToken);
-           
-            return entity != null ? _mapper.Map<EventDto>(entity) : null;
-           
+
+            if (entity is null)
+                return null;
+
+            return _mapper.Map<EventDto>(entity);
         }
     }
 }

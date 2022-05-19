@@ -9,6 +9,11 @@ public class ImageController: BaseController, IImageController
     [HttpPost(nameof(UploadImage))]
     public async Task<ActionResult<bool>> UploadImage([FromForm] AddImage.Command command)
     {
-        return await Mediator.Send(command);
+        var result = await Mediator.Send(command);
+        
+        if(!result)
+            return BadRequest("Failed to upload image");
+
+        return true;
     }
 }

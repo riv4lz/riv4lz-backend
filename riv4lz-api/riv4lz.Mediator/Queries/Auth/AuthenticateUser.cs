@@ -31,22 +31,20 @@ public class AuthenticateUser
             var user = await _userManager.FindByEmailAsync(request.LoginDto.Email);
             
             if (user == null)
-            {
                 return null;
-            }
+            
             var result = await _signInManager
                 .CheckPasswordSignInAsync(user, request.LoginDto.Password, false);
             
-            if (result.Succeeded)
+            if (!result.Succeeded)
+                return null;
+            
+            return new UserDto()
             {
-                return new UserDto()
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    Token = _tokenHelper.CreateToken(user),
-                };
-            }
-            return null;
+                Id = user.Id,
+                Email = user.Email,
+                Token = _tokenHelper.CreateToken(user),
+            };
         }
     }
 }

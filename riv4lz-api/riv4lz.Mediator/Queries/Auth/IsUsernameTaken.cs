@@ -15,7 +15,6 @@ public class IsUsernameTaken
     {
         private readonly AuthContext _authContext;
         
-
         public Handler(AuthContext authContext)
         {
             _authContext = authContext;
@@ -25,8 +24,8 @@ public class IsUsernameTaken
         {
             var user = await _authContext.Users
                 .FirstOrDefaultAsync(u => request.Username.Equals(u.UserName), cancellationToken);
-            
-            return user != null;
+
+            return user is not null;
         }
     }
 }

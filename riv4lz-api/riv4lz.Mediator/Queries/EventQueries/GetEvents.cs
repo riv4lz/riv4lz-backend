@@ -1,6 +1,7 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using riv4lz.core.Entities;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Events;
@@ -29,10 +30,12 @@ public class GetEvents
             var events = await _ctx.Events
                 .Include(e => e.Teams)
                 .Include(e => e.OrganisationProfile)
-                .Select(e => _mapper.Map<Event, EventDto>(e)).ToListAsync(cancellationToken);
+                .Select(e => _mapper.Map<EventDto>(e)).ToListAsync(cancellationToken);
+
+            if (events.IsNullOrEmpty())
+                return null;
 
             return events;
-
         }
     }
 }
