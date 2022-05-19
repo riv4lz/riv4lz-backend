@@ -85,7 +85,7 @@ services:
     
     flyway:
       image: flyway/flyway
-      command: -url=jdbc:postgresql://postgres:5432/authDb -schemas=authSchema -user=jbuus9@gmail.com -password=riv4lz5683 migrate -connectRetries=60 migrate
+      command: -url=jdbc:postgresql://auth_db:5432/authDb -schemas=authSchema -user=jbuus9@gmail.com -password=riv4lz5683 migrate -connectRetries=60 migrate
       volumes:
         - ./sql:/flyway/sql
       depends_on:
