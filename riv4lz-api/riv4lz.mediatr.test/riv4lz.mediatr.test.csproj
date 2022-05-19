@@ -20,4 +20,8 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\riv4lz.Mediator\riv4lz.Mediator.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -21,6 +21,14 @@ public class ChatRoomTest
     }
     
     [Fact]
+    public void ChatRoom_CanBeInitializedWithId()
+    {
+        var id = Guid.NewGuid();
+        var chatRoom = new ChatRoom(id);
+        Assert.Equal(id, chatRoom.Id);
+    }
+
+    [Fact]
     public void ChatRoom_SettingName_SetsName()
     {
         _chatRoom.Name = "Test";
