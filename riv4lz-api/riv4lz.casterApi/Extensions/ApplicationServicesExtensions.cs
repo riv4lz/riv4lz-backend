@@ -36,12 +36,12 @@ namespace riv4lz.casterApi.Extensions
 
             services.AddDbContext<AuthContext>(options =>
             {
-                options.UseSqlite(_configuration.GetConnectionString("AuthConnection"));
+                options.UseNpgsql(_configuration.GetConnectionString("AuthConnection"));
             });
 
             services.AddDbContext<ChatContext>(options =>
             {
-                options.UseSqlite(_configuration.GetConnectionString("ChatConnection"));
+                options.UseNpgsql(_configuration.GetConnectionString("ChatConnection"));
             });
             
             services.AddCors(options =>
