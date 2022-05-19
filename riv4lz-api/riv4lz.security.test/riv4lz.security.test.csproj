@@ -2,8 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <Nullable>enable</Nullable>
-
+        <Nullable>disable</Nullable>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
@@ -23,10 +22,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\riv4lz.security\riv4lz.security.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Models" />
     </ItemGroup>
 
 </Project>

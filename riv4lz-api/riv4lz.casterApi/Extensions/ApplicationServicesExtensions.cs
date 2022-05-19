@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess;
-using riv4lz.dataAccess.Photos;
+using riv4lz.dataAccess.Cloudinary;
 using riv4lz.Mediator.Commands.Auth;
 using riv4lz.security.DataAccess;
 

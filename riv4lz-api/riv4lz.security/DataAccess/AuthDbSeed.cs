@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.core.Entities;
-using riv4lz.core.Models;
+using riv4lz.core.Enums;
 using riv4lz.dataAccess;
 
 
@@ -97,11 +97,11 @@ public class AuthDbSeed
             {
                 Id = user1.Id,
                 Description = "Will cast for money!",
-                DiscordURL = "discord.gg/url",
-                FacebookURL = "facebook.com/url",
+                DiscordUrl = "discord.gg/url",
+                FacebookUrl = "facebook.com/url",
                 Name = "BoraTheCaster",
-                TwitchURL = "twitch.tv/url",
-                TwitterURL = "twitter.com/url",
+                TwitchUrl = "twitch.tv/url",
+                TwitterUrl = "twitter.com/url",
                 UserType = UserType.Caster,
             };
             
@@ -109,11 +109,11 @@ public class AuthDbSeed
             {
                 Id = user2.Id,
                 Description = "Will cast for MORE money!",
-                DiscordURL = "discord.gg/url",
-                FacebookURL = "facebook.com/url",
+                DiscordUrl = "discord.gg/url",
+                FacebookUrl = "facebook.com/url",
                 Name = "Frann0",
-                TwitchURL = "twitch.tv/url",
-                TwitterURL = "twitter.com/url",
+                TwitchUrl = "twitch.tv/url",
+                TwitterUrl = "twitter.com/url",
                 UserType = UserType.Caster,
             };
             
@@ -121,22 +121,22 @@ public class AuthDbSeed
             {
                 Id = user3.Id,
                 Description = "We host the greatest matches in the world!",
-                DiscordURL = "discord.gg/url",
-                FacebookURL = "facebook.com/url",
+                DiscordUrl = "discord.gg/url",
+                FacebookUrl = "facebook.com/url",
                 Name = "DCSA",
-                TwitchURL = "twitch.tv/url",
-                TwitterURL = "twitter.com/url",
+                TwitchUrl = "twitch.tv/url",
+                TwitterUrl = "twitter.com/url",
                 UserType = UserType.Organisation,
             };
             var org2 = new Profile()
             {
                 Id = user4.Id,
                 Description = "All LOL games in the world!",
-                DiscordURL = "discord.gg/url",
-                FacebookURL = "facebook.com/url",
+                DiscordUrl = "discord.gg/url",
+                FacebookUrl = "facebook.com/url",
                 Name = "LoLand",
-                TwitchURL = "twitch.tv/url",
-                TwitterURL = "twitter.com/url",
+                TwitchUrl = "twitch.tv/url",
+                TwitterUrl = "twitter.com/url",
                 UserType = UserType.Organisation,
             };
             

@@ -1,8 +1,8 @@
 using AutoMapper;
 using MediatR;
-using riv4lz.core.Models;
+using riv4lz.core.Enums;
 using riv4lz.dataAccess;
-using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Dtos.Events;
 
 namespace riv4lz.Mediator.Commands;
 
@@ -29,7 +29,7 @@ public class RejectOffer
 
             if (offer != null)
             {
-                offer.OfferStatus = OfferStatus.REJECTED;
+                offer.OfferStatus = OfferStatus.Rejected;
             }
 
             return await _ctx.SaveChangesAsync(cancellationToken) > 0;

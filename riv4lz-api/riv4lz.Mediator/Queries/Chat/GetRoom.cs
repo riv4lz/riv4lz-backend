@@ -2,7 +2,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess;
-using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Dtos.Chat;
 
 namespace riv4lz.Mediator.Queries.Chat;
 

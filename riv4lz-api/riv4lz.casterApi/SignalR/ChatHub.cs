@@ -1,13 +1,14 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
+using riv4lz.casterApi.Interfaces;
 using riv4lz.Mediator.Commands.Chat;
-using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Dtos.Chat;
 using riv4lz.Mediator.Queries.Chat;
 
 namespace riv4lz.casterApi.SignalR;
 
-public class ChatHub: Hub   
+public class ChatHub: Hub, IChatHub
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
@@ -22,7 +23,6 @@ public class ChatHub: Hub
 
     public async Task SendMessage(CreateMessageDto createMessageDto)
     {
-        // TODO handle error
         await _mediator.Send( new CreateMessage.Command{CreateMessageDto = createMessageDto});
         
         var roomId = createMessageDto.ChatRoomId.ToString();
@@ -43,9 +43,9 @@ public class ChatHub: Hub
 
         await Clients.Caller.SendAsync("LoadMessages", messages).ConfigureAwait(true);
     }
-    
 
-    private async Task LeaveRoom(string previousRoomId)
+
+    public async Task LeaveRoom(string previousRoomId)
     {
         if (!previousRoomId.Equals("none"))
         {
@@ -64,7 +64,7 @@ public class ChatHub: Hub
         await JoinRoom(generalRoomId, "none");
     }
 
-    private async Task<List<ChatRoomDto>> LoadRooms()
+    public async Task<List<ChatRoomDto>> LoadRooms()
     {
         return await _mediator.Send(new GetRooms.Query());
     }

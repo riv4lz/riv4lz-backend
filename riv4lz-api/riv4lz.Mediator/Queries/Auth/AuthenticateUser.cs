@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using riv4lz.Mediator.Dtos.Auth;
-using riv4lz.Mediator.Services;
+using riv4lz.Mediator.Helpers;
 
 namespace riv4lz.Mediator.Queries.Auth;
 
@@ -15,14 +15,14 @@ public class AuthenticateUser
     public class Handler : IRequestHandler<Query, UserDto>
     {
         private readonly UserManager<IdentityUser<Guid>> _userManager;
-        private readonly TokenService _tokenService;
+        private readonly TokenHelper _tokenHelper;
         private readonly SignInManager<IdentityUser<Guid>> _signInManager;
 
-        public Handler(UserManager<IdentityUser<Guid>> userManager, TokenService tokenService,
+        public Handler(UserManager<IdentityUser<Guid>> userManager, TokenHelper tokenHelper,
             SignInManager<IdentityUser<Guid>> signInManager)
         {
             _userManager = userManager;
-            _tokenService = tokenService;
+            _tokenHelper = tokenHelper;
             _signInManager = signInManager;
         }
 
@@ -43,7 +43,7 @@ public class AuthenticateUser
                 {
                     Id = user.Id,
                     Email = user.Email,
-                    Token = _tokenService.CreateToken(user),
+                    Token = _tokenHelper.CreateToken(user),
                 };
             }
             return null;

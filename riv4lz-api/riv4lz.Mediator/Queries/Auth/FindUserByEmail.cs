@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using riv4lz.Mediator.Dtos.Auth;
-using riv4lz.Mediator.Services;
+using riv4lz.Mediator.Helpers;
 
 namespace riv4lz.Mediator.Queries.Auth;
 
@@ -15,12 +15,12 @@ public class FindUserByEmail
     public class Handler : IRequestHandler<Query, UserDto>
     {
         private readonly UserManager<IdentityUser<Guid>> _userManager;
-        private readonly TokenService _tokenService;
+        private readonly TokenHelper _tokenHelper;
 
-        public Handler(UserManager<IdentityUser<Guid>> userManager, TokenService tokenService)
+        public Handler(UserManager<IdentityUser<Guid>> userManager, TokenHelper tokenHelper)
         {
             _userManager = userManager;
-            _tokenService = tokenService;
+            _tokenHelper = tokenHelper;
         }
 
         public async Task<UserDto> Handle(Query request, CancellationToken cancellationToken)
@@ -31,7 +31,7 @@ public class FindUserByEmail
             {
                 Id = user.Id,
                 Email = user.Email,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenHelper.CreateToken(user)
             };
 
             return user != null ? userDto : null;

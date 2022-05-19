@@ -1,33 +1,23 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
-
-using riv4lz.core.Models;
+using riv4lz.casterApi.Interfaces;
+using riv4lz.core.Enums;
 using riv4lz.Mediator.Commands.Auth;
-using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Auth;
 using riv4lz.Mediator.Queries.Auth;
-using riv4lz.Mediator.Queries.Chat;
 
 namespace riv4lz.casterApi.Controllers
 {
     
-    public class AuthController : BaseController
+    public class AuthController : BaseController, IAuthController
     {
-        private readonly IDistributedCache _cache;
-        
-        // test comment
-        public AuthController(IDistributedCache cache)
-        {
-            _cache = cache;
-        }
         [AllowAnonymous]
         [HttpPost(nameof(Login))]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await Mediator.Send(new AuthenticateUser.Query {LoginDto = loginDto});
-            if (user == null)
+            if (user is null)
             {
                 return Unauthorized();
             }
@@ -35,7 +25,7 @@ namespace riv4lz.casterApi.Controllers
             return user;
         }
 
-        [HttpPost(nameof(UpdatePassword))]
+        [HttpPut(nameof(UpdatePassword))]
         public async Task<ActionResult> UpdatePassword(UpdatePasswordDto updatePasswordDto)
         {
             var result = await Mediator
@@ -44,7 +34,7 @@ namespace riv4lz.casterApi.Controllers
             return result ? Ok("Password updated") : BadRequest("Error updating password");
         }
 
-        [HttpPost(nameof(UpdateEmail))]
+        [HttpPut(nameof(UpdateEmail))]
         public async Task<ActionResult> UpdateEmail(UpdateEmailDto updateEmailDto)
         {
             var emailTaken = await Mediator.Send(new IsEmailTaken.Query {Email = updateEmailDto.Email});
@@ -60,7 +50,7 @@ namespace riv4lz.casterApi.Controllers
             return result ? Ok("Email updated") : BadRequest("Error updating email");
         }
         
-        [HttpPost(nameof(UpdateUsername))]
+        [HttpPut(nameof(UpdateUsername))]
         public async Task<ActionResult> UpdateUsername(UpdateUsernameDto updateEmailDto)
         {
             var usernameTaken = await Mediator.Send(
@@ -77,20 +67,6 @@ namespace riv4lz.casterApi.Controllers
             return result ? Ok("Username updated") : BadRequest("Error updating username");
         }
 
-        [AllowAnonymous]
-        [HttpPost(nameof(RegisterCaster))]
-        public async Task<ActionResult<UserDto>> RegisterCaster(RegisterUserDto registerUserDto)
-        {
-            return await RegisterUser(registerUserDto, UserType.Caster);
-        }
-
-        [AllowAnonymous]
-        [HttpPost(nameof(RegisterOrganisation))]
-        public async Task<ActionResult<UserDto>> RegisterOrganisation(RegisterUserDto registerUserDto)
-        {
-            return await RegisterUser(registerUserDto, UserType.Organisation);
-        }
-
         [HttpGet(nameof(GetCurrentUser))]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
@@ -104,8 +80,9 @@ namespace riv4lz.casterApi.Controllers
             return await Mediator.Send(new IsEmailTaken.Query { Email = email});
         }
         
-        // TODO slet?
-        private async Task<ActionResult<UserDto>> RegisterUser(RegisterUserDto registerUserDto, UserType userType)
+        [AllowAnonymous]
+        [HttpPost(nameof(RegisterUser))]
+        public async Task<ActionResult<UserDto>> RegisterUser(RegisterUserDto registerUserDto, UserType userType)
         {
             if (await IsEmailTaken(registerUserDto.Email))
             {
@@ -126,19 +103,6 @@ namespace riv4lz.casterApi.Controllers
             var userDto = await Mediator.Send(new FindUserByEmail.Query {Email = registerUserDto.Email});
 
             return userDto != null ? userDto : BadRequest("Problem registering user");
-        }
-        
-        [HttpGet(nameof(GetRoom))]
-        public async Task<ActionResult<ChatRoomWithMessagesDto>> GetRoom(string roomId)
-        {
-            return await Mediator.Send(new GetRoom.Query {RoomId = roomId});
-        }
-        
-        [AllowAnonymous]
-        [HttpGet(nameof(GetRooms))]
-        public async Task<ActionResult<List<ChatRoomDto>>> GetRooms()
-        {
-            return await Mediator.Send(new GetRooms.Query());
         }
     }
 }

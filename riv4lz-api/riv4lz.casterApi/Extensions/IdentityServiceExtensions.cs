@@ -2,7 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using riv4lz.Mediator.Services;
+using riv4lz.Mediator.Helpers;
 using riv4lz.security.DataAccess;
 
 namespace riv4lz.casterApi.Extensions
@@ -72,7 +72,7 @@ namespace riv4lz.casterApi.Extensions
                 });
             });
             
-            services.AddScoped<TokenService>();
+            services.AddScoped<TokenHelper>();
             return services;
         }
     }

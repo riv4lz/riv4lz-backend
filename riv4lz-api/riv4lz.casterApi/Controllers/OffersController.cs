@@ -1,45 +1,34 @@
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using riv4lz.casterApi.Interfaces;
 using riv4lz.Mediator.Commands;
-using riv4lz.Mediator.Dtos;
-using riv4lz.Mediator.Queries;
+using riv4lz.Mediator.Dtos.Events;
+using riv4lz.Mediator.Queries.EventQueries;
 
 namespace riv4lz.casterApi.Controllers
 {
-    [AllowAnonymous]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OffersController : ControllerBase
+    public class OffersController : BaseController, IOffersController
     {
-        private readonly IMediator _mediator;
-
-        public OffersController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-        
         [HttpGet(nameof(GetOffer))]
         public async Task<ActionResult<OfferDto>> GetOffer(Guid offerId)
         {
-            var offer = await _mediator.Send(new GetEventOffer.Query {OfferId = offerId});
+            var offer = await Mediator.Send(new GetEventOffer.Query {OfferId = offerId});
             return Ok(offer);
         }
         
         [HttpGet(nameof(GetOffers))]
         public async Task<ActionResult<List<OfferDto>>> GetOffers(Guid eventId)
         {
-            var offers = await _mediator.Send(new GetEventOffers.Query {EventId = eventId});
+            var offers = await Mediator.Send(new GetEventOffers.Query {EventId = eventId});
             return Ok(offers);
         }
         
         [HttpPost(nameof(CreateOffer))]
         public async Task<ActionResult<OfferDto>> CreateOffer(CreateOfferDto createOfferDto)
         {
-            var result = await _mediator.Send(new CreateEventOffer.Command {CreateOfferDto = createOfferDto});
+            var result = await Mediator.Send(new CreateEventOffer.Command {CreateOfferDto = createOfferDto});
             if (result)
             {
-                var offer = await _mediator.Send(new GetEventOffer.Query {OfferId = createOfferDto.Id});
+                var offer = await Mediator.Send(new GetEventOffer.Query {OfferId = createOfferDto.Id});
                 return Ok(offer);
             }
             return BadRequest("Error creating offer");
@@ -48,13 +37,13 @@ namespace riv4lz.casterApi.Controllers
         [HttpPut(nameof(UpdateOffer))]
         public async Task<ActionResult<bool>> UpdateOffer(UpdateOfferDto updateOfferDto)
         {
-            return await _mediator.Send(new UpdateOfferStatus.Command {UpdateOfferDto = updateOfferDto});
+            return await Mediator.Send(new UpdateOfferStatus.Command {UpdateOfferDto = updateOfferDto});
         }
         
         [HttpPut(nameof(AcceptOffer))]
         public async Task<ActionResult<bool>> AcceptOffer(UpdateOfferDto updateOfferDto)
         {
-            var result = await _mediator.Send(new AcceptOffer.Command {UpdateOfferDto = updateOfferDto});
+            var result = await Mediator.Send(new AcceptOffer.Command {UpdateOfferDto = updateOfferDto});
 
             if (result)
             {
@@ -67,13 +56,13 @@ namespace riv4lz.casterApi.Controllers
         [HttpPut(nameof(RejectOffer))]
         public async Task<ActionResult<bool>> RejectOffer(UpdateOfferDto updateOfferDto)
         {
-            return await _mediator.Send(new RejectOffer.Command {UpdateOfferDto = updateOfferDto});
+            return await Mediator.Send(new RejectOffer.Command {UpdateOfferDto = updateOfferDto});
         }
         
         [HttpDelete(nameof(DeleteOffer))]
         public async Task<ActionResult<bool>> DeleteOffer(Guid offerId)
         {
-            return await _mediator.Send(new DeleteEventOffer.Command {OfferId = offerId});
+            return await Mediator.Send(new DeleteEventOffer.Command {OfferId = offerId});
         }
     }
 }

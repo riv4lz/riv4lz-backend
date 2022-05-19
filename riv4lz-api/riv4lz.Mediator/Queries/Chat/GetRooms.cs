@@ -1,11 +1,9 @@
-using System.Text.Json;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.IdentityModel.Tokens;
 using riv4lz.dataAccess;
-using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Dtos.Chat;
 
 namespace riv4lz.Mediator.Queries.Chat;
 

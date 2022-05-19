@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using riv4lz.core.Models;
+using riv4lz.core.Enums;
 
 namespace riv4lz.core.Entities;
 

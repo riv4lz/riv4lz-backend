@@ -1,9 +1,9 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using riv4lz.core.Models;
+using riv4lz.core.Enums;
 using riv4lz.dataAccess;
-using riv4lz.Mediator.Dtos;
+using riv4lz.Mediator.Dtos.Events;
 
 namespace riv4lz.Mediator.Commands;
 
@@ -36,7 +36,7 @@ public class AcceptOffer
 
                     if (offer != null)
                     {
-                        offer.OfferStatus = OfferStatus.CLOSED;
+                        offer.OfferStatus = OfferStatus.Closed;
                     }
 
                     await _ctx.SaveChangesAsync(cancellationToken);
@@ -49,7 +49,7 @@ public class AcceptOffer
                 
                     foreach (var o in offers)
                     {
-                        o.OfferStatus = OfferStatus.REJECTED;
+                        o.OfferStatus = OfferStatus.Rejected;
                     }
                     
                     // TODO REMOVE in refactoring
