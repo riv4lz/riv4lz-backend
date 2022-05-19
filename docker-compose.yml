@@ -54,7 +54,7 @@ services:
         - 5433:5432
       restart: always
       volumes:
-        - auth-data:/auth/postgres/data
+        - auth-data:/var/lib/auth/postgres/data
         
     pgadmin:
       image: dpage/pgadmin4
@@ -63,10 +63,13 @@ services:
         - PGADMIN_DEFAULT_PASSWORD=riv4lz5683
       ports:
         - 5050:80
-      restart: always    
+      restart: always
+      volumes:
+        - pgadmin-data:/var/lib/pgadmin    
 volumes:
   redis-data:
   postgres-data:
   auth-data:
+  pgadmin-data:
     
     
