@@ -34,6 +34,7 @@ namespace riv4lz.casterApi.Controllers
             return null;
         }
 
+        [HttpDelete(nameof(DeleteEvent))]
         public Task<ActionResult<bool>> DeleteEvent(Guid eventId)
         {
             throw new NotImplementedException();
