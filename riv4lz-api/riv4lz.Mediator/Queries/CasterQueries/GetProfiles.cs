@@ -34,7 +34,10 @@ public class GetProfiles
                 .Select(u => _mapper.Map<ProfileDto>(u))
                 .ToListAsync(cancellationToken);
 
-            return profiles.IsNullOrEmpty() ? null : profiles;
+            if (profiles.IsNullOrEmpty())
+                return null;
+
+            return profiles;
         }
     }
 }

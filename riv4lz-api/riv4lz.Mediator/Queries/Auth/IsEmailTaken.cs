@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using riv4lz.security.DataAccess;
 
 namespace riv4lz.Mediator.Queries.Auth;
@@ -22,9 +23,11 @@ public class IsEmailTaken
 
         public async Task<bool> Handle(Query request, CancellationToken cancellationToken)
         {
-            var user = _authContext.Users.FirstOrDefault(u => request.Email.Equals(u.Email));
-            
-            return user != null;
+            var user = await _authContext.Users
+                .FirstOrDefaultAsync(u => request.Email
+                    .Equals(u.Email), cancellationToken);
+
+            return user is not null;
         }
     }
 }

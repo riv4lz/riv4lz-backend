@@ -30,7 +30,8 @@ public class GetEvents
             var events = await _ctx.Events
                 .Include(e => e.Teams)
                 .Include(e => e.OrganisationProfile)
-                .Select(e => _mapper.Map<EventDto>(e)).ToListAsync(cancellationToken);
+                .Select(e => _mapper.Map<EventDto>(e))
+                .ToListAsync(cancellationToken);
 
             if (events.IsNullOrEmpty())
                 return null;
