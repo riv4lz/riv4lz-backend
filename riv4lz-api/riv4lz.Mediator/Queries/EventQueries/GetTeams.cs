@@ -1,6 +1,7 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos;
 
@@ -10,7 +11,6 @@ public class GetTeams
 {
     public class Query : IRequest<List<TeamDto>>
     {
-        
     }
     
     public class Handler : IRequestHandler<Query, List<TeamDto>>
@@ -26,8 +26,13 @@ public class GetTeams
 
         public async Task<List<TeamDto>> Handle(Query request, CancellationToken cancellationToken)
         {
-            var teams = await _ctx.Teams.Select(te => _mapper.Map<TeamDto>(te)).ToListAsync(cancellationToken);
-            
+            var teams = await _ctx.Teams
+                .Select(te => _mapper.Map<TeamDto>(te))
+                .ToListAsync(cancellationToken);
+
+            if (teams.IsNullOrEmpty())
+                return null;
+
             return teams;
         }
     }

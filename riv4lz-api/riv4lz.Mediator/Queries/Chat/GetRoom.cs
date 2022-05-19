@@ -27,11 +27,12 @@ public class GetRoom
         public async Task<ChatRoomWithMessagesDto> Handle(Query request, CancellationToken cancellationToken)
         {
             var roomId = new Guid(request.RoomId);
+            
             var chatRoom = await _ctx.ChatRooms
                 .Include(r => r.Messages)
                 .FirstOrDefaultAsync(r => r.Id.Equals(roomId), cancellationToken);
-            
-            return _mapper.Map<ChatRoomWithMessagesDto>(chatRoom);
+
+            return chatRoom is null ? null : _mapper.Map<ChatRoomWithMessagesDto>(chatRoom);
         }
     }
 }

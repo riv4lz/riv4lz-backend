@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using riv4lz.core.Enums;
-using riv4lz.Mediator.Dtos.Casters;
 
 namespace riv4lz.Mediator.Dtos.Events;
 

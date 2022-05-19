@@ -2,7 +2,6 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess;
-using riv4lz.dataAccess.Cloudinary;
 using riv4lz.Mediator.Dtos.Events;
 
 namespace riv4lz.Mediator.Commands.EventCommands;

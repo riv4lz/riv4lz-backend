@@ -26,12 +26,16 @@ public class GetEventOffers
         }
         public async Task<List<OfferDto>?> Handle(Query request, CancellationToken cancellationToken)
         {
-            var eventOffers = await _ctx.Offers.Where(x => x.EventId == request.EventId)
+            var eventOffers = await _ctx.Offers
+                .Where(x => x.EventId == request.EventId)
                 .Include(o => o.Caster)
-                .Select(e => _mapper.Map<OfferDto>(e)).ToListAsync(cancellationToken);
+                .Select(e => _mapper.Map<OfferDto>(e))
+                .ToListAsync(cancellationToken);
 
-            return eventOffers.IsNullOrEmpty() ? null : eventOffers;
+            if (eventOffers.IsNullOrEmpty())
+                return null;
 
+            return eventOffers;
         }
     }
 }
