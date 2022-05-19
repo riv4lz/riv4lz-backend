@@ -26,11 +26,11 @@ namespace riv4lz.casterApi
                 var ctx = services.GetRequiredService<DataContext>();
                 var chatCtx = services.GetRequiredService<ChatContext>();
                 //await chatCtx.Database.EnsureCreatedAsync();
-                await chatCtx.Database.MigrateAsync();
+                //await chatCtx.Database.MigrateAsync();
                 //await context.Database.EnsureCreatedAsync();
-                await context.Database.MigrateAsync();
+                //await context.Database.MigrateAsync();
                 //await casterContext.Database.EnsureCreatedAsync();
-                await casterContext.Database.MigrateAsync();
+                //await casterContext.Database.MigrateAsync();
                 await AuthDbSeed.SeedData(context, userManager, roleManager, ctx, chatCtx);
             }
             catch (Exception e)

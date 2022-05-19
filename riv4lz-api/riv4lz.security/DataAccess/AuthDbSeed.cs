@@ -17,7 +17,7 @@ public class AuthDbSeed
         UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager, DataContext ctx, ChatContext chatCtx)
     {
         var casterRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "Caster"};
-        var organisationRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "OrganisationProfile"};
+        var organisationRole = new IdentityRole<Guid>() {Id = new Guid(), Name = "Organisation"};
 
         var user1 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "j@r.co", UserName = "Jonas"};
         var user2 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "m@r.co", UserName = "Mike"};
@@ -31,6 +31,7 @@ public class AuthDbSeed
         {
             await roleManager.CreateAsync(casterRole);
             await roleManager.CreateAsync(organisationRole);
+            await authCtx.SaveChangesAsync();
         }
         
         if (!userManager.Users.Any())
@@ -46,6 +47,8 @@ public class AuthDbSeed
 
             await userManager.CreateAsync(user4, "pw");
             await userManager.AddToRoleAsync(user4, organisationRole.Name);
+
+            await authCtx.SaveChangesAsync();
         }
         
         //await ctx.Database.EnsureDeletedAsync();

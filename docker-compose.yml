@@ -9,6 +9,8 @@ services:
       depends_on:
         - redis
         - postgresql_database
+        - auth_db
+        - chat_db
     redis:
       image: redis:latest
       container_name: "${REDIS_CONT_NAME}"
