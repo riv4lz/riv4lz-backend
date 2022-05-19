@@ -28,7 +28,9 @@ public class DeleteEvent
         {
             _ctx.Events.Remove(_mapper.Map<Event>(request.EventDto));
             
-            return await _ctx.SaveChangesAsync(cancellationToken) > 0;
+            var result = await _ctx.SaveChangesAsync(cancellationToken);
+            
+            return result > 0;
         }
     }
 }

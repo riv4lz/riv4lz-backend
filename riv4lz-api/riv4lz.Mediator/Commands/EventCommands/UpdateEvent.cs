@@ -34,9 +34,9 @@ public class UpdateEvent
             
             _mapper.Map(request.UpdateEventDto, eventToUpdate);
 
-            var result = await _ctx.SaveChangesAsync(cancellationToken) > 0;
+            var result = await _ctx.SaveChangesAsync(cancellationToken);
             
-            return result;
+            return result > 0;
         }
     }
 }

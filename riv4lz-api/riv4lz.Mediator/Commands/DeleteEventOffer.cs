@@ -1,4 +1,3 @@
-using AutoMapper;
 using MediatR;
 using riv4lz.dataAccess;
 
@@ -13,24 +12,24 @@ public class DeleteEventOffer
 
     public class Handler : IRequestHandler<Command, bool>
     {
-        private readonly IMapper _mapper;
         private readonly DataContext _ctx;
 
-        public Handler(IMapper mapper, DataContext ctx)
+        public Handler(DataContext ctx)
         {
-            _mapper = mapper;
             _ctx = ctx;
         }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            var offer = await _ctx.Offers.FindAsync(request.OfferId, cancellationToken);
+            var offer = await _ctx.Offers
+                .FindAsync(request.OfferId, cancellationToken);
 
-            if (offer != null)
-            {
-                _ctx.Offers.Remove(offer);
-            }
+            if (offer is null)
+                return false;
             
-            return await _ctx.SaveChangesAsync(cancellationToken) > 0;
+            _ctx.Offers.Remove(offer);
+            var result = await _ctx.SaveChangesAsync(cancellationToken);
+            
+            return result > 0;
         }
     }
 }

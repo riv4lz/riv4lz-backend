@@ -32,9 +32,13 @@ public class AddImage
             var profile = await _ctx.Profiles
                 .FirstOrDefaultAsync(x => x.Id == request.UserId, cancellationToken);
 
-            profile.Images = new List<Image>();
-            
+            if (profile is null)
+                return false;
+
             var imageUploadResult = await _photoAccessor.AddPhoto(request.File);
+
+            if (imageUploadResult is null)
+                return false;
 
             var image = new Image()
             {
@@ -43,6 +47,7 @@ public class AddImage
                 ImageType = ImgType.Profile,
             };
             
+            profile.Images = new List<Image>();
             profile.Images.Add(image);
 
             var result = await _ctx.SaveChangesAsync(cancellationToken);

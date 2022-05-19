@@ -15,24 +15,24 @@ public class RejectOffer
 
     public class Handler : IRequestHandler<Command, bool>
     {
-        private readonly IMapper _mapper;
         private readonly DataContext _ctx;
 
-        public Handler(IMapper mapper, DataContext ctx)
+        public Handler(DataContext ctx)
         {
-            _mapper = mapper;
             _ctx = ctx;
         }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            var offer = await _ctx.Offers.FindAsync(request.UpdateOfferDto.Id);
+            var offer = await _ctx.Offers
+                .FindAsync(request.UpdateOfferDto.Id, cancellationToken);
 
-            if (offer != null)
-            {
-                offer.OfferStatus = OfferStatus.Rejected;
-            }
-
-            return await _ctx.SaveChangesAsync(cancellationToken) > 0;
+            if (offer is null)
+                return false;
+                
+            offer.OfferStatus = OfferStatus.Rejected;
+            var result = await _ctx.SaveChangesAsync(cancellationToken);
+            
+            return result > 0;
         }
     }
 }

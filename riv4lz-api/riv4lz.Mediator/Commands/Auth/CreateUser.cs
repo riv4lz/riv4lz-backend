@@ -24,6 +24,7 @@ public class CreateUser
         
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
+            // TODO make transaction
             var user = new IdentityUser<Guid>()
             {
                 Id = request.RegisterUserDto.Id,
@@ -33,14 +34,21 @@ public class CreateUser
 
             var registerUserResult = await _userManager.CreateAsync(user, request.RegisterUserDto.Password);
 
-            return registerUserResult.Succeeded && AddRole(user, request.UserType);
+            if (!registerUserResult.Succeeded)
+                return false;
+            
+            var addRoleResult = await AddRole(user, request.UserType);
+            if (!addRoleResult.Succeeded)
+                return false;
+
+            return true;
         }
 
-        private bool AddRole(IdentityUser<Guid> user, UserType requestUserType)
+        private async Task<IdentityResult> AddRole(IdentityUser<Guid> user, UserType requestUserType)
         {
             return requestUserType == UserType.Caster ? 
-                _userManager.AddToRoleAsync(user, UserType.Caster.ToString()).Result.Succeeded : 
-                _userManager.AddToRoleAsync(user, UserType.Organisation.ToString()).Result.Succeeded;
+                await _userManager.AddToRoleAsync(user, UserType.Caster.ToString()) : 
+                await _userManager.AddToRoleAsync(user, UserType.Organisation.ToString());
         }
     }
 }

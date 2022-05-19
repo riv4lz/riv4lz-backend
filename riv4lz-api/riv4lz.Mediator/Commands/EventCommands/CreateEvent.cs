@@ -25,9 +25,8 @@ public class CreateEvent
         }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            await _ctx.Events.AddAsync(
-                _mapper.Map<CreateEventDto, Event>(
-                    request.CreateEventDto), cancellationToken);
+            await _ctx.Events
+                .AddAsync(_mapper.Map<CreateEventDto, Event>(request.CreateEventDto), cancellationToken);
 
             var result = await _ctx.SaveChangesAsync(cancellationToken);
             

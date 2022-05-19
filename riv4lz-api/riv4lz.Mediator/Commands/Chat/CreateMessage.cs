@@ -36,8 +36,14 @@ public class CreateMessage
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             var messageEntity = _mapper.Map<Message>(request.CreateMessageDto);
+
+            if (messageEntity is null)
+                return false;
+            
             await _ctx.Messages.AddAsync(messageEntity, cancellationToken);
-            return await _ctx.SaveChangesAsync(cancellationToken) > 0;
+            var result = await _ctx.SaveChangesAsync(cancellationToken);
+            
+            return result > 0;
         }
     }
 }

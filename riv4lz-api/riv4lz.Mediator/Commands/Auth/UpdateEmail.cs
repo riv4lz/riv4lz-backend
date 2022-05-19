@@ -23,11 +23,9 @@ public class UpdateEmail
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByIdAsync(request.UpdateEmailDto.UserId.ToString());
-            if (user == null)
-            {
+            if (user is null)
                 return false;
-            }
-
+            
             user.Email = request.UpdateEmailDto.Email;
             var result = await _userManager.UpdateAsync(user);
 

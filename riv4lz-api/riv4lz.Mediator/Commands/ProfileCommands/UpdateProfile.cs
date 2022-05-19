@@ -24,13 +24,11 @@ public class UpdateProfile
         }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            var profile = await _ctx.Profiles.FindAsync(
-                request.UpdateProfileDto.Id);
+            var profile = await _ctx.Profiles
+                .FindAsync(request.UpdateProfileDto.Id, cancellationToken);
             
             if (profile == null)
-            {
                 return false;
-            }
             
             _mapper.Map(request.UpdateProfileDto, profile);
             

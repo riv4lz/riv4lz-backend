@@ -1,6 +1,6 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using riv4lz.core.Enums;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Events;
@@ -16,58 +16,57 @@ public class AcceptOffer
 
     public class Handler : IRequestHandler<Command, bool>
     {
-        private readonly IMapper _mapper;
         private readonly DataContext _ctx;
 
-        public Handler(IMapper mapper, DataContext ctx)
+        public Handler(DataContext ctx)
         {
-            _mapper = mapper;
             _ctx = ctx;
         }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            
-            await using (var dbTransaction = await _ctx.Database.BeginTransactionAsync(cancellationToken))
+            await using var dbTransaction = await _ctx.Database.BeginTransactionAsync(cancellationToken);
+            try
             {
-                try
-                {
-                    // Set accepted offer status to CLOSED.
-                    var offer = await _ctx.Offers.Include(o => o.Event).FirstOrDefaultAsync(o => o.Id == request.UpdateOfferDto.Id);
+                var offer = await _ctx.Offers
+                    .Include(o => o.Event)
+                    .FirstOrDefaultAsync(o => o.Id == request.UpdateOfferDto.Id, cancellationToken);
 
-                    if (offer != null)
-                    {
-                        offer.OfferStatus = OfferStatus.Closed;
-                    }
-
-                    await _ctx.SaveChangesAsync(cancellationToken);
-                    
-                    
-                    // Set all other offers' status to REJECTED.
-                    var offers = await _ctx.Offers
-                        .Where(o => o.Id != request.UpdateOfferDto.Id)
-                        .ToListAsync(cancellationToken);
-                
-                    foreach (var o in offers)
-                    {
-                        o.OfferStatus = OfferStatus.Rejected;
-                    }
-                    
-                    // TODO REMOVE in refactoring
-                    // Set event status to CLOSED.
-                    offer.Event.EventStatus = EventStatus.CLOSED;
-                    
-                    await _ctx.SaveChangesAsync(cancellationToken);
-
-                    await dbTransaction.CommitAsync(cancellationToken);
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    await dbTransaction.RollbackAsync(cancellationToken);
-                    Console.WriteLine(e);
+                if (offer is null)
                     return false;
-                } 
+                    
+                offer.OfferStatus = OfferStatus.Closed;
+                
+                var result = await RejectOtherOffers(request, cancellationToken);
+                if (!result)
+                    return false;
+                
+                offer.Event.EventStatus = EventStatus.CLOSED;
+                await _ctx.SaveChangesAsync(cancellationToken);
+
+                await dbTransaction.CommitAsync(cancellationToken);
+                return true;
             }
+            catch (Exception e)
+            {
+                await dbTransaction.RollbackAsync(cancellationToken);
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        private async Task<bool> RejectOtherOffers(Command request, CancellationToken cancellationToken)
+        {
+            var offers = await _ctx.Offers
+                .Where(o => o.Id != request.UpdateOfferDto.Id)
+                .ToListAsync(cancellationToken);
+
+            if (offers.IsNullOrEmpty())
+                return false;
+
+            foreach (var o in offers)
+                o.OfferStatus = OfferStatus.Rejected;
+
+            return true;
         }
     }
 }

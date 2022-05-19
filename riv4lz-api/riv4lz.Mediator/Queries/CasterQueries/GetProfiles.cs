@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using riv4lz.core.Enums;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Casters;
-using Profile = riv4lz.core.Entities.Profile;
 
 namespace riv4lz.Mediator.Queries.CasterQueries;
 

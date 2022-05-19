@@ -1,4 +1,3 @@
-using AutoMapper;
 using MediatR;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Events;
@@ -14,22 +13,20 @@ public class UpdateOfferStatus
 
     public class Handler : IRequestHandler<Command, bool>
     {
-        private readonly IMapper _mapper;
         private readonly DataContext _ctx;
 
-        public Handler(IMapper mapper, DataContext ctx)
+        public Handler(DataContext ctx)
         {
-            _mapper = mapper;
             _ctx = ctx;
         }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             var offer = await _ctx.Offers.FindAsync(request.UpdateOfferDto.Id);
 
-            if (offer != null)
-            {
-                offer.OfferStatus = request.UpdateOfferDto.OfferStatus;
-            }
+            if (offer is null)
+                return false;
+                
+            offer.OfferStatus = request.UpdateOfferDto.OfferStatus;
 
             var result = await _ctx.SaveChangesAsync(cancellationToken);
             

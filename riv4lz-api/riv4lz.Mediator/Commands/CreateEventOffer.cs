@@ -27,7 +27,9 @@ public class CreateEventOffer
         {
             await _ctx.Offers.AddAsync(_mapper.Map<Offer>(request.CreateOfferDto), cancellationToken);
             
-            return await _ctx.SaveChangesAsync(cancellationToken) > 0;
+            var result = await _ctx.SaveChangesAsync(cancellationToken);
+            
+            return result > 0;
         }
     }
 }
