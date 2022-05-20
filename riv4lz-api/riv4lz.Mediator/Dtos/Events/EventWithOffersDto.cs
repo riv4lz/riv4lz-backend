@@ -1,5 +1,6 @@
 using riv4lz.core.Entities;
 using riv4lz.core.Enums;
+using riv4lz.Mediator.Dtos.Profile;
 
 namespace riv4lz.Mediator.Dtos.Events;
 
@@ -13,7 +14,7 @@ public class EventWithOffersDto
     public EventStatus EventStatus { get; set; }
     
     public Guid OrganisationId { get; set; }
-    public Profile OrganisationProfile { get; set; }
+    public ProfileDto OrganisationProfile { get; set; }
 
     public ICollection<Offer>? Offers { get; set; }
 }

@@ -1,4 +1,4 @@
-namespace riv4lz.casterApi.test.Controllers;
+namespace riv4lz.mediatr.test.Dtos;
 
 public class LoginDtoTest
 {

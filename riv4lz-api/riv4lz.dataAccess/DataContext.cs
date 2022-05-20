@@ -24,6 +24,10 @@ public class DataContext : DbContext
             .HasOne<Profile>(e => e.OrganisationProfile)
             .WithMany(o => o.Events)
             .HasForeignKey(o => o.OrganisationId);
+
+        modelBuilder.Entity<Event>()
+            .HasMany(e => e.Teams)
+            .WithMany(t => t.Events);
         
         modelBuilder.Entity<Offer>()
             .HasOne<Profile>(o => o.Caster)
@@ -40,7 +44,7 @@ public class DataContext : DbContext
     public virtual DbSet<Profile> Profiles { get; set; }
     public virtual DbSet<Event> Events { get; set; }
     public virtual DbSet<Offer> Offers { get; set; }
-    
     public virtual DbSet<Team> Teams { get; set; }
-    public virtual DbSet<Image> Images { get; set; }
+
+    public virtual DbSet<EventTeam> EventTeam { get; set; }
 }

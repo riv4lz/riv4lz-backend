@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using riv4lz.core.Entities;
+using riv4lz.core.Enums;
 using Xunit;
 
 namespace riv4lz.core.test.Entities;
@@ -212,6 +213,32 @@ public class EventTest
         Assert.DoesNotContain(team, _event.Teams);
     }
     
+    [Fact]
+    public void Event_EventStatus_IsEventStatus()
+    {
+        _event.EventStatus = new EventStatus();
+        Assert.IsType<EventStatus>(_event.EventStatus);
+    }
     
+    [Fact]
+    public void Event_SettingEventStatus_CanBePending()
+    {
+        _event.EventStatus = EventStatus.Pending;
+        Assert.Equal(EventStatus.Pending, _event.EventStatus);
+    }
+    
+    [Fact]
+    public void Event_SettingEventStatus_CanBeClosed()
+    {
+        _event.EventStatus = EventStatus.Closed;
+        Assert.Equal(EventStatus.Closed, _event.EventStatus);
+    }
+    
+    [Fact]
+    public void Event_SettingEventStatus_CanBeExpired()
+    {
+        _event.EventStatus = EventStatus.Expired;
+        Assert.Equal(EventStatus.Expired, _event.EventStatus);
+    }
     
 }

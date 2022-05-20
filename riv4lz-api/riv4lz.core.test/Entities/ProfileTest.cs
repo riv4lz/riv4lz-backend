@@ -284,64 +284,6 @@ public class ProfileTest
     }
     
     [Fact]
-    public void Profile_Images_CanBeListOfImages()
-    {
-        _profile.Images = new List<Image>();
-        Assert.IsType<List<Image>>(_profile.Images);
-    }
-    
-    [Fact]
-    public void Profile_Images_IsNullByDefault()
-    {
-        Assert.Null(_profile.Images);
-    }
-    
-    [Fact]
-    public void Profile_Images_CanBeSet()
-    {
-        var images = new List<Image>();
-        _profile.Images = images;
-        Assert.Equal(images, _profile.Images);
-    }
-    
-    [Fact]
-    public void Profile_Images_CanBeAdded()
-    {
-        _profile.Images = new List<Image>();
-        var image = new Image();
-        _profile.Images.Add(image);
-        Assert.Contains(image, _profile.Images);
-    }
-    
-    [Fact]
-    public void Profile_Images_CanBeRemoved()
-    {
-        _profile.Images = new List<Image>();
-        var image = new Image();
-        _profile.Images.Add(image);
-        _profile.Images.Remove(image);
-        Assert.DoesNotContain(image, _profile.Images);
-    }
-    
-    [Fact]
-    public void Profile_Images_CanBeCleared()
-    {
-        _profile.Images = new List<Image>();
-        var image = new Image();
-        _profile.Images.Add(image);
-        _profile.Images.Clear();
-        Assert.Empty(_profile.Images);
-    }
-    
-    [Fact]
-    public void Profile_Images_CanBeSetToNull()
-    {
-        _profile.Images = new List<Image>();
-        _profile.Images = null;
-        Assert.Null(_profile.Images);
-    }
-
-    [Fact]
     public void Profile_Events_CanBeListOfEvent()
     {
         _profile.Events = new List<Event>();

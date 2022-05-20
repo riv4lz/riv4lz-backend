@@ -25,13 +25,7 @@ public class DataContextTest
     {
         Assert.True(_dataContext.Profiles is DbSet<Profile>);
     }
-    
-    [Fact]
-    public void DbContext_DbSets_MustHaveDbSetWithTypeImages()
-    {
-        Assert.True(_dataContext.Images is DbSet<Image>);
-    }
-    
+
     [Fact]
     public void DbContext_DbSets_MustHaveDbSetWithTypeTeam()
     {
