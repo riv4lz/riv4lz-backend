@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using riv4lz.core.Enums;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Profile;
@@ -24,7 +25,7 @@ public class UploadImageUrl
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             var profile = await _ctx.Profiles
-                .FindAsync(request.UploadImageUrlDto.UserId);
+                .FirstOrDefaultAsync(p => p.Id == request.UploadImageUrlDto.UserId, cancellationToken);
 
             if (profile is null)
                 return false;
