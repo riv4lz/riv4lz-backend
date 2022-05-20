@@ -25,9 +25,11 @@ public class CreateEvent
         }
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            var entity = await _ctx.Events
-                .AddAsync(_mapper.Map<core.Entities.Event>(request.CreateEventDto), cancellationToken);
-            
+            var eventToBe = _mapper.Map<core.Entities.Event>(request.CreateEventDto);
+
+            var entity = _ctx.Events.Add(eventToBe);
+            var success = _ctx.SaveChanges() > 0;
+
             entity.Entity.Teams = new List<Team>()
             {
                 _mapper.Map<Team>(request.CreateEventDto.TeamOne),

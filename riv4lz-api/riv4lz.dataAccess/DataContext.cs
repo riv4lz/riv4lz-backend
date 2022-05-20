@@ -34,7 +34,7 @@ public class DataContext : DbContext
             .WithMany(c => c.Offers)
             .HasForeignKey(o => o.CasterId);
 
-        modelBuilder.Entity<Team>().HasIndex(t => t.Name).IsUnique();
+        //modelBuilder.Entity<Team>().HasIndex(t => t.Name).IsUnique();
         
         modelBuilder.Entity<Profile>()
             .HasIndex(t => t.Name).IsUnique();
