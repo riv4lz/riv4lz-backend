@@ -25,7 +25,7 @@ public class UpdateProfile
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
             var profile = await _ctx.Profiles
-                .FindAsync(request.UpdateProfileDto.Id, cancellationToken);
+                .FindAsync(request.UpdateProfileDto.Id);
             
             if (profile == null)
                 return false;
