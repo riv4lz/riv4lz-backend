@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.casterApi.Interfaces;
-using riv4lz.Mediator.Commands.EventCommands;
+using riv4lz.Mediator.Commands.Event;
 using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Events;
-using riv4lz.Mediator.Queries.EventQueries;
+using riv4lz.Mediator.Queries.Event;
 
 namespace riv4lz.casterApi.Controllers
 {
@@ -41,7 +41,7 @@ namespace riv4lz.casterApi.Controllers
             if(!result)
                 return BadRequest("Failed to create event");
             
-            return Ok(result);
+            return Ok(true);
         }
         
         [HttpPut(nameof(UpdateEvent))]

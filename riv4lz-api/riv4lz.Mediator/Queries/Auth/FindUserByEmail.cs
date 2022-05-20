@@ -26,15 +26,16 @@ public class FindUserByEmail
         public async Task<UserDto> Handle(Query request, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
-            // test tosee ttt
-            var userDto = new UserDto()
+
+            if (user is null)
+                return null;
+            
+            return new UserDto()
             {
                 Id = user.Id,
                 Email = user.Email,
                 Token = _tokenHelper.CreateToken(user)
             };
-
-            return user != null ? userDto : null;
         }
     }
 }

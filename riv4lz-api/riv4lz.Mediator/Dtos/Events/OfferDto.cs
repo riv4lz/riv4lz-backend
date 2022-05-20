@@ -1,5 +1,5 @@
 using riv4lz.core.Enums;
-using riv4lz.Mediator.Dtos.Casters;
+using riv4lz.Mediator.Dtos.Profile;
 
 namespace riv4lz.Mediator.Dtos.Events;
 

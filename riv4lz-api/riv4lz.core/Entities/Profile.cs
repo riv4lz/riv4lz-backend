@@ -11,6 +11,8 @@ public class Profile
     public UserType UserType { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
+    public string ProfileImageUrl { get; set; }
+    public string BannerImageUrl { get; set; }
     public string FacebookUrl { get; set; }
     public string TwitterUrl { get; set; }
     public string DiscordUrl { get; set; }
@@ -18,6 +20,5 @@ public class Profile
     public string WebsiteUrl { get; set; }
 
     public ICollection<Offer> Offers { get; set; }
-    public ICollection<Image> Images { get; set; }
     public ICollection<Event> Events { get; set; }
 }

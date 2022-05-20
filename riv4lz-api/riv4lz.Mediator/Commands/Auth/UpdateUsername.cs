@@ -24,10 +24,8 @@ public class UpdateUsername
         {
             var user = await _userManager.FindByIdAsync(request.UpdateUsernameDto.UserId.ToString());
             
-            if (user == null)
-            {
+            if (user is null)
                 return false;
-            }
             
             user.UserName = request.UpdateUsernameDto.Username;
             var result = await _userManager.UpdateAsync(user);

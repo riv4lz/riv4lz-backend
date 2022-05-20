@@ -23,7 +23,8 @@ public class IsUsernameTaken
         public async Task<bool> Handle(Query request, CancellationToken cancellationToken)
         {
             var user = await _authContext.Users
-                .FirstOrDefaultAsync(u => request.Username.Equals(u.UserName), cancellationToken);
+                .FirstOrDefaultAsync(u => request.Username
+                    .Equals(u.UserName), cancellationToken);
 
             return user is not null;
         }

@@ -171,7 +171,7 @@ public class AuthDbSeed
                 Id = Guid.NewGuid(),
                 OrganisationId = orgs[1].Id,
                 Price = 99.99,
-                Teams = new List<Team>(){teams[2], teams[3]},
+                Teams = new List<Team>(){teams[1], teams[3]},
                 Time = DateTime.Today.AddMonths(5),
                 Game = "LOL"
             };

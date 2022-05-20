@@ -115,49 +115,7 @@ public class CreateEventDtoTest
     {
         Assert.Null(_createEventDto.Description);
     }
-    
-    [Fact]
-    public void CreateEventDto_TeamOne_IsTeamDto()
-    {
-        _createEventDto.TeamOne = new TeamDto();
-        Assert.IsType<TeamDto>(_createEventDto.TeamOne);
-    }
-    
-    [Fact]
-    public void CreateEventDto_TeamOne_CanBeSet()
-    {
-        var team = new TeamDto();
-        _createEventDto.TeamOne = team;
-        Assert.Equal(team, _createEventDto.TeamOne);
-    }
-    
-    [Fact]
-    public void CreateEventDto_TeamOne_IsNullByDefault()
-    {
-        Assert.Null(_createEventDto.TeamOne);
-    }
-    
-    [Fact]
-    public void CreateEventDto_TeamTwo_IsTeamDto()
-    {
-        _createEventDto.TeamTwo = new TeamDto();
-        Assert.IsType<TeamDto>(_createEventDto.TeamTwo);
-    }
-    
-    [Fact]
-    public void CreateEventDto_TeamTwo_CanBeSet()
-    {
-        var team = new TeamDto();
-        _createEventDto.TeamTwo = team;
-        Assert.Equal(team, _createEventDto.TeamTwo);
-    }
-    
-    [Fact]
-    public void CreateEventDto_TeamTwo_IsNullByDefault()
-    {
-        Assert.Null(_createEventDto.TeamTwo);
-    }
-    
+
     [Fact]
     public void CreateEventDto_Price_IsDouble()
     {

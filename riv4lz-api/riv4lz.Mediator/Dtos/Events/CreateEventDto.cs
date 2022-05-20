@@ -1,3 +1,6 @@
+using riv4lz.core.Entities;
+using riv4lz.core.Enums;
+
 namespace riv4lz.Mediator.Dtos.Events;
 
 public class CreateEventDto
@@ -10,4 +13,5 @@ public class CreateEventDto
     public TeamDto TeamOne { get; set; }
     public TeamDto TeamTwo { get; set; }
     public double Price { get; set; }
+    public EventStatus EventStatus { get; set; }
 }

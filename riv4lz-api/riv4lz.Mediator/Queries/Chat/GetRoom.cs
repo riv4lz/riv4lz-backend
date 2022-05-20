@@ -32,7 +32,10 @@ public class GetRoom
                 .Include(r => r.Messages)
                 .FirstOrDefaultAsync(r => r.Id.Equals(roomId), cancellationToken);
 
-            return chatRoom is null ? null : _mapper.Map<ChatRoomWithMessagesDto>(chatRoom);
+            if (chatRoom is null)
+                return null;
+
+            return _mapper.Map<ChatRoomWithMessagesDto>(chatRoom);
         }
     }
 }

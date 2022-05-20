@@ -22,14 +22,15 @@ public class UpdatePassword
 
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            var user = await _userManager.FindByIdAsync(request.UpdatePasswordDto.UserId.ToString());
-            if (user == null)
-            {
-                return false;
-            }
+            var user = await _userManager
+                .FindByIdAsync(request.UpdatePasswordDto.UserId.ToString());
             
-            var result = await _userManager.ChangePasswordAsync(
-                user, request.UpdatePasswordDto.OldPassword, request.UpdatePasswordDto.NewPassword);
+            if (user is null)
+                return false;
+            
+            var result = await _userManager
+                .ChangePasswordAsync(user, request.UpdatePasswordDto.OldPassword, 
+                    request.UpdatePasswordDto.NewPassword);
             
             return result.Succeeded;
         }
