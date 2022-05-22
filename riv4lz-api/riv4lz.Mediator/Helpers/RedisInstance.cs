@@ -6,8 +6,6 @@ namespace riv4lz.Mediator.Helpers;
 public class RedisInstance
 {
     private readonly IDatabase _cache;
-
-
     public RedisInstance(IConnectionMultiplexer redis)
     {
         _cache = redis.GetDatabase();
