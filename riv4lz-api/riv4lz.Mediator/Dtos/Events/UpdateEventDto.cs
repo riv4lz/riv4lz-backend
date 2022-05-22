@@ -14,5 +14,7 @@ public class UpdateEventDto
     [Required]
     public List<TeamDto> Teams { get; set; }
     [Required]
+    public string Game { get; set; }
+    [Required]
     public double Price { get; set; }
 }

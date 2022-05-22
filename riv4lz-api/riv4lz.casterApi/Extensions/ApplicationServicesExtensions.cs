@@ -6,7 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using riv4lz.dataAccess;
 using riv4lz.dataAccess.Cloudinary;
 using riv4lz.Mediator.Commands.Auth;
+using riv4lz.Mediator.Helpers;
 using riv4lz.security.DataAccess;
+using StackExchange.Redis;
 
 namespace riv4lz.casterApi.Extensions
 {
@@ -23,11 +25,13 @@ namespace riv4lz.casterApi.Extensions
                 .AddJsonOptions(x =>
                     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
-            services.AddStackExchangeRedisCache(options =>
+            services.AddSingleton<IConnectionMultiplexer>(c =>
             {
-                options.Configuration = _configuration.GetConnectionString("Redis");
-                options.InstanceName = "riv4lz_";
+                var configuration = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
             });
+
+            services.AddSingleton<RedisInstance>();
 
             services.AddDbContext<DataContext>(options =>
             {

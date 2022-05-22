@@ -10,6 +10,7 @@ public class EventDto
     public DateTime Time { get; set; }
     public List<TeamDto> Teams { get; set; }
     public double Price { get; set; }
+    public string Game { get; set; }
     
     public ProfileDto OrganisationProfile { get; set; }
 }

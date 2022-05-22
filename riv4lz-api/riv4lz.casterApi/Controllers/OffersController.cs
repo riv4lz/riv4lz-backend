@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.casterApi.Interfaces;
-using riv4lz.Mediator.Commands;
 using riv4lz.Mediator.Commands.Offers;
 using riv4lz.Mediator.Dtos.Events;
 using riv4lz.Mediator.Queries.Event;
@@ -27,7 +26,7 @@ namespace riv4lz.casterApi.Controllers
                 .Send(new GetEventOffers.Query {EventId = eventId});
             
             if (offers is null)
-                return BadRequest("Failed to load offers from database");
+                return new List<OfferDto>();
             
             return Ok(offers);
         }

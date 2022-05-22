@@ -5,7 +5,9 @@ using riv4lz.casterApi.Interfaces;
 using riv4lz.core.Enums;
 using riv4lz.Mediator.Commands.Auth;
 using riv4lz.Mediator.Dtos.Auth;
+using riv4lz.Mediator.Dtos.Chat;
 using riv4lz.Mediator.Queries.Auth;
+using riv4lz.Mediator.Queries.Chat;
 
 namespace riv4lz.casterApi.Controllers
 {
@@ -117,6 +119,12 @@ namespace riv4lz.casterApi.Controllers
                 return BadRequest("Problem registering user");
 
             return Ok(userDto);
+        }
+
+        [HttpGet(nameof(GetRooms))]
+        public async Task<ActionResult<List<ChatRoomDto>>> GetRooms()
+        {
+            return await Mediator.Send(new GetRooms.Query());
         }
     }
 }
