@@ -27,7 +27,7 @@ namespace riv4lz.casterApi.Controllers
                 .Send(new GetEventOffers.Query {EventId = eventId});
             
             if (offers is null)
-                return BadRequest("Failed to load offers from database");
+                return new List<OfferDto>();
             
             return Ok(offers);
         }
