@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Http;
 using riv4lz.core.Enums;
 
 namespace riv4lz.Mediator.Dtos.Profile;

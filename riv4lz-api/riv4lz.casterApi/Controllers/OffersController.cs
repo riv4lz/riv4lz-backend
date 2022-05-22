@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using riv4lz.casterApi.Interfaces;
-using riv4lz.Mediator.Commands;
 using riv4lz.Mediator.Commands.Offers;
 using riv4lz.Mediator.Dtos.Events;
 using riv4lz.Mediator.Queries.Event;

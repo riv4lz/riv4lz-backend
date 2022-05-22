@@ -1,5 +1,4 @@
 using System;
-using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Events;
 using Xunit;
 

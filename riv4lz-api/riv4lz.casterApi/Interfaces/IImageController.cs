@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using riv4lz.Mediator.Commands.Profile;
 using riv4lz.Mediator.Dtos.Profile;
 
 namespace riv4lz.casterApi.Interfaces;

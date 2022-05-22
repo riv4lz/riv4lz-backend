@@ -1,6 +1,4 @@
 using riv4lz.core.Entities;
-using riv4lz.core.Enums;
-using riv4lz.Mediator.Dtos;
 using riv4lz.Mediator.Dtos.Chat;
 using riv4lz.Mediator.Dtos.Events;
 using riv4lz.Mediator.Dtos.Profile;

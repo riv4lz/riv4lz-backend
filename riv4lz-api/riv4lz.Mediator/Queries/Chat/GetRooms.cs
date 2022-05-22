@@ -1,10 +1,10 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
 using riv4lz.dataAccess;
 using riv4lz.Mediator.Dtos.Chat;
+using riv4lz.Mediator.Helpers;
 
 namespace riv4lz.Mediator.Queries.Chat;
 
@@ -17,34 +17,33 @@ public class GetRooms
     {
         private readonly IMapper _mapper;
         private readonly ChatContext _ctx;
-        private readonly IDistributedCache _cache;
+        private readonly RedisInstance _redis;
 
-        public Handler(IMapper mapper, ChatContext ctx, IDistributedCache cache)
+        public Handler(IMapper mapper, ChatContext ctx, RedisInstance redis)
         {
             _mapper = mapper;
             _ctx = ctx;
-            _cache = cache;
+            _redis = redis;
         }
         public async Task<List<ChatRoomDto>> Handle(Query request, CancellationToken cancellationToken)
         {
-            /*
-            var jsonData = await _cache.GetStringAsync("chatrooms");
+            var cachedChatRooms = await _redis.Get<List<ChatRoomDto>>("chatrooms");
 
-            if (!jsonData.IsNullOrEmpty())
+            if (!cachedChatRooms.IsNullOrEmpty())
             {
-                var cachedChatRooms = JsonSerializer.Deserialize<List<ChatRoomDto>>(jsonData);
                 Console.WriteLine("CACHED ROOMS");
                 return cachedChatRooms;
             }
-            */
             
-            var chatRooms = await _ctx.ChatRooms.Select(x => _mapper.Map<ChatRoomDto>(x))
+            
+            var chatRooms = await _ctx.ChatRooms
+                .Select(x => _mapper.Map<ChatRoomDto>(x))
                 .ToListAsync(cancellationToken);
-
+            
             if (chatRooms.IsNullOrEmpty())
                 return null;
 
-            // await _cache.SetStringAsync("chatrooms", JsonSerializer.Serialize(chatRooms));
+            _redis.Set("chatrooms", chatRooms);
 
             return chatRooms;
         }
