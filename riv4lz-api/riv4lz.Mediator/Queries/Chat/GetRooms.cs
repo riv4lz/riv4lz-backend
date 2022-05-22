@@ -29,23 +29,22 @@ public class GetRooms
         {
             var cachedChatRooms = await _redis.Get<List<ChatRoomDto>>("chatrooms");
 
-            if (!cachedChatRooms.IsNullOrEmpty())
+            if (cachedChatRooms.IsNullOrEmpty())
             {
-                Console.WriteLine("CACHED ROOMS");
-                return cachedChatRooms;
+                var chatRooms = await _ctx.ChatRooms
+                    .Select(x => _mapper.Map<ChatRoomDto>(x))
+                    .ToListAsync(cancellationToken);
+            
+                if (chatRooms.IsNullOrEmpty())
+                    return null;
+
+                _redis.Set("chatrooms", chatRooms);
+
+                return chatRooms;
             }
             
-            
-            var chatRooms = await _ctx.ChatRooms
-                .Select(x => _mapper.Map<ChatRoomDto>(x))
-                .ToListAsync(cancellationToken);
-            
-            if (chatRooms.IsNullOrEmpty())
-                return null;
-
-            _redis.Set("chatrooms", chatRooms);
-
-            return chatRooms;
+            Console.WriteLine("CACHED ROOMS");
+            return cachedChatRooms;
         }
     }
 }
