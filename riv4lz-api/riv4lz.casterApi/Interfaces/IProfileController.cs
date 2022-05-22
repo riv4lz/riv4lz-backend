@@ -10,5 +10,5 @@ public interface IProfileController
     Task<ActionResult<ProfileDto>> GetProfile(Guid id);
     Task<ActionResult<ProfileDto>> RegisterProfile(RegisterProfileDto registerProfileDto);
     Task<ActionResult> UpdateProfile(UpdateProfileDto updateProfileDto);
-    ActionResult<ProfileDto> DeleteProfile(Guid id);
+    Task<ActionResult<bool>> DeleteProfile(Guid id);
 }

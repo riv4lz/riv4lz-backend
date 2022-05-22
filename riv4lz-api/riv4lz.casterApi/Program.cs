@@ -19,17 +19,10 @@ namespace riv4lz.casterApi
             {
                 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
                 var context = services.GetRequiredService<AuthContext>();
-                var casterContext = services.GetRequiredService<DataContext>();
                 var userManager = services.GetRequiredService<UserManager<IdentityUser<Guid>>>();
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
                 var ctx = services.GetRequiredService<DataContext>();
                 var chatCtx = services.GetRequiredService<ChatContext>();
-                //await chatCtx.Database.EnsureCreatedAsync();
-                //await chatCtx.Database.MigrateAsync();
-                //await context.Database.EnsureCreatedAsync();
-                //await context.Database.MigrateAsync();
-                //await casterContext.Database.EnsureCreatedAsync();
-                //await casterContext.Database.MigrateAsync();
                 await AuthDbSeed.SeedData(context, userManager, roleManager, ctx, chatCtx);
             }
             catch (Exception e)

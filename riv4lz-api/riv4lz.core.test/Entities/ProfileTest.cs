@@ -342,4 +342,93 @@ public class ProfileTest
         _profile.Events = null;
         Assert.Null(_profile.Events);
     }
+    
+    [Fact]
+    public void Profile_ProfileImageUrl_CanBeSet()
+    {
+        _profile.ProfileImageUrl = "http://www.example.com/image.jpg";
+        Assert.Equal("http://www.example.com/image.jpg", _profile.ProfileImageUrl);
+    }
+    
+    [Fact]
+    public void Profile_ProfileImageUrl_CanBeSetToNull()
+    {
+        _profile.ProfileImageUrl = "http://www.example.com/image.jpg";
+        _profile.ProfileImageUrl = null;
+        Assert.Null(_profile.ProfileImageUrl);
+    }
+    
+    [Fact]  
+    public void Profile_ProfileImageUrl_CanBeSetToEmptyString()
+    {
+        _profile.ProfileImageUrl = "http://www.example.com/image.jpg";
+        _profile.ProfileImageUrl = string.Empty;
+        Assert.Equal(string.Empty, _profile.ProfileImageUrl);
+    }
+    
+    [Fact]
+    public void Profile_ProfileImageUrl_CanBeSetToWhitespace()
+    {
+        _profile.ProfileImageUrl = "http://www.example.com/image.jpg";
+        _profile.ProfileImageUrl = " ";
+        Assert.Equal(" ", _profile.ProfileImageUrl);
+    }
+    
+    [Fact]
+    public void Profile_ProfileImageUrl_IsString()
+    {
+        _profile.ProfileImageUrl = "http://www.example.com/image.jpg";
+        Assert.IsType<string>(_profile.ProfileImageUrl);
+    }
+    
+    [Fact]
+    public void Profile_ProfileImageUrl_IsNullByDefault()
+    {
+        Assert.Null(_profile.ProfileImageUrl);
+    }
+
+    [Fact]
+    public void Profile_BannerImageUrl_IsString()
+    {
+        _profile.BannerImageUrl = "http://www.example.com/image.jpg";
+        Assert.IsType<string>(_profile.BannerImageUrl);
+    }
+    
+    [Fact]
+    public void Profile_BannerImageUrl_CanBeSet()
+    {
+        _profile.BannerImageUrl = "http://www.example.com/image.jpg";
+        Assert.Equal("http://www.example.com/image.jpg", _profile.BannerImageUrl);
+    }
+    
+    [Fact]
+    public void Profile_BannerImageUrl_CanBeSetToNull()
+    {
+        _profile.BannerImageUrl = "http://www.example.com/image.jpg";
+        _profile.BannerImageUrl = null;
+        Assert.Null(_profile.BannerImageUrl);
+    }
+    
+    [Fact]
+    public void Profile_BannerImageUrl_CanBeSetToEmptyString()
+    {
+        _profile.BannerImageUrl = "http://www.example.com/image.jpg";
+        _profile.BannerImageUrl = string.Empty;
+        Assert.Equal(string.Empty, _profile.BannerImageUrl);
+    }
+    
+    [Fact]
+    public void Profile_BannerImageUrl_CanBeSetToWhitespace()
+    {
+        _profile.BannerImageUrl = "http://www.example.com/image.jpg";
+        _profile.BannerImageUrl = " ";
+        Assert.Equal(" ", _profile.BannerImageUrl);
+    }
+    
+    [Fact]
+    public void Profile_BannerImageUrl_IsNullByDefault()
+    {
+        Assert.Null(_profile.BannerImageUrl);
+    }
+    
 }

@@ -250,36 +250,41 @@ public class AuthDbSeed
             {
                 ChatRoomId = r1.Id,
                 Id = Guid.NewGuid(),
-                UserName = "Chatman",
+                UserName = "BoraTheCaster",
+                ProfileImgUrl = "",
                 Text = "Hello World!",
             };
             var message2 = new Message()
             {
                 ChatRoomId = r1.Id,
                 Id = Guid.NewGuid(),
-                UserName = "Admin",
-                Text = "Hello Chatman!",
+                UserName = "Frann0",
+                ProfileImgUrl = "",
+                Text = "Hello BoraT!",
             };
             var message3 = new Message()
             {
                 ChatRoomId = r1.Id,
                 Id = Guid.NewGuid(),
-                UserName = "Chatman",
-                Text = "You don't know me!",
+                ProfileImgUrl = "",
+                UserName = "DCSA",
+                Text = "Also hello!",
             };
             
             var message11 = new Message()
             {
                 ChatRoomId = r2.Id,
                 Id = Guid.NewGuid(),
-                UserName = "Chatman",
+                UserName = "BoraTheCaster",
+                ProfileImgUrl = "",
                 Text = "Hello World!",
             };
             var message12 = new Message()
             {
                 ChatRoomId = r2.Id,
                 Id = Guid.NewGuid(),
-                UserName = "Admin",
+                UserName = "Frann0",
+                ProfileImgUrl = "",
                 Text = "Hello Chatman!",
             };
             var message13 = new Message()
@@ -287,6 +292,7 @@ public class AuthDbSeed
                 ChatRoomId = r2.Id,
                 Id = Guid.NewGuid(),
                 UserName = "Chatman",
+                ProfileImgUrl = "",
                 Text = "You don't know me!",
             };
             
@@ -295,6 +301,7 @@ public class AuthDbSeed
                 ChatRoomId = r3.Id,
                 Id = Guid.NewGuid(),
                 UserName = "Chatman",
+                ProfileImgUrl = "",
                 Text = "Hello World!",
             };
             var message21 = new Message()
@@ -302,6 +309,7 @@ public class AuthDbSeed
                 ChatRoomId = r3.Id,
                 Id = Guid.NewGuid(),
                 UserName = "Admin",
+                ProfileImgUrl = "",
                 Text = "Hello Chatman!",
             };
             var message22 = new Message()
@@ -309,6 +317,7 @@ public class AuthDbSeed
                 ChatRoomId = r3.Id,
                 Id = Guid.NewGuid(),
                 UserName = "Chatman",
+                ProfileImgUrl = "",
                 Text = "You don't know me!",
             };
             
@@ -317,6 +326,7 @@ public class AuthDbSeed
                 ChatRoomId = r4.Id,
                 Id = Guid.NewGuid(),
                 UserName = "Chatman",
+                ProfileImgUrl = "",
                 Text = "Hello World!",
             };
             var message31 = new Message()
@@ -324,6 +334,7 @@ public class AuthDbSeed
                 ChatRoomId = r4.Id,
                 Id = Guid.NewGuid(),
                 UserName = "Admin",
+                ProfileImgUrl = "",
                 Text = "Hello Chatman!",
             };
             var message32 = new Message()
@@ -331,6 +342,7 @@ public class AuthDbSeed
                 ChatRoomId = r4.Id,
                 Id = Guid.NewGuid(),
                 UserName = "Chatman",
+                ProfileImgUrl = "",
                 Text = "You don't know me!",
             };
             

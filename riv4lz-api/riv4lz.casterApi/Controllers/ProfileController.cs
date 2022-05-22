@@ -56,7 +56,7 @@ namespace riv4lz.casterApi.Controllers
         }
         
         [HttpPut(nameof(UpdateProfile))]
-        public async  Task<ActionResult> UpdateProfile([FromBody] UpdateProfileDto updateProfileDto)
+        public async  Task<ActionResult> UpdateProfile(UpdateProfileDto updateProfileDto)
         {
             var result = await Mediator.Send(new UpdateProfile.Command
             {
@@ -70,7 +70,7 @@ namespace riv4lz.casterApi.Controllers
         }
 
         [HttpDelete(nameof(DeleteProfile))]
-        public ActionResult<ProfileDto> DeleteProfile(Guid id)
+        public async Task<ActionResult<bool>> DeleteProfile(Guid id)
         {
             throw new NotImplementedException();
         }
