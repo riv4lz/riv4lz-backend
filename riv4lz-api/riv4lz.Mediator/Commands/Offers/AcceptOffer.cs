@@ -33,12 +33,16 @@ public class AcceptOffer
 
                 if (offer is null)
                     return false;
+                
                     
                 offer.OfferStatus = OfferStatus.Closed;
                 
                 var result = await RejectOtherOffers(request, cancellationToken);
                 if (!result)
+                {
+                    await dbTransaction.RollbackAsync(cancellationToken);
                     return false;
+                }
                 
                 offer.Event.EventStatus = EventStatus.Closed;
                 await _ctx.SaveChangesAsync(cancellationToken);

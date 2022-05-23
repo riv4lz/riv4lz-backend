@@ -11,14 +11,14 @@ using riv4lz.Mediator.Queries.Chat;
 
 namespace riv4lz.casterApi.Controllers
 {
-    
     public class AuthController : BaseController, IAuthController
     {
         [AllowAnonymous]
         [HttpPost(nameof(Login))]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await Mediator.Send(new AuthenticateUser.Query {LoginDto = loginDto});
+            var user = await Mediator
+                .Send(new AuthenticateUser.Query {LoginDto = loginDto});
             
             if (user is null)
                 return Unauthorized(false);
