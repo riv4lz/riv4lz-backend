@@ -21,7 +21,7 @@ namespace riv4lz.casterApi.Controllers
             var user = await Mediator.Send(new AuthenticateUser.Query {LoginDto = loginDto});
             
             if (user is null)
-                return Unauthorized();
+                return Unauthorized(false);
             
             return Ok(user);
         }
