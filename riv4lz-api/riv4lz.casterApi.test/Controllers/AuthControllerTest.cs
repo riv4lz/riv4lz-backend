@@ -345,6 +345,8 @@ public class AuthControllerTest
         
         Assert.NotNull(method.GetCustomAttribute<AllowAnonymousAttribute>());
     }
+    
+    
 
     #endregion
     
