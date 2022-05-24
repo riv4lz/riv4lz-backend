@@ -8,12 +8,12 @@ namespace riv4lz.Mediator.Queries.Event;
 
 public class GetEvent
 {
-    public class Query : IRequest<EventDto?>
+    public class Query : IRequest<EventDto>
     {
         public Guid EventId { get; set; }
     }
     
-    public class Handler : IRequestHandler<Query, EventDto?>
+    public class Handler : IRequestHandler<Query, EventDto>
     {
         private readonly IMapper _mapper;
         private readonly DataContext _ctx;

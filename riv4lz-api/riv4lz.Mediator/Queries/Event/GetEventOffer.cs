@@ -8,12 +8,12 @@ namespace riv4lz.Mediator.Queries.Event;
 
 public class GetEventOffer
 {
-    public class Query : IRequest<OfferDto?>
+    public class Query : IRequest<OfferDto>
     {
         public Guid OfferId { get; set; }
     }
     
-    public class Handler : IRequestHandler<Query, OfferDto?>
+    public class Handler : IRequestHandler<Query, OfferDto>
     {
         private readonly IMapper _mapper;
         private readonly DataContext _ctx;
@@ -23,7 +23,7 @@ public class GetEventOffer
             _mapper = mapper;
             _ctx = ctx;
         }
-        public async Task<OfferDto?> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<OfferDto> Handle(Query request, CancellationToken cancellationToken)
         {
             var entity = await _ctx.Offers
                 .Include(o => o.Caster)
