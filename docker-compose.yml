@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
     api:
-      image: riv4lzprod.azurecr.io/api:${IMAGE_TAG}
+      image: "localhost:7002/api"
       build: .
       container_name: "${API_CONT_NAME}"
       ports:
@@ -12,6 +12,8 @@ services:
         - postgresql_database
         - auth_db
         - chat_db
+
+
     redis:
       image: redis:latest
       container_name: "${REDIS_CONT_NAME}"
@@ -22,6 +24,7 @@ services:
         - redis-data:/data
       depends_on:
         - postgresql_database
+
     
     redis-commander:
       image: rediscommander/redis-commander:latest
@@ -35,15 +38,16 @@ services:
       depends_on:
         - redis
 
+
     postgresql_database:
       image: postgres:latest
-      container_name: "${DB_CONT_NAME}"
+      container_name: "${MAIN_DB_CONT_NAME}"
       environment:
         - POSTGRES_USER=admin
         - POSTGRES_PASSWORD=riv4lz5683
         - POSTGRES_DB=riv4lzMainDb
       ports: 
-        - ${DB_PORT}:5432
+        - ${MAIN_DB_PORT}:5432
       restart: always
       volumes:
         - postgres-data:/var/lib/postgresql/data
@@ -55,7 +59,7 @@ services:
         - POSTGRES_PASSWORD=riv4lz5683
         - POSTGRES_DB=authDb
       ports: 
-        - 5433:5432
+        - ${AUTH_DB_PORT}:5432
       restart: always
       volumes:
         - auth-data:/var/lib/auth/postgres/data
@@ -67,11 +71,11 @@ services:
         - POSTGRES_PASSWORD=riv4lz5683
         - POSTGRES_DB=chatDb
       ports: 
-        - 5434:5432
+        - ${CHAT_DB_PORT}:5432
       restart: always
       volumes:
         - chat-data:/var/lib/chat/postgres/data
-        
+
     pgadmin:
       image: dpage/pgadmin4
       container_name: "${DB_ADMIN_CONT_NAME}"
@@ -84,11 +88,12 @@ services:
       volumes:
         - pgadmin-data:/var/lib/pgadmin
 
+
 volumes:
   redis-data:
   postgres-data:
   pgadmin-data:
   auth-data:
   chat-data:
-    
+
     

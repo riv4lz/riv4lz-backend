@@ -142,11 +142,7 @@ pipeline {
         }
         stage("Push to Azure Container Registry") {
             steps{
-            withCredentials([usernamePassword(credentialsId: 'ACR', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-              sh 'docker login -u ${USERNAME} -p ${PASSWORD} riv4lzprod.azurecr.io'
-              sh "docker-compose --env-file Dev.env build"
-              sh "docker push riv4lzprod.azurecr.io/api:${BUILD_NUMBER}"
-            }
+            sh "docker-compose --env-file Dev.env push"
           }
         }         
     }
