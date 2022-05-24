@@ -72,7 +72,7 @@ namespace riv4lz.casterApi.Controllers
         [HttpDelete(nameof(DeleteProfile))]
         public async Task<ActionResult<bool>> DeleteProfile(Guid id)
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }

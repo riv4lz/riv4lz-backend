@@ -14,6 +14,34 @@ pipeline {
                         } finally {}
                     }
                 }
+                dir("riv4lz-api/riv4lz.core"){
+                    script{
+                        try {
+                            sh "rm -rf TestResults"
+                        } finally {}
+                    }
+                }
+                dir("riv4lz-api/riv4lz.dataAccess"){
+                    script{
+                        try {
+                            sh "rm -rf TestResults"
+                        } finally {}
+                    }
+                }
+                dir("riv4lz-api/riv4lz.mediatr"){
+                    script{
+                        try {
+                            sh "rm -rf TestResults"
+                        } finally {}
+                    }
+                }
+                dir("riv4lz-api/riv4lz.security"){
+                    script{
+                        try {
+                            sh "rm -rf TestResults"
+                        } finally {}
+                    }
+                }
             }
         }
         stage("Build") {
