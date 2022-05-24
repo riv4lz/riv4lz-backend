@@ -24,7 +24,6 @@ public class CreateUser
         
         public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
         {
-            // TODO make transaction
             var user = new IdentityUser<Guid>()
             {
                 Id = request.RegisterUserDto.Id,
