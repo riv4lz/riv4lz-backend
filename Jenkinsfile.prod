@@ -1,7 +1,7 @@
 pipeline{
   agent any
   stages{
-    stage("Deploy to production){
+    stage("Deploy to production"){
       steps{
         sh "docker-compose --env-file Prod.env pull"
         sh "docker-compose --env-file Prod.env up -d"
