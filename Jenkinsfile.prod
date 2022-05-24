@@ -1,5 +1,8 @@
 pipeline{
   agent any
+  parameters{
+    run filter: 'ALL', name: 'PROMOTED_BUILD', projectName: 'riv4lz-backend'
+  }
   stages{
     stage("Deploy to production"){
       steps{
