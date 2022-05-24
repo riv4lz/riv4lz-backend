@@ -59,9 +59,13 @@ pipeline {
             }
         }
         stage("Deploy") {
-            steps {
-                sh "docker-compose --env-file Dev.env up -d" 
+            steps{
+            withCredentials([usernamePassword(credentialsId: 'ACR', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+              sh 'docker login -u ${USERNAME} -p ${PASSWORD} riv4lzprod.azurecr.io'
+              sh "docker-compose --env-file Prod.env build"
+              sh "docker push riv4lzprod.azurecr.io/api:${BUILD_NUMBER}"
             }
+          }
         }         
     }
 }
