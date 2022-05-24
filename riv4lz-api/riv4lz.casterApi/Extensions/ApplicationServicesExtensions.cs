@@ -35,7 +35,7 @@ namespace riv4lz.casterApi.Extensions
 
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseNpgsql(_configuration.GetConnectionString(_configuration.GetConnectionString("Postgres")));
+                options.UseNpgsql(_configuration.GetConnectionString("Postgres"));
             });
 
             services.AddDbContext<AuthContext>(options =>
