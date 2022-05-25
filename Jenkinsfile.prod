@@ -6,8 +6,8 @@ pipeline{
   stages{
     stage("Deploy to production"){
       steps{
-        sh "docker-compose --env-file Prod.env pull"
-        sh "docker-compose --env-file Prod.env up -d"
+        sh "docker-compose -f docker-compose-prod.yml --env-file Prod.env pull"
+        sh "docker-compose -f docker-compose-prod.yml --env-file Prod.env up -d"
       }
     }
   }

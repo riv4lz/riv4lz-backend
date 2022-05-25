@@ -2,15 +2,18 @@ version: '3.9'
 
 services:
     api_prod:
+      image: "localhost:7002/api:${IMAGE_TAG}"
       build: .
       container_name: "${API_CONT_NAME}"
       ports:
         - "${API_PORT}:80" 
       depends_on:
-        - redis
-        - postgresql_database
-        - auth_db
-        - chat_db
+        - redis_prod
+        - postgresql_database_prod
+        - auth_db_prod
+        - chat_db_prod
+
+
     redis_prod:
       image: redis:latest
       container_name: "${REDIS_CONT_NAME}"
@@ -20,7 +23,8 @@ services:
       volumes:
         - redis-data:/data
       depends_on:
-        - postgresql_database
+        - postgresql_database_prod
+
     
     redis-commander_prod:
       image: rediscommander/redis-commander:latest
@@ -32,7 +36,8 @@ services:
       ports:
         - ${REDIS_CMD_PORT}:8081
       depends_on:
-        - redis
+        - redis_prod
+
 
     postgresql_database_prod:
       image: postgres:latest
@@ -40,19 +45,22 @@ services:
       environment:
         - POSTGRES_USER=admin
         - POSTGRES_PASSWORD=riv4lz5683
-        - POSTGRES_DB=riv4lzMainDb
+        - POSTGRES_DB=${MAIN_DB_NAME}
+        - MAIN_DB_CONNECTION_STRING=Server=postgresql_database_prod;Port=5432;Database=${MAIN_DB_NAME};User Id=admin;Password=riv4lz5683;
       ports: 
         - ${MAIN_DB_PORT}:5432
       restart: always
       volumes:
         - postgres-data:/var/lib/postgresql/data
 
+
     auth_db_prod:
       image: postgres:latest
       environment:
         - POSTGRES_USER=admin
         - POSTGRES_PASSWORD=riv4lz5683
-        - POSTGRES_DB=authDb
+        - POSTGRES_DB=${AUTH_DB_NAME}
+        - AUTH_DB_CONNECTION_STRING=Server=auth_db_prod;Port=5432;Database=${AUTH_DB_NAME};User Id=admin;Password=riv4lz5683;
       ports: 
         - ${AUTH_DB_PORT}:5432
       restart: always
@@ -64,13 +72,14 @@ services:
       environment:
         - POSTGRES_USER=admin
         - POSTGRES_PASSWORD=riv4lz5683
-        - POSTGRES_DB=chatDb
+        - POSTGRES_DB=${CHAT_DB_NAME}
+        - CHAT_DB_CONNECTION_STRING=Server=chat_db_prod;Port=5432;Database=${CHAT_DB_NAME};User Id=admin;Password=riv4lz5683;
       ports: 
         - ${CHAT_DB_PORT}:5432
       restart: always
       volumes:
         - chat-data:/var/lib/chat/postgres/data
-        
+
     pgadmin_prod:
       image: dpage/pgadmin4
       container_name: "${DB_ADMIN_CONT_NAME}"
@@ -83,11 +92,12 @@ services:
       volumes:
         - pgadmin-data:/var/lib/pgadmin
 
-volumes_prod:
+
+volumes:
   redis-data:
   postgres-data:
   pgadmin-data:
   auth-data:
   chat-data:
-    
+
     
