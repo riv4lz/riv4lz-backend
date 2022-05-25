@@ -160,13 +160,7 @@ public class AuthControllerTest
         Assert.Equal(typeof(RegisterUserDto).FullName, method.GetParameters()[0].ParameterType.FullName);
     }
     
-    [Fact]
-    public void AuthController_RegisterUserMethod_TakesUserType_AsSecondParameter()
-    {
-        var method = _infoHelper.GetMethodByName("RegisterUser");
-        
-        Assert.Equal(typeof(UserType).FullName, method.GetParameters()[1].ParameterType.FullName);
-    }
+    
     
 
     #endregion
