@@ -6,7 +6,7 @@ namespace riv4lz.casterApi.Interfaces;
 
 public interface IAuthController
 {
-    Task<ActionResult<UserDto>> RegisterUser(RegisterUserDto registerUserDto, UserType userType);
+    Task<ActionResult<UserDto>> RegisterUser(RegisterUserDto registerUserDto);
     Task<ActionResult<UserDto>> Login(LoginDto loginDto);
     Task<ActionResult> UpdatePassword(UpdatePasswordDto updatePasswordDto);
     Task<ActionResult> UpdateEmail(UpdateEmailDto updateEmailDto);

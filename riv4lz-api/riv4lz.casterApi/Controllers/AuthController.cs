@@ -97,7 +97,7 @@ namespace riv4lz.casterApi.Controllers
         
         [AllowAnonymous]
         [HttpPost(nameof(RegisterUser))]
-        public async Task<ActionResult<UserDto>> RegisterUser(RegisterUserDto registerUserDto, UserType userType)
+        public async Task<ActionResult<UserDto>> RegisterUser(RegisterUserDto registerUserDto)
         {
             if (await IsEmailTaken(registerUserDto.Email))
                 return BadRequest("Email taken");
@@ -105,8 +105,7 @@ namespace riv4lz.casterApi.Controllers
 
             var result = await Mediator.Send(new CreateUser.Command
             {
-                RegisterUserDto = registerUserDto,
-                UserType = userType
+                RegisterUserDto = registerUserDto
             });
 
             if (!result)

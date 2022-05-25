@@ -10,7 +10,6 @@ public class CreateUser
     public class Command : IRequest<bool>
     {
         public RegisterUserDto RegisterUserDto { get; set; }
-        public UserType UserType { get; set; }
     }
 
     public class Handler : IRequestHandler<Command, bool>
@@ -36,7 +35,7 @@ public class CreateUser
             if (!registerUserResult.Succeeded)
                 return false;
             
-            var addRoleResult = await AddRole(user, request.UserType);
+            var addRoleResult = await AddRole(user, request.RegisterUserDto.UserType);
             if (!addRoleResult.Succeeded)
                 return false;
 
