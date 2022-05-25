@@ -6,9 +6,9 @@ services:
       build: .
       container_name: "${API_CONT_NAME}"
       environment:
-        - MAIN_DB_CONNECTION_STRING=Server=postgresql_database;Port=5432;Database=${MAIN_DB_NAME};User Id=admin;Password=riv4lz5683;
-        - AUTH_DB_CONNECTION_STRING=Server=auth_db;Port=5432;Database=${AUTH_DB_NAME};User Id=admin;Password=riv4lz5683;
-        - CHAT_DB_CONNECTION_STRING=Server=chat_db;Port=5432;Database=${CHAT_DB_NAME};User Id=admin;Password=riv4lz5683;
+        - Postgres=Server=postgresql_database;Port=5432;Database=${MAIN_DB_NAME};User Id=admin;Password=riv4lz5683;
+        - AuthConnection=Server=auth_db;Port=5432;Database=${AUTH_DB_NAME};User Id=admin;Password=riv4lz5683;
+        - ChatConnection=Server=chat_db;Port=5432;Database=${CHAT_DB_NAME};User Id=admin;Password=riv4lz5683;
       ports:
         - "${API_PORT}:80" 
       depends_on:

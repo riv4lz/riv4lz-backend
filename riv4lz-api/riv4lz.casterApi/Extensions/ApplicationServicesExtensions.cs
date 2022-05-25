@@ -35,17 +35,17 @@ namespace riv4lz.casterApi.Extensions
 
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseNpgsql(_configuration.GetConnectionString(Environment.GetEnvironmentVariable("MAIN_DB_CONNECTION_STRING")));
+                options.UseNpgsql(_configuration.GetConnectionString(Environment.GetEnvironmentVariable("Postgres")));
             });
 
             services.AddDbContext<AuthContext>(options =>
             {
-                options.UseNpgsql(_configuration.GetConnectionString("AUTH_DB_CONNECTION_STRING"));
+                options.UseNpgsql(_configuration.GetConnectionString("AuthConnection"));
             });
 
             services.AddDbContext<ChatContext>(options =>
             {
-                options.UseNpgsql(_configuration.GetConnectionString("CHAT_DB_CONNECTION_STRING"));
+                options.UseNpgsql(_configuration.GetConnectionString("ChatConnection"));
             });
             
             services.AddCors(options =>
