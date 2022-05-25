@@ -140,7 +140,7 @@ pipeline {
                 sh "docker-compose --env-file Dev.env up -d" 
             }
         }
-        stage("Push to Azure Container Registry") {
+        stage("Push to local Registry") {
             steps{
             sh "docker-compose --env-file Dev.env push"
           }

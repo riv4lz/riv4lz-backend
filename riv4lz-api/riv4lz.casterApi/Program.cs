@@ -23,7 +23,13 @@ namespace riv4lz.casterApi
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
                 var ctx = services.GetRequiredService<DataContext>();
                 var chatCtx = services.GetRequiredService<ChatContext>();
-                await AuthDbSeed.SeedData(context, userManager, roleManager, ctx, chatCtx);
+                await context.Database.EnsureDeletedAsync();
+                await ctx.Database.EnsureDeletedAsync();
+                await chatCtx.Database.EnsureDeletedAsync();
+                await context.Database.EnsureCreatedAsync();
+                await ctx.Database.EnsureCreatedAsync();
+                await chatCtx.Database.EnsureCreatedAsync();
+                //await AuthDbSeed.SeedData(context, userManager, roleManager, ctx, chatCtx);
             }
             catch (Exception e)
             {
