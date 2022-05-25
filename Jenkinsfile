@@ -142,8 +142,9 @@ pipeline {
         }
         stage("Push to local Registry") {
             steps{
-            sh "docker-compose -f docker-compose-prod.yml --env-file Prod.env build api_prod"
-            sh "docker-compose -f docker-compose-prod-yml --env-file Prod.env push"
+            sh "docker-compose --env-file Dev.env push"
+            //sh "docker-compose -f docker-compose-prod.yml --env-file Prod.env build api_prod"
+            //sh "docker-compose -f docker-compose-prod-yml --env-file Prod.env push"
           }
         }         
     }

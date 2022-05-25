@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
     api_prod:
-      image: "localhost:7002/api:${IMAGE_TAG}"
+      image: "localhost:7002/api_prod:${IMAGE_TAG}"
       build: .
       container_name: "${API_CONT_NAME}"
       ports:
