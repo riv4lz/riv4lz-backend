@@ -11,7 +11,7 @@ public class AuthDbSeed
 {
     public AuthDbSeed()
     {
-        // Commentwerdfgsdfsdfgsdafadsfsdfsdfsdfsdfsadsdafasdasdsdf
+       
     }
     public static async Task SeedData(AuthContext authCtx,
         UserManager<IdentityUser<Guid>> userManager, RoleManager<IdentityRole<Guid>> roleManager, DataContext ctx, ChatContext chatCtx)
@@ -22,10 +22,9 @@ public class AuthDbSeed
         var user1 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "j@r.co", UserName = "Jonas"};
         var user2 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "m@r.co", UserName = "Mike"};
         var user3 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "f@r.co", UserName = "Frederik"};
-        var user4 = new IdentityUser<Guid>() {Id = Guid.NewGuid(), Email = "a@r.co", UserName = "Ashwini"};
 
-        await authCtx.Database.EnsureDeletedAsync();
-        await authCtx.Database.EnsureCreatedAsync();
+        //await authCtx.Database.EnsureDeletedAsync();
+        //await authCtx.Database.EnsureCreatedAsync();
 
         if (!authCtx.Roles.Any())
         {
@@ -45,14 +44,11 @@ public class AuthDbSeed
             await userManager.CreateAsync(user3, "pw");
             await userManager.AddToRoleAsync(user3, organisationRole.Name);
 
-            await userManager.CreateAsync(user4, "pw");
-            await userManager.AddToRoleAsync(user4, organisationRole.Name);
-
             await authCtx.SaveChangesAsync();
         }
         
-        await ctx.Database.EnsureDeletedAsync();
-        await ctx.Database.EnsureCreatedAsync();
+        //await ctx.Database.EnsureDeletedAsync();
+        //await ctx.Database.EnsureCreatedAsync();
         
         if (!ctx.Teams.Any())
         {
@@ -91,6 +87,7 @@ public class AuthDbSeed
             await ctx.SaveChangesAsync();
         }
 
+        /*
         if (!ctx.Profiles.Any())
         {
             var caster1 = new Profile()
@@ -128,20 +125,9 @@ public class AuthDbSeed
                 TwitterUrl = "twitter.com/url",
                 UserType = UserType.Organisation,
             };
-            var org2 = new Profile()
-            {
-                Id = user4.Id,
-                Description = "All LOL games in the world!",
-                DiscordUrl = "discord.gg/url",
-                FacebookUrl = "facebook.com/url",
-                Name = "LoLand",
-                TwitchUrl = "twitch.tv/url",
-                TwitterUrl = "twitter.com/url",
-                UserType = UserType.Organisation,
-            };
+            
             
             await ctx.Profiles.AddAsync(org1);
-            await ctx.Profiles.AddAsync(org2);
             await ctx.Profiles.AddAsync(caster1);
             await ctx.Profiles.AddAsync(caster2);
             await ctx.SaveChangesAsync();
@@ -220,9 +206,10 @@ public class AuthDbSeed
             await ctx.Offers.AddAsync(o5);
             await ctx.SaveChangesAsync();
         }
-        await chatCtx.Database.EnsureDeletedAsync();
-        await chatCtx.Database.EnsureCreatedAsync();
+        //await chatCtx.Database.EnsureDeletedAsync();
+        //await chatCtx.Database.EnsureCreatedAsync();
 
+        
         if (!chatCtx.ChatRooms.Any())
         {
             var r1 = new ChatRoom()
@@ -364,6 +351,7 @@ public class AuthDbSeed
             await chatCtx.Messages.AddAsync(message32);
             await chatCtx.SaveChangesAsync();
         }
+        */
     }
     
     

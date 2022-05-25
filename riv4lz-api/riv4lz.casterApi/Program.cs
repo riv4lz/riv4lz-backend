@@ -29,7 +29,7 @@ namespace riv4lz.casterApi
                 await context.Database.EnsureCreatedAsync();
                 await ctx.Database.EnsureCreatedAsync();
                 await chatCtx.Database.EnsureCreatedAsync();
-                //await AuthDbSeed.SeedData(context, userManager, roleManager, ctx, chatCtx);
+                await AuthDbSeed.SeedData(context, userManager, roleManager, ctx, chatCtx);
             }
             catch (Exception e)
             {
