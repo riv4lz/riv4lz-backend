@@ -88,6 +88,7 @@ public class AuthDbSeed
         }
 
         /*
+        
         if (!ctx.Profiles.Any())
         {
             var caster1 = new Profile()
