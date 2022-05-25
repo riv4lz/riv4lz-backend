@@ -87,7 +87,7 @@ public class AuthDbSeed
             await ctx.SaveChangesAsync();
         }
 
-        /*
+        
         
         if (!ctx.Profiles.Any())
         {
@@ -134,7 +134,7 @@ public class AuthDbSeed
             await ctx.SaveChangesAsync();
         }
 
-        
+        /*
 
         if (!ctx.Events.Any())
         {
