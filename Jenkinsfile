@@ -1,8 +1,11 @@
 pipeline {
     agent any
+    triggers{
+      pollSCM("*/10 * * * *")
+    }
     environment {
         COMMITMSG = sh(returnStdout: true, script: "git log -1 --oneline")  
-      }
+    }
     stages {
         stage("Startup"){
             steps {
