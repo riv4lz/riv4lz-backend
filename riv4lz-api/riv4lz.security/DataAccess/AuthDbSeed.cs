@@ -209,7 +209,7 @@ public class AuthDbSeed
         }
         //await chatCtx.Database.EnsureDeletedAsync();
         //await chatCtx.Database.EnsureCreatedAsync();
-
+        */
         
         if (!chatCtx.ChatRooms.Any())
         {
@@ -233,6 +233,8 @@ public class AuthDbSeed
                 Id = Guid.NewGuid(),
                 Name = "wow",
             };
+            
+            /*
 
             var message = new Message()
             {
@@ -351,8 +353,9 @@ public class AuthDbSeed
             await chatCtx.Messages.AddAsync(message31);
             await chatCtx.Messages.AddAsync(message32);
             await chatCtx.SaveChangesAsync();
-        }
         */
+        }
+        
     }
     
     
