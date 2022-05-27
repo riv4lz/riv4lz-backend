@@ -61,11 +61,10 @@ pipeline {
             }
             post{
                 success{
-                    // archiveArtifacts("bin/**")
                     echo "Build succeded"
                 }
                 failure{
-                    echo "Build failed"
+                    discordSend description: "Build Stage FAILED", footer: "Please correct errors", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/958687917100892181/Ywqi7Cv9vZ9UTFwvP9vezRxnBgWo_iXHhzFqNWqG8pv0i1gRyT3kiCihM09JOn4KB0le"
                 }
             }
         } 
@@ -126,6 +125,9 @@ pipeline {
                    publishCoverage adapters: [cobertura(path: 'riv4lz-api/riv4lz.dataAccess.test/TestResults/*/coverage.cobertura.xml', thresholds: [[thresholdTarget: 'Conditional', unhealthyThreshold: 80.0, unstableThreshold: 50.0]])], sourceFileResolver: sourceFiles('NEVER_STORE') 
                    echo "Test succeded"
                 }
+                failure{
+                  discordSend description: "Test Stage FAILED", footer: "Please correct errors", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/958687917100892181/Ywqi7Cv9vZ9UTFwvP9vezRxnBgWo_iXHhzFqNWqG8pv0i1gRyT3kiCihM09JOn4KB0le"
+                }
             }
         }
         stage("Clean Containers"){
@@ -138,17 +140,28 @@ pipeline {
                 }
             }
         }
-        stage("Deploy") {
+        stage("Deploy to Test Environment") {
             steps {
                 sh "docker-compose --env-file Dev.env up -d" 
+            }
+            post{
+              failure{
+              discordSend description: "Deploy Stage FAILED", footer: "Please correct errors", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/958687917100892181/Ywqi7Cv9vZ9UTFwvP9vezRxnBgWo_iXHhzFqNWqG8pv0i1gRyT3kiCihM09JOn4KB0le"
+              }
+              success{
+                discordSend description: "Successfully deployed!", footer: "Great job!", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/958687917100892181/Ywqi7Cv9vZ9UTFwvP9vezRxnBgWo_iXHhzFqNWqG8pv0i1gRyT3kiCihM09JOn4KB0le"
+              }
             }
         }
         stage("Push to local Registry") {
             steps{
-            sh "docker-compose --env-file Dev.env push"
-            //sh "docker-compose -f docker-compose-prod.yml --env-file Prod.env build api_prod"
-            //sh "docker-compose -f docker-compose-prod-yml --env-file Prod.env push"
-          }
+              sh "docker-compose --env-file Dev.env push"
+            }
+            post{
+              failure{
+                discordSend description: "Push Stage FAILED", footer: "Please correct errors", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/958687917100892181/Ywqi7Cv9vZ9UTFwvP9vezRxnBgWo_iXHhzFqNWqG8pv0i1gRyT3kiCihM09JOn4KB0le"
+              }
+            }
         }         
     }
 }

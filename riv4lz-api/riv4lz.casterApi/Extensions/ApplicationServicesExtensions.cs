@@ -27,7 +27,8 @@ namespace riv4lz.casterApi.Extensions
 
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
-                var configuration = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"), true);
+                var configuration = ConfigurationOptions
+                    .Parse(_configuration.GetConnectionString("Redis"), true);
                 return ConnectionMultiplexer.Connect(configuration);
             });
 
