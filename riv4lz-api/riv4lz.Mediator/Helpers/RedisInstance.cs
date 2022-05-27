@@ -14,16 +14,33 @@ public class RedisInstance
     public async void Set<T>(string key, T value)
     {
         var jsonData = JsonSerializer.Serialize(value);
-        await _cache.StringSetAsync(key, jsonData, TimeSpan.FromMinutes(1));
+        try
+        {
+            await _cache.StringSetAsync(key, jsonData, TimeSpan.FromMinutes(1));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
     
     public async Task<T> Get<T>(string key)
     {
-        var data = await _cache.StringGetAsync(key);
+        try
+        {
+            var data = await _cache.StringGetAsync(key);
         
-        if (data.IsNullOrEmpty)
-            return default;
+            if (data.IsNullOrEmpty)
+                return default;
         
-        return JsonSerializer.Deserialize<T>(data);
+            return JsonSerializer.Deserialize<T>(data);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
     }
 }
