@@ -234,7 +234,7 @@ public class AuthDbSeed
                 Name = "wow",
             };
             
-            /*
+            
 
             var message = new Message()
             {
@@ -353,7 +353,7 @@ public class AuthDbSeed
             await chatCtx.Messages.AddAsync(message31);
             await chatCtx.Messages.AddAsync(message32);
             await chatCtx.SaveChangesAsync();
-        */
+        
         }
         
     }
