@@ -34,15 +34,15 @@ public class AcceptOffer
                 if (offer is null)
                     return false;
                 
-                    
+                
                 offer.OfferStatus = OfferStatus.Closed;
                 
                 var result = await RejectOtherOffers(request, cancellationToken);
-                if (!result)
+                /*if (!result)
                 {
                     await dbTransaction.RollbackAsync(cancellationToken);
                     return false;
-                }
+                }*/
                 
                 offer.Event.EventStatus = EventStatus.Closed;
                 await _ctx.SaveChangesAsync(cancellationToken);
@@ -58,19 +58,19 @@ public class AcceptOffer
             }
         }
 
-        private async Task<bool> RejectOtherOffers(Command request, CancellationToken cancellationToken)
+        private async Task<int> RejectOtherOffers(Command request, CancellationToken cancellationToken)
         {
             var offers = await _ctx.Offers
                 .Where(o => o.Id != request.UpdateOfferDto.Id)
                 .ToListAsync(cancellationToken);
 
             if (offers.IsNullOrEmpty())
-                return false;
+                return 0;
 
             foreach (var o in offers)
                 o.OfferStatus = OfferStatus.Rejected;
 
-            return true;
+            return await _ctx.SaveChangesAsync(cancellationToken);
         }
     }
 }
