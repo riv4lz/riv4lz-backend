@@ -101,6 +101,8 @@ public class AuthDbSeed
                 TwitchUrl = "twitch.tv/url",
                 TwitterUrl = "twitter.com/url",
                 UserType = UserType.Caster,
+                BannerImageUrl = "",
+                ProfileImageUrl = ""
             };
             
             var caster2 = new Profile()
@@ -113,6 +115,8 @@ public class AuthDbSeed
                 TwitchUrl = "twitch.tv/url",
                 TwitterUrl = "twitter.com/url",
                 UserType = UserType.Caster,
+                BannerImageUrl = "",
+                ProfileImageUrl = ""
             };
             
             var org1 = new Profile()
@@ -125,6 +129,8 @@ public class AuthDbSeed
                 TwitchUrl = "twitch.tv/url",
                 TwitterUrl = "twitter.com/url",
                 UserType = UserType.Organisation,
+                BannerImageUrl = "",
+                ProfileImageUrl = ""
             };
             
             

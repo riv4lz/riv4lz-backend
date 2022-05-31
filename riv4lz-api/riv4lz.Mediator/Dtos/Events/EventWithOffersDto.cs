@@ -16,5 +16,5 @@ public class EventWithOffersDto
     public Guid OrganisationId { get; set; }
     public ProfileDto OrganisationProfile { get; set; }
 
-    public ICollection<Offer>? Offers { get; set; }
+    public ICollection<Offer> Offers { get; set; }
 }
