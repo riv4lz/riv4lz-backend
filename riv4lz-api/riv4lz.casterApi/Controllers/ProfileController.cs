@@ -10,6 +10,19 @@ namespace riv4lz.casterApi.Controllers
 {
     public class ProfileController : BaseController, IProfileController
     {
+        [HttpGet(nameof(GetAllProfiles))]
+        public async Task<ActionResult<List<ProfileDto>>> GetAllProfiles()
+        {
+            var profiles = await Mediator.Send(new GetAllProfiles.Query());
+
+            if (profiles is null)
+            {
+                return BadRequest("Error loading profiles");
+            }
+            
+            return Ok(profiles);
+        }
+
         [HttpGet(nameof(GetProfiles))]
         public async  Task<ActionResult<List<ProfileDto>>> GetProfiles(UserType userType)
         {
