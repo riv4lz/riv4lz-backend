@@ -91,22 +91,22 @@ public class MessageTest
     [Fact]
     public void Message_ProfileImgUrl_IsString()
     {
-        _message.ProfileImgUrl = "test";
-        Assert.IsType<string>(_message.ProfileImgUrl);
+        _message.ProfileImageUrl = "test";
+        Assert.IsType<string>(_message.ProfileImageUrl);
     }
     
     [Fact]
     public void Message_ProfileImgUrl_IsNullByDefault()
     {
-        Assert.Null(_message.ProfileImgUrl);
+        Assert.Null(_message.ProfileImageUrl);
     }
     
     [Fact]
     public void Message_ProfileImgUrl_CanBeSet()
     {
         var profileImgUrl = "test";
-        _message.ProfileImgUrl = profileImgUrl;
-        Assert.Equal(profileImgUrl, _message.ProfileImgUrl);
+        _message.ProfileImageUrl = profileImgUrl;
+        Assert.Equal(profileImgUrl, _message.ProfileImageUrl);
     }
     
     [Fact]

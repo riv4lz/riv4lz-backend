@@ -101,28 +101,28 @@ public class CreateMessageDtoTest
     [Fact]
     public void CreateMessageDto_ProfileImgUrl_IsString()
     {
-        _createMessageDto.ProfileImgUrl = "test";
-        Assert.IsType<string>(_createMessageDto.ProfileImgUrl);
+        _createMessageDto.ProfileImageUrl = "test";
+        Assert.IsType<string>(_createMessageDto.ProfileImageUrl);
     }
     
     [Fact]
     public void CreateMessageDto_ProfileImgUrl_IsNullByDefault()
     {
-        Assert.Null(_createMessageDto.ProfileImgUrl);
+        Assert.Null(_createMessageDto.ProfileImageUrl);
     }
     
     [Fact]
     public void CreateMessageDto_ProfileImgUrl_IsNotEmptyAfterSet()
     {
-        _createMessageDto.ProfileImgUrl = "test";
-        Assert.NotEmpty(_createMessageDto.ProfileImgUrl);
+        _createMessageDto.ProfileImageUrl = "test";
+        Assert.NotEmpty(_createMessageDto.ProfileImageUrl);
     }
     
     [Fact]
     public void CreateMessageDto_ProfileImgUrl_CanBeSet()
     {
-        _createMessageDto.ProfileImgUrl = "test";
-        Assert.NotEmpty(_createMessageDto.ProfileImgUrl);
+        _createMessageDto.ProfileImageUrl = "test";
+        Assert.NotEmpty(_createMessageDto.ProfileImageUrl);
     }
     
     [Fact]

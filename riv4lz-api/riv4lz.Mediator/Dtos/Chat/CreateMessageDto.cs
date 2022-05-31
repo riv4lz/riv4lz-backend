@@ -14,7 +14,7 @@ public class CreateMessageDto
     [Required]
     public string Username { get; set; }
     [Required] 
-    public string ProfileImgUrl { get; set; }
+    public string ProfileImageUrl { get; set; }
     [Required]
     public string Text { get; set; }
 }

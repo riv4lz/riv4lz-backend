@@ -49,15 +49,15 @@ public class MessageDtoTest
     [Fact]
     public void MessageDto_ProfileImgUrl_IsString()
     {
-        _messageDto.ProfileImgUrl = "test";
-        Assert.IsType<string>(_messageDto.ProfileImgUrl);
+        _messageDto.ProfileImageUrl = "test";
+        Assert.IsType<string>(_messageDto.ProfileImageUrl);
     }
     
     [Fact]
     public void MessageDto_ProfileImgUrl_CanBeSet()
     {
-        _messageDto.ProfileImgUrl = "test";
-        Assert.Equal("test", _messageDto.ProfileImgUrl);
+        _messageDto.ProfileImageUrl = "test";
+        Assert.Equal("test", _messageDto.ProfileImageUrl);
     }
     
 }
