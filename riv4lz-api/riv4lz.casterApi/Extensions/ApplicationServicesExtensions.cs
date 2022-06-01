@@ -55,6 +55,15 @@ namespace riv4lz.casterApi.Extensions
                 {
                     policy
                         .WithOrigins("http://localhost:3000")
+                        .WithOrigins("http://localhost:3000")
+                        .WithOrigins("http://10.0.2.2:8081")
+                        .WithOrigins("https://10.0.2.2:8081")
+                        .WithOrigins("http://localhost:8081")
+                        .WithOrigins("https://localhost:8081")
+                        .WithOrigins("http://165.227.144.141:4004")
+                        .WithOrigins("http://165.227.144.141:3000")
+                        .WithOrigins("https://riv4lz.web.app")
+                        .WithOrigins("https://riv4lz.firebaseapp.com")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();
@@ -70,6 +79,8 @@ namespace riv4lz.casterApi.Extensions
                         .WithOrigins("https://localhost:8081")
                         .WithOrigins("http://165.227.144.141:4004")
                         .WithOrigins("http://165.227.144.141:3000")
+                        .WithOrigins("https://riv4lz.web.app")
+                        .WithOrigins("https://riv4lz.firebaseapp.com")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();
